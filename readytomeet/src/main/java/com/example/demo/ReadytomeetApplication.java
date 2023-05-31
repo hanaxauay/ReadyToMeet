@@ -11,5 +11,7 @@ public class ReadytomeetApplication {
 		SpringApplication.run(ReadytomeetApplication.class, args);
 
 		System.out.println("hi");
+		System.out.println("hi");
+		System.out.println("hihello im hooooo suuuung!");
 	}
 }
