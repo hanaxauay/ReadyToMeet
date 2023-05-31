@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+ }
+
+p {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+.bu {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+#update {
+    position: relative;
+    width: 100px;
+    height: 30px;
+    border-radius: 0.5rem;
+    left: 40px;
+}
+
+#delete {
+    position: relative;
+    width: 100px;
+    height: 30px;
+    border-radius: 0.5rem;
+    left: 40px;
+}
+
+.main {
+    text-align: center;
+    margin-top: 10%;
+    border: 5px solid black;
+    border-radius: 1rem;
+    width: 500px;
+    height: 360px;
+    display: inline-block;
+    margin-left: 45%;
+}
+
+textarea {
+    margin: 10px;
+    border: 2px solid black;
+}
+
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    /* font-size: 2.25rem; */
+    font-size: 3rem;
+    line-height: 4rem;
+    justify-content: space-around;
+    padding: 0 2.5em;
+    text-align: center;
+    width: auto;
+    margin-bottom: 1rem;
+    
+  }
+
+.star-rating input {
+    display: none;
+  }
+   
+.star-rating label {
+    -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 2.3px;
+    -webkit-text-stroke-color: #2b2a29;
+    cursor: pointer;
+  }
+   
+.star-rating :checked ~ label {
+    -webkit-text-fill-color: gold;
+  }
+   
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    -webkit-text-fill-color: #fff58c;
+  }
