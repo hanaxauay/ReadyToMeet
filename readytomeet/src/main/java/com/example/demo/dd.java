@@ -9,5 +9,6 @@ public class dd {
 
         System.out.println("zzz");
         System.out.println("11111111");
+        System.out.println("영주테스트하고감");
     }
 }
