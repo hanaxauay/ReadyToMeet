@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신분증 확인</title>
+    <link rel="stylesheet" href="resource/css/idCardPopUp.css">
+    <script src="resource/js/idCard.js"></script>
+</head>
+<body>
+    <div class="main_wrap">
+        <form class="inputImg" method="post" enctype="multipart/form-data">
+            <div class="addImage" id="image-show">
+            </div>
+            <input type="file" accept="image/*" onchange="loadFile(this)">
+        </form>
+        <input type="button" value="확인" id="yes">
+    </div>
+</body>
+</html>

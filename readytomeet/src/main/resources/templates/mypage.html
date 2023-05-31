@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="resource/css/mypage.css">
+    <link rel="stylesheet" href="resource/css/common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="resource/js/idCard.js"></script>
+    
+    <script>
+        // 마이페이지 수정
+        function mypageUpdate() {
+            window.location.href = 'mypageUpdate.html'
+        }
+    </script>
+
+</head>
+<body>
+<!-------------- header --------------->
+    <nav>
+        <ul>
+            <li class="liLogo"><a href="#"><img src="resource/img/logo.png" class="imgLogo"></a></li>
+            <li><a href="#">All</a> </li>
+            <li><a href="#">ACTIVITY</a> </li>
+            <li><a href="#">VEHICLE</a> </li>
+            <li><a href="#">WORK</a> </li>
+            <li><a href="#">Community</a> </li>
+            <li>
+                <span class="search-container">
+                    <input type="text" placeholder="약속을 찾아봐요!">
+                    <input type="submit" value="Search">
+                </span>
+            </li>
+            <li class="liMypage"><a href="#"><img src="resource/img/mypage.png" class="imgMypage"></a></li>
+        </ul>
+    </nav>
+
+<!-------------- main --------------->
+    <div id="main">
+        <section class="main">
+            <div class="main_wrap">
+                <form class="inputImg" method="post" enctype="multipart/form-data">
+                    <div class="addImage" id="image-show">
+                    </div>
+                    <input type="file" accept="image/*" onchange="loadFile(this)">
+                </form>
+            <div class="content">
+                <b>닉네임</b>
+                    <div class="field">
+                        <div>${NICK_NAME}</div>
+                    </div>
+                <b>나이</b>
+                    <div class="field">
+                        <div>${USER_AGE}</div>
+                    </div>
+                <b>성별</b>
+                    <div class="field">
+                        <div>${USER_GENDER}</div>
+                    </div>
+ 
+                <b>자기 소개</b>
+                    <div class="area">
+                        <textarea><c:out value="${content}"/></textarea>
+                        <input type="button" id="bu" value="수정" onclick="mypageUpdate()">
+                        <input type="button" id="idCard" value="신분증 인증" onclick="showPopup();"/>
+                    </div>
+
+                <div class="place">
+                    <h2>지금까지 내가 갔던 장소</h2>
+                    <div>목록</div>
+                    <div>목록</div>
+                    <div>목록</div>
+                    <div>목록</div>
+                    <div>목록</div>
+                    <div>목록</div>
+                    <div>목록</div>
+                </div>
+            </div>
+        </div>
+        </section>
+    </div>
+    <footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
+</body>
+</html>
