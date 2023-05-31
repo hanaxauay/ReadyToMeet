@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ReadytomeetApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ReadytomeetApplication.class, args);
-	}
 
+		SpringApplication.run(ReadytomeetApplication.class, args);
+
+		System.out.println("hi");
+	}
 }
