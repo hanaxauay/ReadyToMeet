@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vehicle생성페이지</title>
+  <link rel="stylesheet" href="css/jinha.css">
+</head>
+<body>
+  <nav>
+    <ul>
+        <li class="liLogo"><a href="#"><img src="image/logo.png" class="imgLogo"></a></li>
+        <li><a href="#">All</a> </li>
+        <li><a href="#">ACTIVITY</a> </li>
+        <li><a href="#">VEHICLE</a> </li>
+        <li><a href="#">WORK</a> </li>
+        <li><a href="#">Community</a> </li>
+        <li>
+            <span class="search-container">
+                <input type="text" placeholder="약속을 찾아봐요!">
+                <input type="submit" value="Search">
+            </span>
+        </li>
+        <li class="liMypage"><a href="#"><img src="image/mypage.png" class="imgMypage"></a></li>
+    </ul>
+  </nav>
+  <div class="header">
+    <div class="contain">
+      <div class="work_title">
+        <h1>VEHICLE</h1>
+      </div>
+      <div class="dropdown_category">
+        <form action="#">
+          <select name="category" id="lang">
+            <option value="category">카테고리</option>
+            <option value="one">카페&맛집</option>
+            <option value="two">스포츠</option>
+            <option value="three">야외활동</option>
+            <option value="four">구매</option>
+            <option value="five">게임</option>
+            <option value="five">기타</option>
+          </select>
+        </form>
+      </div>
+      <div class="dropdown_personnel">
+        <form action="#">
+          <select name="personnel" id="lang">
+            <option value="personnel">인원 표시</option>
+            <option value="one">1</option>
+            <option value="two">2</option>
+            <option value="three">3</option>
+            <option value="four">4</option>
+            <option value="five">5</option>
+          </select>
+        </form>
+      </div>
+      <div class="main">
+        <h3 class="work_produce">약속명</h3>
+        <input type="text" class="work_title" placeholder="약속명을 입력하세요...">
+      </div>
+      <div class="main">
+        <h3 class="work_produce">약속장소</h3>
+        <input type="text" class="work_title" placeholder="약속장소를 입력하세요...">
+      </div>
+      <div class="main">
+        <h3 class="work_produce">날짜,시간</h3>
+        <label>
+          <input type="radio" name="payment_type1" value="AllDay"> All Day
+        </label>
+        <label>
+          <input type="radio" name="payment_type1" value="날짜선택"> 날짜선택
+        </label>
+      </div>
+      <div class="main">
+        <h3 class="work_produce">도착지</h3>
+        <input type="text" class="work_title" placeholder="약속명을 입력하세요...">
+      </div>
+      <div class="main">
+        <h3 class="work_produce">내용</h3>
+        <textarea class="work_content" placeholder="내용을 입력하세요..."></textarea>
+      </div>
+      <div class="work_floor">
+        <input type="submit" value="등록" class="button">
+      </div>
+    </div>
+    <div class="map">
+      <a href="#"><img src="image/mypage.png" class="imgMypage"></a>
+    </div>
+  </div>
+  <footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
+</body>
+</html>
