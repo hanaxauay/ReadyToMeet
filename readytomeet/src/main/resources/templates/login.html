@@ -2,9 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>dd</title>
+    <title>Login</title>
+	<link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-dd
+	<div class="outer1">
+		<div class="outer2">
+			<div class="header">
+				<img class="logo" src="https://cdn.discordapp.com/attachments/1110114711208460353/1111966778457858068/2023-05-27_7.38.49.png">
+			</div>
+			<div class="body">
+				<form method="post" action="">
+					<div class="loginForm">
+						<label for="floatingId">ID</label> <input type="text" id="floatingId" name="userId">
+					</div>
+					<div class="loginForm">
+						<label for="floatingPw">Password</label> <input type="password" id="floatingPw" name="userPw">
+					</div>
+					<button id="submitButton" type="submit">로그인</button>
+					<ul>
+						<li><a href="/login/join">회원가입</a></li>
+						<li><a href="/login/find">비밀번호 찾기</a></li>
+					</ul>
+					<hr>
+					<br>
+					<div class="buttonContainer">
+						<button id="submitKakao" type="button" onclick="">
+							<img src="https://cdn.discordapp.com/attachments/1110114711208460353/1111569552145395772/kakao_login_medium_wide.png">
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
