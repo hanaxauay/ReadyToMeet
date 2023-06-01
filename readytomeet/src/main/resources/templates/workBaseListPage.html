@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+
+        <link href="./css/common.css" rel="stylesheet" />
+        <link href="./css/workBaseListPage.css" rel="stylesheet" />
+        <title>Document</title>
+    </head>
+    <body>
+
+        <!--헤더 영역-->
+        <nav> 
+            <ul>
+                <li class="liLogo"><a href="#"><img src="./images/logo.png" class="imgLogo"></a></li>
+                <li><a href="#">All</a> </li>
+                <li><a href="#">ACTIVITY</a> </li>
+                <li><a href="#">VEHICLE</a> </li>
+                <li><a href="#">WORK</a> </li>
+                <li><a href="#">Community</a> </li>
+                <li>
+                    <span class="search-container">
+                        <input type="text" placeholder="약속을 찾아봐요!">
+                        <input type="submit" value="Search">
+                    </span>
+                </li>
+                <li class="liMypage"><a href="#"><img src="./images/mypage.png" class="imgMypage"></a></li>
+            </ul>
+        </nav>
+
+
+        <!--바디 영역-->
+        <div class="appointment_base_wrap">
+
+            <!--세부 카테고리 영역-->
+            <article class="sub_category">
+                <div class="sub_menu">
+                    <a href="#"><span class="sub_menu_text">유급</span></a>
+                </div>
+                <div class="sub_menu">
+                    <a href="#"><span class="sub_menu_text">무급</span></a>
+                </div>
+            </article>
+            
+
+
+            <!-- 리스트 정렬 & 검색 영역 -->
+            <article class="wrap_appointment_sort_search">
+
+                <!--정렬체크 영역-->
+                <div class="sort_checkbox_container">
+                    <div class="appointment_list_sort">
+                        <label>
+                            <span class="sort_ment">가까운 시간 순 <input type="checkbox" name="sort_time_close" value="sort_time_close"></span>
+                        </label>
+                    </div>
+                    <div class="appointment_list_sort">
+                        <label>
+                            <span class="sort_ment">가까운 위치 순 <input type="checkbox" name="sort_place_close" value="sort_place_close"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 검색 영역-->
+                <div class="appointment_search_container">
+                    <form action="#">
+                        <!--셀렉트 박스-->
+                        <select name="appointment_base_search_filter" >
+                            <option value="">전체</option>
+                            <option value="subCategory">세부카테고리</option>
+                            <option value="appointmentTitle">약속명</option>
+                            <option value="appointmentPlace">약속장소</option>
+                            <option value="writerNickname">작성자</option>
+                        </select>   
+                        
+                        <input type="search" id="search_length" name="appointment_search" placeholder=" 약속 세부 검색..." >
+
+                        <input type="submit" value="search">
+                        
+                    </form>
+                </div>
+            </article>
+
+
+            <!-- 메인 컨텐츠 영역-->
+            <article class="wrap_appointment_main">
+
+                <!-- 카테고리 약속 리스트 컨테이너 (메인 왼쪽)-->
+                <div class="appointment_list_container">
+                    <!--약속 리스트 / 기본 세부 카테고리:전체 / 페이지 당 12개-->
+                    <!-- 반복출력 되도록 jstl 등 활용 필요
+                        양식 통일 필요 (요소 순서, 시간표시, 글자 색, 크기)
+                        커서 올렸을 때 지도 띄우기 추가 필요-->
+                    <div class="appointment_list_area">
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 / 11 : 30</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">가족같은 가게에서 함께 일하실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">05 - 26 - 11 : 30</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 11시 30분</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 11시 30분</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 11시 30분</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 11시 30분</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 11시 30분</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 11시 30분</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 11시 30분</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 11시 30분</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 11시 30분</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 / 11 : 30</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="appointment_list_element">
+                            <a href="#">
+                                <div class="appointment_date">
+                                    <span class="appointment_date_text">5 / 26 / 11 : 30</span>
+                                </div>
+                                <div class="appointment_place">
+                                    <span class="appointment_place_text">멀티캠퍼스 세종</span>
+                                </div>
+                                <div class="appointment_title">
+                                    <span class="appointment_title_text">같이 노실 분~</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 페이징 영역 -->
+                    <div class="paging_container">
+                        <!--페이징 넘버 표시할 곳-->
+                        <span class="paging_num"> 1  2  3  4  5  6</span>
+                    </div>
+
+                </div>
+
+                <!-- 지도 & 약속생성 버튼 영역 (메인 오른쪽) -->
+                <div class="wrap_map_button_sort">
+                    <!-- 지도 컨테이너 -->
+                    <div class="appointment_map_container">
+                        <div class="map_container">
+                        <!-- 지도 들어갈 공간 -->
+                        </div>
+                        <span class="map_container_ment">즐기고 싶은 장소를 찾아보세요!</span>
+                    </div>
+
+                    <!-- 약속 생성 버튼 컨테이너-->
+                    <div class="appointment_create_button_container">
+                        <!--약속 생성 버튼 원형-->
+                        <a href="#">
+                           <div class="create_button_circle">
+                            <span class="create_button_text">+</span>
+                            </div> 
+                        </a>
+                    </div>
+                </div>
+                
+
+                
+
+            </article>
+        
+
+    </body>
+</html>

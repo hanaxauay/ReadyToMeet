@@ -1,0 +1,333 @@
+* {
+  box-sizing: border-box;
+}
+
+
+/*----------------------- 전체 컨텐츠 ---------------------------------*/
+
+body{
+  margin: 0 auto;
+}
+
+.appointment_base_wrap {
+
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+
+  overflow: hidden;
+
+  font-size: 14px;
+  font-family: Inter;
+
+}
+
+
+/*---------------------------- 세부 카테고리 ---------------------------*/
+
+/*세부 카테고리 전체*/
+.sub_category {
+  width: 100%;
+  padding-top: 2%;
+
+  display: flex;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+/*세부카테고리 요소 정렬*/
+.sub_menu {
+  float: left;
+  margin: 0 30px;
+  padding: 10px;
+}
+
+/*세부 카테고리 텍스트 설정*/
+.sub_menu_text {
+  text-align: center;
+  /*text-decoration-line: underline;*/
+  color: #505050;
+  font-size: 18px;
+}
+.sub_menu :hover{
+  color: #FF7777;
+}
+
+
+
+/*------------------------- 정렬 & 검색창 ----------------------------*/
+
+/*정렬체크 검색 전체 영역 정렬*/
+.wrap_appointment_sort_search{
+  width: 80%;
+  padding-top: 2%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/*정렬 체크박스 컨테이너*/
+.sort_checkbox_container {
+  width: 30%;
+  margin: 0 auto; 
+
+  display: flex;
+  justify-content: center;
+
+  overflow: hidden;
+}
+/*체크박스 정렬 설정*/
+.appointment_list_sort {
+  float: left;
+  margin: 0 5%;
+  overflow: hidden;
+}
+/*체크박스 텍스트 설정*/
+.sort_ment {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  color: rgb(85, 85, 85);
+}
+
+/*약속 카테고리 내 검색창 컨테이너*/
+.appointment_search_container {
+  width: 60%;
+  overflow: hidden;
+}
+/*검색창 요소 정렬 설정*/
+.appointment_search_container form{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*검색창 셀렉트 박스 설정*/
+.appointment_search_container select{
+  border: 2px solid rgb(103,103,103);
+}
+/*검색창 길이*/
+#search_length{
+  width: 60%;
+}
+/*검색창 설정*/
+.appointment_search_container input[type="search"]{
+  float: left;
+  margin: 0 1%;
+  border: 2px solid rgb(103,103,103);
+  border-radius: 15px;
+  font-size: 16px;
+}
+.appointment_search_container input:focus{
+  outline: none;
+}
+/*검색창 검색버튼 설정*/
+.appointment_search_container input[type="submit"]{
+  float: left;
+  /* margin: 0 1%; */
+  background-color: rgb(103,103,103);
+  border-radius: 15px;
+  font-size: 16px;
+  color:white;
+}
+
+
+
+
+
+/* ------------------약속목록 & 지도 (메인 컨텐츠) 영역-------------------
+
+[wrap_pappointment_main]
+
+  (왼쪽)
+  > appointment_list_container
+    > appointment_list_area
+      > appointment_list_element
+        > appointment_date, appointment_place, appointment_title & text
+    > paging_container > paging_num
+
+  (오른쪽)
+  > appointment_map_container
+    > map_container
+
+  > appointment_create_button_container
+    > create_button_circle > create_button_text
+
+*/
+
+
+/* 영역전체 */
+.wrap_appointment_main{
+  width:80%;
+  margin-top: 2%;
+
+  display: flex;
+}
+
+/*------- 약속목록 영역 -------*/
+.appointment_list_container {
+  width: 55%;
+  overflow: hidden;
+  margin-left: 2%;
+}
+
+/* 약속목록 전체 컨테이너 */
+/* .appointment_list_area {
+  padding: 0 1%;
+} */
+
+/*약속 1라인 컨테이너*/
+.appointment_list_element {
+  width: 100%;
+  margin-bottom: 0.5%;
+
+  border : 1px solid rgba(128, 128, 128, 0.5);
+  border-radius: 5px;
+
+  overflow: hidden;
+}
+
+/*약속 라인에 커서 올렸을 시 표시 지도 설정용*/
+.appointment_list_element :hover{
+
+}
+
+/* 약속 요소 : 약속시간, 장소, 약속명 */
+.appointment_date {
+  width: 20%;
+
+  float: left;
+  margin: 0 1% 0 3%;
+  padding: 1%;
+}
+.appointment_place {
+  width: 30%;
+
+  float: left;
+  margin: 0 3%;
+  padding: 1%;
+}
+.appointment_title {
+  width: 30%;
+
+  float: left;
+  margin: 0 3% 0 1%;
+  padding: 1%;
+}
+
+/* 약속 요소 텍스트 설정 */
+.appointment_date_text {
+  color: rgba(103,103,103);
+  /* font-size: 16px; */
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.appointment_place span{
+  display: block;
+}
+.appointment_place_text {
+  color: rgba(248,120,111);
+  /* font-size: 18px; */
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.appointment_title span{
+  display: block;
+}
+.appointment_title_text {
+  color: rgba(0,0,0,1);
+  /* font-size: 18px; */
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+/*------ 페이징 영역 ------*/
+.paging_container {
+  width: 100%;
+  margin: 3% 0;
+  text-align: center;
+}
+.paging_num{
+  color: rgba(103,103,103);
+  font-size: 16px;
+}
+
+
+
+/*---------------------------지도 & 버튼 영역------------------------*/
+
+/*영역 전체 정렬용*/
+.wrap_map_button_sort{
+  width: 45%;
+  margin: 0 2%;
+}
+
+/*--------지도 영역-------*/
+.appointment_map_container{
+  width: 100%;
+  height: 90%;
+  margin: 0 0.2%;
+  padding: 1%;
+  background: rgb(159, 159, 159);
+}
+/*임시지도 : 지도 삽입 후 수정 필수*/
+.map_container {
+  width: 300px;
+  height: 300px;
+
+  background: rgb(53,193,84);
+}
+/*지도 하단 텍스트 설정*/
+.map_container_ment {
+  font-size: 15px;
+  text-align: center;
+}
+
+/*------생성버튼영역------*/
+.appointment_create_button_container{
+  width: 100%;
+  margin-top: 2%;
+}
+.create_button_circle{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #FF7777;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.create_button_text{
+  font-size: 30px;
+  color: white;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
