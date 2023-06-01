@@ -15,7 +15,7 @@
     border: 1px solid black;
     width: 100%;
     height: 33%;
- }
+}
 
 #main .field {
     margin: 3% 0;
@@ -31,7 +31,7 @@
     margin-left: 8%;
     padding: 0 2.2%;
     margin-bottom: 1%;
- }
+}
 
 textarea {
     width: 100%;
@@ -40,7 +40,7 @@ textarea {
 
 
 .field {
-    border:1px solid black;
+    border: 1px solid black;
     height: 6%;
 }
 
@@ -51,7 +51,7 @@ textarea {
 
 #bu {
     display: block;
-    
+
 }
 
 #idCard {
