@@ -14,4 +14,9 @@ public class test {
       return "community";
   }
 
+  @GetMapping("/activity")
+  public String test3(){
+    return "activityBaseListPage";
+  }
+
 }
