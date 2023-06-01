@@ -4,8 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Entity //jpa 용
-@Table(name = "user")
 @Data
 public class User {
     @Id
