@@ -12,7 +12,7 @@
             var selectBox = document.getElementById("emailDomainSelect");
             var emailDomainInput = document.getElementById("emailDomain");
             var selectedDomain = selectBox.value;
-    
+
             if (selectedDomain === "직접입력") {
                 emailDomainInput.value = "";
                 emailDomainInput.disabled = false;
@@ -22,41 +22,42 @@
             }
         }
     </script>
-    
+
 </head>
 <body>
-    
-    <div class="center-box">
-        <h1>정보 수정</h1>
-        <div class="joinForm">
-            <form>
-                <div class="joinContent">
-                    <label for="nickname">닉네임</label>
-                    <input type="text" id="nickname" name="nickname">
-                    <button type="button" id="get_verification_code">중복 체크</button><br>
-                </div>
-                
-                <div class="joinContent">
-                    <label for="birthdate">생년월일</label>
-                    <input type="date" id="birthdate" name="birthdate"><br>
-                </div>
-                
-                <div class="joinContent">
-                    <div class="select-gender">
-                        <label for="gender">성별</label>
-                        <input type="radio" id="male" name="gender" value="male" checked style="margin-left: 115px;">
-                        <label for="male">남성</label>
-                        <input type="radio" id="female" name="gender" value="female">
-                        <label for="female">여성</label>
-                    </div>
-                </div>
 
-                <!-- <div class="joinContent">
-                    <label for="id">아이디</label>
-                <input type="text" id="id" name="id">
-                <button type="button" id="get_verification_code">중복 체크</button><br>
-            </div> -->
-            
+<div class="center-box">
+    <h1>정보 수정</h1>
+    <div class="joinForm">
+        <form>
+            <div class="joinContent">
+                <label for="nickname">닉네임</label>
+                <input type="text" id="nickname" name="nickname">
+                <button type="button" id="get_verification_code">중복 체크</button>
+                <br>
+            </div>
+
+            <div class="joinContent">
+                <label for="birthdate">생년월일</label>
+                <input type="date" id="birthdate" name="birthdate"><br>
+            </div>
+
+            <div class="joinContent">
+                <div class="select-gender">
+                    <label for="gender">성별</label>
+                    <input type="radio" id="male" name="gender" value="male" checked style="margin-left: 115px;">
+                    <label for="male">남성</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">여성</label>
+                </div>
+            </div>
+
+            <!-- <div class="joinContent">
+                <label for="id">아이디</label>
+            <input type="text" id="id" name="id">
+            <button type="button" id="get_verification_code">중복 체크</button><br>
+        </div> -->
+
             <div class="joinContent">
                 <label for="password">비밀번호</label>
                 <input type="password" id="password" name="password"><br>
@@ -66,49 +67,49 @@
                 <label for="password_confirm">비밀번호 확인</label>
                 <input type="password" id="password_confirm" name="password_confirm"><br>
             </div>
-<!-- 
-            <div class="joinContent">
-                <label for="name">이름</label>
-                <input type="text" id="name" name="name"><br>
-            </div> -->
-            
+            <!--
+                        <div class="joinContent">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" name="name"><br>
+                        </div> -->
 
 
             <div class="joinContent">
-               <label for="phone">전화번호</label>
-               <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
-               <button type="button" id="get_verification_code">인증번호 받기</button><br>
+                <label for="phone">전화번호</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
+                <button type="button" id="get_verification_code">인증번호 받기</button>
+                <br>
             </div>
 
             <div class="joinContent">
-               <label for="verification_code">인증번호</label>
-               <input type="text" id="verification_code" name="verification_code"><br>
+                <label for="verification_code">인증번호</label>
+                <input type="text" id="verification_code" name="verification_code"><br>
             </div>
-            
+
             <div class="joinContent">
                 <label for="email">이메일</label>
                 <input type="text" id="email" name="email"> @
                 <input type="text" id="emailDomain" name="emailDomain">
-                    <select name="emailDomainSelect" id="emailDomainSelect" onchange="updateEmailDomain()">
-                        <option value="직접입력">직접입력</option>
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="naver.com">naver.com</option>
-                        <option value="daum.net">daum.net</option>
-                    </select>
+                <select name="emailDomainSelect" id="emailDomainSelect" onchange="updateEmailDomain()">
+                    <option value="직접입력">직접입력</option>
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="daum.net">daum.net</option>
+                </select>
             </div>
-            
+
             <div class="joinContent">
                 <label for="address">주소</label>
                 <input type="text" id="address" name="address">
-                <button type="button" id="get_verification_code">주소 찾기</button><br>
+                <button type="button" id="get_verification_code">주소 찾기</button>
+                <br>
             </div>
-            
-            
-            
+
+
             <button type="submit">수정하기</button>
         </form>
-   </div>
- </div>
+    </div>
+</div>
 
 </body>
 </html>

@@ -1,17 +1,13 @@
-package com.example.demo;
+package com.final2.readytomeet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ReadytomeetApplication {
+public class ReadyToMeetApplication {
 
 	public static void main(String[] args) {
-
-		SpringApplication.run(ReadytomeetApplication.class, args);
-
-		System.out.println("hi");
-		System.out.println("hi");
-
+		SpringApplication.run(ReadyToMeetApplication.class, args);
 	}
+
 }

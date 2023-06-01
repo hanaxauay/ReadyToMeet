@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
- }
+}
 
 p {
     font-size: 1.5em;
@@ -57,25 +57,25 @@ textarea {
     text-align: center;
     width: auto;
     margin-bottom: 1rem;
-    
-  }
+
+}
 
 .star-rating input {
     display: none;
-  }
-   
+}
+
 .star-rating label {
     -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
     -webkit-text-stroke-width: 2.3px;
     -webkit-text-stroke-color: #2b2a29;
     cursor: pointer;
-  }
-   
+}
+
 .star-rating :checked ~ label {
     -webkit-text-fill-color: gold;
-  }
-   
+}
+
 .star-rating label:hover,
 .star-rating label:hover ~ label {
     -webkit-text-fill-color: #fff58c;
-  }
+}
