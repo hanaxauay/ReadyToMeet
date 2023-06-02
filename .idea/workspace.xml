@@ -4,17 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29a607d0-3ab8-4d8b-a431-6068a9698c25" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ReadyToMeet.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="bdcd36bd-387f-49f5-97ec-bc1da5337ba3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/chat/ChatMessageMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/config/WebSocketConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readytomeet/src/main/resources/com/final2/readytomeet/chat/ChatMessageMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/controller/ChatController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/controller/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/controller/test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/model/Chat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/repository/ChatRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/repository/impl/ChatRepositoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/service/ChatService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/service/impl/ChatServiceImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/readytomeet/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/readytomeet/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/templates/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/readytomeet/src/main/resources/templates/chat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/test/java/com/example/demo/ReadytomeetApplicationTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +33,20 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/readytomeet">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="ReadyToMeet" type="f1a62948:ProjectNode" />
+                <item name="readytomeet" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="readytomeet" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -43,47 +55,154 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="2QaL1QB7BEagmOL7cX7rNucFNo4" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QY1srbBJq5zumIQxYmygzOV9sy" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="autoscrollFromSource" value="true" />
+    <option name="flattenModules" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/chltl/OneDrive/문서/ReadyToMeet",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-11&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/이후성/Documents/GitHub/ReadyToMeet/readytomeet/src/main/resources/static&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0256b2bf8c58504fb657a7aa286b26c7&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;,
+      &quot;mariadb&quot;
+    ]
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\이후성\Documents\GitHub\ReadyToMeet\readytomeet\src\main\resources\static" />
+      <recent name="C:\Users\이후성\Documents\GitHub\ReadyToMeet\readytomeet\src\main\resources\templates" />
+      <recent name="C:\Users\이후성\Documents\GitHub\ReadyToMeet\readytomeet\src\main\resources\image\index" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ReadyToMeetApplication">
+    <configuration name="ReadyToMeetApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.final2.readytomeet.ReadyToMeetApplication" />
+      <module name="readytomeet.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.final2.readytomeet.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="readytomeet [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/readytomeet" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ReadyToMeetApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="readytomeet.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.final2.readytomeet.ReadyToMeetApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ReadyToMeetApplication" />
+        <item itemvalue="Gradle.readytomeet [build]" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="29a607d0-3ab8-4d8b-a431-6068a9698c25" name="Changes" comment="" />
-      <created>1685586531397</created>
+      <changelist id="bdcd36bd-387f-49f5-97ec-bc1da5337ba3" name="Changes" comment="" />
+      <created>1685515911333</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1685586531397</updated>
+      <updated>1685515911333</updated>
+      <workItem from="1685515912815" duration="3047000" />
+      <workItem from="1685586421745" duration="25000" />
+      <workItem from="1685586468245" duration="159000" />
+      <workItem from="1685586632420" duration="1778000" />
+      <workItem from="1685588461964" duration="7000" />
+      <workItem from="1685588497219" duration="1908000" />
+      <workItem from="1685590438961" duration="238000" />
+      <workItem from="1685590694547" duration="429000" />
+      <workItem from="1685591135569" duration="121000" />
+      <workItem from="1685591287685" duration="762000" />
+      <workItem from="1685592137357" duration="179000" />
+      <workItem from="1685592369729" duration="80000" />
+      <workItem from="1685592475793" duration="7132000" />
+      <workItem from="1685600170068" duration="4239000" />
+      <workItem from="1685606156381" duration="1008000" />
+      <workItem from="1685621381409" duration="711000" />
+      <workItem from="1685669499946" duration="8467000" />
+      <workItem from="1685682546180" duration="2930000" />
+      <workItem from="1685688671563" duration="2386000" />
     </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>

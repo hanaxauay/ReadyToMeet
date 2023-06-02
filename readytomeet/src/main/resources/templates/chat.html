@@ -1,29 +1,58 @@
+
+
+
+
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org">
+<script>
+    // 채팅 목록 토글
+    function toggleChatList() {
+        var chatList = document.getElementById("chatList");
+        chatList.style.display = chatList.style.display === "none" ? "block" : "none";
+    }
+
+    // 채팅 내용 보여주기
+    function showChatContent(roomId) {
+        // 채팅 내용을 서버에서 가져와서 동적으로 생성할 수 있습니다.
+
+        var chatList = document.getElementById("chatList");
+        chatList.style.display = "none";
+
+        var chatContent = document.getElementById("chatContent");
+        chatContent.style.display = "block";
+
+        // 채팅 내용을 동적으로 생성합니다.
+        chatContent.innerHTML = "<h1>채팅방 " + roomId + " 내용</h1>";
+        // 채팅 내용을 보여주는 부분을 적절히 구현합니다.
+    }
+
+
+
+</script>
 
 <head>
     <link rel="stylesheet" href="../css/chat.css">
     <link rel="stylesheet" href="../css/common.css">
 </head>
 <body>
-<!-------------- header --------------->
-<nav>
+<!-- 채팅 버튼 -->
+<button onclick="toggleChatList()">채팅</button>
+
+<!-- 채팅 목록 -->
+<div id="chatList" style="display: none;">
     <ul>
-        <li class="liLogo"><a href="#"><img src="../image/logo.png" class="imgLogo"></a></li>
-        <li><a href="#">All</a> </li>
-        <li><a href="#">ACTIVITY</a> </li>
-        <li><a href="#">VEHICLE</a> </li>
-        <li><a href="#">WORK</a> </li>
-        <li><a href="#">Community</a> </li>
-        <li>
-            <span class="search-container">
-                <input type="text" placeholder="약속을 찾아봐요!">
-                <input type="submit" value="Search">
-            </span>
-        </li>
-        <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
+        <li><a href="#" onclick="showChatContent(1)">채팅방 1</a></li>
+        <li><a href="#" onclick="showChatContent(2)">채팅방 2</a></li>
+        <li><a href="#" onclick="showChatContent(3)">채팅방 3</a></li>
+        <!-- 채팅방 목록에 필요한 데이터를 동적으로 생성할 수 있습니다. -->
     </ul>
-</nav>
+</div>
+
+<!-- 채팅 내용 -->
+<div id="chatContent" style="display: none;">
+    <!-- 채팅 내용을 보여주는 부분 -->
+</div>
 
 
 <!-------------- main --------------->
@@ -57,7 +86,6 @@
     </div>
 </div>
 
-<footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
 </body>
 </html>
-</style>
+
