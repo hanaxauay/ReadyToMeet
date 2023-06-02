@@ -1,19 +1,18 @@
 .main_wrap .addImage {
     border: 1px solid black;
-    width: 40vw;
-    height: 40vh;
+    width: 50%;
+    height: 50vh;
 }
 
 .addImage {
     /* width: 400px;
     height: 300px; */
-    background-color: lightgray;
+    background-color: light-gray;
     /* overflow: hidden; */
-    margin: 0px 10px 10px 0px;
+    margin: 0 10% 2% 0;
 }
 
 #yes {
     position: relative;
     margin-top: 5%;
-    margin-left: 35%;
-}
+    margin-left: 43%;

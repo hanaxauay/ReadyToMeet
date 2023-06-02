@@ -46,6 +46,7 @@
                 <div class="addImage" id="image-show">
                 </div>
                 <input type="file" accept="image/*" onchange="loadFile(this)">
+                <input type="submit" id="submit" value="수정">
             </form>
             <div class="content">
                 <b>닉네임</b>
@@ -64,19 +65,18 @@
                 <b>자기 소개</b>
                 <div class="area">
                     <textarea><c:out value="${content}"/></textarea>
-                    <input type="button" id="bu" value="수정" onclick="mypageUpdate()">
                     <input type="button" id="idCard" value="신분증 인증" onclick="showPopup();"/>
+                    <input type="button" id="bu" value="수정" onclick="mypageUpdate()">
                 </div>
 
                 <div class="place">
                     <h2>지금까지 내가 갔던 장소</h2>
-                    <div>목록</div>
-                    <div>목록</div>
-                    <div>목록</div>
-                    <div>목록</div>
-                    <div>목록</div>
-                    <div>목록</div>
-                    <div>목록</div>
+                    <div>${APPO.TITLE}</div>
+                    <div>${APPO.TITLE}</div>
+                    <div>${APPO.TITLE}</div>
+                    <div>${APPO.TITLE}</div>
+                    <div>${APPO.TITLE}</div>
+                    <div>${APPO.TITLE}</div>
                 </div>
             </div>
         </div>
