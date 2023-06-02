@@ -51,6 +51,33 @@
             <!-- 리스트 정렬 & 검색 영역 -->
             <article class="wrap_appointment_sort_search">
 
+                <!-- 검색 영역-->
+                <div class="appointment_search_container">
+                    <!-- 현재 카테고리 표시 문구 -->
+                    <div class="show_sub_category_container">
+                        <span class="show_sub_category">VEHICLE </span>
+                        <span class="show_sub_category"> > </span>
+                        <!-- 세부 카테고리 변경 시 따라서 바뀌어야 함 -->
+                        <span class="sub_category_ment"> 전체</span>
+                    </div>
+
+                    <form action="#">
+                        <!--셀렉트 박스-->
+                        <select name="appointment_base_search_filter" >
+                            <option value="">전체</option>
+                            <option value="subCategory">세부카테고리</option>
+                            <option value="appointmentTitle">약속명</option>
+                            <option value="appointmentPlace">약속장소</option>
+                            <option value="writerNickname">작성자</option>
+                        </select>   
+                        
+                        <input type="search" id="search_length" name="appointment_search" placeholder="약속 세부 검색..." >
+
+                        <input type="submit" value="search">
+                        
+                    </form>
+                </div>
+
                 <!--정렬체크 영역-->
                 <div class="sort_checkbox_container">
                     <div class="appointment_list_sort">
@@ -65,24 +92,6 @@
                     </div>
                 </div>
 
-                <!-- 검색 영역-->
-                <div class="appointment_search_container">
-                    <form action="#">
-                        <!--셀렉트 박스-->
-                        <select name="appointment_base_search_filter" >
-                            <option value="">전체</option>
-                            <option value="subCategory">세부카테고리</option>
-                            <option value="appointmentTitle">약속명</option>
-                            <option value="appointmentPlace">약속장소</option>
-                            <option value="writerNickname">작성자</option>
-                        </select>   
-                        
-                        <input type="search" id="search_length" name="appointment_search" placeholder="  약속 세부 검색..." >
-
-                        <input type="submit" value="search">
-                        
-                    </form>
-                </div>
             </article>
 
 
