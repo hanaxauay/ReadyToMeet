@@ -6,17 +6,34 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class test {
   @GetMapping("/all")
-  public String test1(){
+  public String gotoAll(){
     return "all";
   }
   @GetMapping("/community")
-  public String test2() {
+  public String gotoCommunity() {
       return "community";
   }
 
   @GetMapping("/activity")
-  public String test3(){
+  public String gotoActivity(){
     return "activityBaseListPage";
   }
+
+  @GetMapping("/vehicle")
+  public String gotoVehicle(){
+    return "vehicleBaseListPage";
+  }
+
+  @GetMapping("/work")
+  public String gotoWork(){
+    return "workBaseListPage";
+  }
+
+  @GetMapping("/main")
+  public String gotoMain(){
+    return "main";
+  }
+
+
 
 }

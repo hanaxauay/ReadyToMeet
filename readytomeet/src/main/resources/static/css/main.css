@@ -1,0 +1,136 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    list-style:none;
+}
+.row {
+    width: 100%;
+    height:100%;
+    padding:1%;
+    display: flex;
+}
+
+.left {
+    width: 50%;
+    box-sizing: border-box;
+    margin-right: 1%;
+
+}
+
+.left_top{
+    width:100%;
+    margin: 1%;
+    background-color: #FF7777;
+    text-align: center;
+}
+
+.weather {
+    background-color:#626262;
+    width:50%;
+    height:200px;
+    float:left;
+    border-radius: 1%;
+    padding-top: 20%;
+
+}
+
+.calendar {
+    background-color:#bbbbbb;
+    width:48.5%;
+    height:200px;
+    float:left;
+    margin-left: 1%;
+    border-radius: 1%;
+    padding-top: 20%;
+
+
+}
+
+.popular_meet{
+    background:hsl(209, 59%, 90%);
+    height:1000px;
+    width:100%;
+    float:left;
+    margin:1%;
+    margin-top:10px;
+    border-radius: 1%;
+
+}
+
+.middle_category{
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    font-size:120%;
+    color:#626262;
+    padding:1%;
+    padding-top:1%;
+}
+
+.right {
+    width: 43%;
+    float: left;
+    box-sizing: border-box;
+    margin: 1%;
+    border-radius: 1%;
+}
+
+.box {
+    background-color: #f1f1f1;
+    display: flex;
+    margin-bottom: 3%;
+    border-radius: 10px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.list {
+    display: flex;
+    width: 100%;
+    padding: 3%;
+
+}
+
+.date{
+    width:40%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.place{
+    color:#FF7777;
+    width:60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+.detail{
+    padding: 10px 20px;
+    background-color: #FF7777;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    width:20%;
+    justify-content: flex-end;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.more{
+    float: right;
+    margin-right: 5%;
+    color:red;
+    background-color: #FF7777;
+}
