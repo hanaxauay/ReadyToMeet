@@ -1,11 +1,11 @@
-package com.final2.readytomeet.model;
+package com.final2.readytomeet.dto;
 
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
-public class User {
+public class UserDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;

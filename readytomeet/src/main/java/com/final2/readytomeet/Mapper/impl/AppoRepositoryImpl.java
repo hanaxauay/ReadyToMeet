@@ -1,4 +1,4 @@
-package com.final2.readytomeet.repository.impl;
+package com.final2.readytomeet.Mapper.impl;
 
 import org.springframework.stereotype.Repository;
 
