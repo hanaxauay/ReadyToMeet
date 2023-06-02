@@ -9,6 +9,7 @@
         <link href="../css/common.css" rel="stylesheet" />
         <link href="../css/vehicleBaseListPage.css" rel="stylesheet" />
         <title>Document</title>
+        <script src="../js/vehicleBaseListPage.js"></script>
     </head>
     <body>
         <!--헤더 영역-->
@@ -54,12 +55,12 @@
                 <div class="sort_checkbox_container">
                     <div class="appointment_list_sort">
                         <label>
-                            <span class="sort_ment">가까운 시간 순 <input type="checkbox" name="sort_time_close" value="sort_time_close"></span>
+                            <span class="sort_ment">가까운 시간 순 <input type="checkbox" name="sort_what_close" value="sort_time_close" onclick="NoMultiChk(this)"></span>
                         </label>
                     </div>
                     <div class="appointment_list_sort">
                         <label>
-                            <span class="sort_ment">가까운 위치 순 <input type="checkbox" name="sort_place_close" value="sort_place_close"></span>
+                            <span class="sort_ment">가까운 위치 순 <input type="checkbox" name="sort_what_close" value="sort_place_close" onclick="NoMultiChk(this)"></span>
                         </label>
                     </div>
                 </div>
