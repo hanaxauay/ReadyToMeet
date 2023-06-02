@@ -1,91 +1,54 @@
-
-
-
-
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-<script>
-    // 채팅 목록 토글
-    function toggleChatList() {
-        var chatList = document.getElementById("chatList");
-        chatList.style.display = chatList.style.display === "none" ? "block" : "none";
-    }
-
-    // 채팅 내용 보여주기
-    function showChatContent(roomId) {
-        // 채팅 내용을 서버에서 가져와서 동적으로 생성할 수 있습니다.
-
-        var chatList = document.getElementById("chatList");
-        chatList.style.display = "none";
-
-        var chatContent = document.getElementById("chatContent");
-        chatContent.style.display = "block";
-
-        // 채팅 내용을 동적으로 생성합니다.
-        chatContent.innerHTML = "<h1>채팅방 " + roomId + " 내용</h1>";
-        // 채팅 내용을 보여주는 부분을 적절히 구현합니다.
-    }
-
-
-
-</script>
-
+<html>
 <head>
-    <link rel="stylesheet" href="../css/chat.css">
-    <link rel="stylesheet" href="../css/common.css">
+    <title>실시간 채팅</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.4/stomp.min.js"></script>
+    <script>
+        var stompClient = null;
+
+        function connect() {
+            var socket = new SockJS('/websocket');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                stompClient.subscribe('/topic/chat', function (message) {
+                    showMessage(JSON.parse(message.body));
+                });
+            });
+        }
+
+        function disconnect() {
+            if (stompClient !== null) {
+                stompClient.disconnect();
+            }
+            console.log("Disconnected");
+        }
+
+        function sendMessage() {
+            var username = $("#username").val();
+            var message = $("#message").val();
+            var timestamp = new Date().toISOString();
+            var chatMessage = {
+                username: username,
+                message: message,
+                timestamp: timestamp
+            };
+            stompClient.send("/app/chat", {}, JSON.stringify(chatMessage));
+            $("#message").val("");
+        }
+
+        function showMessage(message) {
+            $("#chat").append("<p><strong>" + message.username + "</strong>: " + message.message + "</p>");
+        }
+    </script>
 </head>
-<body>
-<!-- 채팅 버튼 -->
-<button onclick="toggleChatList()">채팅</button>
-
-<!-- 채팅 목록 -->
-<div id="chatList" style="display: none;">
-    <ul>
-        <li><a href="#" onclick="showChatContent(1)">채팅방 1</a></li>
-        <li><a href="#" onclick="showChatContent(2)">채팅방 2</a></li>
-        <li><a href="#" onclick="showChatContent(3)">채팅방 3</a></li>
-        <!-- 채팅방 목록에 필요한 데이터를 동적으로 생성할 수 있습니다. -->
-    </ul>
-</div>
-
-<!-- 채팅 내용 -->
-<div id="chatContent" style="display: none;">
-    <!-- 채팅 내용을 보여주는 부분 -->
-</div>
-
-
-<!-------------- main --------------->
-
-<div class="chat-popup">
-    <div class="chat-content">
-        <div class="chat-message" th:each="message : ${messages}" style="flex-grow: 1; padding: 2%; overflow-y: auto;">
-            <div class="message-sender" th:text="${message.sender}" style="font-weight: bold; color: #FF7777;"></div>
-            <div class="message-time" th:text="${message.time}"
-                 style="font-size: 0.8em; color: #888; margin-left: 10px;"></div>
-            <div class="message-content" th:text="${message.content}" style="margin-top: 5px;"></div>
-        </div>
-        <div class="user-list" style="width: 30%; padding: 2%; background-color: #f9f9f9; overflow-y: auto;">
-            <div class="user-list-title"
-                 style="font-weight: bold; padding: 2%; background-color: #FF7777; color: white; text-align: center;">
-                참여인원
-            </div>
-            <div class="user-list-content" th:each="user : ${users}" th:text="${user.name}"
-                 style="padding: 2%; border-bottom: 1px solid #ccc;"></div>
-        </div>
-    </div>
-    <div class="chat-input" style="display: flex; align-items: center; padding: 2%; background-color: #f9f9f9;">
-        <form th:action="@{/sendMessage}" method="post">
-            <textarea class="message-input" name="message" placeholder="메시지를 입력하세요..."
-                      style="flex-grow: 1; padding: 2%; margin-right: 2%; border: 1px solid #ccc; border-radius: 4px;"></textarea>
-            <button class="send-button" type="submit"
-                    style="padding: 2%; background-color: #FF7777; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                전송
-            </button>
-        </form>
-    </div>
-</div>
-
+<body onload="connect()">
+<h1>실시간 채팅</h1>
+<div id="chat"></div>
+<input type="text" id="username" placeholder="사용자명" /><br/>
+<input type="text" id="message" placeholder="메시지" /><br/>
+<button onclick="sendMessage()">전송</button>
+<button onclick="disconnect()">연결 종료</button>
 </body>
 </html>
-

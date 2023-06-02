@@ -1,32 +1,24 @@
 package com.final2.readytomeet.chat;
 
+import com.final2.readytomeet.chat.ChatMessageService;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
-import java.security.Principal;
-import java.time.LocalDateTime;
-
-@RestController
+@Controller
 public class ChatController {
-
+    private final ChatMessageService chatMessageService;
     private final SimpMessagingTemplate messagingTemplate;
-    private final ChatMessageDao chatMessageDao;
 
-    public ChatController(SimpMessagingTemplate messagingTemplate, ChatMessageDao chatMessageDao) {
+    public ChatController(ChatMessageService chatMessageService, SimpMessagingTemplate messagingTemplate) {
+        this.chatMessageService = chatMessageService;
         this.messagingTemplate = messagingTemplate;
-        this.chatMessageDao = chatMessageDao;
     }
 
-    @MessageMapping("/sendMessage")
-    public void sendMessage(ChatMessageDto chatMessageDto, Principal principal) {
-        ChatMessage chatMessage = new ChatMessage();
-        chatMessage.setUsername(principal.getName());
-        chatMessage.setMessage(chatMessageDto.getMessage());
-        chatMessage.setTimestamp(LocalDateTime.now());
-
-        chatMessageDao.save(chatMessage);
-
-        messagingTemplate.convertAndSend("/topic/public", chatMessageDto);
+    @MessageMapping("/chat")
+    public void processMessage(@Payload ChatMessageDto chatMessage) {
+        chatMessageService.saveChatMessage(chatMessage);
+        messagingTemplate.convertAndSend("/topic/chat", chatMessage);
     }
 }

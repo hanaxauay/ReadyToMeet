@@ -1,5 +1,6 @@
 package com.final2.readytomeet.chat;
 
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -12,6 +13,9 @@ import java.util.List;
 public class ChatHandler extends TextWebSocketHandler {
 
     private static final List<WebSocketSession> sessions = new ArrayList<>();
+
+    public ChatHandler(SimpMessagingTemplate messagingTemplate) {
+    }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {

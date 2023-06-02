@@ -1,27 +1,12 @@
-<!-- com.final2.readytomeet.chat.ChatMessageMapper.xml -->
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.final2.readytomeet.chat.ChatMessageMapper">
-
-    <resultMap id="chatMessageResultMap" type="com.final2.readytomeet.chat.ChatMessage">
-        <id property="id" column="id"/>
-        <result property="username" column="username"/>
-        <result property="message" column="message"/>
-        <result property="timestamp" column="timestamp"/>
-    </resultMap>
-
-    <select id="getChatMessageById" resultMap="chatMessageResultMap">
-        SELECT * FROM chat_message WHERE id = #{id}
-    </select>
-
-    <select id="getAllChatMessages" resultMap="chatMessageResultMap">
-        SELECT * FROM chat_message
-    </select>
-
-    <insert id="insertChatMessage">
+    <insert id="saveChatMessage" parameterType="com.final2.readytomeet.chat.ChatMessageDto">
         INSERT INTO chat_message (username, message, timestamp)
         VALUES (#{username}, #{message}, #{timestamp})
     </insert>
 
+    <select id="getAllChatMessages" resultType="com.final2.readytomeet.chat.ChatMessageDto">
+        SELECT * FROM chat_message
+    </select>
 </mapper>
