@@ -10,63 +10,47 @@
     }
     /* 중앙에 위치한 박스 스타일 */
     .center-box {
-        width: 500px;
-        height: 500px;
+        width: 26%;
+        height: 50%;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: white;
         border: 2px solid black;
-        border-radius: 0.8rem;
-        padding-bottom: 50px;
-        padding-left: 50px;
-        padding-right: 50px;
+        border-radius: 4%;
+        padding-bottom: 0.5%;
+        padding-left: 2%;
+        padding-right: 2%;
     }
     h1 {
         display: block;
-        font-size: 2em;
-        margin-block-start: 0.67em;
-        margin-block-end: 0.67em;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
+        font-size: 250%;
+        margin-block-start: 6%;
+        margin-block-end: 6%;
+        margin-inline-start: 0%;
+        margin-inline-end: 0%;
         font-weight: bold;
-        margin-bottom: 50px;
+        margin-top: 10%;
+        margin-bottom: 15%;
     }
     /* 가입하기 버튼 스타일 */
     button[type="submit"] {
         width: 100%;
-        margin-top: 30px;
-        background-color: #F7570B;
+        margin-top: 15%;
+        background-color: #F77777;
         border: none;
         color: white;
         padding: 10px 20px;
         text-align: center;
         display: inline-block;
-        font-size: 16px;
+        font-size: 130%;
         cursor: pointer;
-        border-radius: 5px;
     }
 
-    /* 인증번호 받기 버튼 스타일 */
-    #get_verification_code {
-        margin-top: 10px;
-        background-color: #F7570B;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 7px;
-        cursor: pointer;
-        border-radius: 5px;
-        width:24%;
-        
-    }
     .findContent{
         width: 100%;
-        margin-top: 15px;
+        margin-top: 4%;
     }
     .findContent>label {
         width: 30%;
@@ -80,6 +64,24 @@
         border: 0.7px solid rgb(185, 184, 184);
         border-radius: 0.5rem;
     }
-    #phone{
-        width:43%;
+
+    .hidden {
+        display: none;
+    }
+
+    .announcement {
+        font-size: 180%;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 15%;
+        background-color: #F77777;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        display: inline-block;
+        font-size: 130%;
+        cursor: pointer;
     }
