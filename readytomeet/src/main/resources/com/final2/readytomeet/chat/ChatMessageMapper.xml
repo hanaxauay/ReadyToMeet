@@ -1,0 +1,12 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.final2.readytomeet.chat.ChatMessageMapper">
+    <insert id="saveChatMessage" parameterType="com.final2.readytomeet.chat.ChatMessageDto">
+        INSERT INTO chat_message (username, message, timestamp)
+        VALUES (#{username}, #{message}, #{timestamp})
+    </insert>
+
+    <select id="getAllChatMessages" resultType="com.final2.readytomeet.chat.ChatMessageDto">
+        SELECT * FROM chat_message
+    </select>
+</mapper>

@@ -34,6 +34,10 @@ public class test {
     return "main";
   }
 
+  @GetMapping("/chat")
+  public String gotoChat(){
+    return "chat";
+  }
 
 
 }

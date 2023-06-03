@@ -1,6 +1,7 @@
 package com.final2.readytomeet.model;
 
 import lombok.Data;
+import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 
 import javax.persistence.*;
 
@@ -23,5 +24,6 @@ public class User {
     private String user_content;
     private Integer user_appo_cnt;
     private Integer user_appo_like;
+
 
 }
