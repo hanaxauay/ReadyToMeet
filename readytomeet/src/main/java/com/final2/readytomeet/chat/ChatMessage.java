@@ -1,27 +1,26 @@
 package com.final2.readytomeet.chat;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Data
-@Table(name = "chat_message")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ChatMessage {
+    public enum MessageType {
+        ENTER, TALK
+    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
-    private String username;
-
-    @Column(nullable = false)
+    private MessageType type;
+    //채팅방 ID
+    private String roomId;
+    //보내는 사람
+    private String sender;
+    //내용
     private String message;
-
-    @Column(nullable = false)
-    private LocalDateTime timestamp;
-
-    // constructors, getters, and setters
 }

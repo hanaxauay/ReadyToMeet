@@ -8,10 +8,8 @@
 //@Mapper
 //public interface ChatMessageMapper {
 //
-//    ChatMessage getChatMessageById(@Param("id") Long id);
+//    void saveChatMessage(ChatMessageDto chatMessage);
 //
-//    List<ChatMessage> getAllChatMessages();
-//
-//    void saveChatMessage(ChatMessage chatMessage);
+//    List<ChatMessageDto> getAllChatMessages();
 //
 //}
