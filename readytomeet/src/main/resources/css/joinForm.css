@@ -10,14 +10,14 @@
     }
     /* 중앙에 위치한 박스 스타일 */
     .center-box {
-        width: 500px;
-        height: 800px;
+        width: 26%;
+        height: 80%;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        border-radius: 0.8rem;
-        padding: 50px;
+        border-radius: 2%;
+        padding: 3.75%;
         background-color: white;
     }
     
@@ -26,33 +26,33 @@
     font-size: 200%;
     margin-block-start: 0.67em;
     margin-block-end: 0.67em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+    margin-inline-start: 0%;
+    margin-inline-end: 0%;
     font-weight: bold;
     }
 
     /* 가입하기 버튼 스타일 */
     button[type="submit"] {
         width: 100%;
-        margin-top: 10px;
+        margin-top: 5%;
         background-color: #FF7777;
         border: none;
         color: white;
-        padding: 10px 20px;
+        padding: 2% 20%;
         text-align: center;
         display: inline-block;
         font-size: 100%;
         cursor: pointer;
-        border-radius: 5px;
+        border-radius: 4px;
     }
 
     /* 인증번호 받기 버튼 스타일 */
     #get_verification_code {
-        margin-top: 10px;
+        margin-top: 2%;
         background-color: #FF7777;
         border: none;
         color: white;
-        padding: 10px 20px;
+        padding: 2.4% 4%;
         text-align: center;
         text-decoration: none;
         display: inline-block;

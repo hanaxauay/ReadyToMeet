@@ -9,6 +9,7 @@
         <link href="../css/common.css" rel="stylesheet" />
         <link href="../css/vehicleBaseListPage.css" rel="stylesheet" />
         <title>Document</title>
+        <script src="../js/vehicleBaseListPage.js"></script>
     </head>
     <body>
         <!--헤더 영역-->
@@ -50,22 +51,16 @@
             <!-- 리스트 정렬 & 검색 영역 -->
             <article class="wrap_appointment_sort_search">
 
-                <!--정렬체크 영역-->
-                <div class="sort_checkbox_container">
-                    <div class="appointment_list_sort">
-                        <label>
-                            <span class="sort_ment">가까운 시간 순 <input type="checkbox" name="sort_time_close" value="sort_time_close"></span>
-                        </label>
-                    </div>
-                    <div class="appointment_list_sort">
-                        <label>
-                            <span class="sort_ment">가까운 위치 순 <input type="checkbox" name="sort_place_close" value="sort_place_close"></span>
-                        </label>
-                    </div>
-                </div>
-
                 <!-- 검색 영역-->
                 <div class="appointment_search_container">
+                    <!-- 현재 카테고리 표시 문구 -->
+                    <div class="show_sub_category_container">
+                        <span class="show_sub_category">VEHICLE </span>
+                        <span class="show_sub_category"> > </span>
+                        <!-- 세부 카테고리 변경 시 따라서 바뀌어야 함 -->
+                        <span class="sub_category_ment"> 전체</span>
+                    </div>
+
                     <form action="#">
                         <!--셀렉트 박스-->
                         <select name="appointment_base_search_filter" >
@@ -76,12 +71,27 @@
                             <option value="writerNickname">작성자</option>
                         </select>   
                         
-                        <input type="search" id="search_length" name="appointment_search" placeholder="  약속 세부 검색..." >
+                        <input type="search" id="search_length" name="appointment_search" placeholder="약속 세부 검색..." >
 
                         <input type="submit" value="search">
                         
                     </form>
                 </div>
+
+                <!--정렬체크 영역-->
+                <div class="sort_checkbox_container">
+                    <div class="appointment_list_sort">
+                        <label>
+                            <span class="sort_ment">가까운 시간 순 <input type="checkbox" name="sort_what_close" value="sort_time_close" onclick="NoMultiChk(this)"></span>
+                        </label>
+                    </div>
+                    <div class="appointment_list_sort">
+                        <label>
+                            <span class="sort_ment">가까운 위치 순 <input type="checkbox" name="sort_what_close" value="sort_place_close" onclick="NoMultiChk(this)"></span>
+                        </label>
+                    </div>
+                </div>
+
             </article>
 
 

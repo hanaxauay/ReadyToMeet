@@ -6,25 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>비밀번호 찾기</title>
     <link rel="stylesheet" href="../css/pwFind.css">
+<script>
+    function showPwFindSent() {
+        document.getElementById("pwFind").classList.add("hidden");
+        document.getElementById("pwFindSent").classList.remove("hidden");
+    }
+</script>
 </head>
 <body>
     <div class="center-box">
         <h1>비밀번호 찾기</h1>
         <div class="tab-content">
             <div id="pwFind" class="tab-pane">
-                <form>
+                <form onsubmit="event.preventDefault(); showPwFindSent();">
                     <div class="findContent">
                         <label for="id">아이디</label>
                         <input type="text" class="form-control" id="id" name="id">
                     </div>
                     <div class="findContent">
-                        <label for="phone">이메일</label>
+                        <label for="email">이메일</label>
                         <input type="text" class="form-control" id="email" name="email">
                     </div>
                     <button type="submit">비밀번호 찾기</button>
                 </form>
             </div>
+            <div id="pwFindSent" class="tab-pane hidden">
+                <div class="announcement">
+                    입력하신 이메일로 메일이 발송되었습니다.<br>
+                    발송한 메일에서 비밀번호 수정 작업을 진행해주세요.
+                </div>
+                <button onclick="">뒤로 가기</button>
+            </div>
         </div>
-    </div> 
+    </div>
 </body>
 </html>

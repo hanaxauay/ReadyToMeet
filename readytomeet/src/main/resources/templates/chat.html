@@ -1,63 +1,54 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html>
 <head>
-    <link rel="stylesheet" href="../css/chat.css">
-    <link rel="stylesheet" href="../css/common.css">
+    <title>실시간 채팅</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.4/stomp.min.js"></script>
+    <script>
+        var stompClient = null;
+
+        function connect() {
+            var socket = new SockJS('/websocket');
+            var stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                stompClient.subscribe('/topic/chat', function (message) {
+                    showMessage(JSON.parse(message.body));
+                });
+            });
+        }
+
+        function disconnect() {
+            if (stompClient !== null) {
+                stompClient.disconnect();
+            }
+            console.log("Disconnected");
+        }
+
+        function sendMessage() {
+            var username = $("#username").val();
+            var message = $("#message").val();
+            var timestamp = new Date().toISOString();
+            var chatMessage = {
+                username: username,
+                message: message,
+                timestamp: timestamp
+            };
+            stompClient.send("/app/chat", {}, JSON.stringify(chatMessage));
+            $("#message").val("");
+        }
+
+        function showMessage(message) {
+            $("#chat").append("<p><strong>" + message.username + "</strong>: " + message.message + "</p>");
+        }
+    </script>
 </head>
-<body>
-<!-------------- header --------------->
-<nav>
-    <ul>
-        <li class="liLogo"><a href="#"><img src="../image/logo.png" class="imgLogo"></a></li>
-        <li><a href="#">All</a> </li>
-        <li><a href="#">ACTIVITY</a> </li>
-        <li><a href="#">VEHICLE</a> </li>
-        <li><a href="#">WORK</a> </li>
-        <li><a href="#">Community</a> </li>
-        <li>
-            <span class="search-container">
-                <input type="text" placeholder="약속을 찾아봐요!">
-                <input type="submit" value="Search">
-            </span>
-        </li>
-        <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
-    </ul>
-</nav>
-
-
-<!-------------- main --------------->
-
-<div class="chat-popup">
-    <div class="chat-content">
-        <div class="chat-message" th:each="message : ${messages}" style="flex-grow: 1; padding: 2%; overflow-y: auto;">
-            <div class="message-sender" th:text="${message.sender}" style="font-weight: bold; color: #FF7777;"></div>
-            <div class="message-time" th:text="${message.time}"
-                 style="font-size: 0.8em; color: #888; margin-left: 10px;"></div>
-            <div class="message-content" th:text="${message.content}" style="margin-top: 5px;"></div>
-        </div>
-        <div class="user-list" style="width: 30%; padding: 2%; background-color: #f9f9f9; overflow-y: auto;">
-            <div class="user-list-title"
-                 style="font-weight: bold; padding: 2%; background-color: #FF7777; color: white; text-align: center;">
-                참여인원
-            </div>
-            <div class="user-list-content" th:each="user : ${users}" th:text="${user.name}"
-                 style="padding: 2%; border-bottom: 1px solid #ccc;"></div>
-        </div>
-    </div>
-    <div class="chat-input" style="display: flex; align-items: center; padding: 2%; background-color: #f9f9f9;">
-        <form th:action="@{/sendMessage}" method="post">
-            <textarea class="message-input" name="message" placeholder="메시지를 입력하세요..."
-                      style="flex-grow: 1; padding: 2%; margin-right: 2%; border: 1px solid #ccc; border-radius: 4px;"></textarea>
-            <button class="send-button" type="submit"
-                    style="padding: 2%; background-color: #FF7777; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                전송
-            </button>
-        </form>
-    </div>
-</div>
-
-<footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
+<body onload="connect()">
+<h1>실시간 채팅</h1>
+<div id="chat"></div>
+<input type="text" id="username" placeholder="사용자명" /><br/>
+<input type="text" id="message" placeholder="메시지" /><br/>
+<button onclick="sendMessage()">전송</button>
+<button onclick="disconnect()">연결 종료</button>
 </body>
 </html>
-</style>
