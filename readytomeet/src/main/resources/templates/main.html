@@ -36,7 +36,7 @@
         position: subMarkerPoint,
         map: map,
         label: "어린이대공원역 5번출구",
-          background:"#ffffff",
+        background:"#ffffff",
         icon: {
           url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
           labelOrigin: new google.maps.Point(20, 47),
@@ -50,6 +50,53 @@
         map.setZoom(15);
       }
     }
+
+    // 서버로부터 받은 데이터를 기반으로 현재 날씨 정보를 표시하는 함수
+    // 날씨 api ------------------------------------------------------------------
+    function fetchWeatherData() {
+      const apiKey = 'b5cf380912c1b77315480717fe7a34d9';
+      const location = 'Seoul';
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
+
+      fetch(url)
+              .then(response => response.json())
+              .then(data => {
+                const temperature = data.main.temp;
+                const minTemperature = data.main.temp_min;
+                const maxTemperature = data.main.temp_max;
+                const weatherDescription = data.weather[0].description;
+                const humidity = data.main.humidity;
+                const wind = data.wind.speed;
+
+
+                displayWeather(location, temperature, minTemperature, maxTemperature, weatherDescription, humidity, wind);
+              })
+              .catch(error => {
+                console.log('Error:', error);
+              });
+    }
+
+    function displayWeather(location, temperature, minTemperature, maxTemperature, description, humidity, wind) {
+      const locationElement = document.getElementById('location');
+      const temperatureElement = document.getElementById('temperature');
+      const minTemperatureElement = document.getElementById('minTemperature');
+      const maxTemperatureElement = document.getElementById('maxTemperature');
+      const descriptionElement = document.getElementById('weatherDescription');
+      const humidityElement = document.getElementById('humidity');
+      const windElement = document.getElementById('wind');
+
+      locationElement.textContent = location;
+      temperatureElement.textContent = temperature;
+      minTemperatureElement.textContent = minTemperature;
+      maxTemperatureElement.textContent = maxTemperature;
+      descriptionElement.textContent = description;
+      humidityElement.textContent = humidity;
+      windElement.textContent = wind;
+    }
+
+
+
+    fetchWeatherData();
   </script>
 
   <!-- 아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함 key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.-->
@@ -83,72 +130,98 @@
         <div id="map" style="width: 100%; height: 370px;"></div>
         <button type="button" id="mapBtn">이동하기</button> <!-- 추후 내위치 기반으로 뜨게 해야함 -->
       </div>
+      <div class="weather">
+        <h1 id="location"></h1>
+        <img src="weather-icon.png" class="weather-icon" alt="Weather Icon">
+        <p class="temperature"><span id="temperature"></span>°C</p>
+        <p class="description" id="weatherDescription"></p>
+        <hr>
+        <div class="details">
+          <div class="detail">
+            <p>최저온도</p>
+            <p class="detail-value"><span id="minTemperature"></span>°C</p>
+          </div>
+          <div class="detail">
+            <p>최고온도</p>
+            <p class="detail-value"><span id="maxTemperature"></span>°C</p>
+          </div>
+          <div class="detail">
+            <p>습도</p>
+            <p class="detail-value"><span id="humidity"></span>%</p>
+          </div>
+          <div class="detail">
+            <p>바람</p>
+            <p class="detail-value"><span id="wind"></span></p>
+          </div>
+        </div>
+      </div>
+
     </div>
-  <div class="left_bottom">
-  <!-- 반복해서 만들도록 설정(타임리프로 할듯) -->
-<!--      <div class="box">-->
-<!--           <div class="list">-->
-<!--           <div class="place">서울역 1번 출구 투썸</div>-->
-<!--           <div class="date"> 2023-05-12 </div>-->
-<!--           <button class="detailBtn"> 상세보기</button>-->
-<!--         </div>-->
-<!--              -->
-<!--       </div>-->
-<!--      <div class="box">-->
-<!--          <div class="list">-->
-<!--              <div class="place">서울역 1번 출구 투썸</div>-->
-<!--              <div class="date"> 2023-05-12 </div>-->
-<!--              <button class="detailBtn"> 상세보기</button>-->
-<!--          </div>-->
+    <div class="left_bottom">
+      <!-- 반복해서 만들도록 설정(타임리프로 할듯) -->
+      <!--      <div class="box">-->
+      <!--           <div class="list">-->
+      <!--           <div class="place">서울역 1번 출구 투썸</div>-->
+      <!--           <div class="date"> 2023-05-12 </div>-->
+      <!--           <button class="detailBtn"> 상세보기</button>-->
+      <!--         </div>-->
+      <!--              -->
+      <!--       </div>-->
+      <!--      <div class="box">-->
+      <!--          <div class="list">-->
+      <!--              <div class="place">서울역 1번 출구 투썸</div>-->
+      <!--              <div class="date"> 2023-05-12 </div>-->
+      <!--              <button class="detailBtn"> 상세보기</button>-->
+      <!--          </div>-->
 
-<!--      </div>-->
-<!--      <div class="box">-->
-<!--          <div class="list">-->
-<!--              <div class="place">서울역 1번 출구 투썸</div>-->
-<!--              <div class="date"> 2023-05-12 </div>-->
-<!--              <button class="detailBtn"> 상세보기</button>-->
-<!--          </div>-->
+      <!--      </div>-->
+      <!--      <div class="box">-->
+      <!--          <div class="list">-->
+      <!--              <div class="place">서울역 1번 출구 투썸</div>-->
+      <!--              <div class="date"> 2023-05-12 </div>-->
+      <!--              <button class="detailBtn"> 상세보기</button>-->
+      <!--          </div>-->
 
-<!--      </div>-->
+      <!--      </div>-->
     </div>
   </div>
   <div class="right">
-      <div class="middle_category">스케줄러</div>
-      <!-- 반복해서 만들도록 설정(타임리프로 할듯) -->
-      <div class="box">
-         <div class="list">
-           <div class="place">스케줄러 1번 출구 투썸</div>
-           <div class="date"> 2023-05-12 </div>
-           <button class="detailBtn"> 상세보기</button>
-         </div>
+    <div class="middle_category">스케줄러</div>
+    <!-- 반복해서 만들도록 설정(타임리프로 할듯) -->
+    <div class="box">
+      <div class="list">
+        <div class="place">스케줄러 1번 출구 투썸</div>
+        <div class="date"> 2023-05-12 </div>
+        <button class="detailBtn"> 상세보기</button>
       </div>
-      <div class="box">
-         <div class="list">
-           <div class="place">세종대역 컴포즈커피</div>
-           <div class="date"> 2023-05-12 </div>
-           <button class="detailBtn"> 상세보기</button>
-         </div>
+    </div>
+    <div class="box">
+      <div class="list">
+        <div class="place">세종대역 컴포즈커피</div>
+        <div class="date"> 2023-05-12 </div>
+        <button class="detailBtn"> 상세보기</button>
       </div>
-      <div class="box">
-          <div class="list">
-              <div class="place">홍대입구 김밥천국</div>
-              <div class="date"> 2023-05-12 </div>
-              <button class="detailBtn"> 상세보기</button>
-          </div>
+    </div>
+    <div class="box">
+      <div class="list">
+        <div class="place">홍대입구 김밥천국</div>
+        <div class="date"> 2023-05-12 </div>
+        <button class="detailBtn"> 상세보기</button>
       </div>
-        <div class="box">
-            <div class="list">
-                <div class="place">신촉역 서브웨이</div>
-                <div class="date"> 2023-05-12 </div>
-                <button class="detailBtn"> 상세보기</button>
-            </div>
-        </div>
-      <div class="more"><a href="">더보기</a></div>
+    </div>
+    <div class="box">
+      <div class="list">
+        <div class="place">신촉역 서브웨이</div>
+        <div class="date"> 2023-05-12 </div>
+        <button class="detailBtn"> 상세보기</button>
+      </div>
+    </div>
+    <div class="more"><a href="">더보기</a></div>
   </div>
 </div>
 
 <footer>
-    <div> Team 2 in FinalProject 2023</div>
+  <div> Team 2 in FinalProject 2023</div>
 </footer>
 </body>
 </html>
