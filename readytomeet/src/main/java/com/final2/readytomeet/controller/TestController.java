@@ -44,6 +44,9 @@ public class TestController {
     return "communitywrite";
   }
 
+  @GetMapping("/mypage")
+  public String gotomypage() { return "mypage"; }
+
 
 
 
