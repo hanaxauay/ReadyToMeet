@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/jinha.css">
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<nav>
+    <ul>
+        <li class="liLogo"><a href="#"><img src="../image/logo.png" class="imgLogo"></a></li>
+        <li><a href="#">All</a> </li>
+        <li><a href="#">ACTIVITY</a> </li>
+        <li><a href="#">VEHICLE</a> </li>
+        <li><a href="#">WORK</a> </li>
+        <li><a href="#">Community</a> </li>
+        <li>
+            <span class="search-container">
+                <input type="text" placeholder="약속을 찾아봐요!">
+                <input type="submit" value="Search">
+            </span>
+        </li>
+        <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
+    </ul>
+</nav>
+
+<div class="wrap">
+    <div class="activity_title">
+        <h1>COMMUNITY</h1>
+    </div>
+    <!-- 반복해서 만들도록 설정(타임리프로 할듯) -->
+    <div th:each="share : ${communityList}">
+        <div class="box">
+            <div class="list">
+                <div th:text="${share.share_category}" class="title"></div>
+                <div class="content">
+                <a th:text="${share.share_title}" th:href="@{/community/view(share_seq=${share.share_seq})}"></a>
+                </div>
+                <div th:text="${#dates.format(share.share_time, 'yy.MM.dd')}" class="date"></div>
+                <div th:text="${share.user_id}" class="writer"></div>
+            </div>
+        </div>
+    </div>
+    <div class="create">
+        <a href="/community/write">
+            <img src="../image/create.png">
+        </a>
+    </div>
+    <!-- 페이징 처리하면됨 어떻게할지는 차차... -->
+    <div class="paging">
+        <a href="#" class="bt first"><<</a>
+        <a href="#" class="bt prev"><</a>
+        <a href="#" class="num on">1</a>
+        <a href="#" class="num">2</a>
+        <a href="#" class="num">3</a>
+        <a href="#" class="num">4</a>
+        <a href="#" class="num">5</a>
+        <a href="#" class="bt next">></a>
+        <a href="#" class="bt last">>></a>
+    </div>
+</div>
+<footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
+</body>
+</html>

@@ -12,8 +12,9 @@ public class CommunityDto {
   private String user_id;
   private String filename;
   private String filepath;
+  private Integer share_view;
 
-  public CommunityDto(Integer share_seq, String share_category, String share_title, String share_content, Date share_time, String user_id, String filename, String filepath) {
+  public CommunityDto(Integer share_seq, String share_category, String share_title, String share_content, Date share_time, String user_id, String filename, String filepath, Integer share_view) {
     this.share_seq = share_seq;
     this.share_category = share_category;
     this.share_title = share_title;
@@ -22,6 +23,7 @@ public class CommunityDto {
     this.user_id = user_id;
     this.filename = filename;
     this.filepath = filepath;
+    this.share_view = share_view;
   }
 
   public Integer getShare_seq() {
@@ -86,5 +88,13 @@ public class CommunityDto {
 
   public void setFilepath(String filepath) {
     this.filepath = filepath;
+  }
+
+  public Integer getShare_view() {
+    return share_view;
+  }
+
+  public void setShare_view(Integer share_view) {
+    this.share_view = share_view;
   }
 }

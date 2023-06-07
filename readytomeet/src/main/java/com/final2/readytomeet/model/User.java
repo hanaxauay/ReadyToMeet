@@ -10,7 +10,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
-
     private String user_pw;
     private String user_phone;
     private String user_email;
@@ -19,11 +18,10 @@ public class User {
     private Integer user_age;
     private String user_gender;
     private String user_location;
-    private String user_image;
+    private String user_img;
     private String user_path;
     private String user_content;
     private Integer user_appo_cnt;
     private Integer user_appo_like;
-
 
 }

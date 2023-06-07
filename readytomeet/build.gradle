@@ -39,10 +39,11 @@ dependencies {
 	implementation 'org.webjars.bower:vue:2.5.16'
 	implementation 'org.webjars.bower:axios:0.17.1'
 	implementation 'com.google.code.gson:gson:2.8.0'
-
+	compileOnly('org.springframework.boot:spring-boot-starter-thymeleaf')
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
+
 }
 
 tasks.named('test') {
