@@ -6,26 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="29a607d0-3ab8-4d8b-a431-6068a9698c25" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/css/activityBaseListPage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/css/chat.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/css/common.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/css/idCardPopUp.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/css/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/css/jinha.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/css/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/css/mypage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/css/review.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/css/vehicleBaseListPage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/css/workBaseListPage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/image/create.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/image/index/index1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/image/index/index2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/image/index/index3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/image/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/image/mypage.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/js/activityBaseListPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/js/vehicleBaseListPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/static/js/workBaseListPage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/readytomeet/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/readytomeet/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
