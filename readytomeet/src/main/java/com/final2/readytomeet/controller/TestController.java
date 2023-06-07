@@ -44,6 +44,15 @@ public class TestController {
     return "communitywrite";
   }
 
+  @GetMapping("/login")
+  public String gotoLogin(){
+    return "login";
+  }
+
+  @GetMapping("/joinForm")
+  public String gotoJoinForm(){
+    return "joinForm";
+  }
 
 
 
