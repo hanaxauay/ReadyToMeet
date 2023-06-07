@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,6 +17,14 @@ public class CommunityServiceImpl implements CommunityService {
   @Autowired
   private CommunityMapper communityMapper;
 
+  @Override
+  public List<CommunityDto> selectList() {
+    return communityMapper.selectList();
+  }
+  @Override
+  public CommunityDto selectOne(int share_seq) {
+    return communityMapper.selectOne(share_seq);
+  }
   @Override
   public void write(CommunityDto dto, MultipartFile file) throws Exception {
     String projectPath = "E:/files/";
@@ -30,7 +39,10 @@ public class CommunityServiceImpl implements CommunityService {
     }
     communityMapper.write(dto);
   }
-
+  @Override
+  public void updateViewCount(int share_seq) {
+    communityMapper.updateViewCount(share_seq);
+  }
 
 
 
