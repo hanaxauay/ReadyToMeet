@@ -39,5 +39,22 @@ public class TestController {
     return "chat";
   }
 
+  @GetMapping("/community/write")
+  public String gotocommunitywrite(){
+    return "communitywrite";
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

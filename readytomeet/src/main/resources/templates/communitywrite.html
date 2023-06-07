@@ -28,32 +28,32 @@
 </nav>
 
 <div class="wrap">
-    <div class="community_title">
+    <div class="">
         <h1>COMUNITY</h1>
     </div>
-    <div class="dropdown">
-        <form action="#">
-            <select name="header" id="head">
-                <option value="header">머리글</option>
-                <option value="like">이가게 좋아요</option>
-                <option value="sale">할인정보</option>
-            </select>
-        </form>
-    </div>
-    <div class="container">
-        <div class="main">
-            <h3 class="community_produce">제목</h3>
-            <input type="text" class="community_title" placeholder="제목을 입력하세요...">
+    <form action="/community/writepro" method="post">
+        <div class="dropdown">
+                <select name="share_category" id="head">
+                    <option value="header">머리글</option>
+                    <option value="like">이가게 좋아요</option>
+                    <option value="sale">할인정보</option>
+                </select>
         </div>
-        <div class="main">
-            <h3 class="community_produce">내용</h3>
-            <textarea class="community_content" placeholder="내용을 입력하세요..."></textarea>
-            <button class="image_button">이미지 첨부</button>
+        <div class="container">
+            <div class="main">
+                <h3 class="community_produce">제목</h3>
+                <input name="share_title" type="text" class="community_title" placeholder="제목을 입력하세요...">
+            </div>
+            <div class="main">
+                <h3 class="community_produce">내용</h3>
+                <textarea name="share_content" class="community_content" placeholder="내용을 입력하세요..."></textarea>
+                <button class="image_button">이미지 첨부</button>
+            </div>
         </div>
-    </div>
-    <div class="community_floor">
-        <input type="submit" value="등록" class="button">
-    </div>
+        <div class="community_floor">
+            <input type="submit" value="등록" class="button">
+        </div>
+    </form>
 </div>
 <footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
 </body>
