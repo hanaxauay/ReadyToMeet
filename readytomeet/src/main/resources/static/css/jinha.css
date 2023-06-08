@@ -68,6 +68,7 @@ h1 {
     text-overflow: ellipsis;
     width: 200px;
     margin-left: 20px;
+    text-align: left;
 }
 
 .content {
@@ -75,6 +76,7 @@ h1 {
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 650px;
+    text-align: left;
 }
 
 .date {
@@ -113,11 +115,6 @@ h1 {
 
 .community_title {
     width: 80%;
-    resize: none;
-}
-
-.work_title {
-    width: 70%;
     resize: none;
 }
 

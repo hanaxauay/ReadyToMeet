@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>생성페이지</title>
+    <link rel="stylesheet" href="../css/jinha.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+    function validateForm() {
+        var title = document.getElementById("title").value;
+        var content = document.getElementById("content").value;
+
+        if (title.length < 5) {
+            alert("제목은 최소 5자 이상 입력해야 합니다.");
+            return false;
+        }
+
+        if (content.length < 10) {
+            alert("내용은 최소 10자 이상 입력해야 합니다.");
+            return false;
+        }
+
+        return true;
+    }
+    </script>
+</head>
+<body>
+<nav>
+    <ul>
+        <li class="liLogo"><a href="#"><img src="../image/logo.png" class="imgLogo"></a></li>
+        <li><a href="#">All</a> </li>
+        <li><a href="#">ACTIVITY</a> </li>
+        <li><a href="#">VEHICLE</a> </li>
+        <li><a href="#">WORK</a> </li>
+        <li><a href="#">Community</a> </li>
+        <li>
+            <span class="search-container">
+                <input type="text" placeholder="약속을 찾아봐요!">
+                <input type="submit" value="Search">
+            </span>
+        </li>
+        <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
+    </ul>
+</nav>
+
+<div class="wrap">
+    <div class="">
+        <h1>COMUNITY</h1>
+    </div>
+    <form action="/community/writepro" method="post" onsubmit="return validateForm()">
+        <div class="dropdown">
+            <select name="share_category" id="head">
+                <option value="이가게 좋아요">이가게 좋아요</option>
+                <option value="할인정보">할인정보</option>
+            </select>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h3 class="community_produce">제목</h3>
+                <input name="share_title" id="title" type="text" class="community_title" placeholder="제목을 입력하세요...(최소5글자이상)">
+            </div>
+            <div class="main">
+                <h3 class="community_produce">내용</h3>
+                <textarea name="share_content" id="content" class="community_content" placeholder="내용을 입력하세요...(최소10글자이상)"></textarea>
+                <input type="file" name="file" multiple="multiple">
+            </div>
+        </div>
+        <div class="community_floor">
+            <input type="submit" class="button" value="등록">
+            <input type="button" class="button" value="취소" onclick="location.href='/community/list'">
+        </div>
+    </form>
+</div>
+<footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
+</body>
+</html>

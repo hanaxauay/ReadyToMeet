@@ -9,10 +9,6 @@ public class TestController {
   public String gotoAll(){
     return "all";
   }
-  @GetMapping("/community")
-  public String gotoCommunity() {
-      return "community";
-  }
 
   @GetMapping("/activity")
   public String gotoActivity(){
@@ -38,6 +34,22 @@ public class TestController {
   public String gotoChat(){
     return "chat";
   }
+
+
+  @GetMapping("/mypage")
+  public String gotomypage() { return "mypage"; }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
