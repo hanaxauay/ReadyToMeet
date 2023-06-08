@@ -15,11 +15,12 @@ public class AppointmentDto {
     public String appo_category;
     public String appo_start_place;
     public int appo_pay;
+    public int appo_using;
 
     public AppointmentDto() {
     }
 
-    public AppointmentDto(int appo_seq, String appo_title, String appo_content, String appo_notice, String appo_host, String appo_place, Date appo_time, int appo_min_mem, int appo_max_mem, String appo_category, String appo_start_place, int appo_pay) {
+    public AppointmentDto(int appo_seq, String appo_title, String appo_content, String appo_notice, String appo_host, String appo_place, Date appo_time, int appo_min_mem, int appo_max_mem, String appo_category, String appo_start_place, int appo_pay, int appo_using) {
         this.appo_seq = appo_seq;
         this.appo_title = appo_title;
         this.appo_content = appo_content;
@@ -32,6 +33,7 @@ public class AppointmentDto {
         this.appo_category = appo_category;
         this.appo_start_place = appo_start_place;
         this.appo_pay = appo_pay;
+        this.appo_using = appo_using;
     }
 
     public int getAppo_seq() {
@@ -128,5 +130,13 @@ public class AppointmentDto {
 
     public void setAppo_pay(int appo_pay) {
         this.appo_pay = appo_pay;
+    }
+
+    public int getAppo_using() {
+        return appo_using;
+    }
+
+    public void setAppo_using(int appo_using) {
+        this.appo_using = appo_using;
     }
 }
