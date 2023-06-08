@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>실시간 채팅</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.4/stomp.min.js"></script>
-    <script>
-        var stompClient = null;
-
-        function connect() {
-            var socket = new SockJS('/websocket');
-            var stompClient = Stomp.over(socket);
-            stompClient.connect({}, function (frame) {
-                stompClient.subscribe('/topic/chat', function (message) {
-                    showMessage(JSON.parse(message.body));
-                });
-            });
+    <title>Chat App</title>
+    <style>
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
         }
 
-        function disconnect() {
-            if (stompClient !== null) {
-                stompClient.disconnect();
-            }
-            console.log("Disconnected");
+        #messages li {
+            padding: 5px 10px;
         }
 
-        function sendMessage() {
-            var username = $("#username").val();
-            var message = $("#message").val();
-            var timestamp = new Date().toISOString();
-            var chatMessage = {
-                username: username,
-                message: message,
-                timestamp: timestamp
-            };
-            stompClient.send("/app/chat", {}, JSON.stringify(chatMessage));
-            $("#message").val("");
+        #messages li:nth-child(odd) {
+            background-color: #f1f1f1;
         }
 
-        function showMessage(message) {
-            $("#chat").append("<p><strong>" + message.username + "</strong>: " + message.message + "</p>");
+        #message-input {
+            width: 100%;
         }
-    </script>
+    </style>
 </head>
-<body onload="connect()">
-<h1>실시간 채팅</h1>
-<div id="chat"></div>
-<input type="text" id="username" placeholder="사용자명" /><br/>
-<input type="text" id="message" placeholder="메시지" /><br/>
-<button onclick="sendMessage()">전송</button>
-<button onclick="disconnect()">연결 종료</button>
+<body>
+<h1>Chat App</h1>
+
+<ul id="messages"></ul>
+
+<form id="message-form">
+    <input type="text" id="message-input" placeholder="Type a message" />
+    <button type="submit">Send</button>
+</form>
+
+<script>
+    const socket = new WebSocket('ws://localhost:8080/chat'); // 웹소켓 엔드포인트에 맞게 변경
+
+    const messagesList = document.getElementById('messages');
+    const messageInput = document.getElementById('message-input');
+    const messageForm = document.getElementById('message-form');
+
+    messageForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = messageInput.value.trim();
+        if (message !== '') {
+            socket.send(message);
+            messageInput.value = '';
+        }
+    });
+
+    socket.addEventListener('message', (event) => {
+        const message = event.data;
+        const li = document.createElement('li');
+        li.textContent = message;
+        messagesList.appendChild(li);
+    });
+</script>
 </body>
 </html>

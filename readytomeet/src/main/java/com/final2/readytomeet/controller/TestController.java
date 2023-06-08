@@ -30,10 +30,10 @@ public class TestController {
     return "main";
   }
 
-  @GetMapping("/chat")
-  public String gotoChat(){
-    return "chat";
-  }
+//  @GetMapping("/chat")
+//  public String gotoChat(){
+//    return "chat";
+//  }
 
 
   @GetMapping("/mypage")
