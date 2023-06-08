@@ -12,7 +12,7 @@
 
     <script>
         // 마이페이지 수정
-        function mypageUpdate() {
+        function mypageUpdate2() {
             window.location.href = 'mypageUpdate2.html'
         }
     </script>
@@ -22,19 +22,19 @@
 <!-------------- header --------------->
 <nav>
     <ul>
-        <li class="liLogo"><a href="#"><img src="resource/img/logo.png" class="imgLogo"></a></li>
-        <li><a href="#">All</a></li>
-        <li><a href="#">ACTIVITY</a></li>
-        <li><a href="#">VEHICLE</a></li>
-        <li><a href="#">WORK</a></li>
-        <li><a href="#">Community</a></li>
+        <li class="liLogo"><a href="/main"><img src="../image/logo.png" class="imgLogo"></a></li>
+        <li><a href="/all">All</a> </li>
+        <li><a href="/activity">ACTIVITY</a> </li>
+        <li><a href="/vehicle">VEHICLE</a> </li>
+        <li><a href="/work">WORK</a> </li>
+        <li><a href="/community/list">Community</a> </li>
         <li>
-                <span class="search-container">
-                    <input type="text" placeholder="약속을 찾아봐요!">
-                    <input type="submit" value="Search">
-                </span>
+            <span class="search-container">
+                <input type="text" placeholder="약속을 찾아봐요!">
+                <input type="submit" value="Search">
+            </span>
         </li>
-        <li class="liMypage"><a href="#"><img src="resource/img/mypage.png" class="imgMypage"></a></li>
+        <li class="liMypage"><a href="/mypage"><img src="../image/mypage.png" class="imgMypage"></a></li>
     </ul>
 </nav>
 
@@ -43,11 +43,11 @@
     <section class="main">
         <div class="main_wrap">
             <form class="inputImg" method="post" action="/image/write" enctype="multipart/form-data">
-                <div th:if="${not #strings.isEmpty(dto?.filename)}" class="addImage" id="image-show">
+                <div class="addImage" id="image-show">
                     <img th:src="@{/download/{filename}(filename=${dto?.filename})}" alt="no-img" />
                 </div>
-                <input type="file" name="file" multiple="multiple">
-                <input type="submit" id="submit" value="등록"/>
+                <input type="file" name="file">
+                <input type="submit" id="submit" value="사진변경"/>
             </form>
             <div class="content">
                 <b>닉네임</b>
@@ -67,7 +67,7 @@
                 <div class="area">
                     <textarea><c:out value="${content}"/></textarea>
                     <input type="button" id="idCard" value="신분증 인증" onclick="showPopup();"/>
-                    <input type="button" id="bu" value="수정" onclick="mypageUpdate()">
+                    <input type="button" value="수정" id="bu" onclick="mypageUpdate2()">
                 </div>
 
                 <div class="place">
@@ -83,6 +83,6 @@
         </div>
     </section>
 </div>
-<footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
+
 </body>
 </html>

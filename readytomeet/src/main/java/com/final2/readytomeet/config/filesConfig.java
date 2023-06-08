@@ -12,7 +12,7 @@ public class filesConfig implements WebMvcConfigurer{
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 
       registry.addResourceHandler("/download/**")
-          .addResourceLocations("file:///E:/files/")
+          .addResourceLocations("file:///C:/files/")
           .setCacheControl(CacheControl.maxAge(1, TimeUnit.MINUTES));
     }
 
