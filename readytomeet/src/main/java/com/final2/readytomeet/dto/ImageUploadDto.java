@@ -1,7 +1,10 @@
 package com.final2.readytomeet.dto;
 
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -13,10 +16,8 @@ import java.util.List;
 *
 * */
 @Data
+
 public class ImageUploadDto {
-
-
-
 
     private String filename;
 

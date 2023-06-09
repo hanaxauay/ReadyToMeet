@@ -22,7 +22,7 @@ public class ImageRepositoryImpl implements ImageRepository {
 
     @Override
     public void upload(ImageUploadDto dto, MultipartFile file) throws Exception {
-        String projectPath = "C:/files/";
+        String projectPath = "C:/filesConfig/";
         UUID uuid = UUID.randomUUID();
 
         if(file != null && !file.isEmpty()) {
@@ -30,7 +30,7 @@ public class ImageRepositoryImpl implements ImageRepository {
             File saveFile = new File(projectPath, filename);
             file.transferTo(saveFile);
             dto.setFilename(filename);
-            dto.setFilepath("/download/" + filename);
+            dto.setFilepath("/path/" + filename);
         }
 
         imageMapper.upload(dto);
