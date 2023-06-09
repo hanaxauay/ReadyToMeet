@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,9 @@
     <title>마이페이지</title>
     <link rel="stylesheet" href="../css/mypage.css">
     <link rel="stylesheet" href="../css/common.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
+
 
 
     <script>
@@ -42,12 +44,12 @@
 <div id="main">
     <section class="main">
         <div class="main_wrap">
-            <form class="inputImg" method="post" action="/image/write" enctype="multipart/form-data">
+            <form class="inputImg" method="post" action="/image/upload" enctype="multipart/form-data">
                 <div class="addImage" id="image-show">
-                    <img th:src="@{/download/{filename}(filename=${dto?.filename})}" alt="no-img" />
+                    <img th:src="@{/download/{filename}(filename=${dto?.filename})}"/>
                 </div>
-                <input type="file" name="file">
-                <input type="submit" id="submit" value="사진변경"/>
+                <input type="file" name="file" multiple="multiple"/>
+                <input type="submit" id="submit" value="전송"/>
             </form>
             <div class="content">
                 <b>닉네임</b>
