@@ -7,22 +7,55 @@
   <link href="../css/main.css" rel="stylesheet" />
   <link href="../css/common.css" rel="stylesheet" />
   <script>
+    window.onload = getLocation;
+    function getLocation(){
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(locationSuccess, locationError, geo_options);
+      }else{
+        console.log("지오 로케이션 없음")
+      }
+    };
+    // getLocation
+    var latitude, longitude;
+    function locationSuccess(p){
+      latitude = p.coords.latitude,
+              longitude = p.coords.longitude;
+      initMap();
+    }
+    // locationSuccess
+    function locationError(error){
+      var errorTypes = {
+        0 : "무슨 에런지 모르겠음",
+        1 : "위치 허용 안했음.",
+        2 : "위치가 안잡힘",
+        3 : "응답시간이 지남"
+      };
+      var errorMsg = errorTypes[error.code];
+    }
+    // locationError
+    var geo_options = {
+      enableHighAccuracy: true,
+      maximumAge        : 30000,
+      timeout           : 27000
+    };
+    // geo_options
+    var map;
     function initMap() {
 
-      var map;
       var button = document.getElementById('mapBtn');
       button.addEventListener('click', changeCenter);
-      var gyeongbokgung = { lat: 37.57979553563185, lng: 126.97706245552442 };
+
+      var nowPosition = new google.maps.LatLng(latitude, longitude);
       map = new google.maps.Map( document.getElementById('map'), {
         zoom: 15,
-        center: gyeongbokgung
+        center: nowPosition
       });
 
       var mainMarker = new google.maps.Marker({
-        position: gyeongbokgung,
+        position: nowPosition,
         map: map,
         label: {
-          text: "경복궁",
+          text: "현위치",
           color: "#ff7777"
         },
         icon: {
@@ -31,24 +64,25 @@
         }
       });
 
-      var subMarkerPoint = { lat: 37.547702, lng: 127.074241};
-      var subMarker = new google.maps.Marker({
-        position: subMarkerPoint,
-        map: map,
-        label: "어린이대공원역 5번출구",
-        background:"#ffffff",
-        icon: {
-          url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
-          labelOrigin: new google.maps.Point(20, 47),
-          anchor: new google.maps.Point(50,32)
-        }
-      });
+      // 클릭했을때 이동할 곳
+      // var subMarkerPoint = { lat: 37.547702, lng: 127.074241};
+      // var subMarker = new google.maps.Marker({
+      //   position: subMarkerPoint,
+      //   map: map,
+      //   label: "어린이대공원역 5번출구",
+      //   background:"#ffffff",
+      //   icon: {
+      //     url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+      //     labelOrigin: new google.maps.Point(20, 47),
+      //     anchor: new google.maps.Point(50,32)
+      //   }
+      // });
 
-      function changeCenter() {
-        var compose = { lat: 37.548196, lng: 127.073186 };
-        map.panTo(compose);
-        map.setZoom(15);
-      }
+      // function changeCenter() {
+      //   var compose = { lat: 37.548196, lng: 127.073186 };
+      //   map.panTo(compose);
+      //   map.setZoom(15);
+      // }
     }
 
     // 서버로부터 받은 데이터를 기반으로 현재 날씨 정보를 표시하는 함수
