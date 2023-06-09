@@ -13,13 +13,18 @@ public interface AppoMapper {
     @Select(" SELECT * FROM APPOINTMENT ORDER BY APPO_SEQ DESC ")
     List<AppoDto> selectAppointmentAllList();
 
+    //Activity 전체 약속 검색
+    @Select(" SELECT * FROM APPOINTMENT WHERE NOT APPO_CATEGORY IN ('카풀', '택시', '유급', '무급') ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectActivityAllList();
+    //
+
     //한 약속 검색
     @Select(" SELECT * FROM APPOINTMENT WHERE APPO_SEQ=#{appo_seq} ")
     AppoDto selectAppointmentOneList(int appo_seq);
 
     //세부 카테고리 전체 검색
     @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY=#{appo_category} ORDER BY APPO_SEQ DESC ")
-    List<AppoDto> selectSubCategoryAllList();
+    List<AppoDto> selectSubCategoryAllList(String appo_category);
 
     //가까운 시간 순 검색
     @Select(" SELECT * FROM APPOINTMENT ORDER BY APPO_TIME ")
@@ -35,7 +40,7 @@ public interface AppoMapper {
 
     //--------------------------------insert---------------------------------
     //Activity 약속 생성
-    @Insert(" INSERT INTO APPOINTMENT VALUES(NULL, #{appo_title}, #{appo_content}, NULL, #{appo_host}, #{appo_place, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_category}, NULL, NULL, #{appo_using}) ")
+    @Insert(" INSERT INTO APPOINTMENT VALUES(NULL, #{appo_title}, #{appo_content}, NULL, #{appo_host}, #{appo_place}, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_category}, NULL, NULL, #{appo_using}) ")
     int insertActivity(AppoDto appodto);
 
     //Vehicle 약속 생성
