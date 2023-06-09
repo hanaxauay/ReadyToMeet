@@ -1,26 +1,18 @@
-package com.final2.readytomeet.chat;
+package com.final2.readytomeet.chat.repository;
 
 import com.final2.readytomeet.chat.dto.ChatMessage;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
+import com.final2.readytomeet.chat.mapper.ChatMessageMapper;
+import lombok.RequiredArgsConstructor;
 
 @Repository
+@RequiredArgsConstructor
 public class ChatMessageRepository {
-    private List<ChatMessage> chatMessages;
+    private final ChatMessageMapper chatMessageMapper;
 
-    @PostConstruct
-    private void init() {
-        chatMessages = new ArrayList<>();
-    }
-
-    public List<ChatMessage> getChatMessages() {
-        return chatMessages;
-    }
-
-    public void addChatMessage(ChatMessage chatMessage) {
-        chatMessages.add(chatMessage);
+    public void saveChatMessage(ChatMessage chatMessage) {
+        chatMessageMapper.saveChatMessage(chatMessage);
     }
 }
+

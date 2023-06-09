@@ -49,6 +49,11 @@ public class TestController {
     return "joinForm";
   }
 
+  @GetMapping("/review")
+  public String gotoReview(){
+    return "review";
+  }
+
 
 
 

@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class UserChatRoom {
 
-    private String user_id;
-    private Long room_id;
+    private String user_nickname;
+    private String room_id;
     // getters and setters
 }

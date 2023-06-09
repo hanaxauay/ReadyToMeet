@@ -1,7 +1,7 @@
 package com.final2.readytomeet.chat.controller;
 
-import com.final2.readytomeet.chat.ChatMessageRepository;
 import com.final2.readytomeet.chat.dto.ChatMessage;
+import com.final2.readytomeet.chat.repository.ChatMessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
@@ -22,7 +22,7 @@ public class ChatController {
         } else {
             // 저장하는 로직 추가
             message.setTimestamp(new Timestamp(System.currentTimeMillis()));
-            chatMessageRepository.addChatMessage(message);
+            chatMessageRepository.saveChatMessage(message);
         }
 
         messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoom_id(), message);
