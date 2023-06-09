@@ -2,7 +2,7 @@ package com.final2.readytomeet.repository.impl;
 
 
 
-import com.final2.readytomeet.Mapper.impl.ImageMapper;
+import com.final2.readytomeet.Mapper.ImageMapper;
 import com.final2.readytomeet.dto.ImageUploadDto;
 import com.final2.readytomeet.repository.ImageRepository;
 
@@ -21,11 +21,11 @@ public class ImageRepositoryImpl implements ImageRepository {
     private ImageMapper imageMapper;
 
     @Override
-    public void write(ImageUploadDto dto, MultipartFile file) throws Exception {
+    public void upload(ImageUploadDto dto, MultipartFile file) throws Exception {
         String projectPath = "C:/files/";
         UUID uuid = UUID.randomUUID();
 
-        if(file !=null && !file.isEmpty()) {
+        if(file != null && !file.isEmpty()) {
             String filename = uuid + "_" + file.getOriginalFilename();
             File saveFile = new File(projectPath, filename);
             file.transferTo(saveFile);
@@ -33,6 +33,6 @@ public class ImageRepositoryImpl implements ImageRepository {
             dto.setFilepath("/download/" + filename);
         }
 
-        imageMapper.write(dto);
+        imageMapper.upload(dto);
     }
 }
