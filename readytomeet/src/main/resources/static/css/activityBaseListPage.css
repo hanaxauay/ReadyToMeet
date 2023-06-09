@@ -1,7 +1,5 @@
 * :not(nav, nav ul, nav ul li, nav ul li a, .liLogo, .liMypage, .imgLogo, .imgMypage, .search-container, footer) {
   box-sizing: border-box;
-  font-size: 0.875rem; /* 기본 14px */
-  font-family: Inter;
 }
 
 
@@ -19,6 +17,9 @@ body{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  font-size: 0.875rem; /* 기본 14px */
+  font-family: Inter;
 
   overflow: hidden;
 }
@@ -247,6 +248,10 @@ body{
 }
 
 /* 약속 요소 텍스트 설정 */
+.appointment_list_element a:visited > .appointment_place span{
+    text-decoration : none;
+    color: #FF7777;
+}
 .appointment_date_text {
   color: rgb(103,103,103);
   text-align: center;
