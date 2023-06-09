@@ -46,7 +46,7 @@
         <div class="main_wrap">
             <form class="inputImg" method="post" action="/image/upload" enctype="multipart/form-data">
                 <div class="addImage" id="image-show">
-                    <img th:src="@{/file/{filename}(filename=${dto?.filename})}"/>
+                    <img th:src="@{/download/{filename}(filename=${dto?.filename})}"/>
                 </div>
                 <input type="file" name="file" multiple="multiple"/>
                 <input type="submit" id="submit" value="전송"/>
