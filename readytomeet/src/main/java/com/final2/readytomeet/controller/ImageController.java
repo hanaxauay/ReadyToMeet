@@ -1,6 +1,7 @@
 package com.final2.readytomeet.controller;
 
 
+import com.final2.readytomeet.Mapper.ImageMapper;
 import com.final2.readytomeet.dto.ImageUploadDto;
 import com.final2.readytomeet.repository.ImageRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -15,19 +16,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.net.MalformedURLException;
 
-@Slf4j
+
 @Controller
 @RequestMapping("/image")
-public class ImageContorller {
+public class ImageController {
 
     @Autowired
     private ImageRepository imageRepository;
 
+    @Autowired
+    private ImageMapper imageMapper;
 
-//    @GetMapping("/mypage")
-//    public String myPage(){
-//        return "mypage";
-//    }
+
+    @GetMapping("/mypage")
+    public String myPage(){
+        return "mypage";
+    }
 
 //    @ResponseBody
 //    @GetMapping("/download/{filename}")

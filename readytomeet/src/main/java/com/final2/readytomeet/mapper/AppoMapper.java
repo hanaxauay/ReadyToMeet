@@ -1,4 +1,4 @@
-package com.final2.readytomeet.mapper;
+package com.final2.readytomeet.Mapper;
 
 import com.final2.readytomeet.dto.AppoDto;
 import org.apache.ibatis.annotations.*;
