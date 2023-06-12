@@ -1,6 +1,7 @@
 package com.final2.readytomeet.dto;
 
 import java.util.Date;
+import java.sql.Timestamp;
 
 public class AppoDto {
     public int appo_seq;
@@ -9,7 +10,7 @@ public class AppoDto {
     public String appo_notice;
     public String appo_host;
     public String appo_place;
-    public Date appo_time;
+    public Timestamp appo_time;
     public int appo_min_mem;
     public int appo_max_mem;
     public String appo_category;
@@ -20,7 +21,7 @@ public class AppoDto {
     public AppoDto() {
     }
 
-    public AppoDto(int appo_seq, String appo_title, String appo_content, String appo_notice, String appo_host, String appo_place, Date appo_time, int appo_min_mem, int appo_max_mem, String appo_category, String appo_start_place, int appo_pay, int appo_using) {
+    public AppoDto(int appo_seq, String appo_title, String appo_content, String appo_notice, String appo_host, String appo_place, Timestamp appo_time, int appo_min_mem, int appo_max_mem, String appo_category, String appo_start_place, int appo_pay, int appo_using) {
         this.appo_seq = appo_seq;
         this.appo_title = appo_title;
         this.appo_content = appo_content;
@@ -84,11 +85,11 @@ public class AppoDto {
         this.appo_place = appo_place;
     }
 
-    public Date getAppo_time() {
+    public Timestamp getAppo_time() {
         return appo_time;
     }
 
-    public void setAppo_time(Date appo_time) {
+    public void setAppo_time(Timestamp appo_time) {
         this.appo_time = appo_time;
     }
 
