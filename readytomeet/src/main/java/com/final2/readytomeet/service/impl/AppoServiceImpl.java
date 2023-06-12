@@ -15,9 +15,74 @@ public class AppoServiceImpl implements AppoService {
     private AppoRepository apporepository;
 
     //전체 약속 검색
+//    @Override
+//    public List<AppoDto> selectAppointmentAllList() {
+//        return apporepository.selectAppointmentAllList();
+//    }
+
+    //Activity 전체 약속 검색
     @Override
-    public List<AppoDto> selectAppointmentAllList() {
-        return apporepository.selectAppointmentAllList();
+    public List<AppoDto> selectActivityAllList() {
+        return apporepository.selectActivityAllList();
+    }
+    //Activity 세부 카테고리 전체 검색
+    @Override
+    public List<AppoDto> selectActivityCafeList() {
+        return apporepository.selectActivityCafeList();
+    }
+    @Override
+    public List<AppoDto> selectActivityRestaurantList() {
+        return apporepository.selectActivityRestaurantList();
+    }
+    @Override
+    public List<AppoDto> selectActivitySportList() {
+        return apporepository.selectActivitySportList();
+    }
+    @Override
+    public List<AppoDto> selectActivityOutdoorList() {
+        return apporepository.selectActivityOutdoorList();
+    }
+    @Override
+    public List<AppoDto> selectActivityBuyList() {
+        return apporepository.selectActivityBuyList();
+    }
+    @Override
+    public List<AppoDto> selectActivityGameList() {
+        return apporepository.selectActivityGameList();
+    }
+    @Override
+    public List<AppoDto> selectActivityOthersList() {
+        return apporepository.selectActivityOthersList();
+    }
+
+    //Vehicle 전체 약속 검색
+    @Override
+    public List<AppoDto> selectVehicleAllList() {
+        return apporepository.selectVehicleAllList();
+    }
+    //Vehicle 세부 카테고리 전체 검색
+    @Override
+    public List<AppoDto> selectVehicleCarpoolList() {
+        return apporepository.selectVehicleCarpoolList();
+    }
+    @Override
+    public List<AppoDto> selectVehicleTaxiList() {
+        return apporepository.selectVehicleTaxiList();
+    }
+
+    //Work 전체 약속 검색
+    @Override
+    public List<AppoDto> selectWorkAllList() {
+        return apporepository.selectWorkAllList();
+    }
+    //Work 세부 카테고리 전체 검색
+    @Override
+    public List<AppoDto> selectWorkPaidList() {
+        return apporepository.selectWorkPaidList();
+    }
+    @Override
+    public List<AppoDto> selectWorkUnpaidList() {
+        return apporepository.selectWorkUnpaidList();
     }
 
     //한 약속 검색

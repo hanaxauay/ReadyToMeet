@@ -17,10 +17,112 @@ public class AppoRepositoryImpl implements AppoRepository {
     private AppoMapper appomapper;
 
     //전체 약속 검색
+//    @Override
+//    public List<AppoDto> selectAppointmentAllList() {
+//        List<AppoDto> res = new ArrayList<AppoDto>();
+//        res = appomapper.selectAppointmentAllList();
+//        return res;
+//    }
+
+    //Activity 전체 약속 검색
     @Override
-    public List<AppoDto> selectAppointmentAllList() {
+    public List<AppoDto> selectActivityAllList() {
         List<AppoDto> res = new ArrayList<AppoDto>();
-        res = appomapper.selectAppointmentAllList();
+        res = appomapper.selectActivityAllList();
+        return res;
+    }
+
+    //Activity 세부 카테고리 검색
+    @Override
+    public List<AppoDto> selectActivityCafeList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectActivityCafeList();
+        return res;
+    }
+    @Override
+    public List<AppoDto> selectActivityRestaurantList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectActivityRestaurantList();
+        return res;
+    }
+    @Override
+    public List<AppoDto> selectActivitySportList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectActivitySportList();
+        return res;
+    }
+    @Override
+    public List<AppoDto> selectActivityOutdoorList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectActivityOutdoorList();
+        return res;
+    }
+    @Override
+    public List<AppoDto> selectActivityBuyList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectActivityBuyList();
+        return res;
+    }
+    @Override
+    public List<AppoDto> selectActivityGameList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectActivityGameList();
+        return res;
+    }
+    @Override
+    public List<AppoDto> selectActivityOthersList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectActivityOthersList();
+        return res;
+    }
+
+    //Vehicle 전체 약속 검색
+    @Override
+    public List<AppoDto> selectVehicleAllList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectVehicleAllList();
+        return res;
+    }
+    //Vehicle 세부 카테고리 전체 검색
+    @Override
+    public List<AppoDto> selectVehicleCarpoolList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectVehicleCarpoolList();
+        return res;
+    }
+    @Override
+    public List<AppoDto> selectVehicleTaxiList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectVehicleTaxiList();
+        return res;
+    }
+
+    //Work 전체 약속 검색
+    @Override
+    public List<AppoDto> selectWorkAllList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectWorkAllList();
+        return res;
+    }
+    //Work 세부 카테고리 전체 검색
+    @Override
+    public List<AppoDto> selectWorkPaidList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectWorkPaidList();
+        return res;
+    }
+    @Override
+    public List<AppoDto> selectWorkUnpaidList() {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectWorkUnpaidList();
+        return res;
+    }
+
+    //[카테고리 검색창] 세부 카테고리 검색
+    @Override
+    public List<AppoDto> selectSubCategorySearchList(String appo_search) {
+        List<AppoDto> res = new ArrayList<AppoDto>();
+        res = appomapper.selectSubCategorySearchList(appo_search);
         return res;
     }
 
@@ -80,11 +182,7 @@ public class AppoRepositoryImpl implements AppoRepository {
         return res;
     }
 
-    //세부 카테고리 전체 검색
-    @Override
-    public List<AppoDto> selectSubCategoryAllList() {
-        return null;
-    }
+
 
 
 }
