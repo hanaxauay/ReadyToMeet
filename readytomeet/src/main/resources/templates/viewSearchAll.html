@@ -29,18 +29,13 @@
 
 <div class="wrap">
     <div class="activity_title">
-        <h1>COMMUNITY</h1>
+        <h1>All Appointment</h1>
     </div>
     <!-- 반복해서 만들도록 설정(타임리프로 할듯) -->
-    <div th:each="share : ${communityList}">
+    <div th:each="appointment : ${searchList}">
         <div class="box">
             <div class="list">
-                <div th:text="${share.share_category}" class="title"></div>
-                <div class="content">
-                <a th:text="${share.share_title}" th:href="@{/community/view(share_seq=${share.share_seq})}"></a>
-                </div>
-                <div th:text="${#dates.format(share.share_time, 'yy.MM.dd')}" class="date"></div>
-                <div th:text="${share.user_id}" class="writer"></div>
+                <div th:text="${appointment.appo_title}" class="title"></div>
             </div>
         </div>
     </div>
