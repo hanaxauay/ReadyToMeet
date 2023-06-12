@@ -1,0 +1,10 @@
+<!-- search.xml -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.final2.readytomeet.Mapper.SearchMapper">
+
+    <select id="selectAllAppos" resultType="com.final2.readytomeet.dto.AppoDto">
+        SELECT * FROM APPOINTMENT
+        WHERE APPO_TITLE LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+</mapper>

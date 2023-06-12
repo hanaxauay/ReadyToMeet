@@ -1,7 +1,7 @@
 package com.final2.readytomeet.service.impl;
 
 import com.final2.readytomeet.dto.CommunityDto;
-import com.final2.readytomeet.mapper.CommunityMapper;
+import com.final2.readytomeet.Mapper.CommunityMapper;
 import com.final2.readytomeet.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

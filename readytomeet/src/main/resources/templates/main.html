@@ -147,10 +147,11 @@
     <li><a href="#">WORK</a> </li>
     <li><a href="#">Community</a> </li>
     <li>
-                <span class="search-container">
-                    <input type="text" placeholder="약속을 찾아봐요!">
-                    <input type="submit" value="Search">
-                </span>
+      <form action="/search" method="GET" class="search-container">
+        <input type="text" name="query" placeholder="약속을 찾아봐요!">
+        <input type="submit" value="Search">
+      </form>
+
     </li>
     <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
   </ul>

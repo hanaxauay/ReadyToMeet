@@ -19,7 +19,7 @@ import java.net.MalformedURLException;
 
 @Controller
 @RequestMapping("/image")
-public class ImageContorller {
+public class ImageController {
 
     @Autowired
     private ImageRepository imageRepository;

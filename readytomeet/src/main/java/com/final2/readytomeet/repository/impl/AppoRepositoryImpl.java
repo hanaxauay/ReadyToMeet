@@ -1,7 +1,7 @@
 package com.final2.readytomeet.repository.impl;
 
 import com.final2.readytomeet.dto.AppoDto;
-import com.final2.readytomeet.mapper.AppoMapper;
+import com.final2.readytomeet.Mapper.AppoMapper;
 import com.final2.readytomeet.repository.AppoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
