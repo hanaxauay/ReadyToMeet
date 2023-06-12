@@ -5,5 +5,6 @@ import com.final2.readytomeet.dto.UserDto;
 public interface UserService {
 
     public UserDto selectOne(String user_id);
-    public int update(UserDto dto);
+    public void update(UserDto dto);
+
 }

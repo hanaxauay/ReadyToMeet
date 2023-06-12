@@ -45,20 +45,20 @@
             <div class="content">
                 <b>닉네임</b>
                 <div class="field">
-                    <div>${NICK_NAME}</div>
+                    <div th:text="${dto?.user_nickname}"></div>
                 </div>
                 <b>나이</b>
                 <div class="field">
-                    <div>${USER_AGE}</div>
+                    <div th:text="${dto?.user_age}"></div>
                 </div>
                 <b>성별</b>
                 <div class="field">
-                    <div>${USER_GENDER}</div>
+                    <div th:text="${dto?.user_gender}"></div>
                 </div>
 
                 <b>자기 소개</b>
                 <div class="area">
-                    <textarea><c:out value="${content}"/></textarea>
+                    <textarea th:text="${dto?.user_content}"></textarea>
                     <input type="button" id="idCard" value="신분증 인증" onclick="showPopup();"/>
                     <input type="button" value="수정" id="bu" onclick="location.href='/user/update'">
                 </div>

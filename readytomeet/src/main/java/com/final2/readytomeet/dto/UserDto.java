@@ -1,10 +1,11 @@
 package com.final2.readytomeet.dto;
 
 public class UserDto {
+    private Long id;
     private String user_id;
     private String user_pw;
     private String user_phone;
-    private String uesr_email;
+    private String user_email;
     private String user_nickname;
     private Integer user_age;
     private String user_location;
@@ -14,17 +15,24 @@ public class UserDto {
         super();
     }
 
-    public UserDto(String user_id, String user_pw, String user_phone,
-                   String uesr_email, String user_nickname, Integer user_age,
-                   String user_location, String user_content) {
+    public UserDto(Long id, String user_id, String user_pw, String user_phone, String user_email, String user_nickname, Integer user_age, String user_location, String user_content) {
+        this.id = id;
         this.user_id = user_id;
         this.user_pw = user_pw;
         this.user_phone = user_phone;
-        this.uesr_email = uesr_email;
+        this.user_email = user_email;
         this.user_nickname = user_nickname;
         this.user_age = user_age;
         this.user_location = user_location;
         this.user_content = user_content;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUser_id() {
@@ -51,12 +59,12 @@ public class UserDto {
         this.user_phone = user_phone;
     }
 
-    public String getUesr_email() {
-        return uesr_email;
+    public String getUser_email() {
+        return user_email;
     }
 
-    public void setUesr_email(String uesr_email) {
-        this.uesr_email = uesr_email;
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
     }
 
     public String getUser_nickname() {

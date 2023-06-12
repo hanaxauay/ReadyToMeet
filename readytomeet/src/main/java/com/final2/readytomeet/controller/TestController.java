@@ -35,14 +35,7 @@ public class TestController {
 //    return "chat";
 //  }
 
-  // 회원 정보 수정 페이지 이동
-  @GetMapping("/user/update")
-  public String gotouserUpdate() {
-    return "userUpdate";
-  }
 
-  @GetMapping("/mypage")
-  public String gotomypage() { return "mypage"; }
 
   @GetMapping("/login")
   public String gotoLogin(){
