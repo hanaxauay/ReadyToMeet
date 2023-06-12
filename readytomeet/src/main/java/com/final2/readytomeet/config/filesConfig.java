@@ -13,7 +13,7 @@ public class filesConfig implements WebMvcConfigurer{
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 
-        registry.addResourceHandler("/path/**")
+        registry.addResourceHandler("/download/**")
                 .addResourceLocations("file:///C:/filesConfig/")
                 .setCacheControl(CacheControl.maxAge(1, TimeUnit.MINUTES));
     }

@@ -28,9 +28,9 @@ public class ImageContorller {
     private ImageMapper imageMapper;
 
 
-    @GetMapping("/mypage")
+    @GetMapping("/uesr")
     public String myPage(){
-        return "mypage";
+        return "userView";
     }
 
 //    @ResponseBody

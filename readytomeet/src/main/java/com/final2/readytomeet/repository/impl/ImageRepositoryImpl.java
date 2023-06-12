@@ -30,7 +30,7 @@ public class ImageRepositoryImpl implements ImageRepository {
             File saveFile = new File(projectPath, filename);
             file.transferTo(saveFile);
             dto.setFilename(filename);
-            dto.setFilepath("/path/" + filename);
+            dto.setFilepath("/download/" + filename);
         }
 
         imageMapper.upload(dto);

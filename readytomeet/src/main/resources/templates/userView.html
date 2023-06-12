@@ -5,15 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
-    <link rel="stylesheet" href="../css/mypage.css">
+    <link rel="stylesheet" href="../css/userView.css">
     <link rel="stylesheet" href="../css/common.css">
 
-    <script>
-        // 마이페이지 수정
-        function mypageUpdate2() {
-            window.location.href = 'mypageUpdate2.html'
-        }
-    </script>
+
 
 </head>
 <body>
@@ -42,7 +37,7 @@
         <div class="main_wrap">
             <form class="inputImg" method="post" action="/image/upload" enctype="multipart/form-data">
                 <div class="addImage" id="image-show">
-                    <img th:src="@{/path/{filename}(filename=${dto?.filename})}" width="100%" height="100%" alt="이미지가 아파요"/>
+                    <img th:src="@{/download/{filename}(filename=${dto?.filename})}" width="100%" height="100%" alt="이미지가 아파요"/>
                 </div>
                 <input type="file" name="file" multiple="multiple">
                 <input type="submit" id="submit" value="전송">
@@ -65,7 +60,7 @@
                 <div class="area">
                     <textarea><c:out value="${content}"/></textarea>
                     <input type="button" id="idCard" value="신분증 인증" onclick="showPopup();"/>
-                    <input type="button" value="수정" id="bu" onclick="mypageUpdate2()">
+                    <input type="button" value="수정" id="bu" onclick="location.href='/user/update'">
                 </div>
 
                 <div class="place">
