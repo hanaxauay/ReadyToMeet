@@ -21,34 +21,41 @@ public class AppoController {
     //Activity 기본 페이지 목록 출력
     @GetMapping("/activityAllList")
     public String selectActivityAllList(Model model){
-        model.addAttribute("activityList", apposervice.selectAppointmentAllList());
+        model.addAttribute("activityList", apposervice.selectActivityAllList());
         return "activityBaseListPage";
     }
 
     //Activity 세부 카테고리 페이지 이동
     @GetMapping("/activityCafeList") //카페
     public String selectActivityCafeList(Model model){
-        return "";
+        model.addAttribute("activityList", apposervice.selectActivityCafeList());
+        return "activityBaseListPage";
     }
     @GetMapping("/activityRestaurantList") //식당
     public String selectActivityRestaurantList(Model model){
-        return "";
+        model.addAttribute("activityList", apposervice.selectActivityRestaurantList());
+        return "activityBaseListPage";
     }
     @GetMapping("/activitySportList") //스포츠
     public String selectActivitySportList(Model model){
-        return "";
+        model.addAttribute("activityList", apposervice.selectActivitySportList());
+        return "activityBaseListPage";
     }@GetMapping("/activityOutdoorList") //야외활동
     public String selectActivityOutdoorList(Model model){
-        return "";
+        model.addAttribute("activityList", apposervice.selectActivityOutdoorList());
+        return "activityBaseListPage";
     }@GetMapping("/activityBuyList") //구매
     public String selectActivityBuyList(Model model){
-        return "";
+        model.addAttribute("activityList", apposervice.selectActivityBuyList());
+        return "activityBaseListPage";
     }@GetMapping("/activityGameList") //게임
     public String selectActivityGameList(Model model){
-        return "";
+        model.addAttribute("activityList", apposervice.selectActivityGameList());
+        return "activityBaseListPage";
     }@GetMapping("/activityOthersList") //기타
     public String selectActivityOthersList(Model model){
-        return "";
+        model.addAttribute("activityList", apposervice.selectActivityOthersList());
+        return "activityBaseListPage";
     }
 
     //Activity 상세페이지 이동 (예정)
@@ -80,7 +87,7 @@ public class AppoController {
     //Activity 약속 수정 폼 이동 (예정)
     @GetMapping("/updateActivityForm")
     public String updateActivityForm(Model model, int appo_seq){
-        model.addAttribute("activity", apposervice.selectAppointmentOneList(appo_seq));
+        model.addAttribute("activityDto", apposervice.selectAppointmentOneList(appo_seq));
         return "";
     }
 
@@ -94,20 +101,30 @@ public class AppoController {
             //실패 시 처리 작업 필요하면 추가
             return "redirect:/appointment/ ";
         }
-
     }
 
-    //Activity 약속 삭제 (예정)
 
 
-
-    //--------------Vehicle 페이지 관련 컨트롤-----------------
+    //----------------Vehicle 페이지 관련 컨트롤-----------------
     //Vehicle 기본 페이지 목록 출력
     @GetMapping("/vehicleAllList")
     public String selectVehicleAllList(Model model){
-        model.addAttribute("vehicleList", apposervice.selectAppointmentAllList());
+        model.addAttribute("vehicleList", apposervice.selectVehicleAllList());
         return "vehicleBaseListPage";
     }
+
+    //Vehicle 세부 카테고리 페이지 이동
+    @GetMapping("/vehicleCarpoolList") //카풀
+    public String selectVehicleCarpoolList(Model model){
+        model.addAttribute("vehicleList", apposervice.selectVehicleCarpoolList());
+        return "vehicleBaseListPage";
+    }
+    @GetMapping("/vehicleTaxiList") //택시
+    public String selectVehicleTaxiList(Model model){
+        model.addAttribute("vehicleList", apposervice.selectVehicleTaxiList());
+        return "vehicleBaseListPage";
+    }
+
 
     //Vehicle 상세페이지 이동 (예정)
     @GetMapping("/detailVehiclePage")
@@ -134,13 +151,44 @@ public class AppoController {
         }
     }
 
+    //Vehicle 약속 수정 폼 이동 (예정)
+    @GetMapping("/updateVehicleForm")
+    public String updateVehicleForm(Model model, int appo_seq){
+        model.addAttribute("vehicleDto", apposervice.selectAppointmentOneList(appo_seq));
+        return "";
+    }
+
+    //Vehicle 약속 수정 (예정)
+    @PostMapping("/updateVehicle")
+    public String updateVehicle(AppoDto appodto){
+        if(apposervice.updateVehicle(appodto) > 0){
+            //성공 시 해당 약속 상세페이지 이동
+            return "redirect:/appointment/detailVehiclePage";
+        }else {
+            //실패 시 처리 작업 필요하면 추가
+            return "redirect:/appointment/ ";
+        }
+    }
+
 
     //--------------Work 페이지 관련 컨트롤-----------------
     //Work 기본 페이지 목록 출력
     @GetMapping("/workAllList")
     public String selectWorkAllList(Model model){
-        model.addAttribute("workList", apposervice.selectAppointmentAllList());
-        return "vehicleBaseListPage";
+        model.addAttribute("workList", apposervice.selectWorkAllList());
+        return "workBaseListPage";
+    }
+
+    //Work 세부 카테고리 페이지 이동
+    @GetMapping("/workPaidList") //유급
+    public String selectWorkPaidList(Model model){
+        model.addAttribute("workList", apposervice.selectWorkPaidList());
+        return "workBaseListPage";
+    }
+    @GetMapping("/workUnpaidList") //무급
+    public String selectWorkUnpaidList(Model model){
+        model.addAttribute("workList", apposervice.selectWorkUnpaidList());
+        return "workBaseListPage";
     }
 
     //Work 상세페이지 이동 (예정)
@@ -165,6 +213,25 @@ public class AppoController {
         }else {
             //실패 시 처리 작업 필요하면 추가
             return "redirect:/appointment/insertWorkForm";
+        }
+    }
+
+    //Work 약속 수정 폼 이동 (예정)
+    @GetMapping("/updateWorkForm")
+    public String updateWorkForm(Model model, int appo_seq){
+        model.addAttribute("workDto", apposervice.selectAppointmentOneList(appo_seq));
+        return "";
+    }
+
+    //Vehicle 약속 수정 (예정)
+    @PostMapping("/updateWork")
+    public String updateWork(AppoDto appodto){
+        if(apposervice.updateWork(appodto) > 0){
+            //성공 시 해당 약속 상세페이지 이동
+            return "redirect:/appointment/detailWorkPage";
+        }else {
+            //실패 시 처리 작업 필요하면 추가
+            return "redirect:/appointment/ ";
         }
     }
 }

@@ -8,35 +8,71 @@ import java.util.List;
 @Mapper
 public interface AppoMapper {
 
+    // 지도 추가 후 검색 조건에 거리제한 걸어야 함!! //
+
     //--------------------------------select---------------------------------
-    //전체 약속 검색
-    @Select(" SELECT * FROM APPOINTMENT ORDER BY APPO_SEQ DESC ")
-    List<AppoDto> selectAppointmentAllList();
+//    //전체 약속 검색
+//    @Select(" SELECT * FROM APPOINTMENT ORDER BY APPO_SEQ DESC ")
+//    List<AppoDto> selectAppointmentAllList();
 
     //Activity 전체 약속 검색
     @Select(" SELECT * FROM APPOINTMENT WHERE NOT APPO_CATEGORY IN ('카풀', '택시', '유급', '무급') ORDER BY APPO_SEQ DESC ")
     List<AppoDto> selectActivityAllList();
-    //
+    //Activity 세부 카테고리 전체 검색
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='카페' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectActivityCafeList();
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='맛집' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectActivityRestaurantList();
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='스포츠' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectActivitySportList();
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='야외활동' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectActivityOutdoorList();
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='구매' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectActivityBuyList();
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='게임' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectActivityGameList();
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='기타' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectActivityOthersList();
+
+    //Vehicle 전체 약속 검색
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='카풀' OR APPO_CATEGORY='택시' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectVehicleAllList();
+    //Vehicle 세부 카테고리 전체 검색
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='카풀' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectVehicleCarpoolList();
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='택시' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectVehicleTaxiList();
+
+
+    //Work 전체 약속 검색
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='유급' OR APPO_CATEGORY='무급' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectWorkAllList();
+    //Work 세부 카테고리 전체 검색
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='유급' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectWorkPaidList();
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='무급' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectWorkUnpaidList();
+
 
     //한 약속 검색
     @Select(" SELECT * FROM APPOINTMENT WHERE APPO_SEQ=#{appo_seq} ")
     AppoDto selectAppointmentOneList(int appo_seq);
 
-    //세부 카테고리 전체 검색
-    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY=#{appo_category} ORDER BY APPO_SEQ DESC ")
-    List<AppoDto> selectSubCategoryAllList(String appo_category);
-
-    //가까운 시간 순 검색
-    @Select(" SELECT * FROM APPOINTMENT ORDER BY APPO_TIME ")
-    List<AppoDto> selectAppointmentRecentTime();
-
-    //가까운 거리 순 검색 (예정)
 
 
-    //세부 카테고리 내 검색
-    //약속명 내 검색
-    //약속장소 내 검색
-    //작성자 내 검색
+    //[카테고리 검색창]세부 카테고리 내 검색 (쿼리문 체크 필요)
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY LIKE='%#{appo_search}%' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectSubCategorySearchList(String appo_search);
+    //[카테고리 검색창] 약속명 내 검색
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_TITLE LIKE='%#{appo_search}%' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectTitleSearchList(String appo_search);
+    //[카테고리 검색창] 약속장소 내 검색
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_PLACE LIKE='%#{appo_search}%' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectPlaceSearchList(String appo_search);
+    //[카테고리 검색창] 작성자 내 검색
+    @Select(" SELECT * FROM APPOINTMENT WHERE APPO_TITLE LIKE='%#{appo_search}%' ORDER BY APPO_SEQ DESC ")
+    List<AppoDto> selectHostSearchList(String appo_search);
+
 
     //--------------------------------insert---------------------------------
     //Activity 약속 생성
@@ -50,6 +86,7 @@ public interface AppoMapper {
     //Work 약속 생성
     @Insert(" INSERT INTO APPOINTMENT VALUES(NULL, #{appo_title}, #{appo_content}, NULL, #{appo_host}, #{appo_place}, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_category}, NULL, #{appo_pay}, #{appo_using}) ")
     int insertWork(AppoDto appodto);
+
 
     //--------------------------------update---------------------------------
     //Activity 약속 수정
