@@ -48,7 +48,7 @@ public class ImageController {
                 imageRepository.upload(dto, null);
             }
             model.addAttribute("message", "사진 업로드 완료");
-            model.addAttribute("searchUrl", "/mypage");
+            model.addAttribute("searchUrl", "/user/View");
             return "message";
         } catch (Exception e) {
             e.printStackTrace();
