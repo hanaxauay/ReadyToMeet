@@ -10,7 +10,7 @@ public interface CommunityMapper {
 
     @Select("SELECT * FROM SHARE ORDER BY SHARE_SEQ DESC")
     List<CommunityDto> selectList();
-    @Insert("INSERT INTO SHARE VALUES (NULL, #{share_category}, #{share_title}, #{share_content},NOW(), 'admin', #{share_view}, #{filename}, #{filepath})")
+    @Insert("INSERT INTO SHARE VALUES (NULL, #{share_category}, #{share_title}, #{share_content},NOW(), 'admin', #{filename}, #{filepath}, #{share_view})")
     int write(CommunityDto dto);
     @Select(" SELECT * FROM SHARE WHERE SHARE_SEQ=#{SHARE_SEQ}")
     CommunityDto selectOne(int share_seq);
