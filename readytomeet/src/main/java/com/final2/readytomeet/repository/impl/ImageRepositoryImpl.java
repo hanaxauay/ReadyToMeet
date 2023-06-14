@@ -22,7 +22,7 @@ public class ImageRepositoryImpl implements ImageRepository {
 
     @Override
     public void upload(ImageUploadDto dto, MultipartFile file) throws Exception {
-        String projectPath = "C:/filesConfig/";
+        String projectPath = "E:/files/";
         UUID uuid = UUID.randomUUID();
 
         if(file != null && !file.isEmpty()) {
