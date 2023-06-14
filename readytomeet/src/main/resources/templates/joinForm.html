@@ -6,22 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
     <link rel="stylesheet" href="../static/css/joinForm.css">
+	<script src="../static/js/joinForm.js"></script>
 </head>
-<script>
-    function updateEmailDomain() {
-        var selectBox = document.getElementById("emailDomainSelect");
-        var emailDomainInput = document.getElementById("emailDomain");
-        var selectedDomain = selectBox.value;
-
-        if (selectedDomain === "직접입력") {
-            emailDomainInput.value = "";
-            emailDomainInput.disabled = false;
-        } else {
-            emailDomainInput.value = selectedDomain;
-            emailDomainInput.disabled = true;
-        }
-    }
-</script>
 <body>
     <div class="center-box">
     	<h1>회원가입</h1>
@@ -41,7 +27,8 @@
 	            <div class="joinContent">
 	                <label for="password_confirm">비밀번호 확인</label>
 	                <input type="password" id="password_confirm" name="password_confirm"><br>
-	            </div>
+					<p id="password_error" style="color: red;"></p>
+				</div>
 	
 	            <div class="joinContent">
 	                <label for="name">이름</label>
