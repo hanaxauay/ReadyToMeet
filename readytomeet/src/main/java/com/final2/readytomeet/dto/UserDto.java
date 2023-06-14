@@ -1,5 +1,8 @@
 package com.final2.readytomeet.dto;
 
+import lombok.Data;
+
+@Data
 public class UserDto {
     private Long id;
     private String user_id;
