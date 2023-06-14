@@ -62,20 +62,20 @@
         </div>
     </div>
     <ul class="list-group">
-        <li class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.room_id" v-on:click="enterRoom(item.room_id)">
+        <li class="list-group-item list-group-item-action" v-for="item in UserChatrooms" v-bind:key="item.room_id" v-on:click="enterRoom(item.room_id)">
             {{ item.room_name }}
         </li>
     </ul>
 </div>
 <!-- JavaScript -->
 <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
-<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
+<script src="/webjars/axios/0.17.1/dist/axios.min.js">  </script>
 <script>
     var vm = new Vue({
         el: '#app',
         data: {
             room_name: '',
-            chatrooms: []
+            userChatRooms: []
         },
         created() {
             this.findAllRoom();
@@ -83,7 +83,7 @@
         methods: {
             findAllRoom: function() {
                 axios.get('/chat/rooms').then(response => {
-                    this.chatrooms = response.data;
+                    this.userChatRooms = response.data;
                 });
             },
             createRoom: function() {

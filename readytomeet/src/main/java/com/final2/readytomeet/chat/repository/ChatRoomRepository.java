@@ -2,6 +2,7 @@ package com.final2.readytomeet.chat.repository;
 
 import com.final2.readytomeet.chat.dto.ChatRoom;
 import com.final2.readytomeet.chat.mapper.ChatRoomMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +29,7 @@ public class ChatRoomRepository {
     public ChatRoom findRoomById(String id) {
         return chatRoomMapper.findRoomById(id);
     }
+
 
     public ChatRoom createChatRoom(String name) {
         ChatRoom chatRoom = ChatRoom.create(name);

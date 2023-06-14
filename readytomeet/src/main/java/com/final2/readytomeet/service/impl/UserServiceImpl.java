@@ -12,8 +12,7 @@ import com.final2.readytomeet.Mapper.UserMapper;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Override
     public UserDto selectOne(String user_id) {

@@ -25,7 +25,7 @@ public class UserChatRoomRepository {
         return userChatRoomMapper.getUsersInChatRoom(roomId);
     }
 
-    public List<ChatRoom> getChatRoomsByUserNickname(String userNickname) {
-        return userChatRoomMapper.getChatRoomsByUserNickname(userNickname);
+    public List<ChatRoom> getChatRoomsByUserNickname(String nickname) {
+        return userChatRoomMapper.getChatRoomsByUserNickname(nickname);
     }
 }

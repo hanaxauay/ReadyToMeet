@@ -10,6 +10,11 @@
         <link href="../css/activityBaseListPage.css" rel="stylesheet" />
         <title>Document</title>
         <script src="../js/activityBaseListPage.js"></script>
+        <script>
+            function openNewWindow() {
+                window.open("/activityDetail");
+            }
+        </script>
     </head>
     <body>
         <!--헤더 영역-->
@@ -121,7 +126,7 @@
                     <div class="appointment_list_area">
 
                         <div class="appointment_list_element">
-                            <a href="#">
+                            <a href="#" onclick="openNewWindow()">
                                 <div class="appointment_date">
                                     <span class="appointment_date_text">5 / 26 / 11 : 30</span>
                                 </div>

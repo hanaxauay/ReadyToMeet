@@ -37,10 +37,7 @@ public class TestController {
 
 
 
-  @GetMapping("/login")
-  public String gotoLogin(){
-    return "login";
-  }
+
 
   @GetMapping("/joinForm")
   public String gotoJoinForm(){
@@ -50,6 +47,11 @@ public class TestController {
   @GetMapping("/review")
   public String gotoReview(){
     return "review";
+  }
+
+ @GetMapping("/activityDetail")
+  public String gotoActivityDetail(){
+    return "activityDetail";
   }
 
 

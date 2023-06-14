@@ -3,6 +3,7 @@ package com.final2.readytomeet.controller;
 import com.final2.readytomeet.Mapper.UserMapper;
 import com.final2.readytomeet.dto.UserDto;
 import com.final2.readytomeet.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,19 +12,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserMapper map;
+    private final UserMapper userMapper;
+    private final UserService userService;
+    private final HttpSession session;
 
-    @Autowired
-    private UserService biz;
+
+
 
     @GetMapping("/View")
     public String selectOne(Model model, String user_id) {
-        model.addAttribute("dto", biz.selectOne(user_id));
+        model.addAttribute("dto", userService.selectOne(user_id));
         return "userView";
     }
 

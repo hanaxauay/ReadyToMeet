@@ -14,6 +14,9 @@ public interface ChatRoomMapper {
     @Select("SELECT * FROM CHAT_ROOM WHERE ROOM_ID = #{room_id}")
     ChatRoom findRoomById(String id);
 
+    @Select("SELECT * FROM CHAT_ROOM WHERE USER_NICKNAME = #{user_nickname}")
+    List<ChatRoom> findRoomByNickname(String nickname);
+
     @Insert("INSERT INTO CHAT_ROOM (room_id, room_name) VALUES (#{room_id}, #{room_name})")
     void createChatRoom(ChatRoom chatRoom);
 }
