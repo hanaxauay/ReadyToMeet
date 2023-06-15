@@ -1,4 +1,4 @@
-package com.final2.readytomeet.Mapper;
+package com.final2.readytomeet.mapper;
 
 import com.final2.readytomeet.dto.AppoDto;
 import org.apache.ibatis.annotations.*;
@@ -11,12 +11,12 @@ public interface AppoMapper {
     // 지도 추가 후 검색 조건에 거리제한 걸어야 함!! //
 
     //--------------------------------select---------------------------------
-//    //전체 약속 검색
+//    //모든 약속 검색
 //    @Select(" SELECT * FROM APPOINTMENT ORDER BY APPO_SEQ DESC ")
 //    List<AppoDto> selectAppointmentAllList();
 
     //Activity 전체 약속 검색
-    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_DATE,'%m / %d %H:%i') FROM APPOINTMENT WHERE NOT APPO_CATEGORY IN ('카풀', '택시', '유급', '무급') ORDER BY APPO_SEQ DESC ")
+    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m / %d %H:%i') FROM APPOINTMENT WHERE NOT APPO_CATEGORY IN ('카풀', '택시', '유급', '무급') ORDER BY APPO_SEQ DESC ")
     List<AppoDto> selectActivityAllList();
     //Activity 세부 카테고리 전체 검색
     @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='카페' ORDER BY APPO_SEQ DESC ")
@@ -35,7 +35,7 @@ public interface AppoMapper {
     List<AppoDto> selectActivityOthersList();
 
     //Vehicle 전체 약속 검색
-    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_DATE,'%m / %d %H:%i') FROM APPOINTMENT WHERE APPO_CATEGORY='카풀' OR APPO_CATEGORY='택시' ORDER BY APPO_SEQ DESC ")
+    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m / %d %H:%i') FROM APPOINTMENT WHERE APPO_CATEGORY='카풀' OR APPO_CATEGORY='택시' ORDER BY APPO_SEQ DESC ")
     List<AppoDto> selectVehicleAllList();
     //Vehicle 세부 카테고리 전체 검색
     @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='카풀' ORDER BY APPO_SEQ DESC ")
@@ -45,7 +45,7 @@ public interface AppoMapper {
 
 
     //Work 전체 약속 검색
-    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_DATE,'%m / %d %H:%i') FROM APPOINTMENT WHERE APPO_CATEGORY='유급' OR APPO_CATEGORY='무급' ORDER BY APPO_SEQ DESC ")
+    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m / %d %H:%i') FROM APPOINTMENT WHERE APPO_CATEGORY='유급' OR APPO_CATEGORY='무급' ORDER BY APPO_SEQ DESC ")
     List<AppoDto> selectWorkAllList();
     //Work 세부 카테고리 전체 검색
     @Select(" SELECT * FROM APPOINTMENT WHERE APPO_CATEGORY='유급' ORDER BY APPO_SEQ DESC ")
