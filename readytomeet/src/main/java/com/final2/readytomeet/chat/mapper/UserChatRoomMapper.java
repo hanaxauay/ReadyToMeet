@@ -17,6 +17,6 @@ public interface UserChatRoomMapper {
     @Select("SELECT USER_NICKNAME FROM USER_CHAT_ROOM WHERE ROOM_ID = #{room_id}")
     List<String> getUsersInChatRoom(Long roomId);
 
-    @Select("SELECT r.* FROM CHAT_ROOM r INNER JOIN USER_CHAT_ROOM ucr ON r.ROOM_ID = ucr.ROOM_ID WHERE ucr.USER_NICKNAME = #{user_nickname}")
+    @Select("SELECT r.* FROM CHAT_ROOM r INNER JOIN USER_CHAT_ROOM ucr ON r.ROOM_ID = ucr.ROOM_ID WHERE ucr.USER_NICKNAME = #{nickname}")
     List<ChatRoom> getChatRoomsByUserNickname(String nickname);
 }
