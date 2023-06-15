@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 @Controller
 @RequestMapping("/appointment")
 public class AppoController {
@@ -22,6 +26,9 @@ public class AppoController {
     @GetMapping("/activityAllList")
     public String selectActivityAllList(Model model){
         model.addAttribute("activityList", apposervice.selectActivityAllList());
+
+//        model.addAttribute("test","타임리프 테스트!!");
+
         return "activityBaseListPage";
     }
 
@@ -62,7 +69,7 @@ public class AppoController {
     @GetMapping("/detailActivityPage")
     public String detailActivityPage(Model model, int appo_seq){
         model.addAttribute("activityDto", apposervice.selectAppointmentOneList(appo_seq));
-        return "";
+        return "activityDetailPage";
     }
 
     //Activity 약속 생성 폼 이동
@@ -99,7 +106,7 @@ public class AppoController {
             return "redirect:/appointment/detailActivityPage";
         }else {
             //실패 시 처리 작업 필요하면 추가
-            return "redirect:/appointment/ ";
+            return "redirect:/appointment/updateActivityForm";
         }
     }
 
