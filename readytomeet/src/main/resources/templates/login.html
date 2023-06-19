@@ -14,23 +14,22 @@
 			<div class="body">
 				<form method="post" action="">
 					<div class="loginForm">
-						<label for="floatingId">ID</label> <input type="text" id="floatingId" name="userId">
+						<label for="floatingId">ID</label> <input type="text" id="floatingId" name="user_id">
 					</div>
 					<div class="loginForm">
-						<label for="floatingPw">Password</label> <input type="password" id="floatingPw" name="userPw">
+						<label for="floatingPw">Password</label> <input type="password" id="floatingPw" name="user_pw">
 					</div>
 					<button id="submitButton" type="submit">로그인</button>
 					<ul>
-						<li><a href="/login/join">회원가입</a></li>
-						<li><a href="/login/find">비밀번호 찾기</a></li>
+						<li><a href="/join">회원가입</a></li>
+						<li><a href="/find">비밀번호 찾기</a></li>
 					</ul>
 					<hr>
 					<br>
-					<div class="buttonContainer">
-						<button id="submitKakao" type="button" onclick="">
-							<img src="https://cdn.discordapp.com/attachments/1110114711208460353/1111569552145395772/kakao_login_medium_wide.png">
-						</button>
-					</div>
+					<a href="https://kauth.kakao.com/oauth/authorize?client_id=464e1b3f69dc1186658ba3def0b52ead&redirect_uri=http://localhost:8080/login/kakao/callback&response_type=code">
+						<img src="../image/kakao.png" alt="카카오 로고" style="height: 60px; vertical-align: middle;">
+					</a>
+
 				</form>
 			</div>
 		</div>

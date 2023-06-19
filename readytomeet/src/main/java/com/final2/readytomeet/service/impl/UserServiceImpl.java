@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.final2.readytomeet.Mapper.UserMapper;
+import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.templateparser.markup.decoupled.IDecoupledTemplateLogicResolver;
+
+import java.io.File;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Override
     public UserDto selectOne(String user_id) {
@@ -24,6 +28,19 @@ public class UserServiceImpl implements UserService {
         userMapper.update(dto);
     }
 
+    public void upload(UserDto dto, MultipartFile file) throws Exception {
+        String projectPath = "E:/files/";
+        UUID uuid = UUID.randomUUID();
+
+        if(file != null && !file.isEmpty()) {
+            String user_img = uuid + "_" + file.getOriginalFilename();
+            File saveFile = new File(projectPath, user_img);
+            file.transferTo(saveFile);
+            dto.setUser_img(user_img);
+            dto.setUser_path("/download/" + user_img);
+        }
+        userMapper.upload(dto);
+    }
 
 
 

@@ -4,38 +4,36 @@ import lombok.Data;
 
 @Data
 public class UserDto {
-    private Long id;
     private String user_id;
     private String user_pw;
     private String user_phone;
     private String user_email;
+    private String user_name;
     private String user_nickname;
     private Integer user_age;
+    private Integer user_gender;
     private String user_location;
+    private String user_img;
+    private String user_path;
     private String user_content;
 
-    public UserDto() {
-        super();
+
+    public UserDto(String user_img, String user_path) {
+        this.user_img = user_img;
+        this.user_path = user_path;
     }
 
-    public UserDto(Long id, String user_id, String user_pw, String user_phone, String user_email, String user_nickname, Integer user_age, String user_location, String user_content) {
-        this.id = id;
+    public UserDto(String user_id, String user_pw, String user_phone, String user_email, String user_name, String user_nickname, Integer user_age, Integer user_gender, String user_location, String user_content) {
         this.user_id = user_id;
         this.user_pw = user_pw;
         this.user_phone = user_phone;
         this.user_email = user_email;
+        this.user_name = user_name;
         this.user_nickname = user_nickname;
         this.user_age = user_age;
+        this.user_gender = user_gender;
         this.user_location = user_location;
         this.user_content = user_content;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUser_id() {
@@ -70,6 +68,14 @@ public class UserDto {
         this.user_email = user_email;
     }
 
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
     public String getUser_nickname() {
         return user_nickname;
     }
@@ -86,12 +92,36 @@ public class UserDto {
         this.user_age = user_age;
     }
 
+    public Integer getUser_gender() {
+        return user_gender;
+    }
+
+    public void setUser_gender(Integer user_gender) {
+        this.user_gender = user_gender;
+    }
+
     public String getUser_location() {
         return user_location;
     }
 
     public void setUser_location(String user_location) {
         this.user_location = user_location;
+    }
+
+    public String getUser_img() {
+        return user_img;
+    }
+
+    public void setUser_img(String user_img) {
+        this.user_img = user_img;
+    }
+
+    public String getUser_path() {
+        return user_path;
+    }
+
+    public void setUser_path(String user_path) {
+        this.user_path = user_path;
     }
 
     public String getUser_content() {

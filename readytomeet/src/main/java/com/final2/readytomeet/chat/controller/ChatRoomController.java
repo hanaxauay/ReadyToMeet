@@ -3,11 +3,14 @@ package com.final2.readytomeet.chat.controller;
 
 import com.final2.readytomeet.chat.repository.ChatRoomRepository;
 import com.final2.readytomeet.chat.dto.ChatRoom;
+import com.final2.readytomeet.chat.repository.UserChatRoomRepository;
+import com.final2.readytomeet.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -47,3 +50,18 @@ public class ChatRoomController {
         return chatRoomRepository.findRoomById(room_id);
     }
 }
+
+    //@GetMapping("/room")
+//    public String getUserChatRooms(Model model, HttpSession session) {
+//        // 세션에서 로그인한 사용자 정보 가져오기
+//        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
+//        String nickname = loginUser.getUser_nickname();
+//
+//        // 사용자의 채팅방 목록 조회
+//        List<ChatRoom> userChatRooms = userChatRoomRepository.getChatRoomsByUserNickname(nickname);
+//
+//        // 채팅방 목록을 모델에 추가
+//        model.addAttribute("userChatRooms", userChatRooms);
+//        return "chat/room";
+//    }
+

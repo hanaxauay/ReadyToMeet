@@ -84,8 +84,8 @@ body{
 
 /*----카테고리 표시 문구 설정-----*/
 .show_sub_category_container{
-  width: 30%;
-  padding-left: 2.5%;
+  width: 32%;
+  padding-left: 2%;
 
   display: flex;
   align-items: center;
@@ -102,6 +102,7 @@ body{
 }
 /*세부 카테고리 설정*/
 .sub_category_ment{
+  margin-left: 1.5%;
   font-size: 1.4rem;
   font-weight: 500;
 }
@@ -223,11 +224,6 @@ body{
   overflow: hidden;
 }
 
-/*약속 라인에 커서 올렸을 시 표시 지도 설정용*/
-.appointment_list_element :hover{
-
-}
-
 /* 약속 요소 : 약속시간, 장소, 약속명 */
 .appointment_date {
   width: 20%;
@@ -252,11 +248,15 @@ body{
 }
 
 /* 약속 요소 텍스트 설정 */
-.appointment_list_element a:visited > .appointment_place span{
+.appointment_list_element a:link{
+  color: #FF7777;
+}
+.appointment_list_element a:visited{
     text-decoration : none;
     color: #FF7777;
 }
 .appointment_date_text {
+    margin: 0 2% 0 0;
   color: rgb(103,103,103);
   text-align: center;
 }
@@ -285,6 +285,11 @@ body{
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+/*약속 라인에 커서 올렸을 시 표시 지도 설정용*/
+.appointment_list_element :hover{
+
 }
 
 

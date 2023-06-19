@@ -63,6 +63,7 @@
         font-size: 75.0%;
     }
     .joinContent{
+        position: relative;
         width: 100%;
         margin-bottom: 15px;
     }
@@ -78,6 +79,24 @@
         border: 0.7px solid rgb(185, 184, 184);
         border-radius: 0.5rem;
     }
+
+    .joinContent > input#password_confirm {
+    	width: 34%;
+    	height: 40px;
+        box-sizing: border-box;
+        display: inline-block;
+        border: 0.7px solid rgb(185, 184, 184);
+        border-radius: 0.5rem;
+	}
+    
+    #password_error {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 87.5%;
+    color: red;
+	}
+    
     #id{
         width: 43%;
     }

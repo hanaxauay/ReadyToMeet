@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- 데이터 넘어가는지 테스트용 -->
+
+<div th:each="dto: ${vehicleDto}">
+    <span th:text="${dto.appo_seq}"></span><br>
+    <span th:text="${dto.appo_title}"></span><br>
+    <span th:text="${dto.appo_content}"></span><br>
+    <span th:text="${dto.appo_host}"></span><br>
+    <span th:text="${dto.appo_start_place}"></span><br>
+    <span th:text="${dto.appo_place}"></span><br>
+    <span th:text="${dto.appo_time}"></span><br>
+    <span th:text="${dto.appo_category}"></span>
+</div>
+
+</body>
+</html>

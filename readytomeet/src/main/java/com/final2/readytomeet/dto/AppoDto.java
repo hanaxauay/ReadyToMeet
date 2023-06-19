@@ -18,10 +18,31 @@ public class AppoDto {
     public int appo_pay;
     public int appo_using;
 
-    public AppoDto() {
+    public String appo_date1;
+
+    public String getAppo_date1() {
+        return appo_date1;
     }
 
-    public AppoDto(int appo_seq, String appo_title, String appo_content, String appo_notice, String appo_host, String appo_place, Timestamp appo_time, int appo_min_mem, int appo_max_mem, String appo_category, String appo_start_place, int appo_pay, int appo_using) {
+    public void setAppo_date1(String appo_date1) {
+        this.appo_date1 = appo_date1;
+    }
+
+    public String appo_date2;
+
+    public String getAppo_date2() {
+        return appo_date2;
+    }
+
+    public void setAppo_date2(String appo_date2) {
+        this.appo_date2 = appo_date2;
+    }
+
+    public AppoDto() {
+        super();
+    }
+
+    public AppoDto(int appo_seq, String appo_title, String appo_content, String appo_notice, String appo_host, String appo_place, Timestamp appo_time, int appo_min_mem, int appo_max_mem, String appo_category, String appo_start_place, int appo_pay, int appo_using,String appo_date1,String appo_date2) {
         this.appo_seq = appo_seq;
         this.appo_title = appo_title;
         this.appo_content = appo_content;
@@ -35,6 +56,8 @@ public class AppoDto {
         this.appo_start_place = appo_start_place;
         this.appo_pay = appo_pay;
         this.appo_using = appo_using;
+        this.appo_date1 = appo_date1;
+        this.appo_date2 = appo_date2;
     }
 
     public int getAppo_seq() {
@@ -140,4 +163,5 @@ public class AppoDto {
     public void setAppo_using(int appo_using) {
         this.appo_using = appo_using;
     }
+
 }
