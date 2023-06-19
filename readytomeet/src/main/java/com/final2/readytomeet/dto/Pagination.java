@@ -38,6 +38,7 @@ public class Pagination {
 	/** 12. 다음 블럭의 시작 페이지 **/
 	private int nextBlock;
 
+
 	public int getPageSize() {
 		return pageSize;
 	}

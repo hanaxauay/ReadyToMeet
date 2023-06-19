@@ -56,27 +56,24 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" th:href="@{list?page=1}" aria-label="Previous" th:text="'<<'">
-                    </a>
+                    <a class="page-link" th:href="@{list?page=1}" aria-label="Previous" th:text="'<<'"></a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination.prevBlock})}" aria-label="Previous"  th:text="'<'">
-                    </a>
+                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination.prevBlock})}" aria-label="Previous" th:text="'<'"></a>
                 </li>
                 <th:block th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
                     <li th:each="pageButton : ${#numbers.sequence(start, end)}">
                         <a class="page-link"
                            th:href="@{list?page={page} (page = ${pageButton})}"
-                           th:text=${pageButton}></a>
+                           th:text=${pageButton}
+                           th:style="${pagination.page == pageButton} ? 'background-color: #FDBFBB; color: white;' : ''"></a>
                     </li>
                 </th:block>
                 <li class="page-item">
-                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination.nextBlock})}" aria-label="Next"  th:text="'>'">
-                    </a>
+                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination.nextBlock})}" aria-label="Next"  th:text="'>'"></a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" th:href="@{?page={page} (page = ${pagination.totalPageCnt})}" aria-label="Previous" th:text="'>>'">
-                    </a>
+                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination.totalPageCnt})}" aria-label="Next"  th:text="'>>'"></a>
                 </li>
             </ul>
         </nav>

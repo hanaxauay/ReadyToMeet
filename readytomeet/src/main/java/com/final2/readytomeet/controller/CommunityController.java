@@ -1,8 +1,8 @@
 package com.final2.readytomeet.controller;
 
+import com.final2.readytomeet.Mapper.CommunityMapper;
 import com.final2.readytomeet.dto.CommunityDto;
 import com.final2.readytomeet.dto.Pagination;
-import com.final2.readytomeet.Mapper.CommunityMapper;
 import com.final2.readytomeet.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/community")
@@ -26,8 +28,6 @@ public class CommunityController {
 
   @GetMapping("/list")
   public String selectList(Model model, @RequestParam(defaultValue = "1") int page) {
-
-    // 총 게시물 수
     int totalListCnt = map.findAllCnt();
     Pagination pagination = new Pagination(totalListCnt, page);
     int startIndex = pagination.getStartIndex();
@@ -36,6 +36,7 @@ public class CommunityController {
 
     model.addAttribute("communityList", communityList);
     model.addAttribute("pagination", pagination);
+    model.addAttribute("pageNumbers", IntStream.rangeClosed(pagination.getStartPage(), pagination.getEndPage()).boxed().collect(Collectors.toList()));
 
     return "communitylist";
   }
