@@ -5,9 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29a607d0-3ab8-4d8b-a431-6068a9698c25" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/kakaoLogin/KakaoLogoutController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/kakaoLogin/KakaoMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readytomeet/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9ba016b8-449f-4469-998c-23ffa5153f4e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9ba016b8-449f-4469-998c-23ffa5153f4e.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/readytomeet.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/readytomeet.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readytomeet/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/readytomeet/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/kakaoLogin/KakaoLoginCallbackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/readytomeet/src/main/java/com/final2/readytomeet/kakaoLogin/KakaoLoginCallbackController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/readytomeet/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readytomeet/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/readytomeet/src/main/resources/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,31 +47,74 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2QaL1QB7BEagmOL7cX7rNucFNo4" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/chltl/OneDrive/문서/ReadyToMeet&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/이후성/Documents/GitHub/ReadyToMeet/readytomeet/src/main/resources/static/image&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0256b2bf8c58504fb657a7aa286b26c7&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\이후성\Documents\GitHub\ReadyToMeet\readytomeet\src\main\resources\static\image" />
+      <recent name="C:\Users\이후성\Documents\GitHub\ReadyToMeet\readytomeet\src\main\resources\templates\user" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.final2.readytomeet" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="ReadyToMeetApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="readytomeet.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.final2.readytomeet.ReadyToMeetApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -69,8 +123,45 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685586531397</updated>
+      <workItem from="1685881049851" duration="352000" />
+      <workItem from="1685888231632" duration="4933000" />
+      <workItem from="1685938297323" duration="2833000" />
+      <workItem from="1685963682146" duration="1080000" />
+      <workItem from="1685979346070" duration="4279000" />
+      <workItem from="1686032643374" duration="287000" />
+      <workItem from="1686033961073" duration="909000" />
+      <workItem from="1686114156787" duration="11322000" />
+      <workItem from="1686186954447" duration="2048000" />
+      <workItem from="1686192423086" duration="13986000" />
+      <workItem from="1686212945743" duration="2691000" />
+      <workItem from="1686276100614" duration="8567000" />
+      <workItem from="1686288398936" duration="891000" />
+      <workItem from="1686291967881" duration="3982000" />
+      <workItem from="1686297336145" duration="236000" />
+      <workItem from="1686396287308" duration="1958000" />
+      <workItem from="1686485802521" duration="87000" />
+      <workItem from="1686528768238" duration="611000" />
+      <workItem from="1686544910909" duration="6860000" />
+      <workItem from="1686552051300" duration="887000" />
+      <workItem from="1686557871241" duration="2379000" />
+      <workItem from="1686617667208" duration="71000" />
+      <workItem from="1686621440972" duration="2622000" />
+      <workItem from="1686624110161" duration="1240000" />
+      <workItem from="1686638618275" duration="1555000" />
+      <workItem from="1686654471635" duration="6448000" />
+      <workItem from="1686724120242" duration="2933000" />
+      <workItem from="1686730988967" duration="1591000" />
+      <workItem from="1686740875926" duration="3075000" />
+      <workItem from="1686789297324" duration="4464000" />
+      <workItem from="1686800425834" duration="8971000" />
+      <workItem from="1686876808251" duration="4809000" />
+      <workItem from="1686892709494" duration="537000" />
+      <workItem from="1686900783731" duration="3123000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

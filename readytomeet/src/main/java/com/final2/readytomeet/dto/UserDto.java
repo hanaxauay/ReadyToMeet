@@ -1,8 +1,11 @@
 package com.final2.readytomeet.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+@Getter @Setter
 public class UserDto {
     private String user_id;
     private String user_pw;
@@ -17,6 +20,8 @@ public class UserDto {
     private String user_path;
     private String user_content;
 
+    public UserDto() {
+    }
 
     public UserDto(String user_img, String user_path) {
         this.user_img = user_img;
