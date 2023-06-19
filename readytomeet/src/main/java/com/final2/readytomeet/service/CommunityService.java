@@ -11,5 +11,7 @@ public interface CommunityService {
   public List<CommunityDto> selectList();
   public CommunityDto selectOne(int share_seq);
   public void write(CommunityDto dto, MultipartFile file) throws Exception;
+  public int update(CommunityDto dto);
+  public int delete(int share_seq);
   public void updateViewCount(int share_seq);
 }

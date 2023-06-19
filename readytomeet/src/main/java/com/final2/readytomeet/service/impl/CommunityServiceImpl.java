@@ -40,6 +40,14 @@ public class CommunityServiceImpl implements CommunityService {
     communityMapper.write(dto);
   }
   @Override
+  public int update(CommunityDto dto){
+    return communityMapper.update(dto);
+  }
+  @Override
+  public int delete(int share_seq) {
+    return communityMapper.delete(share_seq);
+  }
+  @Override
   public void updateViewCount(int share_seq) {
     communityMapper.updateViewCount(share_seq);
   }

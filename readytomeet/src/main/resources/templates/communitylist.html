@@ -7,8 +7,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/jinha.css">
     <link rel="stylesheet" href="../css/common.css">
+
 </head>
 <body>
+<!--해더 영역-->
 <nav>
     <ul>
         <li class="liLogo"><a href="#"><img src="../image/logo.png" class="imgLogo"></a></li>
@@ -50,16 +52,34 @@
         </a>
     </div>
     <!-- 페이징 처리하면됨 어떻게할지는 차차... -->
-    <div class="paging">
-        <a href="#" class="bt first"><<</a>
-        <a href="#" class="bt prev"><</a>
-        <a href="#" class="num on">1</a>
-        <a href="#" class="num">2</a>
-        <a href="#" class="num">3</a>
-        <a href="#" class="num">4</a>
-        <a href="#" class="num">5</a>
-        <a href="#" class="bt next">></a>
-        <a href="#" class="bt last">>></a>
+    <div class="pagination-container">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" th:href="@{list?page=1}" aria-label="Previous" th:text="'<<'">
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination.prevBlock})}" aria-label="Previous"  th:text="'<'">
+                    </a>
+                </li>
+                <th:block th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+                    <li th:each="pageButton : ${#numbers.sequence(start, end)}">
+                        <a class="page-link"
+                           th:href="@{list?page={page} (page = ${pageButton})}"
+                           th:text=${pageButton}></a>
+                    </li>
+                </th:block>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination.nextBlock})}" aria-label="Next"  th:text="'>'">
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{?page={page} (page = ${pagination.totalPageCnt})}" aria-label="Previous" th:text="'>>'">
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
 <footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
