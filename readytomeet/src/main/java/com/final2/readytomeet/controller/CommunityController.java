@@ -71,7 +71,31 @@ public class CommunityController {
     return "communityview";
   }
 
-
+  @GetMapping("/updateform")
+  public String updateform(Model model, int share_seq){
+    model.addAttribute("dto", service.selectOne(share_seq));
+    return "communityupdate";
+  }
+  @PostMapping("/update")
+  public String update(CommunityDto dto, Model model) {
+    model.addAttribute("message","글 수정이 완료되었습니다");
+    model.addAttribute("searchUrl","/community/list");
+    if(service.update(dto) > 0) {
+      return "message";
+    }else {
+      return "redirect:/COMMUNITY/updateform?share_seq=" + dto.getShare_seq();
+    }
+  }
+  @GetMapping("/delete")
+  public String delete(int share_seq, Model model) {
+    model.addAttribute("message","삭제가 완료되었습니다");
+    model.addAttribute("searchUrl","/community/list");
+    if(service.delete(share_seq) > 0) {
+      return "message";
+    } else {
+      return "redirect:/community/view?share_seq=" + share_seq;
+    }
+  }
 
 
 

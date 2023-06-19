@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,6 @@
     <title>생성페이지</title>
     <link rel="stylesheet" href="../css/jinha.css">
     <link rel="stylesheet" href="../css/common.css">
-
 </head>
 <body>
 <nav>
@@ -32,36 +31,29 @@
     <div class="">
         <h1>COMUNITY</h1>
     </div>
+    <form action="/community/update" method="post">
+        <input type="hidden" name="share_seq" th:value="${dto.share_seq}">
+        <div class="dropdown">
+            <select name="share_category" id="head">
+                <option value="이가게 좋아요">이가게 좋아요</option>
+                <option value="할인정보">할인정보</option>
+            </select>
+        </div>
         <div class="container">
             <div class="main">
-                <h3 class="community_produce">머리글</h3>
-                <div th:text="${dto.share_category}"></div>
-            </div>
-            <div class="main">
                 <h3 class="community_produce">제목</h3>
-                <div th:text="${dto.share_title}"></div>
-            </div>
-            <div class="main">
-                <h3 class="community_produce">작성자</h3>
-                <div th:text="${dto.user_id}"></div>
-            </div>
-            <div class="main">
-                <h3 class="community_produce">작성일</h3>
-                <div th:text="${#dates.format(dto.share_time, 'yyyy.MM.dd')}"></div>
+                <input name="share_title" id="title" type="text" class="community_title" th:value="${dto.share_title}">
             </div>
             <div class="main">
                 <h3 class="community_produce">내용</h3>
-                <div class="image-wrapper">
-                    <img th:if="${not #strings.isEmpty(dto.filename)}" th:src="@{/download/{filename}(filename=${dto.filename})}" />
-                    <div th:text="${dto.share_content}"></div>
-                </div>
+                <textarea name="share_content" id="content" class="community_content" th:text="${dto.share_content}"></textarea>
             </div>
         </div>
         <div class="community_floor">
-            <input type="button" class="button" value="목록" onclick="location.href='/community/list'">
-            <input type="button" class="button" value="수정" th:onclick="location.href='/community/updateform?share_seq=[[${dto.share_seq}]]'">
-            <input type="button" class="button" value="삭제" th:onclick="location.href='/community/delete?share_seq=[[${dto.share_seq}]]'">
+            <input type="submit" class="button" value="수정">
+            <input type="button" class="button" value="취소" onclick="location.href='/community/list'">
         </div>
+    </form>
 </div>
 <footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
 </body>

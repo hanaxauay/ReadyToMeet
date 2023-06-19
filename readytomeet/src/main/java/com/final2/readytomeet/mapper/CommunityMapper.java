@@ -14,9 +14,10 @@ public interface CommunityMapper {
     int write(CommunityDto dto);
     @Select(" SELECT * FROM SHARE WHERE SHARE_SEQ=#{SHARE_SEQ}")
     CommunityDto selectOne(int share_seq);
-
-
-
+    @Update(" UPDATE SHARE SET SHARE_CATEGORY=#{share_category},SHARE_TITLE=#{share_title}, SHARE_CONTENT=#{share_content} WHERE SHARE_SEQ=#{share_seq}")
+    int update(CommunityDto dto);
+    @Delete(" DELETE FROM SHARE WHERE SHARE_SEQ=#{SHARE_SEQ} ")
+    int delete(int share_seq);
     @Update("UPDATE SHARE SET SHARE_VIEW = SHARE_VIEW + 1 WHERE SHARE_SEQ = #{SHARE_SEQ}")
     int updateViewCount(int share_seq);
     @Select("SELECT COUNT(*) AS TOTAL_COUNT FROM SHARE")
