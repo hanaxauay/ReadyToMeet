@@ -26,9 +26,8 @@ public class AppoController {
     @GetMapping("/activityAllList")
     public String selectActivityAllList(Model model){
         model.addAttribute("activityList", apposervice.selectActivityAllList());
-
-//        model.addAttribute("test","타임리프 테스트!!");
-
+        String subCategoryText = "전체";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "activityBaseListPage";
     }
 
@@ -36,32 +35,46 @@ public class AppoController {
     @GetMapping("/activityCafeList") //카페
     public String selectActivityCafeList(Model model){
         model.addAttribute("activityList", apposervice.selectActivityCafeList());
+        String subCategoryText = "카페";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "activityBaseListPage";
     }
     @GetMapping("/activityRestaurantList") //식당
     public String selectActivityRestaurantList(Model model){
         model.addAttribute("activityList", apposervice.selectActivityRestaurantList());
+        String subCategoryText = "맛집";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "activityBaseListPage";
     }
     @GetMapping("/activitySportList") //스포츠
     public String selectActivitySportList(Model model){
         model.addAttribute("activityList", apposervice.selectActivitySportList());
+        String subCategoryText = "스포츠";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "activityBaseListPage";
     }@GetMapping("/activityOutdoorList") //야외활동
     public String selectActivityOutdoorList(Model model){
         model.addAttribute("activityList", apposervice.selectActivityOutdoorList());
+        String subCategoryText = "야외활동";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "activityBaseListPage";
     }@GetMapping("/activityBuyList") //구매
     public String selectActivityBuyList(Model model){
         model.addAttribute("activityList", apposervice.selectActivityBuyList());
+        String subCategoryText = "구매";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "activityBaseListPage";
     }@GetMapping("/activityGameList") //게임
     public String selectActivityGameList(Model model){
         model.addAttribute("activityList", apposervice.selectActivityGameList());
+        String subCategoryText = "게임";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "activityBaseListPage";
     }@GetMapping("/activityOthersList") //기타
     public String selectActivityOthersList(Model model){
         model.addAttribute("activityList", apposervice.selectActivityOthersList());
+        String subCategoryText = "기타";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "activityBaseListPage";
     }
 
@@ -117,6 +130,8 @@ public class AppoController {
     @GetMapping("/vehicleAllList")
     public String selectVehicleAllList(Model model){
         model.addAttribute("vehicleList", apposervice.selectVehicleAllList());
+        String subCategoryText = "전체";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "vehicleBaseListPage";
     }
 
@@ -124,11 +139,15 @@ public class AppoController {
     @GetMapping("/vehicleCarpoolList") //카풀
     public String selectVehicleCarpoolList(Model model){
         model.addAttribute("vehicleList", apposervice.selectVehicleCarpoolList());
+        String subCategoryText = "카풀";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "vehicleBaseListPage";
     }
     @GetMapping("/vehicleTaxiList") //택시
     public String selectVehicleTaxiList(Model model){
         model.addAttribute("vehicleList", apposervice.selectVehicleTaxiList());
+        String subCategoryText = "택시";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "vehicleBaseListPage";
     }
 
@@ -137,7 +156,7 @@ public class AppoController {
     @GetMapping("/detailVehiclePage")
     public String detailVehiclePage(Model model, int appo_seq){
         model.addAttribute("vehicleDto", apposervice.selectAppointmentOneList(appo_seq));
-        return "";
+        return "vehicleDetailTest";
     }
 
     //Vehicle 약속 생성 폼 이동
@@ -183,6 +202,8 @@ public class AppoController {
     @GetMapping("/workAllList")
     public String selectWorkAllList(Model model){
         model.addAttribute("workList", apposervice.selectWorkAllList());
+        String subCategoryText = "전체";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "workBaseListPage";
     }
 
@@ -190,11 +211,15 @@ public class AppoController {
     @GetMapping("/workPaidList") //유급
     public String selectWorkPaidList(Model model){
         model.addAttribute("workList", apposervice.selectWorkPaidList());
+        String subCategoryText = "유급";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "workBaseListPage";
     }
     @GetMapping("/workUnpaidList") //무급
     public String selectWorkUnpaidList(Model model){
         model.addAttribute("workList", apposervice.selectWorkUnpaidList());
+        String subCategoryText = "무급";
+        model.addAttribute("subCategoryText",subCategoryText);
         return "workBaseListPage";
     }
 
@@ -202,7 +227,7 @@ public class AppoController {
     @GetMapping("/detailWorkPage")
     public String detailWorkPage(Model model, int appo_seq){
         model.addAttribute("workDto", apposervice.selectAppointmentOneList(appo_seq));
-        return "";
+        return "workDetailTest";
     }
 
     //Work 약속 생성 폼 이동
