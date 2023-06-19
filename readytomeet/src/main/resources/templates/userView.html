@@ -35,14 +35,15 @@
 <div id="main">
     <section class="main">
         <div class="main_wrap">
-            <form class="inputImg" method="post" action="/user/upload" enctype="multipart/form-data">
+            <form class="inputImg" method="post" th:action="@{/user/upload}" enctype="multipart/form-data">
                 <div class="addImage" id="image-show">
-                    <img th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>
-
+<!--                    <img th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>-->
+                    <img th:src="@{/download/{filename}(filename=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>
                 </div>
-<!--                <input type="file" name="file" multiple="multiple">-->
-<!--                <input type="submit" id="submit" value="전송">-->
+                <input type="file" name="file" multiple="multiple">
+                <input type="submit" id="submit" value="전송">
             </form>
+
             <div class="content">
                 <b>닉네임</b>
                 <div class="field">
@@ -66,12 +67,48 @@
 
                 <div class="place">
                     <h2>지금까지 내가 갔던 장소</h2>
-                    <div th:text="${APPO?.TITLE}">${APPO.TITLE}</div>
-                    <div>${APPO.TITLE}</div>
-                    <div>${APPO.TITLE}</div>
-                    <div>${APPO.TITLE}</div>
-                    <div>${APPO.TITLE}</div>
-                    <div>${APPO.TITLE}</div>
+                    <div th:each="share : ${communityList}">
+                        <div class="box">
+                            <div class="list">
+                                <div th:text="${share?.share_category}" class="title"></div>
+                                <div class="content1">
+                                    <a th:text="${share?.share_title}" th:href="@{/community/view(share_seq=${share?.share_seq})}"></a>
+                                </div>
+                                <div th:text="${#dates?.format(share?.share_time, 'yy.MM.dd')}" class="date"></div>
+                                <div th:text="${share?.user_id}" class="writer"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pagination-container">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" th:href="@{list?page=1}" aria-label="Previous" th:text="'<<'">
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.prevBlock})}" aria-label="Previous"  th:text="'<'">
+                                    </a>
+                                </li>
+                                <th:block th:with="start = ${pagination?.startPage}, end = ${pagination?.endPage}">
+                                    <li th:each="pageButton : ${numbers?.sequence(start, end)}">
+                                        <a class="page-link"
+                                           th:href="@{list?page={page} (page = ${pageButton})}"
+                                           th:text=${pageButton}></a>
+                                    </li>
+                                </th:block>
+                                <li class="page-item">
+                                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.nextBlock})}" aria-label="Next"  th:text="'>'">
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" th:href="@{?page={page} (page = ${pagination?.totalPageCnt})}" aria-label="Previous" th:text="'>>'">
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

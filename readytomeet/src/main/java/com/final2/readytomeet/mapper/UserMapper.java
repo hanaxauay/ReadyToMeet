@@ -1,11 +1,9 @@
 package com.final2.readytomeet.Mapper;
 
 import com.final2.readytomeet.dto.AppoDto;
+import com.final2.readytomeet.dto.CommunityDto;
 import com.final2.readytomeet.dto.UserDto;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -21,7 +19,7 @@ public interface UserMapper {
 //    @Insert("INSERT INTO USER VALUES (#{user_id}, #{user_pw}, #{user_phone}, #{user_email}, #{user_name}, #{user_nickname}, #{user_age}, #{user_gender}, #{user_location}, #{user_img}, #{user_path}, #{user_content})")
 //    int upload(UserDto dto);
 
-    @Insert("INSERT INTO USER VALUES ('1', '2', '3', '1@naver.com', '2', '닉네임', '100', '1', '지역', #{user_img}, #{user_path}, '하')")
+    @Insert("INSERT INTO IMG VALUES (#{id}, #{user_img}, #{user_path})")
     int upload(UserDto dto);
 
     @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
@@ -30,6 +28,8 @@ public interface UserMapper {
     @Update(" UPDATE USER SET USER_NICKNAME=#{user_nickname}, USER_PW=#{user_pw}, USER_PHONE=#{user_phone}, USER_EMAIL=#{user_email}, USER_LOCATION=#{user_location}, USER_CONTENT=#{user_content} WHERE USER_ID=#{user_id} ")
     int update(UserDto dto);
 
-
-
+    @Select("SELECT COUNT(*) AS TOTAL_COUNT FROM SHARE")
+    int findAllCnt();
+    @Select("SELECT * FROM SHARE ORDER BY SHARE_SEQ DESC LIMIT #{startIndex}, #{pageSize}")
+    List<CommunityDto> findListPaging(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
 }
