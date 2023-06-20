@@ -75,7 +75,7 @@
                                     <a th:text="${share?.share_title}" th:href="@{/community/view(share_seq=${share?.share_seq})}"></a>
                                 </div>
                                 <div th:text="${#dates?.format(share?.share_time, 'yy.MM.dd')}" class="date"></div>
-                                <div th:text="${share?.user_id}" class="writer"></div>
+<!--                                <div th:text="${share?.user_id}" class="writer"></div>-->
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,8 @@
                                     <li th:each="pageButton : ${numbers?.sequence(start, end)}">
                                         <a class="page-link"
                                            th:href="@{list?page={page} (page = ${pageButton})}"
-                                           th:text=${pageButton}></a>
+                                           th:text=${pageButton}
+                                           th:style="${pagination?.page == pageButton} ? 'background-color: #FDBFBB; color: white;' : ''"></a>
                                     </li>
                                 </th:block>
                                 <li class="page-item">
