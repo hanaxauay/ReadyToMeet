@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-    <link rel="stylesheet" href="../static/css/joinForm.css">
-	<script src="../static/js/joinForm.js"></script>
+	<link href="../css/joinForm.css" rel="stylesheet" />
+	<script src="../js/joinForm.js"></script>
 </head>
 <body>
     <div class="center-box">
@@ -45,17 +45,20 @@
 	            	<label for="birthdate">생년월일</label>
 	            	<input type="date" id="birthdate" name="birthdate"><br>
 	            </div>
-	
-	            <div class="joinContent">
-	            	<label for="phone">전화번호</label>
-	            	<input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
-	            	<button type="button" id="get_verification_code">인증번호 받기</button><br>
-	            </div>
-	
-	            <div class="joinContent">
-	            	<label for="verification_code">인증번호</label>
-	            	<input type="text" id="verification_code" name="verification_code"><br>
-	            </div>
+
+				<div class="joinContent">
+					<label for="phone">전화번호</label>
+					<input type="text" id="phone" name="phone">
+					<span id="phoneChk" class="doubleChk">인증번호 보내기</span><br/>
+				</div>
+
+				<div class="joinContent">
+					<label for="phone">인증확인</label>
+					<input type="text" id="phone2" name="phone2" disabled>
+					<span id="phoneChk2" class="doubleChk">인증 확인</span><br/>
+					<span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
+					<input type="hidden" id="phoneDoubleChk"/>
+				</div>
 	            
 	            <div class="joinContent">
 					<label for="email">이메일</label>
