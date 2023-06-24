@@ -59,9 +59,9 @@ public class KakaoLoginCallbackController {
                 userDto.setUser_id(UUID.randomUUID().toString()); // UUID로 랜덤한 값을 설정
                 userDto.setUser_pw(UUID.randomUUID().toString()); // UUID로 랜덤한 값을 설정
                 userDto.setUser_phone(UUID.randomUUID().toString()); // UUID로 랜덤한 값을 설정
-                userDto.setUser_email(userInfoResponse.getEmail());
-                userDto.setUser_name(UUID.randomUUID().toString()); // UUID로 랜덤한 값을 설정
-                userDto.setUser_nickname(userInfoResponse.getNickname());
+                userDto.setUser_email(userInfoResponse.getEmail()); // UUID로 랜덤한 값을 설정
+                userDto.setUser_name("gara data"); // UUID로 랜덤한 값을 설정
+                userDto.setUser_nickname(UUID.randomUUID().toString());
                 userDto.setUser_age(new Random().nextInt(100)); // 0부터 99까지의 랜덤한 정수 설정
                 userDto.setUser_gender(new Random().nextInt(100)); // UUID로 랜덤한 값을 설정
                 userDto.setUser_location(UUID.randomUUID().toString()); // UUID로 랜덤한 값을 설정
