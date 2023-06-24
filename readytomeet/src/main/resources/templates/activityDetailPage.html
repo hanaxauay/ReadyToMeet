@@ -4,20 +4,186 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://kit.fontawesome.com/e66bbc4b5b.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet"/>
+
+    <link href="../../css/common.css" rel="stylesheet" />
+    <link href="../../css/activityDetail.css" rel="stylesheet"/>
+    <title>Document</title>
+    <script src="../../js/activityBaseListPage.js"></script>
+
     <title>Title</title>
 </head>
 <body>
-<!-- 데이터 넘어가는지 테스트용 -->
 
-  <div th:each="dto: ${activityDto}">
-    <span th:text="${dto.appo_seq}"></span>
-    <span th:text="${dto.appo_title}"></span>
-    <span th:text="${dto.appo_content}"></span>
-    <span th:text="${dto.appo_host}"></span>
-    <span th:text="${dto.appo_place}"></span>
-    <span th:text="${dto.appo_time}"></span>
-    <span th:text="${dto.appo_category}"></span>
-  </div>
+<!--헤더 영역-->
+<nav>
+    <ul>
+        <li class="liLogo"><a href="/main"><img src="../../image/logo.png" class="imgLogo"></a></li>
+        <li><a href="/all">All</a> </li>
+        <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
+        <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
+        <li><a href="/appointment/workList/all">WORK</a> </li>
+        <li><a href="/community/list">Community</a> </li>
+        <li>
+            <form action="/search" method="GET" class="search-container">
+                <input type="text" name="keyword" placeholder="약속을 찾아봐요!">
+                <input type="submit" value="Search">
+            </form>
+        </li>
+        <li class="liMypage"><a href="#"><img src="../../image/mypage.png" class="imgMypage"></a></li>
+    </ul>
+</nav>
 
+<div class=”main_content”>
+
+    <!--바디 영역-->
+    <div class="appointment_base_wrap">
+
+        <!-- 카테고리 표시 영역 -->
+        <article class="wrap_appointment_category">
+
+            <!-- 현재 카테고리 표시 문구 -->
+            <div class="show_sub_category_container">
+                <!-- <a th:href="@{/appointment/activityAllList}"> -->
+                <span class="show_sub_category">ACTIVITY </span>
+                <!-- </a> -->
+                <span class="show_sub_category"> > </span>
+                <!-- 세부 카테고리 변경 시 따라서 문구 변경 -->
+                <span class="sub_category_ment" th:text="${activityDto.appo_category}"> appo_category</span>
+            </div>
+
+        </article>
+
+
+        <!-- 메인 컨텐츠 영역-->
+        <article class="wrap_appointment_main" th:each="dto: ${activityDto}">
+
+            <!-- 헤드라인(약속 제목, 작성자) 영역-->
+            <div class="appointment_detail_headline">
+                <div class="appointment_title">
+                    <span class="appointment_title_text" th:text="${dto.appo_title}">appo_title</span>
+                </div>
+                <div class="appointment_host">
+                    <div id="appointment_host_img"></div>
+                    <span class="appointment_host_text" th:text="${dto.appo_host}">appo_host</span>
+                </div>
+            </div>
+
+
+            <!--메인 영역-->
+            <div class="wrap_appointment_detail">
+                <!--메인 영역 윗줄-->
+                <div class="wrap_appointment_detail_row1">
+                    <!-- 반복출력 되도록 타임리프 활용
+                        세션에서 아이디를 받아와서 호스트/ 유저/ 참여자 구분하여 각각 다른 버튼을 보이기
+                        양식 : 폰트 크기 = 기본 1rem
+                              시간 표시 = MM월 dd일 HH:mm
+                        지도 띄우기 추가 필요-->
+
+                    <!-- 약속 상세 컨테이너 (메인 왼쪽)-->
+                    <div class="appointment_detail_container">
+
+                        <div class="appointment_detail_area"><!--약속 상세 테두리-->
+
+                            <div class="appointment_notice">
+                                <span class="appointment_ment"><i class="fa-solid fa-bullhorn"></i>&nbsp;&nbsp;공지사항</span>
+                                <span class="appointment_text" th:if="${dto.appo_notice == null}" id="nothing_text">(공지사항이 없습니다.)</span>
+                                <span class="appointment_text" th:text="${dto.appo_notice}" th:unless="${dto.appo_notice == null}">appo_notice</span>
+                            </div>
+
+                            <div class="appointment_detail_area_row1">
+                                <div class="appointment_date">
+                                    <span class="appointment_ment"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;시간</span>
+                                    <span class="appointment_text" th:text="${#dates.format(dto.appo_time,'MM월 dd일 HH:mm')}"></span>
+                                </div>
+                                <div class="appointment_application">
+                                    <span class="appointment_ment"><i class="fa-solid fa-users"></i>&nbsp;&nbsp;모집 인원</span>
+                                    <span class="appointment_text" th:text="|${dto.appo_min_mem}명 ↔ ${dto.appo_max_mem}명|">n명 ↔ n명</span>
+                                </div>
+                            </div>
+
+                            <div class="appointment_place">
+                                <span class="appointment_ment"><i class="fa-solid fa-map-location-dot"></i>&nbsp;&nbsp;장소</span>
+                                <span class="appointment_text" th:text="${dto.appo_place}">appo_place</span>
+                                <!-- 지도 컨테이너 -->
+                                <div class="appointment_map_container">
+                                    <div class="map_container">
+                                        <!-- 지도 들어갈 공간 -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="appointment_content">
+                                <span class="appointment_ment"><i class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;내용</span>
+                                <span class="appointment_text" th:text="${dto.appo_content}">appo_content</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- 참여자 목록 & 채팅버튼 영역 (메인 오른쪽) -->
+                    <div class="participant_container">
+                        <div class="party_count_ment">
+                            <span th:text="|현재 ${dto.appo_using}명이 참여 중입니다|"></span>
+                        </div>
+
+                        <!-- 참여자 목록 -->
+                        <div class="participant_list_container">
+                            <div class="participant_list_element" th:if="${dto.appo_using == 0}" id="nothing_userlist">
+                                <i class="fa-solid fa-user-xmark"></i>
+                                <span>참여자가 없습니다.</span>
+                            </div>
+                            <!-- appo와 user를 조인, appo_seq로 검색하여 목록 불러오기
+                                프로필 이미지 누르면 해당 프로필 페이지로 이동
+                                0일 때 참여자 없음 표시 th:if 사용
+                            -->
+                            <th:block th:each="inpo : ${userinpoDto}" th:unless="${dto.appo_using == 0}">
+                                <div class="participant_list_element">
+                                    <div class="participant_member_img"></div>
+                                    <span class="participant_member_nick">nickname</span>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--버튼 영역 (메인 아랫줄)-->
+                <div class="wrap_button_container">
+                    <!--약속 상세 괸련 버튼 컨테이너-->
+                    <div class="detail_button_container">
+                        <div class="wrap_button_container_row1">
+                            <!--참여하기-->
+                            <button class="detail_button" id="party_button" th:onclick="@{/appointment/}">약속에 참여하기</button>
+                            <!--목록-->
+                            <button class="detail_button" id="list_button" th:onclick="'history.back()'">목록</button>
+                        </div>
+                        <div class="wrap_button_container_row2">
+                            <!--수정하기-->
+                            <button class="detail_button" id="update_button" th:onclick="@{/appointment/insertActivityForm(appo_seq=${dto.appo_seq})}">수정</button>
+                            <!--삭제하기-->
+                            <button class="detail_button" id="delete_button">삭제</button>
+                        </div>
+                    </div>
+
+                    <!-- 채팅 참여 버튼 컨테이너-->
+                    <div class="chat_button_container">
+                        <!--채팅 참여 버튼-->
+                        <button class="detail_button" id="chat_button" >채팅 참여하기</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</div>
+<footer>
+    <div> Team 2 in FinalProject 2023</div>
+</footer>
 </body>
 </html>

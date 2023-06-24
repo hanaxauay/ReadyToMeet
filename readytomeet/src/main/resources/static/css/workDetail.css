@@ -1,0 +1,494 @@
+* :not(nav, nav ul, nav ul li, nav ul li a, .liLogo, .liMypage, .imgLogo, .imgMypage, .search-container, footer) {
+  box-sizing: border-box;
+}
+  
+  
+/*----------------------- 전체 컨텐츠 ---------------------------------*/
+  
+body{
+  margin: 0 auto;
+    /*드래그 방지*/
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+  
+.appointment_base_wrap {
+  width: 100%;
+  height: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  /* font-size: 0.875rem; 기본 14px */
+  font-family: Inter;
+  
+  overflow: hidden;
+}
+  
+  
+/*------------------------- 카테고리 표시 ----------------------------*/
+  
+/*카테고리 영역 정렬*/
+.wrap_appointment_category{
+  width: 80%;
+  margin: 2% 0 2.5% 0;
+  padding-top: 1%;
+  
+  float: left;
+  
+  overflow: hidden;
+}
+  
+/*----카테고리 표시 문구 설정-----*/
+.show_sub_category_container{
+  width: 30%;
+  margin-left: 4%;
+
+  display: flex;
+  align-items: center;
+  float: left;
+  
+  color: #FF7777;
+  text-align: center;
+}
+/*카테고리 텍스트 설정*/
+.show_sub_category{
+  margin-right: 3%;
+  font-size: 2rem;
+  font-weight: bold;
+}
+/*세부 카테고리 설정*/
+.sub_category_ment{
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+  
+  
+/* ------------------약속 상세 (메인 컨텐츠) 영역-------------------
+  
+  [wrap_appointment_main]
+
+    (헤드라인)
+    > appointment_detail_headline
+      > appointment_title, appointment_host
+
+    (메인)
+    > wrap_appointment_detail
+      (윗줄)
+      > wrap_appointment_detail_row1
+        (왼쪽)
+        > appointment_detail_container
+          > appointment_detail_area
+            > appointment_list_element
+              > appointment_notice
+              > appointment_date, appointment_application, appointment_pay
+              > appointment_place > appointment_map_container
+              > appointment_content
+        (오른쪽)
+        > wrap_participant_container
+         > party_count_ment
+         > participant_list_container
+
+      (아랫줄)
+      > wrap_button_container
+        > detail_button_container
+          > list_button, party_button, update_button, delete_button
+        > chat_button_container
+
+*/
+  
+  
+/* 영역전체 */
+.wrap_appointment_main{
+  width:80%;
+  margin-top: 1.3%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow: hidden;
+}
+  
+/*------- 약속 상세 헤드라인 -------*/
+.appointment_detail_headline {
+  width: 96%;
+  margin: 0 4% 0.8% 4%;
+  padding: 2%;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  background:linear-gradient(45deg, #ff77773e 50%, #ff77775f 0);
+  border : none;
+  border-radius: 0.3125rem; /*5px*/
+
+  overflow: hidden;
+}
+/* 약속 이름 */
+.appointment_title{
+  width: 100%;
+  margin-bottom: 1.5%;
+
+  text-align: left;
+  font-size: 1.85rem;
+  color: #d3455b;
+  font-weight: 500;
+}
+/* 호스트 표시 */
+.appointment_host{
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  font-size: 0.875rem;
+  color: #505050;
+}
+#appointment_host_img{
+  width: 1.6rem;
+  height: 1.6rem;
+  margin: 0 1% 0 0.5%;
+
+  border-radius: 50%;
+  background-color: rgb(170, 170, 170);
+}
+
+  
+/*----------------------약속 상세 영역------------------------*/
+
+/* 약속 상세 영역 전체 */
+.wrap_appointment_detail{
+  width: 100%;
+  margin-left: 2%;
+
+  display: flex;
+  /* justify-content: center; */
+  flex-direction:column;
+}
+/* 약속 상세 & 참여자 목록 컨테이너 */
+.wrap_appointment_detail_row1{
+  width: 100%;
+  display: flex;
+  /* justify-content: center; */
+}
+
+/* 약속 상세 컨테이너 (메인 왼쪽)*/
+.appointment_detail_container{
+  width: 63%;
+  margin-left: 2%;
+}
+.appointment_detail_container i{
+  font-size: 1.025rem;
+  color:  #d3455b;
+}
+
+/*약속상세 영역*/
+.appointment_detail_area {
+  width: 100%;
+  overflow: hidden;
+  padding: 2.5% 5%;
+  float: left;
+    
+  border : 0.125rem solid rgba(128, 128, 128, 0.5);
+  border-radius: 0.3125rem;
+}
+
+/*약속 공지사항*/
+.appointment_notice{
+  width: 100%;
+  margin-bottom: 2%;
+
+  display:flex;
+  flex-direction:column;
+
+  text-align: left;
+}
+
+/*시간, 모집인원, 급여 정렬용*/
+.appointment_detail_area_row1{
+  width: 100%;
+  margin-bottom: 2%;
+  display:flex;
+}
+/*약속 시간*/
+.appointment_date {
+  width: 40%;
+  margin-right: 1%;
+  
+  display:flex;
+  flex-direction:column;
+  float: left;
+
+  text-align: left;
+}
+/*모집인원*/
+.appointment_application{
+  width: 40%;
+  margin-right: 1%;
+  
+  display:flex;
+  flex-direction:column;
+  float: right;
+
+  text-align: left;
+}
+/*임금*/
+.appointment_pay{
+  width: 30%;
+  display:flex;
+  flex-direction:column;
+  float: right;
+
+  text-align: left;
+}
+
+/*약속 장소*/
+.appointment_place {
+  width: 100%;
+  margin-bottom: 2%;
+  display:flex;
+  flex-direction:column;
+
+  text-align: left;
+}
+/*지도 영역*/
+.appointment_map_container {
+  width: 90%;
+  height: 40%;
+  margin: 1.8% auto 0 auto;
+  padding: 1%;
+  text-align: center;
+    
+  background: rgb(131, 131, 131);
+}
+/*임시지도 : 지도 삽입 후 수정 필수*/
+.map_container {
+  width: 300px;
+  height: 300px;
+  
+  background: rgb(53,193,84);
+}
+
+/*약속 내용*/
+.appointment_content{
+  width: 100%;
+  margin-bottom: 2%;
+
+  display:flex;
+  flex-direction:column;
+
+  text-align: left;
+}
+/*내용 텍스트란*/
+.appointment_content .appointment_text{
+  padding: 1.3% 1% 1.3% 1.5%;
+  background: rgb(225, 225, 225);
+  border-radius: 0.3125rem;
+}
+
+  
+/* 약속 요소 텍스트 설정 */
+.appointment_ment{
+  margin: 1.5% 0 0 0;
+  float: left;
+  color: rgb(135, 135, 135);
+  font-size: 0.92rem;
+  font-weight: 600;
+  overflow: hidden;
+}
+.appointment_text {
+  margin: 1.125% 0 0 0;
+  float: left;
+    
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-indent: 0.5rem;
+
+  overflow: hidden;
+}
+
+
+/*--------------------------- 참여자 목록 & 채팅버튼 영역------------------------*/
+  
+/*영역 전체 정렬용*/
+.participant_container{
+  width: 30%;
+  margin: 0 2%;
+}
+
+/*참여자 수 알림*/
+.party_count_ment{
+  margin-bottom: 4%;
+  padding: 2% 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  border-top: 0.3rem double #FF7777;
+  border-bottom: 0.3rem double #FF7777;
+}
+  
+/*참여자 목록 영역*/
+.participant_list_container{
+  width: 100%;
+  padding: 0.8% 0;
+  background: rgb(225, 225, 225);
+  border-radius: 0.3125rem;
+}
+
+/*참여자 1라인 영역*/
+.participant_list_element{
+  width: 100%;
+  /* margin-bottom: 1.2%; */
+  padding: 1.5% 3%;
+
+  display: flex;
+  align-items: center;
+}
+/*참가자 프로필 이미지 영역*/
+.participant_member_img{
+  width: 2rem;
+  height: 2rem;
+  margin-right: 5%;
+
+  border-radius: 50%;
+  background-color: rgb(170, 170, 170);
+}
+/*참가자 닉네임 텍스트 설정*/
+.participant_member_nick{
+  font-size: 1.075rem;
+  font-weight: 500;
+}
+  
+
+
+/*------------------ 기능 버튼 영역 -----------------*/
+/*전체 영역*/
+.wrap_button_container{
+  width: 100%;
+  margin-bottom: 2%;
+  padding-left: 2%;
+  padding-right: 0.7%;
+  display:flex;
+}
+/*약속 상세 버튼 영역*/
+.detail_button_container{
+  width: 65%;
+  display:flex;
+  flex-direction:column;
+}
+/*약속 상세 버튼 윗줄*/
+.wrap_button_container_row1{
+  padding: 0.8% 0.8% 0 0.8%;
+  display:flex;
+}
+/*약속 상세 버튼 아랫줄*/
+.wrap_button_container_row2{
+  padding: 0.8%;
+  display:flex;
+}
+/*채팅 참여 버튼 영역*/
+.chat_button_container{
+  width: 35%;
+  padding-top: 0.5%;
+}
+/* 버튼 디폴트 초기화 */
+.detail_button{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+
+  padding: 0.725% 0;
+  
+  /* border: none; */
+  border: 0.128rem solid #FF7777;
+  border-radius: 0.25rem;
+  /* background-color: #ff77773e; */
+  background-color: white;
+  color: #d3455b;
+  /* 체크배경
+   background-color: #fff;
+  background-image: linear-gradient(-45deg, #ff77773e 25%, transparent 25%, transparent 50%,#ff77773e 50%, #ff77773e 75%, transparent 75%, transparent 100%),
+                    linear-gradient(45deg, #ff77773e 25%, transparent 25%, transparent 50%, #ff77773e 50%, #ff77773e 75%, transparent 75%, transparent 100%);
+  background-size: 2.3rem 2.3rem; */
+}
+.detail_button:active,
+.detail_button:hover,
+.detail_button:focus {
+  outline: 0;
+  background-color: #FF7777;
+  color: white;
+}
+/*각 버튼 설정*/
+#party_button{
+  width: 85%;
+  margin: 0 auto;
+
+  font-size: 1rem;
+  font-weight: 600;
+}
+#list_button{
+  width: 12%;
+  float: right;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+#update_button{
+  width: 12%;
+  margin-right: 1.5%;
+  margin-left: auto;
+  padding: 0.75% 0;
+  font-weight: 500;
+}
+#delete_button{
+  width: 12%;
+  padding: 0.75% 0;
+  float: right;
+  font-weight: 500;
+}
+
+
+#chat_button{
+  width: 80%;
+  margin: 0 auto;
+  padding: 1.3% 0;
+  
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/*-------- 없을 때 안내 문구 --------*/
+#nothing_text{
+    color: rgb(150, 150, 150);
+    font-size: 1rem;
+}
+#nothing_userlist{
+    padding-bottom: 3%;
+
+    display:flex;
+    flex-direction:column;
+
+    text_align: center;
+    color: rgb(180, 180, 180);
+    font-size: 0.875rem;
+}
+#nothing_userlist i{
+    margin: 2% 0 2.5% 0;
+    font-size: 4rem;
+}
+  
+  
+  
+  
+  
+  
+  
+  
