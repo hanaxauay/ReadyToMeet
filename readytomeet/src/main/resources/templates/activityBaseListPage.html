@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
 
-        <link href="../css/common.css" rel="stylesheet" />
-        <link href="../css/activityBaseListPage.css" rel="stylesheet" />
+        <link href="../../css/common.css" rel="stylesheet" />
+        <link href="../../css/activityBaseListPage.css" rel="stylesheet" />
         <title>Document</title>
-        <script src="../js/activityBaseListPage.js"></script>
+        <script src="../../js/activityBaseListPage.js"></script>
         <script>
             function openNewWindow() {
                 window.open("/activityDetail");
@@ -20,11 +20,11 @@
         <!--헤더 영역-->
 <nav> 
     <ul>
-        <li class="liLogo"><a href="/main"><img src="../image/logo.png" class="imgLogo"></a></li>
+        <li class="liLogo"><a href="/main"><img src="../../image/logo.png" class="imgLogo"></a></li>
         <li><a href="/all">All</a> </li>
-        <li><a href="/appointment/activityAllList">ACTIVITY</a> </li>
-        <li><a href="/appointment/vehicleAllList">VEHICLE</a> </li>
-        <li><a href="/appointment/workAllList">WORK</a> </li>
+        <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
+        <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
+        <li><a href="/appointment/workList/all">WORK</a> </li>
         <li><a href="/community/list">Community</a> </li>
         <li>
             <form action="/search" method="GET" class="search-container">
@@ -32,7 +32,7 @@
                 <input type="submit" value="Search">
             </form>
         </li>
-        <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
+        <li class="liMypage"><a href="#"><img src="../../image/mypage.png" class="imgMypage"></a></li>
     </ul>
 </nav>
         <div class=”main_content”>
@@ -43,25 +43,25 @@
             <!--세부 카테고리 영역-->
             <article class="sub_category">
                 <div class="sub_menu">
-                    <a href="/appointment/activityCafeList"><span class="sub_menu_text">카페</span></a>
+                    <a href="/appointment/activityList/cafe"><span class="sub_menu_text">카페</span></a>
                 </div>
                 <div class="sub_menu">
-                    <a href="/appointment/activityRestaurantList"><span class="sub_menu_text">맛집</span></a>
+                    <a href="/appointment/activityList/restaurant"><span class="sub_menu_text">맛집</span></a>
                 </div>
                 <div class="sub_menu">
-                    <a href="/appointment/activitySportList"><span class="sub_menu_text">스포츠</span></a>
+                    <a href="/appointment/activityList/sport"><span class="sub_menu_text">스포츠</span></a>
                 </div>
                 <div class="sub_menu">
-                    <a href="/appointment/activityOutdoorList"><span class="sub_menu_text">야외활동</span></a>
+                    <a href="/appointment/activityList/outdoor"><span class="sub_menu_text">야외활동</span></a>
                 </div>
                 <div class="sub_menu">
-                    <a href="/appointment/activityBuyList"><span class="sub_menu_text">구매</span></a>
+                    <a href="/appointment/activityList/buy"><span class="sub_menu_text">구매</span></a>
                 </div>
                 <div class="sub_menu">
-                    <a href="/appointment/activityGameList"><span class="sub_menu_text">게임</span></a>
+                    <a href="/appointment/activityList/game"><span class="sub_menu_text">게임</span></a>
                 </div>
                 <div class="sub_menu">
-                    <a href="/appointment/activityOthersList"><span class="sub_menu_text">기타</span></a>
+                    <a href="/appointment/activityList/others"><span class="sub_menu_text">기타</span></a>
                 </div>
             </article>
             
@@ -75,9 +75,11 @@
 
                     <!-- 현재 카테고리 표시 문구 -->
                     <div class="show_sub_category_container">
-                        <span class="show_sub_category">ACTIVITY </span>
+<!--                        <a th:href="@{/appointment/activityAllList}">-->
+                            <span class="show_sub_category">ACTIVITY </span>
+<!--                        </a>-->
                         <span class="show_sub_category"> > </span>
-                        <!-- 세부 카테고리 변경 시 따라서 바뀌어야 함 -->
+                        <!-- 세부 카테고리 변경 시 따라서 문구 변경 -->
                         <span class="sub_category_ment" th:text="${subCategoryText}"> subCategoryText</span>
                     </div>
 
@@ -87,7 +89,7 @@
                             <option value="subCategory" th:text="${subCategoryText}" th:if="${subCategoryText == '전체'}"></option>
                             <option value="subCategory" th:text="${subCategoryText}+' 전체'" th:unless="${subCategoryText == '전체'}"></option>
                             <option value="appointmentTitle">약속명</option>
-                            <option value="appointmentPlace">약속장소                       </option>
+                            <option value="appointmentPlace">약속장소</option>
                             <option value="writerNickname">작성자</option>
                         </select>   
                         
@@ -120,8 +122,10 @@
                 <!-- 카테고리 약속 리스트 컨테이너 (메인 왼쪽)-->
                 <div class="appointment_list_container">
                     <!--약속 리스트 / 기본 세부 카테고리:전체 / 페이지 당 13개-->
-                    <!-- 반복출력 되도록 jstl 등 활용 필요
-                        양식 통일 필요 (요소 순서, 시간표시, 글자 색, 크기)
+                    <!-- 반복출력 되도록 타임리프 활용
+                        양식 : 폰트 크기 = 약 14px,
+                              시간 표시 = MM / DD HH:mm (10 이하일 때 십의 자리에 0 추가, 24시간으로 표시)
+                              영역 크기 = 시간 20%, 장소 30%, 제목 30% (마진, 패딩 미포함)
                         커서 올렸을 때 지도 띄우기 추가 필요-->
                     <div class="appointment_list_area">
 
@@ -129,8 +133,8 @@
                         <div class="appointment_list_element">
 
 <!--                            <a href="#" onclick="openNewWindow()">-->
-
-                            <a th:href="@{/appointment/detailActivityPage(appo_seq=${list.appo_seq})}" th:target="_blank">
+                            <!-- 클릭 시 새 창으로 열기 ->  th:target="_blank" -->
+                            <a th:href="@{/appointment/detailActivity(appo_seq=${list.appo_seq})}">
 
                                 <div class="appointment_date">
                                     <span class="appointment_date_text" th:text="${list.appo_date1}"></span>
