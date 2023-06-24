@@ -3,33 +3,40 @@
     outline: none;
 }
 
+b {
+    font-size: large;
+}
 
 /*---------------------------------- main ----------------------------------*/
 .main_wrap {
     display: flex;
-    margin-left: 35%;
-    margin-top: 5%;
+    margin-left: 15%;
+    margin-top: 3%;
+    width: 100%;
+    height: 100%;
+    margin-top: 7%;
 }
 
 .main_wrap .addImage {
     border: 1px solid black;
-    width: 100%;
-    height: 35%;
+    width: 70%;
+    height: 30%;
 }
 
 .inputImg {
-    width: 18%;
+    width: 15%;
+    margin-left: 10%;
 }
 
 .addImage {
-    background-color: light-gray;
+    background-color: lightgray;
     overflow: hidden;
     margin: 0 1% 5% 0;
 }
 
 #submit {
     display: inline-block;
-    margin-left: 87%;
+    margin-left: 65%;
 }
 
 
@@ -44,10 +51,10 @@
 
 .content {
     text-align: center;
-    width: 28%;
-    margin-left: 8%;
-    padding: 0 2.2%;
-    margin-bottom: 1%;
+    width: 15%;
+    margin-left: 0.1%;
+    padding: 0 1%;
+    margin-bottom: 3%;
 }
 
 .textarea {
@@ -69,8 +76,8 @@
 
 .button {
     display: inline-block;
-    margin-left: 65%;
     margin-top: 2%;
+    margin-left: 50%;
 }
 
 
@@ -130,11 +137,22 @@
     width: 100%;
 }
 
+
+.page-content {
+    width: 10%;
+    height: 100%;
+    margin: 5%;
+    margin-top: 0.1%;
+}
+
+
 .place {
     text-align: center;
     border: 1px solid black;
-    margin-top: 5%;
-    height : 20vh;
+    height : 20vw;
+    width: 20vw;
+    padding: 2%;
+    margin-top: 10%;
 }
 
 .place nav ul li a {
@@ -142,4 +160,3 @@
     color: #626262;
     padding: 2px;
 }
-

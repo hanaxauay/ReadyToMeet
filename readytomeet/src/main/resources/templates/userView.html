@@ -27,7 +27,7 @@
                 <input type="submit" value="Search">
             </form>
         </li>
-        <li class="liMypage"><a href="/mypage"><img src="../image/mypage.png" class="imgMypage"></a></li>
+        <li class="liMypage"><a href="/user/View"><img src="../image/mypage.png" class="imgMypage"></a></li>
     </ul>
 </nav>
 
@@ -37,7 +37,7 @@
         <div class="main_wrap">
             <form class="inputImg" method="post" th:action="@{/user/upload}" enctype="multipart/form-data">
                 <div class="addImage" id="image-show">
-<!--                    <img th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>-->
+                    <!--                    <img th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>-->
                     <img src="../image/mypage.png" width="100%" height="100%">
                     <img th:src="@{/download/{filename}(filename=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>
                 </div>
@@ -63,13 +63,15 @@
                 <div class="area">
                     <div class=textarea th:text="${dto?.user_content}"></div>
                     <div class="button">
-                        <input type="button" id="idCard" value="신분증 인증" onclick="showPopup();"/>
-                        <input type="button" value="수정" id="bu" th:onclick="location.href='/user/updateform?user_id=[[${dto?.user_id}]]'">
+                        <input type="button" value="신분증 인증" onclick="showPopup();"/>
+                        <input type="button" value="수정" th:onclick="location.href='/user/updateform?user_id=[[${dto?.user_id}]]'">
                     </div>
                 </div>
+            </div>
 
+            <div class="page-content">
                 <div class="place">
-                    <h2>지금까지 내가 갔던 장소</h2>
+                    <b>지금까지 내가 간 장소</b>
                     <div th:each="share : ${communityList}">
                         <div class="box">
                             <div class="list">
@@ -78,7 +80,7 @@
                                     <a th:text="${share?.share_title}" th:href="@{/community/view(share_seq=${share?.share_seq})}"></a>
                                 </div>
                                 <div th:text="${#dates?.format(share?.share_time, 'yy.MM.dd')}" class="date"></div>
-<!--                                <div th:text="${share?.user_id}" class="writer"></div>-->
+                                <!--                                <div th:text="${share?.user_id}" class="writer"></div>-->
                             </div>
                         </div>
                     </div>
@@ -117,6 +119,8 @@
             </div>
         </div>
     </section>
+
+
 </div>
 </body>
 </html>
