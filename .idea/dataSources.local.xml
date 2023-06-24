@@ -15,5 +15,15 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
+    <data-source name="readytomeet.main/Hibernate" uuid="82bdc65c-39e1-478a-93e4-ace8c9374cb2">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MARIADB" exact-version="0" />
+      <user-name>final02</user-name>
+      <schema-mapping />
+    </data-source>
+    <data-source name="readytomeet.test/Hibernate" uuid="5195c074-f34d-4fab-b209-71ffe22e734c">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MARIADB" exact-version="0" />
+      <user-name>final02</user-name>
+      <schema-mapping />
+    </data-source>
   </component>
 </project>
