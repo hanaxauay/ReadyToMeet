@@ -45,35 +45,39 @@ public class UserController {
             } else {
                 service.upload(dto, null);
             }
-            model.addAttribute("message", "글 작성이 완료되었습니다.");
+            model.addAttribute("message", "사진 업로드 완료되었습니다.");
             model.addAttribute("searchUrl", "/user/View");
             return "message";
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("message", "글 작성 중 오류가 발생했습니다.");
+            model.addAttribute("message", "사진 업로드 중 오류가 발생했습니다.");
             model.addAttribute("searchUrl", "/user/View");
             return "message";
         }
     }
 
 
-    @PostMapping("/update")
+    @GetMapping("/updateform")
+    public String updateform(Model model, String user_id) {
+        model.addAttribute("dto", service.selectOne(user_id));
+        return "userUpdate";
+    }
+
+    @PostMapping("/Update")
     public String update(UserDto dto, Model model) {
         model.addAttribute("message", "회원 정보 수정 완료");
         model.addAttribute("searchUrl", "/user/View");
         if(service.update(dto) > 0) {
             return "message";
         }else{
-            return "redirect:/user/Update?user_id=" + dto.getUser_id();
+            return "redirect:/user/updateform?user_id=" + dto.getUser_id();
         }
 
     }
 
-
-
-//    @GetMapping("/update")
-//    public String gotouserUpdate() {
-//        return "userUpdate";
-//    }
+    @GetMapping("Update")
+    public String gotouserview(){
+        return "userView";
+    }
 
 }

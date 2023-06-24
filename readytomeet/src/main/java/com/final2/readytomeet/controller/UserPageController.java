@@ -2,9 +2,7 @@ package com.final2.readytomeet.controller;
 
 import com.final2.readytomeet.Mapper.UserPageMapper;
 import com.final2.readytomeet.dto.CommunityDto;
-import com.final2.readytomeet.dto.Pagination;
 import com.final2.readytomeet.dto.UserPagination;
-import com.final2.readytomeet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +21,6 @@ public class UserPageController {
     @Autowired
     private UserPageMapper map;
 
-    @Autowired
-    private UserService service;
 
 
     @GetMapping("/list")

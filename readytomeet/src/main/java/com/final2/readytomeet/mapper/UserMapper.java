@@ -19,8 +19,12 @@ public interface UserMapper {
 //    @Insert("INSERT INTO USER VALUES (#{user_id}, #{user_pw}, #{user_phone}, #{user_email}, #{user_name}, #{user_nickname}, #{user_age}, #{user_gender}, #{user_location}, #{user_img}, #{user_path}, #{user_content})")
 //    int upload(UserDto dto);
 
-    @Insert("INSERT INTO IMG VALUES (#{id}, #{user_img}, #{user_path})")
+//    @Insert("INSERT INTO USER VALUES (#{user_img}, #{user_path})")
+//    int upload(UserDto dto);
+
+    @Update(" UPDATE USER SET USER_IMG=#{user_img}, USER_PATH=#{user_path} WHERE USER_ID=#{user_id} ")
     int upload(UserDto dto);
+
 
     @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
     UserDto selectOne(String user_id);

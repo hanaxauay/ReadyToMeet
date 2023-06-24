@@ -38,6 +38,7 @@
             <form class="inputImg" method="post" th:action="@{/user/upload}" enctype="multipart/form-data">
                 <div class="addImage" id="image-show">
 <!--                    <img th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>-->
+                    <img src="../image/mypage.png" width="100%" height="100%">
                     <img th:src="@{/download/{filename}(filename=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>
                 </div>
                 <input type="file" name="file" multiple="multiple">
@@ -60,9 +61,11 @@
 
                 <b>자기 소개</b>
                 <div class="area">
-                    <textarea th:text="${dto?.user_content}"></textarea>
-                    <input type="button" id="idCard" value="신분증 인증" onclick="showPopup();"/>
-                    <input type="button" value="수정" id="bu" onclick="location.href='/user/update'">
+                    <div class=textarea th:text="${dto?.user_content}"></div>
+                    <div class="button">
+                        <input type="button" id="idCard" value="신분증 인증" onclick="showPopup();"/>
+                        <input type="button" value="수정" id="bu" th:onclick="location.href='/user/updateform?user_id=[[${dto?.user_id}]]'">
+                    </div>
                 </div>
 
                 <div class="place">
@@ -115,6 +118,5 @@
         </div>
     </section>
 </div>
-
 </body>
 </html>

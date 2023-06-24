@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>페이지 수정</title>
     <link rel="stylesheet" href="../css/userUpdate.css">
+    <script src="../static/js/joinForm.js"></script>
 
     <script>
         function updateEmailDomain() {
@@ -29,7 +30,7 @@
 <div class="center-box">
     <h1>정보 수정</h1>
     <div class="joinForm">
-        <form>
+        <form action="/user/Update" method="post">
             <div class="joinContent" style="display:none;">
                 <label for="id">아이디</label>
                 <input type="text" id="id" name="id" th:value="${dto?.user_id}" readonly>
@@ -111,7 +112,7 @@
 
 
 
-            <button type="submit" onclick="location.href='/user/View'">수정하기</button>
+            <button type="submit" value="수정">수정하기</button>
         </form>
     </div>
 </div>
