@@ -31,10 +31,10 @@ public class UserController {
     private UserService service;
 
 
-    @GetMapping("/View")
+    @GetMapping("/view")
     public String selectOne(Model model, String user_id) {
         model.addAttribute("dto", service.selectOne(user_id));
-        return "userView";
+        return "userview";
     }
 
     @PostMapping("/upload")
@@ -46,12 +46,12 @@ public class UserController {
                 service.upload(dto, null);
             }
             model.addAttribute("message", "사진 업로드 완료되었습니다.");
-            model.addAttribute("searchUrl", "/user/View");
+            model.addAttribute("searchUrl", "/user/view");
             return "message";
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("message", "사진 업로드 중 오류가 발생했습니다.");
-            model.addAttribute("searchUrl", "/user/View");
+            model.addAttribute("searchUrl", "/user/view");
             return "message";
         }
     }
@@ -60,10 +60,10 @@ public class UserController {
     @GetMapping("/updateform")
     public String updateform(Model model, String user_id) {
         model.addAttribute("dto", service.selectOne(user_id));
-        return "userUpdate";
+        return "userupdate";
     }
 
-    @PostMapping("/Update")
+    @PostMapping("/update")
     public String update(UserDto dto, Model model) {
         model.addAttribute("message", "회원 정보 수정 완료");
         model.addAttribute("searchUrl", "/user/View");
@@ -75,7 +75,7 @@ public class UserController {
 
     }
 
-    @GetMapping("Update")
+    @GetMapping("update")
     public String gotouserview(){
         return "userView";
     }

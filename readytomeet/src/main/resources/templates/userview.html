@@ -38,9 +38,8 @@
         <div class="main_wrap">
             <form class="inputImg" method="post" th:action="@{/user/upload}" enctype="multipart/form-data">
                 <div class="addImage" id="image-show">
-                    <!--                    <img th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>-->
-                    <img src="../image/mypage.png" width="100%" height="100%">
-                    <img th:src="@{/download/{filename}(filename=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>
+                    <img th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>
+<!--                    <img th:src="@{download/{filename}(filename=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>-->
                 </div>
                 <input type="file" name="file" multiple="multiple">
                 <input type="submit" id="submit" value="전송">
@@ -97,7 +96,7 @@
                                     <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.prevBlock})}" aria-label="Previous" th:text="'<'"></a>
                                 </li>
                                 <th:block th:with="start = ${pagination?.startPage}, end = ${pagination?.endPage}">
-                                    <li th:if="${not #strings.isEmpty(user.id)}" th:each="pageButton : ${#numbers.sequence(start, end)}">
+                                    <li th:each="pageButton : ${#numbers?.sequence(start, end)}">
                                         <a class="page-link"
                                            th:href="@{list?page={page} (page = ${pageButton})}"
                                            th:text=${pageButton}
