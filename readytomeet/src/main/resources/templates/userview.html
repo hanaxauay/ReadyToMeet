@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
-    <link rel="stylesheet" href="../css/userView.css">
+    <link rel="stylesheet" href="../css/userview.css">
     <link rel="stylesheet" href="../css/common.css">
 
 
@@ -27,7 +28,7 @@
                 <input type="submit" value="Search">
             </form>
         </li>
-        <li class="liMypage"><a href="/user/View"><img src="../image/mypage.png" class="imgMypage"></a></li>
+        <li class="liMypage"><a href="/user/view"><img src="../image/mypage.png" class="imgMypage"></a></li>
     </ul>
 </nav>
 
@@ -69,18 +70,19 @@
                 </div>
             </div>
 
+
             <div class="page-content">
                 <div class="place">
                     <b>지금까지 내가 간 장소</b>
                     <div th:each="share : ${communityList}">
                         <div class="box">
                             <div class="list">
-                                <div th:text="${share?.share_category}" class="title"></div>
-                                <div class="content1">
-                                    <a th:text="${share?.share_title}" th:href="@{/community/view(share_seq=${share?.share_seq})}"></a>
+                                <div th:text="${share.share_category}" class="title"></div>
+                                <div class="content">
+                                    <a th:text="${share.share_title}" th:href="@{/community/view(share_seq=${share.share_seq})}"></a>
                                 </div>
-                                <div th:text="${#dates?.format(share?.share_time, 'yy.MM.dd')}" class="date"></div>
-                                <!--                                <div th:text="${share?.user_id}" class="writer"></div>-->
+                                <div th:text="${#dates.format(share.share_time, 'yy.MM.dd')}" class="date"></div>
+<!--                                <div th:text="${share.user_id}" class="writer"></div>-->
                             </div>
                         </div>
                     </div>
@@ -89,15 +91,13 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item">
-                                    <a class="page-link" th:href="@{list?page=1}" aria-label="Previous" th:text="'<<'">
-                                    </a>
+                                    <a class="page-link" th:href="@{list?page=1}" aria-label="Previous" th:text="'<<'"></a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.prevBlock})}" aria-label="Previous"  th:text="'<'">
-                                    </a>
+                                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.prevBlock})}" aria-label="Previous" th:text="'<'"></a>
                                 </li>
                                 <th:block th:with="start = ${pagination?.startPage}, end = ${pagination?.endPage}">
-                                    <li th:each="pageButton : ${numbers?.sequence(start, end)}">
+                                    <li th:if="${not #strings.isEmpty(user.id)}" th:each="pageButton : ${#numbers.sequence(start, end)}">
                                         <a class="page-link"
                                            th:href="@{list?page={page} (page = ${pageButton})}"
                                            th:text=${pageButton}
@@ -105,18 +105,17 @@
                                     </li>
                                 </th:block>
                                 <li class="page-item">
-                                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.nextBlock})}" aria-label="Next"  th:text="'>'">
-                                    </a>
+                                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.nextBlock})}" aria-label="Next"  th:text="'>'"></a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" th:href="@{?page={page} (page = ${pagination?.totalPageCnt})}" aria-label="Previous" th:text="'>>'">
-                                    </a>
+                                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.totalPageCnt})}" aria-label="Next"  th:text="'>>'"></a>
                                 </li>
                             </ul>
                         </nav>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
