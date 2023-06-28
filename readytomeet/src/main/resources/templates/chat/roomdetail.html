@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Websocket ChatRoom</title>
   <!-- Required meta tags -->
@@ -32,14 +32,15 @@
       {{ message.user_nickname }} - {{ message.message }}
     </li>
   </ul>
-  <div></div>
+
 </div>
 <!-- JavaScript -->
 <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
 <script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
 <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
-<script>
+
+<script th:inline="javascript">
   var sock = new SockJS("/ws-stomp");
   var ws = Stomp.over(sock);
   var reconnect = 0;
@@ -48,21 +49,27 @@
     data: {
       roomId: '',
       room: {},
-      sender: '',
+      sender: '', // 수정된 부분
       message: '',
       messages: []
     },
     created() {
       this.roomId = localStorage.getItem('wschat.roomId');
-      this.sender = localStorage.getItem('wschat.sender');
+      this.sender = [[${loginUser.user_nickname}]];
       this.findRoom();
+      this.getChatMessages();
     },
     methods: {
       findRoom: function() {
         axios.get('/chat/room/' + this.roomId).then(response => {
           this.room = response.data;
         });
+        axios.get('/chats/room/' + this.roomId).then(response => {
+          this.messages = response.data;
+        });
       },
+
+
       sendMessage: function() {
         ws.send("/pub/chat/message", {}, JSON.stringify({
           type: 'TALK',
@@ -73,12 +80,21 @@
         this.message = '';
       },
       recvMessage: function(recv) {
-        this.messages.unshift({
-          "type": recv.type,
-          "user_nickname": recv.type == 'ENTER' ? '[Notification]' : recv.user_nickname,
-          "message": recv.message
-        })
+        if (recv.type == 'ENTER') {
+          this.messages.unshift({
+            "type": recv.type,
+            "user_nickname": '[Notification]',
+            "message": this.sender + '님이 입장하셨습니다.' // 수정된 부분
+          });
+        } else {
+          this.messages.unshift({
+            "type": recv.type,
+            "user_nickname": recv.user_nickname,
+            "message": recv.message
+          });
+        }
       }
+
     }
   });
 

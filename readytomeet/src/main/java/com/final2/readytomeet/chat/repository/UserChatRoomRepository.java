@@ -28,4 +28,10 @@ public class UserChatRoomRepository {
     public List<ChatRoom> getChatRoomsByUserNickname(String nickname) {
         return userChatRoomMapper.getChatRoomsByUserNickname(nickname);
     }
+
+    public void insertUserChatRoom(String user_nickname, String room_id) {
+        userChatRoomMapper.insertUserChatRoom(user_nickname, room_id);
+    }
+
+
 }

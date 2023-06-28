@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Websocket Chat</title>
     <meta charset="utf-8">
@@ -49,7 +49,7 @@
 <div class="container" id="app" v-cloak>
     <div class="row">
         <div class="col-md-12">
-            <h3>Chat Room List</h3>
+            <h3>나의 채팅 리스트</h3>
         </div>
     </div>
     <div class="input-group">
@@ -62,10 +62,23 @@
         </div>
     </div>
     <ul class="list-group">
-        <li class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.room_id" v-on:click="enterRoom(item.room_id)">
+        <li class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.room_id"
+            v-on:click="enterRoom(item.room_id, item.room_name)">
             {{ item.room_name }}
         </li>
     </ul>
+
+<!--        <ul class="list-group" th:each="userChatRoom : ${userChatRooms}">-->
+<!--        <li class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.room_id"-->
+<!--            v-on:click="enterRoom(item.room_id, item.room_name)" th:text="${userChatRoom.room_name}"> [[${"userChatRooms.room_name"}]]-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--    <ul class="list-group">-->
+<!--        <li class="list-group-item list-group-item-action" th:each="userChatRoom : ${userChatRooms}" th:text="${userChatRoom.room_name}" v-on:click="enterRoom(userChatRoom.room_id, userChatRoom.room_name)"></li>-->
+<!--    </ul>-->
+
+
+
 </div>
 <!-- JavaScript -->
 <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
@@ -88,30 +101,34 @@
             },
             createRoom: function() {
                 if (this.room_name === "") {
-                    alert("Please enter a room name.");
+                    alert("채팅방 이름을 입력하세요");
                     return;
                 } else {
                     var params = new URLSearchParams();
                     params.append("name", this.room_name);
                     axios.post('/chat/room', params)
                         .then(response => {
-                            alert("Room " + response.data.room_name + " created successfully.");
+                            alert("Room " + response.data.room_name + " 채팅방이 생성되었습니다.");
                             this.room_name = '';
                             this.findAllRoom();
                         })
                         .catch(response => {
-                            alert("Failed to create the chat room.");
+                            alert("채팅방 생성에 실패했습니다.");
                         });
                 }
             },
-            enterRoom: function(roomId) {
-                var sender = prompt('Enter your nickname.');
-                if (sender !== "") {
+            enterRoom: function(roomId, roomName) {
+                var sender = localStorage.getItem('wschat.sender');
+                if (!sender) {
+                    sender = prompt('닉네임을 입력하세요');
                     localStorage.setItem('wschat.sender', sender);
-                    localStorage.setItem('wschat.roomId', roomId);
-                    location.href = "/chat/room/enter/" + roomId;
                 }
+                localStorage.setItem('wschat.roomId', roomId);
+                window.location.href = "/chat/room/" + roomId;
             }
+
+
+
         }
     });
 </script>

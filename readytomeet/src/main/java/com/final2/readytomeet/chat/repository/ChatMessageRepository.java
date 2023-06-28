@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.final2.readytomeet.chat.mapper.ChatMessageMapper;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class ChatMessageRepository {
@@ -13,6 +15,10 @@ public class ChatMessageRepository {
 
     public void saveChatMessage(ChatMessage chatMessage) {
         chatMessageMapper.saveChatMessage(chatMessage);
+    }
+
+    public List<ChatMessage> getChatMessagesByRoomId(String room_id) {
+        return chatMessageMapper.getChatMessagesByRoomId(room_id);
     }
 }
 

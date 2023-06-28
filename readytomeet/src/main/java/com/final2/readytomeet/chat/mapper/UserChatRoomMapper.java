@@ -19,4 +19,11 @@ public interface UserChatRoomMapper {
 
     @Select("SELECT r.* FROM CHAT_ROOM r INNER JOIN USER_CHAT_ROOM ucr ON r.ROOM_ID = ucr.ROOM_ID WHERE ucr.USER_NICKNAME = #{nickname}")
     List<ChatRoom> getChatRoomsByUserNickname(String nickname);
+
+
+    @Insert("INSERT INTO USER_CHAT_ROOM (USER_NICKNAME, ROOM_ID) VALUES (#{user_nickname}, #{room_id})")
+    void insertUserChatRoom(@Param("user_nickname") String user_nickname, @Param("room_id") String room_id);
+
+    @Select("SELECT COUNT(*) FROM USER_CHAT_ROOM WHERE USER_NICKNAME = #{nickname} AND ROOM_ID = #{room_id}")
+    int isUserJoined(@Param("nickname") String nickname, @Param("room_id") String room_id);
 }

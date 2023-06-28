@@ -8,8 +8,6 @@ import lombok.Setter;
 import java.sql.Timestamp;
 import java.time.Instant;
 
-
-
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatMessage {

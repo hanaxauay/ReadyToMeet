@@ -11,6 +11,7 @@ import com.final2.readytomeet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.net.MalformedURLException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -38,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/upload")
-    public String upload(UserDto dto, Model model, @RequestParam(name = "file", required = false) MultipartFile file){
+    public String upload(UserDto dto, Model model, @RequestParam(name = "file", required = false) MultipartFile file) {
         try {
             if (file != null && !file.isEmpty()) {
                 service.upload(dto, file);
@@ -67,17 +69,18 @@ public class UserController {
     public String update(UserDto dto, Model model) {
         model.addAttribute("message", "회원 정보 수정 완료");
         model.addAttribute("searchUrl", "/user/View");
-        if(service.update(dto) > 0) {
+        if (service.update(dto) > 0) {
             return "message";
-        }else{
+        } else {
             return "redirect:/user/updateform?user_id=" + dto.getUser_id();
         }
 
     }
 
     @GetMapping("Update")
-    public String gotouserview(){
+    public String gotouserview() {
         return "userView";
     }
+
 
 }

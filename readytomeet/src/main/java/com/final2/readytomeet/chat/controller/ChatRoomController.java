@@ -1,6 +1,10 @@
 package com.final2.readytomeet.chat.controller;
 
 
+import com.final2.readytomeet.chat.dto.ChatMessage;
+import com.final2.readytomeet.chat.mapper.ChatMessageMapper;
+import com.final2.readytomeet.chat.mapper.UserChatRoomMapper;
+import com.final2.readytomeet.chat.repository.ChatMessageRepository;
 import com.final2.readytomeet.chat.repository.ChatRoomRepository;
 import com.final2.readytomeet.chat.dto.ChatRoom;
 import com.final2.readytomeet.chat.repository.UserChatRoomRepository;
@@ -11,57 +15,82 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/chat")
 public class ChatRoomController {
 
     private final ChatRoomRepository chatRoomRepository;
+    private final UserChatRoomRepository userChatRoomRepository;
+    private final ChatMessageRepository chatMessageRepository;
+    private final UserChatRoomMapper userChatRoomMapper;
+    private final ChatMessageMapper chatMessageMapper;
 
     // 채팅 리스트 화면
-    @GetMapping("/room")
-    public String rooms(Model model) {
-        return "/chat/room";
+    @GetMapping("/chat/room")
+    public String rooms(Model model, HttpSession session) {
+        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
+        String nickname = loginUser.getUser_nickname();
+        List<ChatRoom> userChatRooms = userChatRoomRepository.getChatRoomsByUserNickname(nickname);
+        model.addAttribute("userChatRooms", userChatRooms);
+        model.addAttribute("nickname", nickname); // Add this line
+        return "chat/room";
     }
+
     // 모든 채팅방 목록 반환
-    @GetMapping("/rooms")
+    @GetMapping("/chat/rooms")
     @ResponseBody
-    public List<ChatRoom> room() {
-        return chatRoomRepository.findAllRoom();
+    public List<ChatRoom> room(HttpSession session) {
+        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
+        String nickname = loginUser.getUser_nickname();
+        return userChatRoomRepository.getChatRoomsByUserNickname(nickname);
     }
+
     // 채팅방 생성
-    @PostMapping("/room")
+    @PostMapping("/chat/room")
     @ResponseBody
     public ChatRoom createRoom(@RequestParam String name) {
         return chatRoomRepository.createChatRoom(name);
     }
+
     // 채팅방 입장 화면
-    @GetMapping("/room/enter/{room_id}")
-    public String roomDetail(Model model, @PathVariable String room_id) {
+    @GetMapping("/chat/room/{room_id}")
+    public String roomDetail(Model model, @PathVariable String room_id, HttpSession session) {
+        ChatRoom chatRoom = new ChatRoom();
+        chatRoom.setRoom_id(room_id);
         model.addAttribute("room_id", room_id);
-        return "/chat/roomdetail";
+
+
+        // 사용자를 채팅방에 추가
+        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
+        String nickname = loginUser.getUser_nickname();
+        // 이미 채팅방에 참여한 사용자인지 확인
+        int isUserJoined = userChatRoomMapper.isUserJoined(nickname, room_id);
+        if (isUserJoined ==0) {
+            // 처음 참여하는 사용자일 경우에만 채팅방에 추가
+            userChatRoomRepository.insertUserChatRoom(nickname, room_id);
+        }
+        // 로그인한 사용자의 닉네임도 모델에 추가
+        model.addAttribute("loginUser", loginUser);
+
+
+
+        return "chat/roomdetail";
     }
-    // 특정 채팅방 조회
-    @GetMapping("/room/{room_id}")
+
+    // 모든 채팅 목록 반환
+    @GetMapping("/chats/room/{room_id}")
     @ResponseBody
-    public ChatRoom roomInfo(@PathVariable String room_id) {
-        return chatRoomRepository.findRoomById(room_id);
+    public List<ChatMessage> getChats(Model model, @PathVariable String room_id,HttpSession session) {
+        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
+        String nickname = loginUser.getUser_nickname();
+        return chatMessageMapper.getChatMessagesByRoomId(room_id);
+
     }
+
 }
 
-    //@GetMapping("/room")
-//    public String getUserChatRooms(Model model, HttpSession session) {
-//        // 세션에서 로그인한 사용자 정보 가져오기
-//        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
-//        String nickname = loginUser.getUser_nickname();
-//
-//        // 사용자의 채팅방 목록 조회
-//        List<ChatRoom> userChatRooms = userChatRoomRepository.getChatRoomsByUserNickname(nickname);
-//
-//        // 채팅방 목록을 모델에 추가
-//        model.addAttribute("userChatRooms", userChatRooms);
-//        return "chat/room";
-//    }
+
 
