@@ -38,7 +38,7 @@ public class UserPageController {
         model.addAttribute("pagination", pagination);
         model.addAttribute("pageNumbers", IntStream.rangeClosed(pagination.getStartPage(), pagination.getEndPage()).boxed().collect(Collectors.toList()));
 
-        return "userView";
+        return "userview";
     }
 
 }
