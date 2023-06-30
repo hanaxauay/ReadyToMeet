@@ -1,6 +1,5 @@
 package com.final2.readytomeet.Mapper;
 
-import com.final2.readytomeet.dto.AppoDto;
 import com.final2.readytomeet.dto.CommunityDto;
 import com.final2.readytomeet.dto.UserDto;
 import org.apache.ibatis.annotations.*;
@@ -25,12 +24,26 @@ public interface UserMapper {
     @Update(" UPDATE USER SET USER_IMG=#{user_img}, USER_PATH=#{user_path} WHERE USER_ID=#{user_id} ")
     int upload(UserDto dto);
 
+    // 회원 프로필 이미지 변경
+    @Update(" UPDATE USER SET user_img=#{user_img} WHERE user_id=#{user_id} ")
+    void updateUimage(UserDto dto);
 
     @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
-    UserDto selectOne(String user_id);
+    UserDto readUser(String user_id);
 
     @Update(" UPDATE USER SET USER_NICKNAME=#{user_nickname}, USER_PW=#{user_pw}, USER_PHONE=#{user_phone}, USER_EMAIL=#{user_email}, USER_LOCATION=#{user_location}, USER_CONTENT=#{user_content} WHERE USER_ID=#{user_id} ")
-    int update(UserDto dto);
+    void updateUser(UserDto dto);
+
+    @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} and USER_PW=#{user_pw} ")
+    void  readUserWithIDPW(String user_id, String user_pw);
+
+
+
+
+
+
+
+
 
     @Select("SELECT COUNT(*) AS TOTAL_COUNT FROM SHARE")
     int findAllCnt();
