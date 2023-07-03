@@ -94,6 +94,7 @@ public class AppoController {
     //Activity 약속 생성
     @PostMapping("/insertActivity")
     public String insertActivity(AppoDto appodto){
+
         if(apposervice.insertActivity(appodto) > 0){
             //성공 시 해당 약속 상세페이지 이동
             return "redirect:/appointment/detailActivityPage";
@@ -123,6 +124,13 @@ public class AppoController {
         }
     }
 
+    //Activity 약속 삭제
+    @GetMapping("/deleteActivity")
+    public String deleteActivity(int appo_seq){
+        //삭제 시 필요한 메세지 추가
+        apposervice.deleteAppointment(appo_seq);
+        return "activityList/all";
+    }
 
 
     //----------------Vehicle 페이지 관련 컨트롤-----------------
@@ -186,14 +194,22 @@ public class AppoController {
 
     //Vehicle 약속 수정 (예정)
     @PostMapping("/updateVehicle")
-    public String updateVehicle(AppoDto appodto){
+    public String updateVehicle(AppoDto appodto, int appo_seq){
         if(apposervice.updateVehicle(appodto) > 0){
             //성공 시 해당 약속 상세페이지 이동
-            return "redirect:/appointment/detailVehiclePage";
+            return "redirect:/appointment/detailVehiclePage(appo_seq)";
         }else {
             //실패 시 처리 작업 필요하면 추가
             return "redirect:/appointment/ ";
         }
+    }
+
+    //Vehicle 약속 삭제
+    @GetMapping("/deleteVehicle")
+    public String deleteVehicle(int appo_seq){
+        //삭제 시 필요한 메세지 추가
+        apposervice.deleteAppointment(appo_seq);
+        return "vehicleList/all";
     }
 
 
@@ -255,7 +271,7 @@ public class AppoController {
         return "workWrite";
     }
 
-    //Vehicle 약속 수정 (예정)
+    //Work 약속 수정 (예정)
     @PostMapping("/updateWork")
     public String updateWork(AppoDto appodto){
         if(apposervice.updateWork(appodto) > 0){
@@ -266,4 +282,16 @@ public class AppoController {
             return "redirect:/appointment/ ";
         }
     }
+
+    //Work 약속 삭제
+    @GetMapping("/deleteWork")
+    public String deleteWork(int appo_seq){
+        //삭제 시 필요한 메세지 추가
+        apposervice.deleteAppointment(appo_seq);
+        return "workList/all";
+    }
+
+
+
+
 }
