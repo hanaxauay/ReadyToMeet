@@ -5,7 +5,7 @@
 /*----------------------- 전체 컨텐츠 ---------------------------------*/
 body{
     margin: 0 auto;
-}
+  }
 .appointment_form_wrap {
     width: 100%;
     height: 100%;
@@ -264,7 +264,7 @@ legend {
     resize: none;
     border: 0;
     border-radius: 0.3125rem;
-    background-color: rgb(240, 240, 240);
+    background-color: (240, 240, 240);
     font-size: 1rem;
 }
 
@@ -307,9 +307,9 @@ legend {
 .inputform_button button:hover,
 .inputform_button button:focus {
 
-    background-color: #FF7777;
-    outline: 0;
-    color: white;
+  background-color: #FF7777;
+  outline: 0;
+  color: white;
 }
 
 

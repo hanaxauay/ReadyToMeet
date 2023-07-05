@@ -130,4 +130,9 @@ public class AppoServiceImpl implements AppoService {
     public int updateWork(AppoDto appodto) {
         return apporepository.updateWork(appodto);
     }
+
+    @Override
+    public int deleteAppointment(int appo_seq) {
+        return apporepository.deleteAppointment(appo_seq);
+    }
 }

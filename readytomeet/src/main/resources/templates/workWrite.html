@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/e66bbc4b5b.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="../css/workWrite.css">
+    <link rel="stylesheet" href="../css/workwrite.css">
     <link rel="stylesheet" href="../css/common.css">
 
     <title>work생성페이지</title>
@@ -55,7 +55,7 @@
                 <div class="form_row1">
                     <!--카테고리 설정-->
                     <div class="inputform_subcategory">
-                        <select name="subcategory" id="select_subcategory">
+                        <select name="subcategory" id="select_subcategory" required>
                             <option value="">세부 카테고리&nbsp;</option>
                             <option value="유급">유급</option>
                             <option value="무급">무급</option>
@@ -66,7 +66,7 @@
                     <div class="inputform_title">
                         <i class="fa-solid fa-quote-left"></i>
                         <spen class="form_ment"> 약속명 :&nbsp;
-                            <input type="text" name="write_title" placeholder="제목">
+                            <input type="text" name="write_title" placeholder="제목" required>
                         </spen>
                         <i class="fa-solid fa-quote-right"></i>
                     </div>
@@ -85,7 +85,7 @@
                     <div class="select_date">
                         <label>
                                 <span class="form_ment">날짜 :
-                                    <input type="date" name="write_date" min="2023-01-01" max="2024-01-01">
+                                    <input type="date" name="write_date" min="2023-01-01" max="2024-01-01" required>
                                 </span>
                         </label>
                     </div>
@@ -93,7 +93,7 @@
                     <div class="select_time_type">
                         <span class="form_ment">시간 : </span>
                         <label title="참여자들이 상의하여 자유롭게 시간을 결정하기 위한 옵션입니다.">
-                            <input type="radio" name="option_time" value="allday"> All Day
+                            <input type="radio" name="option_time" value="allday" required> All Day
                             <input type="hidden" name="write_time" value="00:00">
                         </label>
                         <div class="form_row2">
@@ -124,7 +124,8 @@
                 <!--카테고리 유급 설정 시 나타나도록 하면 굿-->
                 <fieldset class="inputform_pay">
                     <legend>&nbsp;<i class="fa-solid fa-plus"></i> 지급할 금액을 정해주세요!&nbsp;</legend>
-                    <span class="form_ment">임금(시급) :<input type="number" name="select_pay" step="10" value="9160" title="현재 최저시급은 9160원입니다.">&nbsp;원</span>
+                    <span class="form_ment">임금(시급) :<input type="number" name="select_pay" step="10" value="9160"
+                                                           title="현재 최저시급은 9160원입니다." required>&nbsp;원</span>
                 </fieldset>
 
                 <!--약속장소 설정-->

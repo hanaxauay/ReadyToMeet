@@ -81,7 +81,7 @@ legend {
     justify-content: center;
     text-align: center;
 }
-/*---------- 세부 카테고리 ---------*/
+/*----세부 카테고리----*/
 .inputform_subcategory{
     width: 15%;
     float: left;
@@ -95,7 +95,7 @@ legend {
     color: rgb(50, 50, 50);
 }
 
-/*-------------- 약속명 ----------*/
+/*-------약속명------*/
 .inputform_title{
     width: 85%;
     padding-left: 0.8%;
@@ -193,7 +193,7 @@ legend {
 .inputform_personnel span{
     margin-right: 10%;
 }
-.inputform_personnel input[type=number]{
+.inputform_personnel input{
     margin-left: 1%;
     padding: 0.5% 1%;
 
@@ -203,27 +203,6 @@ legend {
     color: rgb(50, 50, 50);
 }
 
-
-/*----------- 임금 ---------*/
-.inputform_pay{
-    margin-top: 1.5%;
-    padding: 1.3% 3% 2% 3%;
-    border: 0.125rem solid rgba(128, 128, 128, 0.5);
-    border-radius: 0.3125rem;
-}
-.inputform_pay span{
-    margin-right: 10%;
-}
-.inputform_pay input{
-    width: 15%;
-    margin-left: 1%;
-    padding: 0.5% 1%;
-
-    outline: 0;
-    border: 0.125rem solid rgba(128, 128, 128, 0.5);
-    border-radius: 0.3125rem;
-    color: rgb(50, 50, 50);
-}
 
 /*------------ 약속장소 -----------*/
 .inputform_place {
