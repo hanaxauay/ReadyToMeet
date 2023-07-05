@@ -12,7 +12,8 @@ public interface ChatMessageMapper {
     @Options(useGeneratedKeys = true, keyProperty = "messageId")
     void saveChatMessage(ChatMessage chatMessage);
 
-    @Select("SELECT * FROM CHAT_MESSAGE WHERE ROOM_ID = #{room_id} ORDER BY TIMESTAMP DESC")
+    @Select("SELECT * FROM CHAT_MESSAGE WHERE ROOM_ID = #{room_id} ORDER BY TIMESTAMP")
     List<ChatMessage> getChatMessagesByRoomId(@Param("room_id") String room_id);
+
 
 }

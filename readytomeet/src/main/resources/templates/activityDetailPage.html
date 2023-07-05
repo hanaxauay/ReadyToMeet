@@ -96,7 +96,7 @@
                             <div class="appointment_detail_area_row1">
                                 <div class="appointment_date">
                                     <span class="appointment_ment"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;시간</span>
-                                    <span class="appointment_text" th:text="${#dates.format(dto.appo_time,'MM월 dd일 HH:mm')}"></span>
+                                    <span class="appointment_text" th:text="${dto.appo_time}">[날짜 및 시간]</span>
                                 </div>
                                 <div class="appointment_application">
                                     <span class="appointment_ment"><i class="fa-solid fa-users"></i>&nbsp;&nbsp;모집 인원</span>
@@ -162,7 +162,7 @@
                         </div>
                         <div class="wrap_button_container_row2">
                             <!--수정하기-->
-                            <button class="detail_button" id="update_button" th:onclick="@{/appointment/insertActivityForm(appo_seq=${dto.appo_seq})}">수정</button>
+                            <button class="detail_button" id="update_button" th:onclick="|location.href='@{/appointment/updateActivityForm}'|">수정</button>
                             <!--삭제하기-->
                             <button class="detail_button" id="delete_button">삭제</button>
                         </div>

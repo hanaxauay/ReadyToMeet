@@ -26,8 +26,8 @@ public class ChatRoomRepository {
         return chatRoomMapper.findAllRoom();
     }
 
-    public ChatRoom findRoomById(String id) {
-        return chatRoomMapper.findRoomById(id);
+    public ChatRoom getChatRoomById(String room_id) {
+        return chatRoomMapper.getChatRoomById(room_id);
     }
 
 

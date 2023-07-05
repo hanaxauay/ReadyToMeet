@@ -25,10 +25,10 @@ public class TestController {
     return "workBaseListPage";
   }
 
-  @GetMapping("/main")
-  public String gotoMain(){
-    return "main";
-  }
+//  @GetMapping("/main")
+//  public String gotoMain(){
+//    return "main";
+//  }
 
 //  @GetMapping("/chat")
 //  public String gotoChat(){

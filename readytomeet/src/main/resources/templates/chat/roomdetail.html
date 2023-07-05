@@ -11,14 +11,55 @@
     [v-cloak] {
       display: none;
     }
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    .chat-header {
+      padding: 10px;
+      text-align: center;
+
+      color: #FF7777; /* 변경: 글자색상 */
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 60px;
+    }
+    .chat-messages li {
+      margin-bottom: 10px;
+      word-break: break-all;
+    }
+    .chat-input {
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
   </style>
 </head>
 <body>
 <div class="container" id="app" v-cloak>
-  <div>
-    <h2>{{ room.room_name }}</h2>
-  </div>
-  <div class="input-group">
+  <div class="chat-container">
+    <div class="chat-header">
+      <h3 th:text="${chatRoom1.room_name}"></h3>
+    </div>
+<!--  <div class="input-group mt-5">-->
+<!--    <div class="input-group-prepend">-->
+<!--      <label class="input-group-text">Message</label>-->
+<!--    </div>-->
+<!--    <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">-->
+<!--    <div class="input-group-append">-->
+<!--      <button class="btn btn-primary" type="button" @click="sendMessage">Send</button>-->
+<!--    </div>-->
+<!--  </div>-->
+  <ul class="list-group chat-messages">
+    <li class="list-group-item" v-for="message in messages">
+      {{ message.user_nickname }} - {{ message.message }}
+      <span style="float: right">{{ formatDate(message.timestamp) }}</span>
+    </li>
+  </ul>
+  <div class="chat-input">
+  <div class="input-group" >
     <div class="input-group-prepend">
       <label class="input-group-text">Message</label>
     </div>
@@ -27,12 +68,8 @@
       <button class="btn btn-primary" type="button" @click="sendMessage">Send</button>
     </div>
   </div>
-  <ul class="list-group">
-    <li class="list-group-item" v-for="message in messages">
-      {{ message.user_nickname }} - {{ message.message }}
-    </li>
-  </ul>
-
+  </div>
+  </div>
 </div>
 <!-- JavaScript -->
 <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
@@ -51,7 +88,8 @@
       room: {},
       sender: '', // 수정된 부분
       message: '',
-      messages: []
+      messages: [],
+      timestamp: ''
     },
     created() {
       this.roomId = localStorage.getItem('wschat.roomId');
@@ -60,13 +98,35 @@
       this.getChatMessages();
     },
     methods: {
+      scrollToBottom: function() {
+        var chatContainer = document.querySelector('.chat-messages');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      },
       findRoom: function() {
         axios.get('/chat/room/' + this.roomId).then(response => {
           this.room = response.data;
         });
         axios.get('/chats/room/' + this.roomId).then(response => {
           this.messages = response.data;
+          // 가장 최근 메시지를 가져와서 표시
+          if (this.messages.length > 0) {
+            var latestMessage = this.messages[this.messages.length - 1];
+            this.latestMessage = latestMessage.message;
+            this.$nextTick(this.scrollToBottom);
+          }
         });
+      },
+      formatDate: function(timestamp) {
+        var date = new Date(timestamp);
+        var options = {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric'
+        };
+        return date.toLocaleString('ko-KR', options);
       },
 
 
@@ -78,23 +138,25 @@
           message: this.message
         }));
         this.message = '';
+        this.$nextTick(this.scrollToBottom);
       },
       recvMessage: function(recv) {
         if (recv.type == 'ENTER') {
-          this.messages.unshift({
+          this.messages.push({
             "type": recv.type,
-            "user_nickname": '[Notification]',
-            "message": this.sender + '님이 입장하셨습니다.' // 수정된 부분
+            "user_nickname": '★',
+            "message": this.sender + '님 입장~! ★', // 수정된 부분
+            "timestamp": new Date()
           });
         } else {
-          this.messages.unshift({
+          this.messages.push({
             "type": recv.type,
             "user_nickname": recv.user_nickname,
-            "message": recv.message
+            "message": recv.message,
+            "timestamp": new Date(recv.timestamp)
           });
         }
       }
-
     }
   });
 

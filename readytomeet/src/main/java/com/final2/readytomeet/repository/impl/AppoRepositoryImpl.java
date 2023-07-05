@@ -136,9 +136,9 @@ public class AppoRepositoryImpl implements AppoRepository {
 
     //Activity 약속 생성
     @Override
-    public int insertActivity(AppoDto appodto) {
+    public int insertActivity(AppoDto appoDto) {
         int res = 0;
-        res = appomapper.insertActivity(appodto);
+        res = appomapper.insertActivity(appoDto);
         return res;
     }
 
