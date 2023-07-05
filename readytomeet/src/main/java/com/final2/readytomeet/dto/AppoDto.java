@@ -10,7 +10,7 @@ public class AppoDto {
     public String appo_notice;
     public String appo_host;
     public String appo_place;
-    public Timestamp appo_time;
+    public String appo_time;
     public int appo_min_mem;
     public int appo_max_mem;
     public String appo_category;
@@ -42,7 +42,7 @@ public class AppoDto {
         super();
     }
 
-    public AppoDto(int appo_seq, String appo_title, String appo_content, String appo_notice, String appo_host, String appo_place, Timestamp appo_time, int appo_min_mem, int appo_max_mem, String appo_category, String appo_start_place, int appo_pay, int appo_using,String appo_date1,String appo_date2) {
+    public AppoDto(int appo_seq, String appo_title, String appo_content, String appo_notice, String appo_host, String appo_place, String appo_time, int appo_min_mem, int appo_max_mem, String appo_category, String appo_start_place, int appo_pay, int appo_using,String appo_date1,String appo_date2) {
         this.appo_seq = appo_seq;
         this.appo_title = appo_title;
         this.appo_content = appo_content;
@@ -108,11 +108,11 @@ public class AppoDto {
         this.appo_place = appo_place;
     }
 
-    public Timestamp getAppo_time() {
+    public String getAppo_time() {
         return appo_time;
     }
 
-    public void setAppo_time(Timestamp appo_time) {
+    public void setAppo_time(String appo_time) {
         this.appo_time = appo_time;
     }
 

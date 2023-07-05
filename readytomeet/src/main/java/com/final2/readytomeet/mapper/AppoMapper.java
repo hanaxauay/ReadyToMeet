@@ -77,8 +77,9 @@ public interface AppoMapper {
 
     //--------------------------------insert---------------------------------
     //Activity 약속 생성
-    @Insert(" INSERT INTO APPOINTMENT VALUES(NULL, #{appo_title}, #{appo_content}, NULL, #{appo_host}, #{appo_place}, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_category}, NULL, NULL, #{appo_using}) ")
-    int insertActivity(AppoDto appodto);
+    @Insert(" INSERT INTO APPOINTMENT (APPO_SEQ, APPO_CATEGORY, APPO_TITLE, APPO_TIME, APPO_MIN_MEM, APPO_MAX_MEM, APPO_PLACE, APPO_CONTENT, APPO_HOST, APPO_NOTICE, APPO_START_PLACE, APPO_PAY, APPO_USING) " +
+            "VALUES(NULL, #{appo_category}, #{appo_title}, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_place}, #{appo_content}, #{appo_host}, #{appo_notice}, #{appo_start_place}, #{appo_pay}, #{appo_using}) ")
+    int insertActivity(AppoDto appoDto);
 
     //Vehicle 약속 생성
     @Insert(" INSERT INTO APPOINTMENT VALUES(NULL, #{appo_title}, #{appo_content}, NULL, #{appo_host}, #{appo_place}, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_category}, #{appo_start_place}, NULL, #{appo_using}) ")

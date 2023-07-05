@@ -10,12 +10,10 @@
         <link href="../../css/activityBaseListPage.css" rel="stylesheet" />
         <title>Document</title>
         <script src="../../js/activityBaseListPage.js"></script>
-        <script>
-            function openNewWindow() {
-                window.open("/activityDetail");
-            }
-        </script>
+
+
     </head>
+
     <body>
         <!--헤더 영역-->
 <nav> 
@@ -189,7 +187,7 @@
                     <!-- 약속 생성 버튼 컨테이너-->
                     <div class="appointment_create_button_container">
                         <!--약속 생성 버튼 원형-->
-                        <a href="/appointment/insertActivityForm">
+                        <a href="/appointment/insertActivity">
                            <div class="create_button_circle">
                             <span class="create_button_text">+</span>
                             </div> 
@@ -200,7 +198,29 @@
             </article>
         </div>
 
-        </div>
+
+            <script>
+                function checkLogin(evt) {
+                    evt.preventDefault(); // 기본 동작 중지
+
+                // 로그인 여부 체크 로직
+                if (isLoggedIn()) {
+                    // 로그인된 상태라면 링크 이동
+                    window.location.href = evt.target.href;
+                } else {
+                    // 로그인되지 않은 상태라면 로그인 필요 메시지 표시
+                    alert("로그인이 필요합니다.");
+                }
+            }
+
+            // 로그인 여부 확인 함수
+            function isLoggedIn() {
+                // 세션 또는 쿠키 등을 사용하여 로그인 여부를 체크하는 로직을 작성하십시오.
+                // 예시: 세션에 로그인 정보가 있는지 확인
+                return (sessionStorage.getItem("loggedInUser") !== null);
+            }
+
+            </script>
         <footer>
             <div> Team 2 in FinalProject 2023</div>
         </footer>

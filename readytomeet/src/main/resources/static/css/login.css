@@ -100,3 +100,8 @@ li {
 	display: block;
 	margin: 0 auto;
 }
+
+.error-message {
+	color: red;
+	font-weight: bold;
+}

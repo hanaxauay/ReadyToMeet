@@ -12,7 +12,7 @@ public interface ChatRoomMapper {
     List<ChatRoom> findAllRoom();
 
     @Select("SELECT * FROM CHAT_ROOM WHERE ROOM_ID = #{room_id}")
-    ChatRoom findRoomById(String id);
+    ChatRoom getChatRoomById(String room_id);
 
     @Select("SELECT * FROM CHAT_ROOM WHERE USER_NICKNAME = #{user_nickname}")
     List<ChatRoom> findRoomByNickname(String nickname);
