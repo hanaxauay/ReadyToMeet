@@ -2,29 +2,36 @@ package com.final2.readytomeet.service;
 
 import com.final2.readytomeet.dto.CommunityDto;
 import com.final2.readytomeet.dto.UserDto;
+import com.final2.readytomeet.repository.UserRepository;
 import org.apache.catalina.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
-
-//    public List<UserDto> selectList();
-
+//    //note 로그인
 //    public UserDto login(UserDto dto);
 
 
-    public void upload(UserDto dto, MultipartFile file) throws Exception;
+
+//
+//    List<Map<String, Object>> getUser();
+//
+//
+////    public List<UserDto> selectList();
+//
+//
+//
+//
+//
+//    public void upload(UserDto dto, MultipartFile file) throws Exception;
+//
+//
+//
+    //note 회원정보 보기
+    public UserDto readUser(String user_id);
 
 
-
-    // 회원 정보
-    public UserDto readUser(String uid) throws Exception;
-
-    // 회원 정보 수정
-    public void modifyUser(UserDto userDto) throws Exception;
-
-    // 회원 프로필 사진 수정
-    public void modifyUimage(String uid, String uimage) throws Exception;
 }
