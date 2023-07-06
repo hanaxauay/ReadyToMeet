@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- CSS -->
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css">
+    <link href="../../../css/common.css" rel="stylesheet" />
+    <link href="../../../css/activityDetail.css" rel="stylesheet"/>
     <style>
 
         [v-cloak] {
@@ -14,6 +16,7 @@
 
         .container {
             margin-top: 50px;
+            margin-bottom: 50px;
         }
 
         h3 {
@@ -30,6 +33,7 @@
             cursor: pointer;
             background-color: #FFFFFF; /* 변경: 배경색상 */
             color: #FF7777; /* 변경: 글자색상 */
+            margin-bottom: 0.5%;
         }
 
         /* 변경: 입력 필드 스타일 */
@@ -46,6 +50,24 @@
     </style>
 </head>
 <body>
+<!--헤더 영역-->
+<nav>
+    <ul>
+        <li class="liLogo"><a href="/main"><img src="../../image/logo.png" class="imgLogo"></a></li>
+        <li><a href="/all">All</a> </li>
+        <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
+        <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
+        <li><a href="/appointment/workList/all">WORK</a> </li>
+        <li><a href="/community/list">Community</a> </li>
+        <li>
+            <form action="/search" method="GET" class="search-container">
+                <input type="text" name="keyword" placeholder="약속을 찾아봐요!">
+                <input type="submit" value="Search">
+            </form>
+        </li>
+        <li class="liMypage"><a href="#"><img src="../../image/mypage.png" class="imgMypage"></a></li>
+    </ul>
+</nav>
 <div class="container" id="app" v-cloak>
     <div class="row">
         <div class="col-md-12">
@@ -57,7 +79,13 @@
             v-on:click="enterRoom(item.room_id, item.room_name)">
             {{ item.room_name }}
         </li>
+<!--        <input type="text" class="form-control" v-model="room_name" v-on:keyup.enter="createRoom">-->
+<!--        <div class="input-group-append">-->
+<!--            <button class="btn btn-primary" type="button" @click="createRoom">채팅방 개설</button>-->
+<!--        </div>-->
     </ul>
+    <h5 style="float:right"> <a th:href="@{/appointment/activityList/all}">약속 만들고 채팅방 생성하러 가기</a></h5>
+
 </div>
 <!-- JavaScript -->
 <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
@@ -90,12 +118,14 @@
                             alert("Room " + response.data.room_name + " 채팅방이 생성되었습니다.");
                             this.room_name = '';
                             this.findAllRoom();
+                            this.enterRoom(response.data.room_id, response.data.room_name); // 생성된 채팅방으로 입장
                         })
                         .catch(response => {
                             alert("채팅방 생성에 실패했습니다.");
                         });
                 }
             },
+
             enterRoom: function(roomId, roomName) {
                 var sender = localStorage.getItem('wschat.sender');
                 if (!sender) {
@@ -105,11 +135,11 @@
                 localStorage.setItem('wschat.roomId', roomId);
                 window.location.href = "/chat/room/" + roomId;
             }
-
-
-
         }
     });
 </script>
+<!--<footer>-->
+<!--    <div> Team 2 in FinalProject 2023</div>-->
+<!--</footer>-->
 </body>
 </html>

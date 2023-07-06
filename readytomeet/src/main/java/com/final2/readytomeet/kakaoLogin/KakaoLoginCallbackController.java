@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class KakaoLoginCallbackController {
 
-    private final String clientId = "464e1b3f69dc1186658ba3def0b52ead";
+    private final String clientId = "e63f6f8d0032fa6401e0e24435afcea0";
     private final String redirectUri = "http://localhost:8080/login/kakao/callback";
 
     @GetMapping("/login/kakao/callback")
@@ -40,9 +40,8 @@ public class KakaoLoginCallbackController {
 
                 // 모델에 필요한 정보를 추가
                 model.addAttribute("nickname", userInfoResponse.getNickname());
-                model.addAttribute("email", userInfoResponse.getEmail());
 
-                return "redirect:/main"; // 로그인 성공 후 리다이렉트할 페이지 설정
+                return "kakaoJoinForm"; // 로그인 성공 후 리다이렉트할 페이지 설정
             }
         }
 

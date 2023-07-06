@@ -13,7 +13,7 @@ public class AppoSaveForm {
     private String appo_category;
 
     @NotBlank
-    @Size(min = 2)
+    @Size(min = 2, message = "최소 두 글자 이상 적어주세요.")
     private String appo_title;
 
     @NotNull
@@ -29,7 +29,7 @@ public class AppoSaveForm {
     private String appo_place;
 
     @NotNull
-    @Size(min = 5)
+    @Size(min = 5, message = "최소 5글자 이상 적어주세요.")
     private String appo_content;
 
 }

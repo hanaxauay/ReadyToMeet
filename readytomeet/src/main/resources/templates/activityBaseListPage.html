@@ -132,8 +132,8 @@
 
 <!--                            <a href="#" onclick="openNewWindow()">-->
                             <!-- 클릭 시 새 창으로 열기 ->  th:target="_blank" -->
-                            <a th:href="@{/appointment/detailActivity(appo_seq=${list.appo_seq})}">
-
+<!--                            <a th:href="@{/appointment/detailActivity(appo_seq=${list.appo_seq})}">-->
+                                <a th:href="@{/appointment/detailActivity(appo_seq=${list.appo_seq})}">
                                 <div class="appointment_date">
                                     <span class="appointment_date_text" th:text="${list.appo_date1}"></span>
                                     <span class="appointment_date_text" th:text="${list.appo_date2}"></span>
@@ -224,5 +224,6 @@
         <footer>
             <div> Team 2 in FinalProject 2023</div>
         </footer>
+        </div>
     </body>
 </html>

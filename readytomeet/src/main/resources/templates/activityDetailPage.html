@@ -15,6 +15,7 @@
 
     <title>Title</title>
 </head>
+
 <body>
 
 <!--헤더 영역-->
@@ -162,16 +163,20 @@
                         </div>
                         <div class="wrap_button_container_row2">
                             <!--수정하기-->
-                            <button class="detail_button" id="update_button" th:onclick="|location.href='@{/appointment/updateActivityForm}'|">수정</button>
+<!--                            <button class="detail_button" id="update_button" th:onclick="|location.href='@{/appointment/updateActivityForm}'|">수정</button>-->
                             <!--삭제하기-->
-                            <button class="detail_button" id="delete_button">삭제</button>
+<!--                            <button class="detail_button" id="delete_button">삭제</button>-->
                         </div>
                     </div>
 
                     <!-- 채팅 참여 버튼 컨테이너-->
-                    <div class="chat_button_container">
-                        <!--채팅 참여 버튼-->
-                        <button class="detail_button" id="chat_button" >채팅 참여하기</button>
+                    <div class="container" id="app" v-cloak>
+                    <button class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.room_id"
+                            v-if=""
+                        v-on:click="enterRoom(item.room_id, item.room_name)">
+                        {{ item.room_name }}
+                    </button>
+<!--                      activityDetailPageMine.html여기에서 appo_seq로 구분해서 채팅방 생성 -> 여기는 appo_seq에 맞는 채팅방만이 나와야함. -->
                     </div>
                 </div>
 
@@ -182,6 +187,56 @@
     </div>
 
 </div>
+<!-- JavaScript -->
+<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
+<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            room_name: '',
+            chatrooms: []
+        },
+        created() {
+            this.findAllRoom();
+        },
+        methods: {
+            findAllRoom: function() {
+                axios.get('/chat/rooms').then(response => {
+                    this.chatrooms = response.data;
+                });
+            },
+            createRoom: function() {
+                if (this.room_name === "") {
+                    alert("채팅방 이름을 입력하세요");
+                    return;
+                } else {
+                    var params = new URLSearchParams();
+                    params.append("name", this.room_name);
+                    axios.post('/chat/room', params)
+                        .then(response => {
+                            alert("Room " + response.data.room_name + " 채팅방이 생성되었습니다.");
+                            this.room_name = '';
+                            this.findAllRoom();
+                            this.enterRoom(response.data.room_id, response.data.room_name); // 생성된 채팅방으로 입장
+                        })
+                        .catch(response => {
+                            alert("채팅방 생성에 실패했습니다.");
+                        });
+                }
+            },
 
+            enterRoom: function(roomId, roomName) {
+                var sender = localStorage.getItem('wschat.sender');
+                if (!sender) {
+                    sender = prompt('닉네임을 입력하세요');
+                    localStorage.setItem('wschat.sender', sender);
+                }
+                localStorage.setItem('wschat.roomId', roomId);
+                window.location.href = "/chat/room/" + roomId;
+            }
+        }
+    });
+</script>
 </body>
 </html>

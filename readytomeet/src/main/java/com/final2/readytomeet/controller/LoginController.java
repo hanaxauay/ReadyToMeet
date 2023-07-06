@@ -47,21 +47,11 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/")
-    public String home() {
-        UserDto loggedInUser = (UserDto) session.getAttribute("loggedInUser");
-        if (loggedInUser != null) {
-            return "redirect:/main"; // 이미 로그인한 상태이므로 main.html로 리다이렉트
-        } else {
-            return "index"; // 로그인하지 않은 상태이므로 index.html을 반환
-        }
-    }
-
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String logout() {
         session.removeAttribute("loggedInUser");
         session.invalidate();
-        return "login"; // 로그인 폼 페이지로 리다이렉트
+        return "redirect:/login"; // 로그인 폼 페이지로 리다이렉트
     }
 
     @GetMapping("/find")
@@ -77,14 +67,9 @@ public class LoginController {
     @GetMapping("/main")
     public String gotoMain(Model model){
         UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
-        String nickname = loginUser.getUser_nickname();
-        List<ChatRoom> userChatRooms = userChatRoomRepository.getChatRoomsByUserNickname(nickname);
-        model.addAttribute("userChatRooms", userChatRooms);
-
-
-//        ChatRoom chatRoomById = chatRoomMapper.getChatRoomById(room_id);
-//
-//        List<ChatMessage> chatRoom = chatMessageRepository.getChatMessagesByRoomId(room_id);
+//        String nickname = loginUser.getUser_nickname();
+//        List<ChatRoom> userChatRooms = userChatRoomRepository.getChatRoomsByUserNickname(nickname);
+//        model.addAttribute("userChatRooms", userChatRooms);
 
         if (loginUser != null) {
             return "main"; // 로그인 상태이므로 main.html 반환
@@ -93,6 +78,15 @@ public class LoginController {
         }
     }
 
+    @GetMapping("/")
+    public String home() {
+        UserDto loggedInUser = (UserDto) session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            return "redirect:/main"; // 이미 로그인한 상태이므로 main.html로 리다이렉트
+        } else {
+            return "index"; // 로그인하지 않은 상태이므로 index.html을 반환
+        }
+    }
 
 
 }

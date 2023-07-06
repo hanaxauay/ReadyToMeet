@@ -391,7 +391,6 @@ body{
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  cursor: pointer;
   text-align: center;
   text-decoration: none;
 
@@ -437,6 +436,12 @@ body{
   float: right;
   font-weight: 500;
 }
+#create_button{
+  width: 12%;
+  padding: 0.75% 0;
+  float: right;
+  font-weight: 500;
+}
 
 
 #chat_button{
@@ -451,6 +456,7 @@ body{
 
   font-size: 1rem;
   font-weight: 600;
+
 }
 
 

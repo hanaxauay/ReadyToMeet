@@ -102,23 +102,23 @@
                 const temperature = data.main.temp;
                 const minTemperature = data.main.temp_min;
                 const maxTemperature = data.main.temp_max;
-                const weatherDescription = data.weather[0].description;
+                // const weatherDescription = data.weather[0].description;
                 const humidity = data.main.humidity;
                 const wind = data.wind.speed;
 
-                displayWeather(location, temperature, minTemperature, maxTemperature, weatherDescription, humidity, wind);
+                displayWeather(location, temperature, minTemperature, maxTemperature, humidity, wind);
               })
               .catch(error => {
                 console.log('Error:', error);
               });
     }
 
-    function displayWeather(location, temperature, minTemperature, maxTemperature, description, humidity, wind) {
+    function displayWeather(location, temperature, minTemperature, maxTemperature, humidity, wind) {
       const locationElement = document.getElementById('location');
       const temperatureElement = document.getElementById('temperature');
       const minTemperatureElement = document.getElementById('minTemperature');
       const maxTemperatureElement = document.getElementById('maxTemperature');
-      const descriptionElement = document.getElementById('weatherDescription');
+      // const descriptionElement = document.getElementById('weatherDescription');
       const humidityElement = document.getElementById('humidity');
       const windElement = document.getElementById('wind');
 
@@ -126,7 +126,7 @@
       temperatureElement.textContent = temperature;
       minTemperatureElement.textContent = minTemperature;
       maxTemperatureElement.textContent = maxTemperature;
-      descriptionElement.textContent = description;
+      // descriptionElement.textContent = description;
       humidityElement.textContent = humidity;
       windElement.textContent = wind;
     }
@@ -159,6 +159,7 @@
     </li>
     <li class="liMypage"><a href="/user/view"><img src="../image/mypage.png" class="imgMypage"></a></li>
   </ul>
+
 </nav>
 
 <div class="main_content">
@@ -173,7 +174,7 @@
         <h2 id="location">지역</h2>
 <!--        <img src="../image/weather.png" class="weather-icon" alt="Weather Icon">-->
         <p class="temperature"><span id="temperature"></span>°C</p>
-        <p class="description" id="weatherDescription"></p>
+<!--        <p class="description" id="weatherDescription"></p>-->
         <hr>
         <div class="details">
           <div class="detail">
@@ -197,33 +198,7 @@
       </div>
 
     </div>
-    <div class="left_bottom">
-      <!-- 반복해서 만들도록 설정(타임리프로 할듯) -->
-      <!--      <div class="box">-->
-      <!--           <div class="list">-->
-      <!--           <div class="place">서울역 1번 출구 투썸</div>-->
-      <!--           <div class="date"> 2023-05-12 </div>-->
-      <!--           <button class="detailBtn"> 상세보기</button>-->
-      <!--         </div>-->
-      <!--              -->
-      <!--       </div>-->
-      <!--      <div class="box">-->
-      <!--          <div class="list">-->
-      <!--              <div class="place">서울역 1번 출구 투썸</div>-->
-      <!--              <div class="date"> 2023-05-12 </div>-->
-      <!--              <button class="detailBtn"> 상세보기</button>-->
-      <!--          </div>-->
 
-      <!--      </div>-->
-      <!--      <div class="box">-->
-      <!--          <div class="list">-->
-      <!--              <div class="place">서울역 1번 출구 투썸</div>-->
-      <!--              <div class="date"> 2023-05-12 </div>-->
-      <!--              <button class="detailBtn"> 상세보기</button>-->
-      <!--          </div>-->
-
-      <!--      </div>-->
-    </div>
   </div>
   <div class="right">
     <div class="middle_category">스케줄러</div>
@@ -256,6 +231,9 @@
         <button class="detailBtn"> 상세보기</button>
       </div>
     </div>
+    <form action="/logout" method="post">
+      <button type="submit">로그아웃</button>
+    </form>
     <div class="more"><a href="">더보기</a></div>
     <br>
 

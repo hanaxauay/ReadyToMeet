@@ -17,8 +17,8 @@ public class ChatMessageRepository {
         chatMessageMapper.saveChatMessage(chatMessage);
     }
 
-    public List<ChatMessage> getChatMessagesByRoomId(String room_id) {
-        return chatMessageMapper.getChatMessagesByRoomId(room_id);
+    public List<ChatMessage> getChatMessagesByRoomId(int appo_seq) {
+        return chatMessageMapper.getChatMessagesByRoomId(appo_seq);
     }
 }
 
