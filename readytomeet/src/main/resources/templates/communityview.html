@@ -5,19 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>생성페이지</title>
-    <link rel="stylesheet" href="../css/jinha.css">
+    <link href="../../css/activityDetail.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../css/common.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <nav>
     <ul>
         <li class="liLogo"><a href="#"><img src="../image/logo.png" class="imgLogo"></a></li>
-        <li><a href="#">All</a> </li>
-        <li><a href="#">ACTIVITY</a> </li>
-        <li><a href="#">VEHICLE</a> </li>
-        <li><a href="#">WORK</a> </li>
-        <li><a href="#">Community</a> </li>
+        <li><a href="/all">All</a> </li>
+        <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
+        <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
+        <li><a href="/appointment/workList/all">WORK</a> </li>
+        <li><a href="/community/list">Community</a> </li>
         <li>
             <form action="/search" method="GET" class="search-container">
                 <input type="text" name="keyword" placeholder="약속을 찾아봐요!">
@@ -27,41 +28,64 @@
         <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
     </ul>
 </nav>
+<div class=”main_content”>
+    <div class="appointment_base_wrap">
 
-<div class="wrap">
-    <div class="">
-        <h1>COMUNITY</h1>
-    </div>
-        <div class="container">
-            <div class="main">
-                <h3 class="community_produce">머리글</h3>
-                <div th:text="${dto.share_category}"></div>
+    <!-- 카테고리 표시 영역 -->
+        <div class="wrap_appointment_category">
+            <!-- 현재 카테고리 표시 문구 -->
+            <div class="show_sub_category_container">
+                <span class="show_sub_category"><a href="/community/list">COMMUNITY</a></span>
+                <!-- </a> -->
+                <span class="show_sub_category"> > </span>
+                <!-- 세부 카테고리 변경 시 따라서 문구 변경 -->
+                <span class="sub_category_ment" th:text="${dto.share_category}"> share_category</span>
             </div>
-            <div class="main">
-                <h3 class="community_produce">제목</h3>
-                <div th:text="${dto.share_title}"></div>
-            </div>
-            <div class="main">
-                <h3 class="community_produce">작성자</h3>
-                <div th:text="${dto.user_id}"></div>
-            </div>
-            <div class="main">
-                <h3 class="community_produce">작성일</h3>
-                <div th:text="${#dates.format(dto.share_time, 'yyyy.MM.dd')}"></div>
-            </div>
-            <div class="main">
-                <h3 class="community_produce">내용</h3>
-                <div class="image-wrapper">
-                    <img th:if="${not #strings.isEmpty(dto.filename)}" th:src="@{/download/{filename}(filename=${dto.filename})}" />
-                    <div th:text="${dto.share_content}"></div>
+        </div>
+        <div class="wrap_appointment_main">
+            <!-- 헤드라인(약속 제목, 작성자) 영역-->
+            <div class="appointment_detail_headline">
+                <div class="appointment_title">
+                    <span class="appointment_title_text" th:text="${dto.share_title}">share_title</span>
+                </div>
+                <div class="appointment_host">
+                    <!--이미지 추후 변경사항-->
+                    <div id="appointment_host_img"></div>
+                    <span class="appointment_host_bar" th:text="${dto.user_nickname}">share_host</span>
+                    <div class="com_data" th:text="${#dates.format(dto.share_time, 'yyyy.MM.dd')}">작성일</div>
                 </div>
             </div>
         </div>
-        <div class="community_floor">
-            <input type="button" class="button" value="목록" onclick="location.href='/community/list'">
-            <input type="button" class="button" value="수정" th:onclick="location.href='/community/updateform?share_seq=[[${dto.share_seq}]]'">
-            <input type="button" class="button" value="삭제" th:onclick="location.href='/community/delete?share_seq=[[${dto.share_seq}]]'">
+
+
+        <div class="com_detail_container">
+            <div class="com_detail_area">
+                <div class="appointment_content">
+                    <span class="appointment_ment"><i class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;내용</span>
+                    <span class="appointment_text">
+                        <img th:if="${not #strings.isEmpty(dto.filename)}" th:src="@{/download/{filename}(filename=${dto.filename})}" />
+                        <div th:text="${dto.share_content}"></div>
+                    </span>
+                </div>
+            </div>
         </div>
+
+
+        <!--버튼 영역 (메인 아랫줄)-->
+        <div class="wrap_com_button_container">
+            <!--약속 상세 괸련 버튼 컨테이너-->
+            <div class="detail_com_button_container">
+                <div class="wrap_com_button_container_row2">
+                    <!--목록-->
+                    <button class="detail_button" id="list_com_button" th:onclick="location.href='/community/list'">목록</button>
+                    <!--수정하기-->
+                    <button class="detail_button" id="update_com_button" th:onclick="location.href='/community/updateform?share_seq=[[${dto.share_seq}]]'">수정</button>
+                    <!--삭제하기-->
+                    <button class="detail_button" id="delete_com_button" th:onclick="location.href='/community/delete?share_seq=[[${dto.share_seq}]]'">삭제</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
 </body>

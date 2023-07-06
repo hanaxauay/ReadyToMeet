@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="ko">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,7 +38,7 @@
         <div class="main_wrap">
             <form class="inputImg" method="post" th:action="@{/user/upload}" enctype="multipart/form-data">
                 <div class="addImage" id="image-show">
-<!--                    <img th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>-->
+                    <img th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>
 <!--                    <img th:src="@{download/{filename}(filename=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>-->
                 </div>
                 <input type="file" name="file" multiple="multiple">
@@ -45,43 +46,25 @@
             </form>
 
             <div class="content">
-                <b>아이디</b>
-<!--                <div class="field">-->
-<!--&lt;!&ndash;                    <div th:text="${dto?.user_id}"></div>&ndash;&gt;-->
-<!--                    <div name="user_id" valus="${userInfo.user_id}" readonly></div>-->
-<!--                </div>-->
-                <div><input class="field" value="${userInfo.user_id" readonly></div>
-                <b>비밀번호</b>
+                <b>닉네임</b>
                 <div class="field">
-                    <div th:text="${userInfo.user_pw}"></div>
-                </div>
-                <b>전화번호</b>
-                <div class="field">
-                    <div th:text="${userInfo.user_phone}"></div>
-                </div>
-                <b>이메일</b>
-                <div class="field">
-                    <div th:text="${userInfo.user_email}"></div>
-                </div>
-                <b>이름</b>
-                <div class="field">
-                    <div th:text="${userInfo.user_name}"></div>
+                    <div th:text="${dto?.user_nickname}"></div>
                 </div>
                 <b>나이</b>
                 <div class="field">
-                    <div th:text="${userInfo.user_age}"></div>
+                    <div th:text="${dto?.user_age}"></div>
                 </div>
-                <b>지역</b>
+                <b>성별</b>
                 <div class="field">
-                    <div th:text="${userInfo.user_location}"></div>
+                    <div th:text="${dto?.user_gender}"></div>
                 </div>
 
                 <b>자기 소개</b>
                 <div class="area">
-                    <div class=textarea th:text="${userInfo.user_content}"></div>
+                    <div class=textarea th:text="${dto?.user_content}"></div>
                     <div class="button">
-                        <input type="button" value="신분증 인증" th:onclick="showPopup();"/>
-                        <input type="button" value="수정" th:onclick="location.href='update'">
+                        <input type="button" value="신분증 인증" onclick="showPopup();"/>
+                        <input type="button" value="수정" th:onclick="location.href='/user/updateform?user_id=[[${dto?.user_id}]]'">
                     </div>
                 </div>
             </div>
@@ -113,7 +96,7 @@
                                     <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.prevBlock})}" aria-label="Previous" th:text="'<'"></a>
                                 </li>
                                 <th:block th:with="start = ${pagination?.startPage}, end = ${pagination?.endPage}">
-                                    <li th:each="pageButton : ${numbers?.sequence(start, end)}">
+                                    <li th:each="pageButton : ${#numbers?.sequence(start, end)}">
                                         <a class="page-link"
                                            th:href="@{list?page={page} (page = ${pageButton})}"
                                            th:text=${pageButton}

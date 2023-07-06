@@ -29,8 +29,8 @@ public class UserChatRoomRepository {
         return userChatRoomMapper.getChatRoomsByUserNickname(nickname);
     }
 
-    public void insertUserChatRoom(String user_nickname, int appo_seq) {
-        userChatRoomMapper.insertUserChatRoom(user_nickname, appo_seq);
+    public void insertUserChatRoom(String user_nickname, String room_id) {
+        userChatRoomMapper.insertUserChatRoom(user_nickname, room_id);
     }
 
 

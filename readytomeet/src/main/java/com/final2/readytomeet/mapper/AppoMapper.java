@@ -1,4 +1,4 @@
-package com.final2.readytomeet.Mapper;
+package com.final2.readytomeet.mapper;
 
 import com.final2.readytomeet.dto.AppoDto;
 import org.apache.ibatis.annotations.*;
@@ -16,8 +16,8 @@ public interface AppoMapper {
 //    List<AppoDto> selectAppointmentAllList();
 
     //Activity 전체 약속 검색
-    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2" +
-            " FROM APPOINTMENT WHERE NOT APPO_CATEGORY IN ('카풀', '택시', '유급', '무급') ORDER BY APPO_SEQ DESC ")
+    @Select("SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2" +
+        " FROM APPOINTMENT WHERE NOT APPO_CATEGORY IN ('카풀', '택시', '유급', '무급') ORDER BY APPO_SEQ DESC")
     List<AppoDto> selectActivityAllList();
     //Activity 세부 카테고리 전체 검색
     @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY='카페' ORDER BY APPO_SEQ DESC ")
@@ -36,7 +36,7 @@ public interface AppoMapper {
     List<AppoDto> selectActivityOthersList();
 
     //Vehicle 전체 약속 검색
-    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_START_PLACE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY='카풀' OR APPO_CATEGORY='택시' ORDER BY APPO_SEQ DESC ")
+    @Select("SELECT APPO_SEQ, APPO_TITLE, APPO_START_PLACE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY IN ('카풀', '택시') ORDER BY APPO_SEQ DESC")
     List<AppoDto> selectVehicleAllList();
     //Vehicle 세부 카테고리 전체 검색
     @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_START_PLACE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY='카풀' ORDER BY APPO_SEQ DESC ")
@@ -46,7 +46,7 @@ public interface AppoMapper {
 
 
     //Work 전체 약속 검색
-    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY='유급' OR APPO_CATEGORY='무급' ORDER BY APPO_SEQ DESC ")
+    @Select("SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY IN ('유급', '무급') ORDER BY APPO_SEQ DESC")
     List<AppoDto> selectWorkAllList();
     //Work 세부 카테고리 전체 검색
     @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY='유급' ORDER BY APPO_SEQ DESC ")
@@ -77,9 +77,8 @@ public interface AppoMapper {
 
     //--------------------------------insert---------------------------------
     //Activity 약속 생성
-    @Insert(" INSERT INTO APPOINTMENT (APPO_SEQ, APPO_CATEGORY, APPO_TITLE, APPO_TIME, APPO_MIN_MEM, APPO_MAX_MEM, APPO_PLACE, APPO_CONTENT, APPO_HOST, APPO_NOTICE, APPO_START_PLACE, APPO_PAY, APPO_USING) " +
-            "VALUES(NULL, #{appo_category}, #{appo_title}, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_place}, #{appo_content}, #{appo_host}, #{appo_notice}, #{appo_start_place}, #{appo_pay}, #{appo_using}) ")
-    int insertActivity(AppoDto appoDto);
+    @Insert(" INSERT INTO APPOINTMENT VALUES(NULL, #{appo_title}, #{appo_content}, NULL, #{appo_host}, #{appo_place}, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_category}, NULL, NULL, #{appo_using}) ")
+    int insertActivity(AppoDto appodto);
 
     //Vehicle 약속 생성
     @Insert(" INSERT INTO APPOINTMENT VALUES(NULL, #{appo_title}, #{appo_content}, NULL, #{appo_host}, #{appo_place}, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_category}, #{appo_start_place}, NULL, #{appo_using}) ")

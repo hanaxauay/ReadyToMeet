@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -133,12 +133,9 @@
     fetchWeatherData();
   </script>
 
-
-
   <!-- 아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함 key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.-->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD51bMavEVnc-HZy3RwWG_brHEQ4qfXAog&callback=initMap">
   </script>
-
 </head>
 <body > <!--th:if="${loggedIn}"-->
 <nav>
@@ -156,7 +153,7 @@
       </form>
 
     </li>
-    <li class="liMypage"><a th:href="@{|/user/#{user_id}|}"><img src="../image/mypage.png" class="imgMypage"></a></li>
+    <li class="liMypage"><a href="/user/view"><img src="../image/mypage.png" class="imgMypage"></a></li>
   </ul>
 </nav>
 
@@ -255,13 +252,73 @@
       </div>
     </div>
     <div class="more"><a href="">더보기</a></div>
+    <br>
+
+    <!-- 채팅방 리스트를 표시할 부분 -->
+    <div class="chatrooms">
+      <div class="middle_category"><a href="/chat/room">나의 채팅방 리스트</a></div>
+      <div class="container" id="app" v-cloak>
+        <div class="row">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action list" v-for="item, index in chatrooms" v-bind:key="item.room_id"
+                v-on:click="enterRoom(item.room_id, item.room_name)" v-if="index < 3">
+              {{ item.room_name }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h5 style="float: right"><a href="/chat/room">더보기</a></h5>
+    </div>
   </div>
 </div>
-<!--<div th:unless="${loggedIn}">-->
-<!--  &lt;!&ndash; 로그인하지 않은 상태에 따른 내용 &ndash;&gt;-->
-<!--  <p>로그인이 필요합니다.</p>-->
-<!--  <a href="/login">로그인</a>-->
-<!--</div>-->
+<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
+<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      room_name: '',
+      chatrooms: []
+    },
+    created() {
+      this.findAllRoom();
+    },
+    methods: {
+      findAllRoom: function() {
+        axios.get('/chat/rooms').then(response => {
+          this.chatrooms = response.data;
+        });
+      },
+      createRoom: function() {
+        if (this.room_name === "") {
+          alert("채팅방 이름을 입력하세요");
+          return;
+        } else {
+          var params = new URLSearchParams();
+          params.append("name", this.room_name);
+          axios.post('/chat/room', params)
+                  .then(response => {
+                    alert("Room " + response.data.room_name + " 채팅방이 생성되었습니다.");
+                    this.room_name = '';
+                    this.findAllRoom();
+                  })
+                  .catch(response => {
+                    alert("채팅방 생성에 실패했습니다.");
+                  });
+        }
+      },
+      enterRoom: function(roomId, roomName) {
+        var sender = localStorage.getItem('wschat.sender');
+        if (!sender) {
+          sender = prompt('닉네임을 입력하세요');
+          localStorage.setItem('wschat.sender', sender);
+        }
+        localStorage.setItem('wschat.roomId', roomId);
+        window.location.href = "/chat/room/" + roomId;
+      }
+    }
+  });
+</script>
 <footer>
   <div> Team 2 in FinalProject 2023</div>
 </footer>

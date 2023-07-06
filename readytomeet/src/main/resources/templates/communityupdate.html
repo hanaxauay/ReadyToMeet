@@ -7,16 +7,42 @@
     <title>생성페이지</title>
     <link rel="stylesheet" href="../css/jinha.css">
     <link rel="stylesheet" href="../css/common.css">
+    <script src="https://kit.fontawesome.com/e66bbc4b5b.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+    <script type="text/javascript">
+    function validateForm() {
+        var head = document.getElementById("head").value;
+        var title = document.getElementById("title").value;
+        var content = document.getElementById("content").value;
+
+        if (head === "") {
+            alert("세부 카테고리를 선택해주세요.");
+            return false;
+        }
+
+        if (title.length < 5) {
+            alert("제목은 최소 5자 이상 입력해야 합니다.");
+            return false;
+        }
+
+        if (content.length < 10) {
+            alert("내용은 최소 10자 이상 입력해야 합니다.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
 </head>
 <body>
 <nav>
     <ul>
         <li class="liLogo"><a href="#"><img src="../image/logo.png" class="imgLogo"></a></li>
-        <li><a href="#">All</a> </li>
-        <li><a href="#">ACTIVITY</a> </li>
-        <li><a href="#">VEHICLE</a> </li>
-        <li><a href="#">WORK</a> </li>
-        <li><a href="#">Community</a> </li>
+        <li><a href="/all">All</a> </li>
+        <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
+        <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
+        <li><a href="/appointment/workList/all">WORK</a> </li>
+        <li><a href="/community/list">Community</a> </li>
         <li>
             <form action="/search" method="GET" class="search-container">
                 <input type="text" name="keyword" placeholder="약속을 찾아봐요!">
@@ -28,32 +54,45 @@
 </nav>
 
 <div class="wrap">
-    <div class="">
-        <h1>COMUNITY</h1>
-    </div>
-    <form action="/community/update" method="post">
-        <input type="hidden" name="share_seq" th:value="${dto.share_seq}">
-        <div class="dropdown">
-            <select name="share_category" id="head">
-                <option value="이가게 좋아요">이가게 좋아요</option>
-                <option value="할인정보">할인정보</option>
-            </select>
-        </div>
-        <div class="container">
-            <div class="main">
-                <h3 class="community_produce">제목</h3>
-                <input name="share_title" id="title" type="text" class="community_title" th:value="${dto.share_title}">
+
+    <section class="category_container">
+        <span class="category_ment1">COMUNITY</span>
+        <i class="fa-regular fa-calendar-plus"></i>
+        <span class="category_ment2">게시글 수정</span>
+    </section>
+
+    <section class="wrap_insert_form">
+        <form action="/community/writepro" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
+            <div class="form_row1">
+                <div class="inputform_subcategory">
+                    <select class="com_category" id="head" name="share_category">
+                        <option value="">세부 카테고리</option>
+                        <option value="이가게 좋아요">이가게 좋아요</option>
+                        <option value="할인정보">할인정보</option>
+                    </select>
+                </div>
+
+                <div class="inputform_title">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <spen class="form_ment"> 제목 :
+                        <input name="share_title" id="title" type="text" class="write_title"  th:value="${dto.share_title}">
+                    </spen>
+                    <i class="fa-solid fa-quote-right"></i>
+                </div>
             </div>
-            <div class="main">
-                <h3 class="community_produce">내용</h3>
-                <textarea name="share_content" id="content" class="community_content" th:text="${dto.share_content}"></textarea>
+
+            <fieldset class="inputform_content">
+                <legend><i class="fa-solid fa-plus"></i> 내용</legend>
+                <textarea name="share_content" id="content" cols="50" rows="20" class="write_content" th:text="${dto.share_content}"></textarea>
+                <input type="file" name="file" multiple="multiple">
+            </fieldset>
+
+            <div class="inputform_button">
+                <input type="submit" class="button" value="등록">
+                <input type="button" class="button" value="취소" onclick="location.href='/community/list'">
             </div>
-        </div>
-        <div class="community_floor">
-            <input type="submit" class="button" value="수정">
-            <input type="button" class="button" value="취소" onclick="location.href='/community/list'">
-        </div>
-    </form>
+        </form>
+    </section>
 </div>
 <footer>Copyright &copy; Team 2 in FinalProject 2023</footer>
 </body>

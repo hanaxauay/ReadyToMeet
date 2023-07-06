@@ -157,51 +157,51 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    position: absolute;
+    position: fixed;
     bottom: 7%;
     left: 2%;
     margin: 1%;
     padding: 1%;
-    background-color: #fff;
-    border-radius: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.weather h2 {
-    font-size: 1.4rem;
+.weather h1 {
+    font-size: 1.8vw;
     font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: #ff7777;
+    margin-bottom: 1%;
+    color: #333;
 }
 
 .weather .weather-icon {
-    width: 8rem;
-    height: 8rem;
-    margin-bottom: 1rem;
+    width: 6.4vw;
+    height: 6.4vw;
+    margin-bottom: 1%;
 }
 
 .weather p {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.4vw;
+    margin-bottom: 0.5%;
     color: #555;
 }
 
 .weather .temperature {
-    font-size: 1.5rem;
+    font-size: 2vw;
     font-weight: bold;
     color: #333;
 }
 
 .weather .description {
-    font-size: 1rem;
+    font-size: 1.4vw;
     color: #777;
 }
 
 .weather .details {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
+    gap: 1%;
+    margin-top: 1%;
 }
 
 .weather .detail {
@@ -209,14 +209,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem 1rem;
+    padding: 1%;
     background-color: #f8f8f8;
     border-radius: 5px;
 }
 
 .weather .detail p {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.2vw;
+    margin-bottom: 0.5%;
     color: #777;
 }
 
@@ -227,9 +227,9 @@
 
 .weather hr {
     border: none;
-    height: 2px;
+    height: 0.1vw;
     background-color: #ddd;
-    margin: 1.5rem 0;
+    margin: 2% 0;
 }
 
 

@@ -9,8 +9,8 @@
     <script src="https://kit.fontawesome.com/e66bbc4b5b.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="./css/vehiclewritetest.css">
-    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="../css/vehicleWrite.css">
+    <link rel="stylesheet" href="../css/common.css">
 
     <title>vehicle생성페이지</title>
 
@@ -21,7 +21,7 @@
 <!--헤더 영역-->
 <nav>
     <ul>
-        <li class="liLogo"><a href="/main"><img src="./images/logo.png" class="imgLogo"></a></li>
+        <li class="liLogo"><a href="/main"><img src="../image/logo.png" class="imgLogo"></a></li>
         <li><a href="/all">All</a> </li>
         <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
         <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
@@ -33,7 +33,7 @@
                 <input type="submit" value="Search">
             </form>
         </li>
-        <li class="liMypage"><a href="#"><img src="./images/mypage.png" class="imgMypage"></a></li>
+        <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
     </ul>
 </nav>
 
@@ -55,7 +55,7 @@
                 <div class="form_row1">
                     <!--카테고리 설정-->
                     <div class="inputform_subcategory">
-                        <select name="subcategory" id="select_subcategory" required>
+                        <select name="subcategory" id="select_subcategory">
                             <option value="">세부 카테고리&nbsp;</option>
                             <option value="카풀">카풀</option>
                             <option value="택시">택시</option>
@@ -66,7 +66,7 @@
                     <div class="inputform_title">
                         <i class="fa-solid fa-quote-left"></i>
                         <spen class="form_ment"> 약속명 :&nbsp;
-                            <input type="text" name="write_title" placeholder="제목" required>
+                            <input type="text" name="write_title" placeholder="제목">
                         </spen>
                         <i class="fa-solid fa-quote-right"></i>
                     </div>
@@ -85,7 +85,7 @@
                     <div class="select_date">
                         <label>
                                 <span class="form_ment">날짜 :
-                                    <input type="date" name="write_date" min="2023-01-01" max="2024-01-01" required>
+                                    <input type="date" name="write_date" min="2023-01-01" max="2024-01-01">
                                 </span>
                         </label>
                     </div>
@@ -93,13 +93,13 @@
                     <div class="select_time_type">
                         <span class="form_ment">시간 : </span>
                         <label title="참여자들이 상의하여 자유롭게 시간을 결정하기 위한 옵션입니다.">
-                            <input type="radio" name="option_time" value="allday" required> All Day
+                            <input type="radio" name="option_time" value="allday"> All Day
                             <input type="hidden" name="write_time" value="00:00">
                         </label>
                         <div class="form_row2">
                             <label title="정확한 약속시간을 설정하기 위한 옵션입니다.">
                                 <input type="radio" name="option_time" value="choosetime"
-                                       onclick="showTimeOption()" required> 날짜
+                                       onclick="showTimeOption()"> 날짜
                                 선택
                             </label>
                             <!--날짜선택 눌렀을 시 표시-->
@@ -117,10 +117,10 @@
                     <legend>&nbsp;<i class="fa-solid fa-plus"></i> 모집할 인원 수를 정해주세요!&nbsp;</legend>
                     <!--최소인원 설정-->
                     <span class="form_ment">최소 인원 :<input type="number" name="select_min_num" value="1" min="1"
-                                                          max="20" required></span>
+                                                          max="20"></span>
                     <!--최대인원 설정-->
                     <span class="form_ment">최대 인원 : <input type="number" name="select_max_num" value="1" min="1"
-                                                           max="20" required></span>
+                                                           max="20"></span>
                 </fieldset>
 
                 <!--약속장소 설정-->

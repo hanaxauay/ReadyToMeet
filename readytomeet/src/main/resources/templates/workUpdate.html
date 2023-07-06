@@ -2,168 +2,168 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://kit.fontawesome.com/e66bbc4b5b.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/e66bbc4b5b.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="../css/workUpdate.css">
-    <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="./css/workUpdatetest.css">
+  <link rel="stylesheet" href="./css/common.css">
 
-    <title>work수정페이지</title>
+  <title>work수정페이지</title>
 
 </head>
 
 <body>
 
-    <!--헤더 영역-->
-    <nav>
-        <ul>
-            <li class="liLogo"><a href="/main"><img src="../image/logo.png" class="imgLogo"></a></li>
-            <li><a href="/all">All</a> </li>
-            <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
-            <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
-            <li><a href="/appointment/workList/all">WORK</a> </li>
-            <li><a href="/community/list">Community</a> </li>
-            <li>
-                <form action="/search" method="GET" class="search-container">
-                    <input type="text" name="keyword" placeholder="약속을 찾아봐요!">
-                    <input type="submit" value="Search">
-                </form>
-            </li>
-            <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
-        </ul>
-    </nav>
+<!--헤더 영역-->
+<nav>
+  <ul>
+    <li class="liLogo"><a href="/main"><img src="./images/logo.png" class="imgLogo"></a></li>
+    <li><a href="/all">All</a> </li>
+    <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
+    <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
+    <li><a href="/appointment/workList/all">WORK</a> </li>
+    <li><a href="/community/list">Community</a> </li>
+    <li>
+      <form action="/search" method="GET" class="search-container">
+        <input type="text" name="keyword" placeholder="약속을 찾아봐요!">
+        <input type="submit" value="Search">
+      </form>
+    </li>
+    <li class="liMypage"><a href="#"><img src="./images/mypage.png" class="imgMypage"></a></li>
+  </ul>
+</nav>
 
-    <div class=”main_content”>
+<div class=”main_content”>
 
-        <!--바디 영역-->
-        <div class="appointment_form_wrap">
+  <!--바디 영역-->
+  <div class="appointment_form_wrap">
 
-            <!--카테고리 & 생성멘트 표시-->
-            <section class="category_container">
-                <span class="category_ment1">WORK</span>
-                <i class="fa-solid fa-pencil"></i>
-                <span class="category_ment2">약속 수정하기</span>
-            </section>
+    <!--카테고리 & 생성멘트 표시-->
+    <section class="category_container">
+      <span class="category_ment1">WORK</span>
+      <i class="fa-solid fa-pencil"></i>
+      <span class="category_ment2">약속 수정하기</span>
+    </section>
 
-            <!--생성 양식 영역-->
-            <section class="wrap_insert_form">
-                <form action="/appointment/insertform" method="post">
-                    <div class="form_row1">
-                        <!--카테고리 설정-->
-                        <div class="inputform_subcategory">
-                            <select name="subcategory" id="select_subcategory">
-                                <option value="">세부 카테고리&nbsp;</option>
-                                <option value="유급">유급</option>
-                                <option value="무급">무급</option>
-                            </select>
-                        </div>
+    <!--생성 양식 영역-->
+    <section class="wrap_insert_form">
+      <form action="/appointment/insertform" method="post">
+        <div class="form_row1">
+          <!--카테고리 설정-->
+          <div class="inputform_subcategory">
+            <select name="subcategory" id="select_subcategory">
+              <option value="">세부 카테고리&nbsp;</option>
+              <option value="유급">유급</option>
+              <option value="무급">무급</option>
+            </select>
+          </div>
 
-                        <!--약속명 설정-->
-                        <div class="inputform_title">
-                            <i class="fa-solid fa-quote-left"></i>
-                            <spen class="form_ment"> 약속명 :&nbsp;
-                                <input type="text" name="write_title" placeholder="제목">
-                            </spen>
-                            <i class="fa-solid fa-quote-right"></i>
-                        </div>
-
-                    </div>
-
-
-                    <!--약속시간 설정-->
-                    <!-- 기본 시간설정을 js로 현재 시간 받아서 표시하기
-                        write_date : 날짜 값 / write_time : 시간 값 -> 컨트롤러에서 합쳐서 insert
-                        showTimeOption() : 선택 시 div.selected_choosetime 표시
-                    -->
-                    <fieldset class="inputform_time">
-                        <legend>&nbsp;<i class="fa-solid fa-plus"></i> 시간을 정해주세요!&nbsp;</legend>
-
-                        <div class="select_date">
-                            <label>
-                                <span class="form_ment">날짜 :
-                                    <input type="date" name="write_date" min="2023-01-01" max="2024-01-01">
-                                </span>
-                            </label>
-                        </div>
-
-                        <div class="select_time_type">
-                            <span class="form_ment">시간 : </span>
-                            <label title="참여자들이 상의하여 자유롭게 시간을 결정하기 위한 옵션입니다.">
-                                <input type="radio" name="option_time" value="allday"> All Day
-                                <input type="hidden" name="write_time" value="00:00">
-                            </label>
-                            <div class="form_row2">
-                                <label title="정확한 약속시간을 설정하기 위한 옵션입니다.">
-                                    <input type="radio" name="option_time" value="choosetime" onclick="showTimeOption()"> 날짜
-                                    선택
-                                </label>
-                                <!--날짜선택 눌렀을 시 표시-->
-                                <div class="selected_choosetime">
-                                    <i class="fa-solid fa-caret-down"></i>
-                                    <input type="time" name="write_time" id="select_time">
-                                </div>
-                            </div>
-                        </div>
-
-                    </fieldset>
-
-                    <!--모집인원 설정-->
-                    <fieldset class="inputform_personnel">
-                        <legend>&nbsp;<i class="fa-solid fa-plus"></i> 모집할 인원 수를 정해주세요!&nbsp;</legend>
-                        <!--최소인원 설정-->
-                        <span class="form_ment">최소 인원 :<input type="number" name="select_min_num" value="1" min="1" max="20"></span>
-                        <!--최대인원 설정-->
-                        <span class="form_ment">최대 인원 : <input type="number" name="select_max_num" value="1" min="1" max="20"></span>
-                    </fieldset>
-
-                    <!--임금 설정-->
-                    <!--카테고리 유급 설정 시 나타나도록 하면 굿-->
-                    <fieldset class="inputform_pay">
-                        <legend>&nbsp;<i class="fa-solid fa-plus"></i> 지급할 금액을 정해주세요!&nbsp;</legend>
-                        <span class="form_ment">임금(시급) :<input type="number" name="select_pay" step="10" value="9160" title="현재 최저시급은 9160원입니다.">&nbsp;원</span>
-                    </fieldset>
-
-                    <!--약속장소 설정-->
-                    <fieldset class="inputform_place">
-                        <legend>&nbsp;<i class="fa-solid fa-plus"></i> 만날 장소를 정해주세요!&nbsp;</legend>
-                        <!--장소 검색기능 필요!!-->
-                        <span class="form_ment">위치 : </span>
-                        <input type="search" placeholder="위치 검색...">
-                        <!--지도표시 영역-->
-                        <div class="map_container">
-                            <div></div>
-                        </div>
-                        
-                    </fieldset>
-
-                    <!--약속 내용 작성-->
-                    <fieldset class="inputform_content">
-                        <legend>&nbsp;<i class="fa-solid fa-plus"></i> 약속에 대해 설명해주세요!&nbsp;</legend>
-                        <textarea name="write_content" cols="50" rows="10" placeholder="내용..."></textarea>
-                    </fieldset>
-
-                    <!--버튼 영역-->
-                    <div class="inputform_button">
-                        <button type="submit">수정</button>
-                        <button>취소</button>
-                    </div>
-
-                </form>
-            </section>
-
+          <!--약속명 설정-->
+          <div class="inputform_title">
+            <i class="fa-solid fa-quote-left"></i>
+            <spen class="form_ment"> 약속명 :&nbsp;
+              <input type="text" name="write_title" placeholder="제목">
+            </spen>
+            <i class="fa-solid fa-quote-right"></i>
+          </div>
 
         </div>
 
-    </div>
+
+        <!--약속시간 설정-->
+        <!-- 기본 시간설정을 js로 현재 시간 받아서 표시하기
+            write_date : 날짜 값 / write_time : 시간 값 -> 컨트롤러에서 합쳐서 insert
+            showTimeOption() : 선택 시 div.selected_choosetime 표시
+        -->
+        <fieldset class="inputform_time">
+          <legend>&nbsp;<i class="fa-solid fa-plus"></i> 시간을 정해주세요!&nbsp;</legend>
+
+          <div class="select_date">
+            <label>
+                                <span class="form_ment">날짜 :
+                                    <input type="date" name="write_date" min="2023-01-01" max="2024-01-01">
+                                </span>
+            </label>
+          </div>
+
+          <div class="select_time_type">
+            <span class="form_ment">시간 : </span>
+            <label title="참여자들이 상의하여 자유롭게 시간을 결정하기 위한 옵션입니다.">
+              <input type="radio" name="option_time" value="allday"> All Day
+              <input type="hidden" name="write_time" value="00:00">
+            </label>
+            <div class="form_row2">
+              <label title="정확한 약속시간을 설정하기 위한 옵션입니다.">
+                <input type="radio" name="option_time" value="choosetime" onclick="showTimeOption()"> 날짜
+                선택
+              </label>
+              <!--날짜선택 눌렀을 시 표시-->
+              <div class="selected_choosetime">
+                <i class="fa-solid fa-caret-down"></i>
+                <input type="time" name="write_time" id="select_time">
+              </div>
+            </div>
+          </div>
+
+        </fieldset>
+
+        <!--모집인원 설정-->
+        <fieldset class="inputform_personnel">
+          <legend>&nbsp;<i class="fa-solid fa-plus"></i> 모집할 인원 수를 정해주세요!&nbsp;</legend>
+          <!--최소인원 설정-->
+          <span class="form_ment">최소 인원 :<input type="number" name="select_min_num" value="1" min="1" max="20"></span>
+          <!--최대인원 설정-->
+          <span class="form_ment">최대 인원 : <input type="number" name="select_max_num" value="1" min="1" max="20"></span>
+        </fieldset>
+
+        <!--임금 설정-->
+        <!--카테고리 유급 설정 시 나타나도록 하면 굿-->
+        <fieldset class="inputform_pay">
+          <legend>&nbsp;<i class="fa-solid fa-plus"></i> 지급할 금액을 정해주세요!&nbsp;</legend>
+          <span class="form_ment">임금(시급) :<input type="number" name="select_pay" step="10" value="9160" title="현재 최저시급은 9160원입니다.">&nbsp;원</span>
+        </fieldset>
+
+        <!--약속장소 설정-->
+        <fieldset class="inputform_place">
+          <legend>&nbsp;<i class="fa-solid fa-plus"></i> 만날 장소를 정해주세요!&nbsp;</legend>
+          <!--장소 검색기능 필요!!-->
+          <span class="form_ment">위치 : </span>
+          <input type="search" placeholder="위치 검색...">
+          <!--지도표시 영역-->
+          <div class="map_container">
+            <div></div>
+          </div>
+
+        </fieldset>
+
+        <!--약속 내용 작성-->
+        <fieldset class="inputform_content">
+          <legend>&nbsp;<i class="fa-solid fa-plus"></i> 약속에 대해 설명해주세요!&nbsp;</legend>
+          <textarea name="write_content" cols="50" rows="10" placeholder="내용..."></textarea>
+        </fieldset>
+
+        <!--버튼 영역-->
+        <div class="inputform_button">
+          <button type="submit">수정</button>
+          <button>취소</button>
+        </div>
+
+      </form>
+    </section>
 
 
-    <footer>
-        <div> Team 2 in FinalProject 2023</div>
-    </footer>
+  </div>
+
+</div>
+
+
+<footer>
+  <div> Team 2 in FinalProject 2023</div>
+</footer>
 </body>
 
 </html>

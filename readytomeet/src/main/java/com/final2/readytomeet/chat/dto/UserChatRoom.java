@@ -8,6 +8,6 @@ import lombok.Setter;
 public class UserChatRoom {
 
     private String user_nickname;
-    private int appo_seq;
+    private String room_id;
     // getters and setters
 }

@@ -11,19 +11,19 @@ import java.util.List;
 
 @Mapper
 public interface UserChatRoomMapper {
-    @Insert("INSERT INTO USER_CHAT_ROOM (USER_NICKNAME, APPO_SEQ) VALUES (#{user_nickname}, #{appo_seq})")
+    @Insert("INSERT INTO USER_CHAT_ROOM (USER_NICKNAME, ROOM_ID) VALUES (#{user_nickname}, #{room_id})")
     void addUserToChatRoom(UserChatRoom userChatRoom);
 
-    @Select("SELECT USER_NICKNAME FROM USER_CHAT_ROOM WHERE APPO_SEQ = #{appo_seq}")
+    @Select("SELECT USER_NICKNAME FROM USER_CHAT_ROOM WHERE ROOM_ID = #{room_id}")
     List<String> getUsersInChatRoom(Long roomId);
 
-    @Select("SELECT r.* FROM CHAT_ROOM r INNER JOIN USER_CHAT_ROOM ucr ON r.APPO_SEQ = ucr.APPO_SEQ WHERE ucr.USER_NICKNAME = #{nickname}")
+    @Select("SELECT r.* FROM CHAT_ROOM r INNER JOIN USER_CHAT_ROOM ucr ON r.ROOM_ID = ucr.ROOM_ID WHERE ucr.USER_NICKNAME = #{nickname}")
     List<ChatRoom> getChatRoomsByUserNickname(String nickname);
 
 
-    @Insert("INSERT INTO USER_CHAT_ROOM (USER_NICKNAME, APPO_SEQ) VALUES (#{user_nickname}, #{appo_seq})")
-    void insertUserChatRoom(@Param("user_nickname") String user_nickname, @Param("appo_seq") int appo_seq);
+    @Insert("INSERT INTO USER_CHAT_ROOM (USER_NICKNAME, ROOM_ID) VALUES (#{user_nickname}, #{room_id})")
+    void insertUserChatRoom(@Param("user_nickname") String user_nickname, @Param("room_id") String room_id);
 
-    @Select("SELECT COUNT(*) FROM USER_CHAT_ROOM WHERE USER_NICKNAME = #{nickname} AND APPO_SEQ = #{appo_seq}")
-    int isUserJoined(@Param("nickname") String nickname, @Param("appo_seq") int appo_seq);
+    @Select("SELECT COUNT(*) FROM USER_CHAT_ROOM WHERE USER_NICKNAME = #{nickname} AND ROOM_ID = #{room_id}")
+    int isUserJoined(@Param("nickname") String nickname, @Param("room_id") String room_id);
 }
