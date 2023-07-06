@@ -23,12 +23,20 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'com.vikingsen.inject:worker-inject:0.2.2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     compileOnly 'org.projectlombok:lombok'
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+
+	//note  공백 및 각종체크 도와주는 어노테이션
+	implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.5'
+
+	//note mybatis 관련
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+
 	implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
 
 	//websocket

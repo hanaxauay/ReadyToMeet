@@ -37,7 +37,7 @@
         <div class="main_wrap">
             <form class="inputImg" method="post" th:action="@{/user/upload}" enctype="multipart/form-data">
                 <div class="addImage" id="image-show">
-                    <img th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>
+<!--                    <img th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>-->
 <!--                    <img th:src="@{download/{filename}(filename=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>-->
                 </div>
                 <input type="file" name="file" multiple="multiple">
@@ -46,37 +46,39 @@
 
             <div class="content">
                 <b>아이디</b>
-                <div class="field">
-                    <div th:text="${dto?.user_id}"></div>
-                </div>
+<!--                <div class="field">-->
+<!--&lt;!&ndash;                    <div th:text="${dto?.user_id}"></div>&ndash;&gt;-->
+<!--                    <div name="user_id" valus="${userInfo.user_id}" readonly></div>-->
+<!--                </div>-->
+                <div><input class="field" value="${userInfo.user_id" readonly></div>
                 <b>비밀번호</b>
                 <div class="field">
-                    <div th:text="${dto?.user_pw}"></div>
+                    <div th:text="${userInfo.user_pw}"></div>
                 </div>
                 <b>전화번호</b>
                 <div class="field">
-                    <div th:text="${dto?.user_phone}"></div>
+                    <div th:text="${userInfo.user_phone}"></div>
                 </div>
                 <b>이메일</b>
                 <div class="field">
-                    <div th:text="${dto?.user_email}"></div>
+                    <div th:text="${userInfo.user_email}"></div>
                 </div>
                 <b>이름</b>
                 <div class="field">
-                    <div th:text="${dto?.user_name}"></div>
+                    <div th:text="${userInfo.user_name}"></div>
                 </div>
                 <b>나이</b>
                 <div class="field">
-                    <div th:text="${dto?.user_age}"></div>
+                    <div th:text="${userInfo.user_age}"></div>
                 </div>
                 <b>지역</b>
                 <div class="field">
-                    <div th:text="${dto?.user_location}"></div>
+                    <div th:text="${userInfo.user_location}"></div>
                 </div>
 
                 <b>자기 소개</b>
                 <div class="area">
-                    <div class=textarea th:text="${dto?.user_content}"></div>
+                    <div class=textarea th:text="${userInfo.user_content}"></div>
                     <div class="button">
                         <input type="button" value="신분증 인증" th:onclick="showPopup();"/>
                         <input type="button" value="수정" th:onclick="location.href='update'">

@@ -1,13 +1,16 @@
 package com.final2.readytomeet.controller;
 
 
+import com.final2.readytomeet.Mapper.UserMapper;
 import com.final2.readytomeet.dto.UserDto;
 import com.final2.readytomeet.service.UserService;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,17 +21,104 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Inject
-    private UserService service;
+    @Autowired
+    private UserService userService;
+//
+//    @Autowired
+//    private UserMapper userMapper;
+
+    @RequestMapping("/login")
+    public String login() {
+        logger.info("LOGIN PAGE");
+
+        return "login";
+    }
+
+
+//    @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
+//    public String userLogin(UserDto dto, HttpServletRequest request) {
+//
+//        HttpSession session = request.getSession();
+//        UserDto res = userService.login(dto);
+//
+//        if( res != null ) {
+//
+//            session.setAttribute("res", res);
+//            return "redirect:main";
+//        } else {
+//            return "redirect:login";
+//        }
+//    }
+//
+//
+//
+
+
+
+
+
+//    @Autowired
+//    UserController(UserService userService){
+//        this.userService = userService;
+//    }
+//
+//    @GetMapping("/user")
+//    @ResponseBody
+//    public List<Map<String, Object>> getUser(){
+//        return userService.getUser();
+//    }
+
+
+
+
+
+
+//
+//    //note 유저 상세정보 조회
+//    @RequestMapping(value = "/user", method = RequestMethod.GET)
+//    public String user(HttpSession session, Model model){
+//        UserDto dto = (UserDto)session.getAttribute("userDto");
+//        String user_id = dto.getUser_id();
+//
+//
+//        UserDto userDto = userMapper.readUser(user_id);
+//        model.addAttribute("dto", dto);
+//
+//        return "userview";
+//    }
+
+
+
+
+
+
+//    @RequestMapping(value = "/user", method = RequestMethod.GET)
+//    public void viewGet(HttpSession session, Model model) throws Exception{
+//        String user_id  = (String) session.getAttribute("user_id");
+//
+//        UserDto dto = userService.readUser(user_id);
+//
+//        model.addAttribute("dto", dto);
+//
+//
+//    }
+
+
+
+
+
 
 //    @Resource(name = "uimagePath")
 //    private String uimagePath;
@@ -58,79 +148,40 @@ public class UserController {
 //    }
 
 
-
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public String pofile(HttpSession session, Model model) throws Exception {
-//        Object userObj = session.getAttribute("login");
-//        UserDto dto = (UserDto) userObj;
-//        String user_id = dto.getUser_id();
-//
-//        model.addAttribute("UserDto", dto);
-
-        String user_id = (String) session.getAttribute("login");
-
-        UserDto dto = service.readUser(user_id);
-
-       model.addAttribute("UserDto", dto);
-
-
-        return "userview";
-    }
-
-    /* 회원 정보 보기 */
-//    @GetMapping("/user")
-//    public void userGet(HttpSession session, Model model) throws Exception {
-//        String user_id = (String) session.getAttribute("user_id");
-//
-//        UserDto dto = service.readUser(user_id);
-//
-//        model.addAttribute("UserDto", dto);
-//
+//    @PostMapping("/upload")
+//    public String upload(UserDto dto, Model model, @RequestParam(name = "file", required = false) MultipartFile file) {
+//        try {
+//            if (file != null && !file.isEmpty()) {
+//                userService.upload(dto, file);
+//            } else {
+//                userService.upload(dto, null);
+//            }
+//            model.addAttribute("message", "사진 업로드 완료되었습니다.");
+//            model.addAttribute("searchUrl", "/user/view");
+//            return "message";
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            model.addAttribute("message", "사진 업로드 중 오류가 발생했습니다.");
+//            model.addAttribute("searchUrl", "/user/view");
+//            return "message";
+//        }
 //    }
 //
 //
-//    @GetMapping("/view")
-//    public String readUser(String user_id, Model model) {
-//        model.addAttribute("dto", service.readUser(user_id));
-//        return "userview";
+//    @GetMapping("/updateform")
+//    public String updateform(Model model, String user_id) {
+//        model.addAttribute("dto");
+//        return "userupdate";
 //    }
-
-
-
-    @PostMapping("/upload")
-    public String upload(UserDto dto, Model model, @RequestParam(name = "file", required = false) MultipartFile file) {
-        try {
-            if (file != null && !file.isEmpty()) {
-                service.upload(dto, file);
-            } else {
-                service.upload(dto, null);
-            }
-            model.addAttribute("message", "사진 업로드 완료되었습니다.");
-            model.addAttribute("searchUrl", "/user/view");
-            return "message";
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("message", "사진 업로드 중 오류가 발생했습니다.");
-            model.addAttribute("searchUrl", "/user/view");
-            return "message";
-        }
-    }
-
-
-    @GetMapping("/updateform")
-    public String updateform(Model model, String user_id) {
-        model.addAttribute("dto");
-        return "userupdate";
-    }
-
-    /* 회원 정보 업데이트 */
-    @GetMapping("/update")
-    public String updateGet(HttpSession session, Model model) throws Exception {
-        model.addAttribute("userDto", service.readUser((String)session.getAttribute("user_id")));
-
-        return "userupdate";
-
-    }
+//
+//    /* 회원 정보 업데이트 */
+//    @GetMapping("/update")
+//    public String updateGet(HttpSession session, Model model) throws Exception {
+//        model.addAttribute("userDto", userService.readUser((String)session.getAttribute("user_id")));
+//
+//        return "userupdate";
+//
+//    }
 
 
 //    @PostMapping("/update")

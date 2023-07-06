@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -156,7 +156,7 @@
       </form>
 
     </li>
-    <li class="liMypage"><a href="/user/view"><img src="../image/mypage.png" class="imgMypage"></a></li>
+    <li class="liMypage"><a th:href="@{|/user/#{user_id}|}"><img src="../image/mypage.png" class="imgMypage"></a></li>
   </ul>
 </nav>
 

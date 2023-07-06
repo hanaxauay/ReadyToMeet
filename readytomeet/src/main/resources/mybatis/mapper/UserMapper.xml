@@ -1,0 +1,33 @@
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+
+<!--<mapper namespace="user">-->
+<!--    <select id="readUser" resultType="com.final2.readytomeet.dto.UserDto">-->
+<!--        select user_id,-->
+<!--               user_pw,-->
+<!--               user_phone,-->
+<!--               user_email,-->
+<!--               user_name,-->
+<!--               user_nickname,-->
+<!--               user_age,-->
+<!--               user_gender,-->
+<!--               user_location,-->
+<!--               user_img,-->
+<!--               user_path,-->
+<!--               user_content-->
+<!--        from USER-->
+<!--        where USER_ID = #{user_id}-->
+<!--    </select>-->
+
+<!--&lt;!&ndash;    <select id="login" parameterType="userDto" resultType="userDto">&ndash;&gt;-->
+<!--&lt;!&ndash;        SELECT *&ndash;&gt;-->
+<!--&lt;!&ndash;        FROM USER&ndash;&gt;-->
+<!--&lt;!&ndash;        WHERE USER_ID = #{user_id}&ndash;&gt;-->
+<!--&lt;!&ndash;        AND USER_PW = #{user_pw}&ndash;&gt;-->
+<!--&lt;!&ndash;    </select>&ndash;&gt;-->
+
+
+
+
+
+
+<!--</mapper>-->
