@@ -30,8 +30,8 @@ public interface UserService {
 //
 //
 //
-//    //note 회원정보 보기
-//    public UserDto readUser(String user_id);
+    //note 회원정보 보기
+    public UserDto readUser(String user_id);
 
 
 }

@@ -36,8 +36,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 //
-//    @Autowired
-//    private UserMapper userMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @RequestMapping("/login")
     public String login() {

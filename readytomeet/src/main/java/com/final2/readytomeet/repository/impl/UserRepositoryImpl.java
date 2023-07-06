@@ -18,19 +18,19 @@ import static javax.xml.stream.XMLStreamConstants.NAMESPACE;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 //
-//    @Inject
-//    private SqlSession sqlSession;
-//
-//
-//    private static final String namespace = "com.final2.readytomeet.Mapper.UserMapper";
-//
-//    //note 회원정보조회
-//    @Override
-//    public UserDto readUser(String user_id) throws Exception {
-//        //테스트(컨트롤러) 호출 -> 정보를 저장 -> DB로이동
-//        UserDto dto = sqlSession.selectOne(namespace+".readUser", user_id); //괄호안의 물음표를 콤마뒤에 쓰는거임
-//        return dto;
-//    }
+    @Inject
+    private SqlSession sqlSession;
+
+
+    private static final String namespace = "com.final2.readytomeet.Mapper.UserMapper";
+
+    //note 회원정보조회
+    @Override
+    public UserDto readUser(String user_id) throws Exception {
+        //테스트(컨트롤러) 호출 -> 정보를 저장 -> DB로이동
+        UserDto dto = sqlSession.selectOne(namespace+".readUser", user_id); //괄호안의 물음표를 콤마뒤에 쓰는거임
+        return dto;
+    }
 //
 //    /* 회원정보조회 - ID, PW 정보에 해당하는 사용자 정보*/
 //    @Override

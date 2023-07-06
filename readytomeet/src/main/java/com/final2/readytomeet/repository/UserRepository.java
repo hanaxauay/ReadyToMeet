@@ -9,8 +9,8 @@ import javax.inject.Inject;
 public interface UserRepository{
 //
 //
-//    //note 회원정보
-//    public UserDto readUser(String user_id) throws Exception;
+    //note 회원정보
+    public UserDto readUser(String user_id) throws Exception;
 //    public UserDto readUserWithIDPW(String user_id, String user_pw) throws Exception;
 //
 //    // 회원정봅 수정

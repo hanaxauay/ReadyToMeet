@@ -2,7 +2,7 @@ package com.final2.readytomeet.service.impl;
 
 
 
-import com.final2.readytomeet.dao.UserDao;
+
 import com.final2.readytomeet.dto.UserDto;
 import com.final2.readytomeet.repository.UserRepository;
 import com.final2.readytomeet.service.UserService;
@@ -22,13 +22,14 @@ import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-    @Autowired
-    private UserDao dao;
-//    private UserMapper userMapper;
 //
-//    @Inject
-//    private UserRepository userRepository;
+//    @Autowired
+//    private UserDao dao;
+@Autowired
+    private UserMapper userMapper;
+//
+    @Inject
+    private UserRepository userRepository;
 
     //note 로그인
 //    @Override
@@ -61,18 +62,18 @@ public class UserServiceImpl implements UserService {
 
 
     //note 회원정보 조회
-//    @Override
-//    public UserDto readUser(String user_id){
-//        UserDto dto = null;
-//
-//        try {
-//            dto = userMapper.readUser;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return dto;
-//    }
+    @Override
+    public UserDto readUser(String user_id){
+        UserDto dto = null;
+
+        try {
+            dto = userMapper.readUser(user_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return dto;
+    }
 
 //    @Override
 //    public List<UserDto> selectList() {

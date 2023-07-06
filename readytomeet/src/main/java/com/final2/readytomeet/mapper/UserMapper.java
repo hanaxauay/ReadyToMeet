@@ -15,7 +15,7 @@ public interface UserMapper {
 
     public List<Map<String, Object>> getUser();
 
-    public UserDto readUser(String user_Id);
+//    public UserDto readUser(String user_Id);
 
 
 
@@ -28,8 +28,8 @@ public interface UserMapper {
 //    @Update(" UPDATE USER SET user_img=#{user_img} WHERE user_id=#{user_id} ")
 //    void updateUimage(UserDto dto);
 //
-////    @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
-////    UserDto readUser(String user_id);
+    @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
+    UserDto readUser(String user_id);
 //
 //    @Update(" UPDATE USER SET USER_NICKNAME=#{user_nickname}, USER_PW=#{user_pw}, USER_PHONE=#{user_phone}, USER_EMAIL=#{user_email}, USER_LOCATION=#{user_location}, USER_CONTENT=#{user_content} WHERE USER_ID=#{user_id} ")
 //    void updateUser(UserDto dto);
