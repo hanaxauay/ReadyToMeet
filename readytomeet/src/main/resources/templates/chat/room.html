@@ -28,8 +28,8 @@
 
         .list-group-item {
             cursor: pointer;
-            background-color: #FF7777; /* 변경: 배경색상 */
-            color: #FFFFFF; /* 변경: 글자색상 */
+            background-color: #FFFFFF; /* 변경: 배경색상 */
+            color: #FF7777; /* 변경: 글자색상 */
         }
 
         /* 변경: 입력 필드 스타일 */
@@ -52,33 +52,12 @@
             <h3>나의 채팅 리스트</h3>
         </div>
     </div>
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Room Name</label>
-        </div>
-        <input type="text" class="form-control" v-model="room_name" v-on:keyup.enter="createRoom">
-        <div class="input-group-append">
-            <button class="btn btn-primary" type="button" @click="createRoom">Create Room</button>
-        </div>
-    </div>
     <ul class="list-group">
         <li class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.room_id"
             v-on:click="enterRoom(item.room_id, item.room_name)">
             {{ item.room_name }}
         </li>
     </ul>
-
-<!--        <ul class="list-group" th:each="userChatRoom : ${userChatRooms}">-->
-<!--        <li class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.room_id"-->
-<!--            v-on:click="enterRoom(item.room_id, item.room_name)" th:text="${userChatRoom.room_name}"> [[${"userChatRooms.room_name"}]]-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--    <ul class="list-group">-->
-<!--        <li class="list-group-item list-group-item-action" th:each="userChatRoom : ${userChatRooms}" th:text="${userChatRoom.room_name}" v-on:click="enterRoom(userChatRoom.room_id, userChatRoom.room_name)"></li>-->
-<!--    </ul>-->
-
-
-
 </div>
 <!-- JavaScript -->
 <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>

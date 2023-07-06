@@ -36,7 +36,7 @@ public interface AppoService {
 
 
     //약속 생성
-    public int insertActivity(AppoDto appodto);
+    public int insertActivity(AppoDto appoDto);
 
     public int insertVehicle(AppoDto appodto);
 

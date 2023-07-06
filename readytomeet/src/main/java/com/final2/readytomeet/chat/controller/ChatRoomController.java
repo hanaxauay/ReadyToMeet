@@ -35,11 +35,18 @@ public class ChatRoomController {
         String nickname = loginUser.getUser_nickname();
         List<ChatRoom> userChatRooms = userChatRoomRepository.getChatRoomsByUserNickname(nickname);
         model.addAttribute("userChatRooms", userChatRooms);
-        model.addAttribute("nickname", nickname); // Add this line
+        model.addAttribute("nickname", nickname);
         return "chat/room";
     }
 
     // 모든 채팅방 목록 반환
+    // 채팅방 생성
+    @PostMapping("/chat/room")
+    @ResponseBody
+    public ChatRoom createRoom(@RequestParam String name) {
+        return chatRoomRepository.createChatRoom(name);
+    }
+
     @GetMapping("/chat/rooms")
     @ResponseBody
     public List<ChatRoom> room(HttpSession session) {
@@ -48,19 +55,17 @@ public class ChatRoomController {
         return userChatRoomRepository.getChatRoomsByUserNickname(nickname);
     }
 
-    // 채팅방 생성
-    @PostMapping("/chat/room")
-    @ResponseBody
-    public ChatRoom createRoom(@RequestParam String name) {
-        return chatRoomRepository.createChatRoom(name);
-    }
-
     // 채팅방 입장 화면
     @GetMapping("/chat/room/{room_id}")
     public String roomDetail(Model model, @PathVariable String room_id, HttpSession session) {
-        ChatRoom chatRoom = new ChatRoom();
-        chatRoom.setRoom_id(room_id);
-        model.addAttribute("room_id", room_id);
+        List<ChatMessage> chatRoom = chatMessageRepository.getChatMessagesByRoomId(room_id);
+//        ChatRoom chatRoom = new ChatRoom();
+//        chatRoom.setRoom_id(room_id);
+        model.addAttribute("userChatRooms", chatRoom);
+
+        ChatRoom chatRoom1 = chatRoomRepository.getChatRoomById(room_id);
+        model.addAttribute("chatRoom1", chatRoom1);
+
 
 
         // 사용자를 채팅방에 추가
@@ -74,21 +79,16 @@ public class ChatRoomController {
         }
         // 로그인한 사용자의 닉네임도 모델에 추가
         model.addAttribute("loginUser", loginUser);
-
-
-
         return "chat/roomdetail";
     }
 
-    // 모든 채팅 목록 반환
     @GetMapping("/chats/room/{room_id}")
     @ResponseBody
-    public List<ChatMessage> getChats(Model model, @PathVariable String room_id,HttpSession session) {
-        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
-        String nickname = loginUser.getUser_nickname();
-        return chatMessageMapper.getChatMessagesByRoomId(room_id);
-
+    public List<ChatMessage> getChats(@PathVariable String room_id) {
+        return chatMessageRepository.getChatMessagesByRoomId(room_id);
     }
+
+
 
 }
 

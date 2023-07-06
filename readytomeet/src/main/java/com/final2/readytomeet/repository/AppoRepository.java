@@ -36,7 +36,7 @@ public interface AppoRepository {
     public AppoDto selectAppointmentOneList(int appo_seq);
 
 
-    public int insertActivity(AppoDto appodto);
+    public int insertActivity(AppoDto appoDto);
     public int insertVehicle(AppoDto appodto);
     public int insertWork(AppoDto appodto);
 
