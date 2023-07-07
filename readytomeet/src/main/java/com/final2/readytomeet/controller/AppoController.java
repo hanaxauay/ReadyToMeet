@@ -129,7 +129,7 @@ public class AppoController {
         UserDto loggedInUser = (UserDto) session.getAttribute("loggedInUser");
 
         AppoDto appoDto = new AppoDto();
-//        appoDto.setAppo_seq(form.getAppo_seq());
+        appoDto.setAppo_seq(form.getAppo_seq());
         appoDto.setAppo_category(form.getAppo_category());
         appoDto.setAppo_title(form.getAppo_title());
         appoDto.setAppo_time(form.getAppo_time());
@@ -154,8 +154,9 @@ public class AppoController {
 
                 //성공 시 해당 약속 상세페이지 이동
                 return "redirect:/appointment/activityList/all";
-            } else {
-                return "redirect:/appointment/insertActivityForm";
+            }else {
+                //실패 시 처리 작업 필요하면 추가
+                return "redirect:/appointment/updateActivityForm?appo_seq="+appoDto.appo_seq;
             }
         } else {
             return "redirect:/login";
@@ -163,7 +164,7 @@ public class AppoController {
     }
             //Activity 약속 수정 폼 이동 (예정)
             @GetMapping("/updateActivityForm")
-            public String updateActivityForm (Model model, @RequestParam int appo_seq){
+            public String updateActivityForm (Model model, int appo_seq){
                 model.addAttribute("activityDto", apposervice.selectAppointmentOneList(appo_seq));
                 return "activityUpdate";
             }
@@ -171,25 +172,25 @@ public class AppoController {
             //Activity 약속 수정 (예정)
             @PostMapping("/updateActivity")
             public String updateActivity (AppoDto appodto){
-                if (apposervice.updateActivity(appodto) > 0) {
+                if(apposervice.updateActivity(appodto) > 0){
                     //성공 시 해당 약속 상세페이지 이동
-                    return "redirect:/appointment/detailActivity?appo_seq=" + appodto.appo_seq;
-                } else {
+                    return "redirect:/appointment/detailActivity?appo_seq="+appodto.appo_seq;
+                }else {
                     //실패 시 처리 작업 필요하면 추가
-//                    return "redirect:/appointment/activityUpdate";
-                    //alert띄우기
-                    return null;
+                    return "redirect:/appointment/updateActivityForm?appo_seq="+appodto.appo_seq;
                 }
             }
 
             //Activity 약속 삭제
             @GetMapping("/deleteActivity")
-            public String deleteActivity ( int appo_seq){
+            public String deleteActivity (int appo_seq){
                 //삭제 시 필요한 메세지 추가
-                apposervice.deleteAppointment(appo_seq);
-                return "activityList/all";
+                if (apposervice.deleteAppointment(appo_seq) > 0) {
+                    return "redirect:/activityList/all";
+                } else {
+                    return "redirect:/appointment/detailActivity?appo_seq=" + appo_seq;
+                }
             }
-
 
             //----------------Vehicle 페이지 관련 컨트롤-----------------
             //Vehicle 기본 페이지 목록 출력
@@ -220,7 +221,7 @@ public class AppoController {
 
             //Vehicle 상세페이지 이동 (예정)
             @GetMapping("/detailVehicle")
-            public String detailVehiclePage (Model model,int appo_seq){
+            public String detailVehiclePage (Model model, int appo_seq){
                 //로그인 세션 가져와서 내가 작성한 글이면 채팅방 개설하기랑 수정 목록 삭제만 들어 있는 detail페이지로 보내기.
                 UserDto loggedInUser = (UserDto) session.getAttribute("loggedInUser");
                 AppoDto appoDto = apposervice.selectAppointmentOneList(appo_seq);
@@ -228,7 +229,7 @@ public class AppoController {
 
                     if (loggedInUser.getUser_id().equals(appoDto.getAppo_host())) {
                         model.addAttribute("vehicleDto", appoDto);
-                        return "vehicleDetail";
+                        return "vehicleDetailMine";
                     } else {
                         model.addAttribute("vehicleDto", appoDto);
                         return "vehicleDetail";
@@ -313,7 +314,7 @@ public class AppoController {
             @GetMapping("/deleteVehicle")
             public String deleteVehicle ( int appo_seq){
                 //삭제 시 필요한 메세지 추가
-                apposervice.deleteAppointment(appo_seq);
+//                apposervice.deleteAppointment(appo_seq);
                 return "vehicleList/all";
             }
 
@@ -346,8 +347,20 @@ public class AppoController {
     //Work 상세페이지 이동 (예정)
     @GetMapping("/detailWork")
     public String detailWorkPage(Model model, int appo_seq){
-        model.addAttribute("workDto", apposervice.selectAppointmentOneList(appo_seq));
-        return "workDetail";
+        //로그인 세션 가져와서 내가 작성한 글이면 채팅방 개설하기랑 수정 목록 삭제만 들어 있는 detail페이지로 보내기.
+        UserDto loggedInUser = (UserDto) session.getAttribute("loggedInUser");
+        AppoDto appoDto = apposervice.selectAppointmentOneList(appo_seq);
+        if (loggedInUser != null) {
+
+            if (loggedInUser.getUser_id().equals(appoDto.getAppo_host())) {
+                model.addAttribute("workDto", appoDto);
+                return "workDetailMine";
+            } else {
+                model.addAttribute("workDto", appoDto);
+                return "workDetail";
+            }
+        }
+        return "redirect:/login";
     }
 
     //Work 약속 생성 폼 이동
@@ -411,7 +424,7 @@ public class AppoController {
     @GetMapping("/deleteWork")
     public String deleteWork(int appo_seq){
         //삭제 시 필요한 메세지 추가
-        apposervice.deleteAppointment(appo_seq);
+//        apposervice.deleteAppointment(appo_seq);
         return "workBaseListPage";
     }
 }

@@ -43,32 +43,32 @@
     <div class="chat-header">
       <h3 th:text="${chatRoom1.room_name}"></h3>
     </div>
-<!--  <div class="input-group mt-5">-->
-<!--    <div class="input-group-prepend">-->
-<!--      <label class="input-group-text">Message</label>-->
-<!--    </div>-->
-<!--    <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">-->
-<!--    <div class="input-group-append">-->
-<!--      <button class="btn btn-primary" type="button" @click="sendMessage">Send</button>-->
-<!--    </div>-->
-<!--  </div>-->
-  <ul class="list-group chat-messages">
-    <li class="list-group-item" v-for="message in messages">
-      {{ message.user_nickname }} - {{ message.message }}
-      <span style="float: right">{{ formatDate(message.timestamp) }}</span>
-    </li>
-  </ul>
-  <div class="chat-input">
-  <div class="input-group" >
-    <div class="input-group-prepend">
-      <label class="input-group-text">Message</label>
+    <!--  <div class="input-group mt-5">-->
+    <!--    <div class="input-group-prepend">-->
+    <!--      <label class="input-group-text">Message</label>-->
+    <!--    </div>-->
+    <!--    <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">-->
+    <!--    <div class="input-group-append">-->
+    <!--      <button class="btn btn-primary" type="button" @click="sendMessage">Send</button>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <ul class="list-group chat-messages">
+      <li class="list-group-item" v-for="message in messages">
+        {{ message.user_nickname }} - {{ message.message }}
+        <span style="float: right">{{ formatDate(message.timestamp) }}</span>
+      </li>
+    </ul>
+    <div class="chat-input">
+      <div class="input-group" >
+        <div class="input-group-prepend">
+          <label class="input-group-text">Message</label>
+        </div>
+        <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" @click="sendMessage">Send</button>
+        </div>
+      </div>
     </div>
-    <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">
-    <div class="input-group-append">
-      <button class="btn btn-primary" type="button" @click="sendMessage">Send</button>
-    </div>
-  </div>
-  </div>
   </div>
 </div>
 <!-- JavaScript -->
@@ -84,7 +84,7 @@
   var vm = new Vue({
     el: '#app',
     data: {
-      roomId: '',
+      appo_seq: '',
       room: {},
       sender: '', // 수정된 부분
       message: '',
@@ -92,11 +92,7 @@
       timestamp: ''
     },
     created() {
-<<<<<<< HEAD
       this.appo_seq = localStorage.getItem('wschat.appo_seq');
-=======
-      this.roomId = localStorage.getItem('wschat.roomId');
->>>>>>> 182079b9dc963dde3b45a136a06fe4e96b75d745
       this.sender = [[${loginUser.user_nickname}]];
       this.findRoom();
       this.getChatMessages();
@@ -107,10 +103,10 @@
         chatContainer.scrollTop = chatContainer.scrollHeight;
       },
       findRoom: function() {
-        axios.get('/chat/room/' + this.roomId).then(response => {
+        axios.get('/chat/room/' + this.appo_seq).then(response => {
           this.room = response.data;
         });
-        axios.get('/chats/room/' + this.roomId).then(response => {
+        axios.get('/chats/room/' + this.appo_seq).then(response => {
           this.messages = response.data;
           // 가장 최근 메시지를 가져와서 표시
           if (this.messages.length > 0) {
@@ -137,7 +133,7 @@
       sendMessage: function() {
         ws.send("/pub/chat/message", {}, JSON.stringify({
           type: 'TALK',
-          room_id: this.roomId,
+          appo_seq: this.appo_seq,
           user_nickname: this.sender,
           message: this.message
         }));
@@ -166,13 +162,13 @@
 
   function connect() {
     ws.connect({}, function(frame) {
-      ws.subscribe("/sub/chat/room/" + vm.$data.roomId, function(message) {
+      ws.subscribe("/sub/chat/room/" + vm.$data.appo_seq, function(message) {
         var recv = JSON.parse(message.body);
         vm.recvMessage(recv);
       });
       ws.send("/pub/chat/message", {}, JSON.stringify({
         type: 'ENTER',
-        room_id: vm.$data.roomId,
+        appo_seq: vm.$data.appo_seq,
         user_nickname: vm.$data.sender
       }));
     }, function(error) {

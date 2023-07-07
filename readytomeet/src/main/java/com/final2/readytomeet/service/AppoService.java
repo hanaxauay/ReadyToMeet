@@ -47,4 +47,6 @@ public interface AppoService {
     public int updateActivity(AppoDto appodto);
     public int updateVehicle(AppoDto appodto);
     public int updateWork(AppoDto appodto);
+
+    int deleteAppointment(int appo_seq);
 }

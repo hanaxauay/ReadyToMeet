@@ -97,7 +97,7 @@
               <div class="appointment_detail_area_row1">
                 <div class="appointment_date">
                   <span class="appointment_ment"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;시간</span>
-                  <span class="appointment_text" th:text="${#dates.format(dto.appo_time,'MM월 dd일 HH:mm')}"></span>
+                  <span class="appointment_text" th:text="${dto.appo_time}">[날짜 및 시간]</span>
                 </div>
                 <div class="appointment_application">
                   <span class="appointment_ment"><i class="fa-solid fa-users"></i>&nbsp;&nbsp;모집 인원</span>
@@ -161,12 +161,11 @@
               <!--목록-->
               <button class="detail_button" id="list_button" th:onclick="|location.href='@{/appointment/activityList/all}'|">목록</button>
               <!--수정하기-->
-              <a class="detail_button" id="update_button" th:onclick="|location.href='@{/appointment/updateActivityForm?appo_seq={appo_seq}(appo_seq=${dto.appo_seq})}'|">수정</a>
+              <button class="detail_button" id="update_button" th:onclick="|location.href='@{/appointment/updateActivityForm(appo_seq=${dto.appo_seq})}'|">수정</button>
               <!--삭제하기-->
-              <button class="detail_button" id="delete_button">삭제</button>
+              <button class="detail_button" id="delete_button" th:onclick="|location.href='@{/appointment/deleteActivity(appo_seq=${dto.appo_seq})}'|">삭제</button>
             </div>
             <div class="wrap_button_container_row2">
-
             </div>
           </div>
 
@@ -223,14 +222,14 @@
           axios
                   .post('/chat/room', params)
                   .then(response => {
-                    alert(response.data.room_name + " chat room has been created.");
+                    alert(response.data.room_name + " 방이 생성되었습니다 ! ");
                     this.room_name = '';
                     this.appo_seq = ''; // Added: Reset appoSeq value
                     this.findAllRoom();
                     this.enterRoom(response.data.appo_seq, response.data.room_name);
                   })
                   .catch(response => {
-                    alert("당신이 이미 생성한 채팅방입니다.");
+                    alert("이 약속의 채팅방은 당신이 이미 만들었습니다 ! ");
                   });
         }
       },

@@ -171,62 +171,71 @@
                         </div>
                     </div>
 
-                    <button><a th:href="@{/chat/room/{appo_seq}(appo_seq=${dto.appo_seq})}" th:text="'채팅방 참여하기'">dd</a></button>
+                    <div class="chat_button_container" id="app" v-cloak>
+                        <!-- Chat join button container -->
+                        <input type="number" class="detail_button" id="appo_seq_input" v-model="appo_seq" placeholder="Enter appo_seq value" hidden="hidden">
+                        <input type="text" class="detail_button" id="chat_button" v-model="room_name" v-on:keyup.enter="createRoom" placeholder="개설할 채팅방 이름을 입력하세요.">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" @click="createRoomWithAppoSeq">채팅방 생성</button>
+                        </div>
+                    </div>
 
-                    <!--                      activityDetailPageMine.html여기에서 appo_seq로 구분해서 채팅방 생성 -> 여기는 appo_seq에 맞는 채팅방만이 나와야함. -->
-                    <!--                    </div>-->
                 </div>
-
             </div>
-
         </article>
-
     </div>
-
 </div>
+</body>
+
 <!-- JavaScript -->
 <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
 <script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
 <script>
+
     var vm = new Vue({
         el: '#app',
         data: {
+            appo_seq: '', // Added: appo_seq value
             room_name: '',
             chatrooms: []
         },
+
         created() {
             this.findAllRoom();
         },
         methods: {
+
             findAllRoom: function() {
                 axios.get('/chat/rooms').then(response => {
                     this.chatrooms = response.data;
                 });
             },
-            createRoom: function() {
+            createRoomWithAppoSeq: function() { // Changed: Added createRoomWithAppoSeq method
                 if (this.room_name === "") {
-                    alert("채팅방 이름을 입력하세요");
+                    alert("공백은 허용하지 않습니다.");
+                    return;
+                } else if (this.appo_seq === "") { // Added: Check if appo_seq value is empty
+                    alert("Please enter the appo_seq value");
                     return;
                 } else {
                     var params = new URLSearchParams();
                     params.append("name", this.room_name);
-                    axios.post('/chat/room', params)
+                    params.append("appo_seq", this.appo_seq); // Added: Pass the appo_seq value
+                    axios
+                        .post('/chat/room', params)
                         .then(response => {
-                            alert("Room " + response.data.room_name + " 채팅방이 생성되었습니다.");
+                            alert(response.data.room_name + " 방이 생성되었습니다 ! ");
                             this.room_name = '';
+                            this.appo_seq = ''; // Added: Reset appoSeq value
                             this.findAllRoom();
-                            this.enterRoom(response.data.appo_seq, response.data.room_name); // 생성된 채팅방으로 입장
+                            this.enterRoom(response.data.appo_seq, response.data.room_name);
                         })
                         .catch(response => {
-                            alert("채팅방 생성에 실패했습니다.");
+                            alert("당신이 이미 생성한 채팅방입니다.");
                         });
                 }
             },
-            joinChatRoom() {
-                var appo_seq = this.appo_seq; // Get the appo_seq value
-                var url = "/chat/room/" + appo_seq; // Create the URL with appo_seq parameter
-                window.location.href = url; // Redirect to the chat room page
-            },
+
             enterRoom: function(appo_seq, roomName) {
                 var sender = localStorage.getItem('wschat.sender');
                 if (!sender) {
@@ -238,7 +247,12 @@
             }
         }
     });
-
+    var urlParams = new URLSearchParams(window.location.search);
+    var appoSeqParam = urlParams.get('appo_seq');
+    if (appoSeqParam) {
+        var appoSeqInput = document.getElementById('appo_seq_input');
+        appoSeqInput.value = appoSeqParam;
+        vm.appo_seq = parseInt(appoSeqParam);
+    }
 </script>
-</body>
 </html>

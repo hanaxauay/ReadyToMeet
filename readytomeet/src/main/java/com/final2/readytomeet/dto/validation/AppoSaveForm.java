@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @Data
 public class AppoSaveForm {
 
-//    private int appo_seq;
+    private int appo_seq;
 
     @NotNull
     private String appo_category;
