@@ -1,5 +1,6 @@
 package com.final2.readytomeet.repository;
 
+<<<<<<< HEAD
 import com.final2.readytomeet.dto.UserDto;
 
 import javax.inject.Inject;
@@ -18,4 +19,7 @@ public interface UserRepository{
 
 
 
+=======
+public interface UserRepository {
+>>>>>>> 182079b9dc963dde3b45a136a06fe4e96b75d745
 }

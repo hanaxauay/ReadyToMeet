@@ -1,7 +1,7 @@
 package com.final2.readytomeet.repository.impl;
 
 import com.final2.readytomeet.dto.AppoDto;
-import com.final2.readytomeet.Mapper.AppoMapper;
+import com.final2.readytomeet.mapper.AppoMapper;
 import com.final2.readytomeet.repository.AppoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -136,9 +136,9 @@ public class AppoRepositoryImpl implements AppoRepository {
 
     //Activity 약속 생성
     @Override
-    public int insertActivity(AppoDto appoDto) {
+    public int insertActivity(AppoDto appodto) {
         int res = 0;
-        res = appomapper.insertActivity(appoDto);
+        res = appomapper.insertActivity(appodto);
         return res;
     }
 
@@ -182,12 +182,7 @@ public class AppoRepositoryImpl implements AppoRepository {
         return res;
     }
 
-    @Override
-    public int deleteAppointment(int appo_seq) {
-        int res = 0;
-        res = appomapper.deleteAppointment(appo_seq);
-        return res;
-    }
+
 
 
 }

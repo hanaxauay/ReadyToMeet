@@ -48,8 +48,8 @@ public class CommunityServiceImpl implements CommunityService {
     return communityMapper.delete(share_seq);
   }
   @Override
-  public void updateViewCount(int share_seq) {
-    communityMapper.updateViewCount(share_seq);
+  public int updateViewCount(int share_seq) {
+    return communityMapper.updateViewCount(share_seq);
   }
 
 

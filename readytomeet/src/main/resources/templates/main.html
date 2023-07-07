@@ -134,12 +134,9 @@
     fetchWeatherData();
   </script>
 
-
-
   <!-- 아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함 key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.-->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD51bMavEVnc-HZy3RwWG_brHEQ4qfXAog&callback=initMap">
   </script>
-
 </head>
 <body > <!--th:if="${loggedIn}"-->
 <nav>
@@ -239,6 +236,7 @@
 
     <!-- 채팅방 리스트를 표시할 부분 -->
     <div class="chatrooms">
+<<<<<<< HEAD
       <p class="middle_category" style="text-align: center">
         <button class="detailBtn2"><a href="/chat/room">나의 채팅 리스트</a></button>
       </p>
@@ -255,12 +253,27 @@
       </div>
 
 
+=======
+      <div class="middle_category"><a href="/chat/room">나의 채팅방 리스트</a></div>
+      <div class="container" id="app" v-cloak>
+        <div class="row">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action list" v-for="item, index in chatrooms" v-bind:key="item.room_id"
+                v-on:click="enterRoom(item.room_id, item.room_name)" v-if="index < 3">
+              {{ item.room_name }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h5 style="float: right"><a href="/chat/room">더보기</a></h5>
+>>>>>>> 182079b9dc963dde3b45a136a06fe4e96b75d745
     </div>
   </div>
 </div>
 <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
 <script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
 <script>
+<<<<<<< HEAD
 
   var vm = new Vue({
     el: '#app',
@@ -270,26 +283,44 @@
       chatrooms: []
     },
 
+=======
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      room_name: '',
+      chatrooms: []
+    },
+>>>>>>> 182079b9dc963dde3b45a136a06fe4e96b75d745
     created() {
       this.findAllRoom();
     },
     methods: {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 182079b9dc963dde3b45a136a06fe4e96b75d745
       findAllRoom: function() {
         axios.get('/chat/rooms').then(response => {
           this.chatrooms = response.data;
         });
       },
+<<<<<<< HEAD
       createRoomWithAppoSeq: function() { // Changed: Added createRoomWithAppoSeq method
         if (this.room_name === "") {
           alert("Please enter the chat room name");
           return;
         } else if (this.appo_seq === "") { // Added: Check if appo_seq value is empty
           alert("Please enter the appo_seq value");
+=======
+      createRoom: function() {
+        if (this.room_name === "") {
+          alert("채팅방 이름을 입력하세요");
+>>>>>>> 182079b9dc963dde3b45a136a06fe4e96b75d745
           return;
         } else {
           var params = new URLSearchParams();
           params.append("name", this.room_name);
+<<<<<<< HEAD
           params.append("appo_seq", this.appo_seq); // Added: Pass the appo_seq value
           axios
                   .post('/chat/room', params)
@@ -307,11 +338,26 @@
       },
 
       enterRoom: function(appo_seq, roomName) {
+=======
+          axios.post('/chat/room', params)
+                  .then(response => {
+                    alert("Room " + response.data.room_name + " 채팅방이 생성되었습니다.");
+                    this.room_name = '';
+                    this.findAllRoom();
+                  })
+                  .catch(response => {
+                    alert("채팅방 생성에 실패했습니다.");
+                  });
+        }
+      },
+      enterRoom: function(roomId, roomName) {
+>>>>>>> 182079b9dc963dde3b45a136a06fe4e96b75d745
         var sender = localStorage.getItem('wschat.sender');
         if (!sender) {
           sender = prompt('닉네임을 입력하세요');
           localStorage.setItem('wschat.sender', sender);
         }
+<<<<<<< HEAD
         localStorage.setItem('wschat.appo_seq', appo_seq);
         window.location.href = "/chat/room/" + appo_seq;
       }
@@ -325,6 +371,13 @@
     vm.appo_seq = parseInt(appoSeqParam);
   }
 </script>
+=======
+        localStorage.setItem('wschat.roomId', roomId);
+        window.location.href = "/chat/room/" + roomId;
+      }
+    }
+  });
+>>>>>>> 182079b9dc963dde3b45a136a06fe4e96b75d745
 </script>
 <footer>
   <div> Team 2 in FinalProject 2023</div>

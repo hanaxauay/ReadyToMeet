@@ -36,7 +36,7 @@ public interface AppoService {
 
 
     //약속 생성
-    public int insertActivity(AppoDto appoDto);
+    public int insertActivity(AppoDto appodto);
 
     public int insertVehicle(AppoDto appodto);
 
@@ -47,6 +47,4 @@ public interface AppoService {
     public int updateActivity(AppoDto appodto);
     public int updateVehicle(AppoDto appodto);
     public int updateWork(AppoDto appodto);
-
-    public int deleteAppointment(int appo_seq);
 }
