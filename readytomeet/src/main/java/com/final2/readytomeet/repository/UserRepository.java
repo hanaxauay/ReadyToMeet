@@ -1,8 +1,6 @@
 package com.final2.readytomeet.repository;
 
 import com.final2.readytomeet.dto.UserDto;
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.inject.Inject;
 

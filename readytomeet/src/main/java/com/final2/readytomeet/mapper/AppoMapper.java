@@ -77,9 +77,8 @@ public interface AppoMapper {
 
     //--------------------------------insert---------------------------------
     //Activity 약속 생성
-    @Insert(" INSERT INTO APPOINTMENT (APPO_SEQ, APPO_CATEGORY, APPO_TITLE, APPO_TIME, APPO_MIN_MEM, APPO_MAX_MEM, APPO_PLACE, APPO_CONTENT, APPO_HOST, APPO_NOTICE, APPO_START_PLACE, APPO_PAY, APPO_USING) " +
-            "VALUES(NULL, #{appo_category}, #{appo_title}, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_place}, #{appo_content}, #{appo_host}, #{appo_notice}, #{appo_start_place}, #{appo_pay}, #{appo_using}) ")
-    int insertActivity(AppoDto appoDto);
+    @Insert(" INSERT INTO APPOINTMENT VALUES(NULL, #{appo_title}, #{appo_content}, NULL, #{appo_host}, #{appo_place}, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_category}, NULL, NULL, #{appo_using}) ")
+    int insertActivity(AppoDto appodto);
 
     //Vehicle 약속 생성
     @Insert(" INSERT INTO APPOINTMENT VALUES(NULL, #{appo_title}, #{appo_content}, NULL, #{appo_host}, #{appo_place}, #{appo_time}, #{appo_min_mem}, #{appo_max_mem}, #{appo_category}, #{appo_start_place}, NULL, #{appo_using}) ")
@@ -92,15 +91,15 @@ public interface AppoMapper {
 
     //--------------------------------update---------------------------------
     //Activity 약속 수정
-    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem} ")
+    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem} WHERE APPO_SEQ=#{appo_seq} ")
     int updateActivity(AppoDto appodto);
 
     //Vehicle 약속 수정
-    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTEMT=#{appo_content}, APPO_PALCE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_START_PALCE=#{appo_start_place} ")
+    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_START_PLACE=#{appo_start_place} WHERE APPO_SEQ=#{appo_seq} ")
     int updateVehicle(AppoDto appodto);
 
     //Work 약속 수정
-    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APO_PLACE=#{appo_place}, ppo_time=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_PAY=#{appo_pay} ")
+    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_PAY=#{appo_pay} WHERE APPO_SEQ=#{appo_seq} ")
     int updateWork(AppoDto appodto);
 
 

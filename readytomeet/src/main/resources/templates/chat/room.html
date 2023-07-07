@@ -75,8 +75,8 @@
         </div>
     </div>
     <ul class="list-group">
-        <li class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.room_id"
-            v-on:click="enterRoom(item.room_id, item.room_name)">
+        <li class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.appo_seq"
+            v-on:click="enterRoom(item.appo_seq, item.room_name)">
             {{ item.room_name }}
         </li>
 <!--        <input type="text" class="form-control" v-model="room_name" v-on:keyup.enter="createRoom">-->
@@ -113,12 +113,14 @@
                 } else {
                     var params = new URLSearchParams();
                     params.append("name", this.room_name);
+                    params.append("appo_seq", parseInt(this.appo_seq)); // Added: Pass the appo_seq value
+
                     axios.post('/chat/room', params)
                         .then(response => {
                             alert("Room " + response.data.room_name + " 채팅방이 생성되었습니다.");
                             this.room_name = '';
                             this.findAllRoom();
-                            this.enterRoom(response.data.room_id, response.data.room_name); // 생성된 채팅방으로 입장
+                            this.enterRoom(response.data.appo_seq, response.data.room_name); // 생성된 채팅방으로 입장
                         })
                         .catch(response => {
                             alert("채팅방 생성에 실패했습니다.");
@@ -126,14 +128,14 @@
                 }
             },
 
-            enterRoom: function(roomId, roomName) {
+            enterRoom: function(appo_seq, roomName) {
                 var sender = localStorage.getItem('wschat.sender');
                 if (!sender) {
                     sender = prompt('닉네임을 입력하세요');
                     localStorage.setItem('wschat.sender', sender);
                 }
-                localStorage.setItem('wschat.roomId', roomId);
-                window.location.href = "/chat/room/" + roomId;
+                localStorage.setItem('wschat.appo_seq', appo_seq);
+                window.location.href = "/chat/room/" + appo_seq;
             }
         }
     });

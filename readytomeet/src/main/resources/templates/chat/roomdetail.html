@@ -92,7 +92,7 @@
       timestamp: ''
     },
     created() {
-      this.roomId = localStorage.getItem('wschat.appo_seq');
+      this.appo_seq = localStorage.getItem('wschat.appo_seq');
       this.sender = [[${loginUser.user_nickname}]];
       this.findRoom();
       this.getChatMessages();

@@ -162,13 +162,13 @@
                             <!--참여하기-->
                             <button class="detail_button" id="party_button" th:onclick="@{/appointment/}">약속에 참여하기</button>
                             <!--목록-->
-                            <button class="detail_button" id="list_button" th:onclick="'history.back()'">목록</button>
+                            <button class="detail_button" id="list_button" th:onclick="|location.href='@{/appointment/workList/all}'|">목록</button>
                         </div>
                         <div class="wrap_button_container_row2">
                             <!--수정하기-->
-                            <button class="detail_button" id="update_button" th:onclick="@{/appointment/insertWorkForm(appo_seq=${dto.appo_seq})}">수정</button>
+                            <button class="detail_button" id="update_button" th:onclick="|location.href='@{/appointment/updateWorkForm?appo_seq={appo_seq}(appo_seq=${dto.appo_seq})}'|">수정</button>
                             <!--삭제하기-->
-                            <button class="detail_button" id="delete_button" th:onclick="">삭제</button>
+                            <button class="detail_button" id="delete_button" th:onclick="|location.href='@{/appointment/deleteWork??appo_seq={appo_seq}(appo_seq=${dto.appo_seq})}'|">삭제</button>
                         </div>
                     </div>
 

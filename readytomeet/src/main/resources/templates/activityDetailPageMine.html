@@ -97,7 +97,7 @@
               <div class="appointment_detail_area_row1">
                 <div class="appointment_date">
                   <span class="appointment_ment"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;시간</span>
-                  <span class="appointment_text" th:text="${dto.appo_time}">[날짜 및 시간]</span>
+                  <span class="appointment_text" th:text="${#dates.format(dto.appo_time,'MM월 dd일 HH:mm')}"></span>
                 </div>
                 <div class="appointment_application">
                   <span class="appointment_ment"><i class="fa-solid fa-users"></i>&nbsp;&nbsp;모집 인원</span>
@@ -159,9 +159,9 @@
               <!--참여하기-->
               <!--              <button class="detail_button" id="party_button" th:onclick="@{/appointment/}">약속에 참여하기</button>-->
               <!--목록-->
-              <button class="detail_button" id="list_button" th:onclick="'history.back()'">목록</button>
+              <button class="detail_button" id="list_button" th:onclick="|location.href='@{/appointment/activityList/all}'|">목록</button>
               <!--수정하기-->
-              <button class="detail_button" id="update_button" th:onclick="|location.href='@{/appointment/updateActivityForm}'|">수정</button>
+              <a class="detail_button" id="update_button" th:onclick="|location.href='@{/appointment/updateActivityForm?appo_seq={appo_seq}(appo_seq=${dto.appo_seq})}'|">수정</a>
               <!--삭제하기-->
               <button class="detail_button" id="delete_button">삭제</button>
             </div>
@@ -172,14 +172,12 @@
 
           <div class="chat_button_container" id="app" v-cloak>
             <!-- Chat join button container -->
-            <input type="number" class="detail_button" id="appo_seq_input" v-model="appo_seq" placeholder="Enter appo_seq value">
-            <input type="text" class="detail_button" id="chat_button" v-model="room_name" v-on:keyup.enter="createRoom">
+            <input type="number" class="detail_button" id="appo_seq_input" v-model="appo_seq" placeholder="Enter appo_seq value" hidden="hidden">
+            <input type="text" class="detail_button" id="chat_button" v-model="room_name" v-on:keyup.enter="createRoom" placeholder="개설할 채팅방 이름을 입력하세요.">
             <div class="input-group-append">
-              <button class="btn btn-primary" type="button" @click="createRoomWithAppoSeq">Create Chat Room</button>
+              <button class="btn btn-primary" type="button" @click="createRoomWithAppoSeq">채팅방 생성</button>
             </div>
           </div>
-
-
 
         </div>
       </div>
@@ -192,6 +190,7 @@
 <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
 <script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
 <script>
+
   var vm = new Vue({
     el: '#app',
     data: {
@@ -199,10 +198,12 @@
       room_name: '',
       chatrooms: []
     },
+
     created() {
       this.findAllRoom();
     },
     methods: {
+
       findAllRoom: function() {
         axios.get('/chat/rooms').then(response => {
           this.chatrooms = response.data;
@@ -210,7 +211,7 @@
       },
       createRoomWithAppoSeq: function() { // Changed: Added createRoomWithAppoSeq method
         if (this.room_name === "") {
-          alert("Please enter the chat room name");
+          alert("공백은 허용하지 않습니다.");
           return;
         } else if (this.appo_seq === "") { // Added: Check if appo_seq value is empty
           alert("Please enter the appo_seq value");
@@ -218,7 +219,7 @@
         } else {
           var params = new URLSearchParams();
           params.append("name", this.room_name);
-          params.append("appo_seq", parseInt(this.appo_seq)); // Added: Pass the appo_seq value
+          params.append("appo_seq", this.appo_seq); // Added: Pass the appo_seq value
           axios
                   .post('/chat/room', params)
                   .then(response => {
@@ -229,7 +230,7 @@
                     this.enterRoom(response.data.appo_seq, response.data.room_name);
                   })
                   .catch(response => {
-                    alert("Failed to create the chat room.");
+                    alert("당신이 이미 생성한 채팅방입니다.");
                   });
         }
       },
@@ -240,10 +241,17 @@
           sender = prompt('닉네임을 입력하세요');
           localStorage.setItem('wschat.sender', sender);
         }
-        localStorage.setItem('wschat.roomId', appo_seq);
+        localStorage.setItem('wschat.appo_seq', appo_seq);
         window.location.href = "/chat/room/" + appo_seq;
       }
     }
   });
+  var urlParams = new URLSearchParams(window.location.search);
+  var appoSeqParam = urlParams.get('appo_seq');
+  if (appoSeqParam) {
+    var appoSeqInput = document.getElementById('appo_seq_input');
+    appoSeqInput.value = appoSeqParam;
+    vm.appo_seq = parseInt(appoSeqParam);
+  }
 </script>
 </html>

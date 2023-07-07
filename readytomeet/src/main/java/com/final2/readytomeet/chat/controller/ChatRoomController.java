@@ -8,7 +8,9 @@ import com.final2.readytomeet.chat.repository.ChatMessageRepository;
 import com.final2.readytomeet.chat.repository.ChatRoomRepository;
 import com.final2.readytomeet.chat.dto.ChatRoom;
 import com.final2.readytomeet.chat.repository.UserChatRoomRepository;
+import com.final2.readytomeet.dto.AppoDto;
 import com.final2.readytomeet.dto.UserDto;
+import com.final2.readytomeet.service.AppoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,7 @@ public class ChatRoomController {
     private final ChatMessageRepository chatMessageRepository;
     private final UserChatRoomMapper userChatRoomMapper;
     private final ChatMessageMapper chatMessageMapper;
+    private final AppoService appoService;
 
     // 채팅 리스트 화면
     @GetMapping("/chat/room")
@@ -43,19 +46,9 @@ public class ChatRoomController {
     // 채팅방 생성
     @PostMapping("/chat/room")
     @ResponseBody
-    public ChatRoom createRoom(@RequestParam String appo_seq, @RequestParam String name) {
-        int appoSeq = Integer.parseInt(appo_seq);
-        return chatRoomRepository.createChatRoom(appoSeq, name);
+    public ChatRoom createRoom(@RequestParam int appo_seq, @RequestParam String name) {
+        return chatRoomRepository.createChatRoom(appo_seq, name);
     }
-
-
-//    // appo_seq로 채팅방 생성
-//    @PostMapping("/chat/roomsss")
-//    @ResponseBody
-//    public ChatRoom createRoomsss(@RequestParam int appo_seq) {
-//        return chatRoomRepository.createChatRoomsss(appo_seq);
-//    }
-
 
     @GetMapping("/chat/rooms")
     @ResponseBody
@@ -64,6 +57,15 @@ public class ChatRoomController {
         String nickname = loginUser.getUser_nickname();
         return userChatRoomRepository.getChatRoomsByUserNickname(nickname);
     }
+
+    @GetMapping("/chat/roomsss")
+    @ResponseBody
+    public AppoDto roomsss(Model model, @RequestParam int appo_seq, HttpSession session) {
+        UserDto loggedInUser = (UserDto) session.getAttribute("loggedInUser");
+        return appoService.selectAppointmentOneList(appo_seq);
+    }
+
+
 
     // 채팅방 입장 화면
     @GetMapping("/chat/room/{appo_seq}")

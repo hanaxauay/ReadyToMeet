@@ -97,7 +97,7 @@
                             <div class="appointment_detail_area_row1">
                                 <div class="appointment_date">
                                     <span class="appointment_ment"><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;시간</span>
-                                    <span class="appointment_text" th:text="${dto.appo_time}">[날짜 및 시간]</span>
+                                    <span class="appointment_text" th:text="${#dates.format(dto.appo_time,'MM월 dd일 HH:mm')}"></span>
                                 </div>
                                 <div class="appointment_application">
                                     <span class="appointment_ment"><i class="fa-solid fa-users"></i>&nbsp;&nbsp;모집 인원</span>
@@ -163,21 +163,24 @@
                         </div>
                         <div class="wrap_button_container_row2">
                             <!--수정하기-->
-<!--                            <button class="detail_button" id="update_button" th:onclick="|location.href='@{/appointment/updateActivityForm}'|">수정</button>-->
+                            <a class="detail_button" id="update_button" th:onclick="|location.href='@{/appointment/updateActivityForm?appo_seq={appo_seq}(appo_seq=${dto.appo_seq})}'|">수정</a>
                             <!--삭제하기-->
 <!--                            <button class="detail_button" id="delete_button">삭제</button>-->
                         </div>
                     </div>
 
                     <!-- 채팅 참여 버튼 컨테이너-->
-                    <div class="container" id="app" v-cloak>
-                    <button class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.room_id"
-                            v-if=""
-                        v-on:click="enterRoom(item.room_id, item.room_name)">
-                        {{ item.room_name }}
-                    </button>
-<!--                      activityDetailPageMine.html여기에서 appo_seq로 구분해서 채팅방 생성 -> 여기는 appo_seq에 맞는 채팅방만이 나와야함. -->
-                    </div>
+<!--                    <div class="container" id="app" v-cloak>-->
+<!--                    <button class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.appo_seq"-->
+<!--                            v-if=""-->
+<!--                        v-on:click="enterRoom(item.appo_seq, item.room_name)">-->
+<!--                        {{ item.room_name }}-->
+<!--                    </button>-->
+
+                    <button class="detail_button"><a th:href="@{/chat/room/{appo_seq}(appo_seq=${dto.appo_seq})}" th:text="'채팅방 참여하기'">dd</a></button>
+
+                    <!--                      activityDetailPageMine.html여기에서 appo_seq로 구분해서 채팅방 생성 -> 여기는 appo_seq에 맞는 채팅방만이 나와야함. -->
+<!--                    </div>-->
                 </div>
 
             </div>
@@ -218,25 +221,30 @@
                             alert("Room " + response.data.room_name + " 채팅방이 생성되었습니다.");
                             this.room_name = '';
                             this.findAllRoom();
-                            this.enterRoom(response.data.room_id, response.data.room_name); // 생성된 채팅방으로 입장
+                            this.enterRoom(response.data.appo_seq, response.data.room_name); // 생성된 채팅방으로 입장
                         })
                         .catch(response => {
                             alert("채팅방 생성에 실패했습니다.");
                         });
                 }
             },
-
-            enterRoom: function(roomId, roomName) {
+            joinChatRoom() {
+                var appo_seq = this.appo_seq; // Get the appo_seq value
+                var url = "/chat/room/" + appo_seq; // Create the URL with appo_seq parameter
+                window.location.href = url; // Redirect to the chat room page
+            },
+            enterRoom: function(appo_seq, roomName) {
                 var sender = localStorage.getItem('wschat.sender');
                 if (!sender) {
                     sender = prompt('닉네임을 입력하세요');
                     localStorage.setItem('wschat.sender', sender);
                 }
-                localStorage.setItem('wschat.roomId', roomId);
-                window.location.href = "/chat/room/" + roomId;
+                localStorage.setItem('wschat.appo_seq', appo_seq);
+                window.location.href = "/chat/room/" + appo_seq;
             }
         }
     });
+
 </script>
 </body>
 </html>
