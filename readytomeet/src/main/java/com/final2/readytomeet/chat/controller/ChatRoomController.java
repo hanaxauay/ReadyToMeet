@@ -35,6 +35,10 @@ public class ChatRoomController {
     @GetMapping("/chat/room")
     public String rooms(Model model, HttpSession session) {
         UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
+
+        if (loginUser == null) {
+            return "redirect:/login";
+        }
         String nickname = loginUser.getUser_nickname();
         List<ChatRoom> userChatRooms = userChatRoomRepository.getChatRoomsByUserNickname(nickname);
         model.addAttribute("userChatRooms", userChatRooms);
@@ -66,7 +70,6 @@ public class ChatRoomController {
     }
 
 
-
     // 채팅방 입장 화면
     @GetMapping("/chat/room/{appo_seq}")
     public String roomDetail(Model model, @PathVariable int appo_seq, HttpSession session) {
@@ -81,13 +84,12 @@ public class ChatRoomController {
         model.addAttribute("chatRoom1", chatRoom1);
 
 
-
         // 사용자를 채팅방에 추가
         UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
         String nickname = loginUser.getUser_nickname();
         // 이미 채팅방에 참여한 사용자인지 확인
         int isUserJoined = userChatRoomMapper.isUserJoined(nickname, appo_seq);
-        if (isUserJoined ==0) {
+        if (isUserJoined == 0) {
             // 처음 참여하는 사용자일 경우에만 채팅방에 추가
             userChatRoomRepository.insertUserChatRoom(nickname, appo_seq);
         }
@@ -102,8 +104,10 @@ public class ChatRoomController {
         return chatMessageRepository.getChatMessagesByRoomId(appo_seq);
     }
 
-
-
+    @GetMapping("/chat/room/delete")
+    public int deleteChatRoom(@RequestParam int appo_seq) {
+        return chatRoomRepository.deleteChatRoom(appo_seq);
+    }
 }
 
 

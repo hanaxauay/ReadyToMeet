@@ -145,7 +145,7 @@
 <nav>
   <ul>
     <li class="liLogo"><a href="#"><img src="../image/logo.png" class="imgLogo"></a></li>
-    <li><a href="/all">All</a> </li>
+    <li><a href="/all/list">All</a> </li>
     <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
     <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
     <li><a href="/appointment/workList/all">WORK</a> </li>
@@ -200,8 +200,14 @@
     </div>
 
   </div>
-  <div class="right">
-    <div class="middle_category">스케줄러</div>
+  <div class="right" style="position: center">
+    <span class="middle_category" >스케줄러
+    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <form action="/logout" method="post" th:align="right" style="display: inline-block; margin-right: 10px;">
+      <button type="submit" style="padding: 8px 16px; background-color: #ff7777; color: #ffffff; border: none; border-radius: 4px; font-size: 14px; font-weight: bold; cursor: pointer;">로그아웃</button>
+    </form>
+
+
     <!-- 반복해서 만들도록 설정(타임리프로 할듯) -->
     <div class="box">
       <div class="list">
@@ -231,9 +237,7 @@
         <button class="detailBtn"> 상세보기</button>
       </div>
     </div>
-    <form action="/logout" method="post">
-      <button type="submit">로그아웃</button>
-    </form>
+
     <div class="more"><a href="">더보기</a></div>
     <br>
 
@@ -250,7 +254,7 @@
               {{ item.room_name }}
             </li>
           </ul>
-          <span style="float: right"><a href="/chat/room">더보기</a></span>
+          <span class="more"><a href="/chat/room">더보기</a></span>
         </div>
       </div>
 
