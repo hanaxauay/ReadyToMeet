@@ -9,11 +9,85 @@
     <script src="https://kit.fontawesome.com/e66bbc4b5b.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="./css/vehiclewritetest.css">
-    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="../css/vehicleUpdate.css">
+    <link rel="stylesheet" href="../css/common.css">
 
     <title>vehicle생성페이지</title>
 
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script th:inline="javascript" type="text/javascript" src="../js/vehicleUpdate.js"></script>
+
+    <!-- 아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함 key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD51bMavEVnc-HZy3RwWG_brHEQ4qfXAog&callback=initMap">
+    </script>
+    <script>
+        window.onload = getLocation;
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(locationSuccess, locationError, geo_options);
+            } else {
+                console.log("지오 로케이션 없음")
+            }
+        };
+
+        // getLocation
+        var latitude, longitude;
+        function locationSuccess(p) {
+            latitude = p.coords.latitude;
+            longitude = p.coords.longitude;
+            // 위치를 얻은 후에 날씨 데이터를 가져오기 위해 fetchWeatherData 함수 호출
+            // fetchWeatherData(latitude, longitude);
+            initMap();
+        }
+
+        // locationSuccess
+        function locationError(error){
+            var errorTypes = {
+                0 : "무슨 에런지 모르겠음",
+                1 : "위치 허용 안했음.",
+                2 : "위치가 안잡힘",
+                3 : "응답시간이 지남"
+            };
+            var errorMsg = errorTypes[error.code];
+        }
+        // locationError
+        var geo_options = {
+            enableHighAccuracy: true,
+            maximumAge        : 30000,
+            timeout           : 27000
+        };
+        // geo_options
+        var map;
+        function initMap() {
+
+            var button = document.getElementById('mapBtn');
+            // button.addEventListener('click', changeCenter);
+
+            var nowPosition = new google.maps.LatLng(latitude, longitude);
+            var map1 = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: nowPosition
+            });
+
+            var map2 = new google.maps.Map(document.getElementById('map2'), {
+                zoom: 15,
+                center: nowPosition
+            });
+
+            var mainMarker = new google.maps.Marker({
+                position: nowPosition,
+                map: map1, map2,
+                label: {
+                    text: "현위치",
+                    color: "#ff7777"
+                },
+                icon: {
+                    url: "logo.png",
+                    labelOrigin: new google.maps.Point(100, 55)
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -21,7 +95,7 @@
 <!--헤더 영역-->
 <nav>
     <ul>
-        <li class="liLogo"><a href="/main"><img src="./images/logo.png" class="imgLogo"></a></li>
+        <li class="liLogo"><a href="/main"><img src="../image/logo.png" class="imgLogo"></a></li>
         <li><a href="/all">All</a> </li>
         <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
         <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
@@ -33,7 +107,7 @@
                 <input type="submit" value="Search">
             </form>
         </li>
-        <li class="liMypage"><a href="#"><img src="./images/mypage.png" class="imgMypage"></a></li>
+        <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
     </ul>
 </nav>
 
@@ -42,23 +116,24 @@
     <!--바디 영역-->
     <div class="appointment_form_wrap">
 
-        <!--카테고리 & 생성멘트 표시-->
+        <!--카테고리 & 수정멘트 표시-->
         <section class="category_container">
             <span class="category_ment1">VEHICLE</span>
-            <i class="fa-regular fa-calendar-plus"></i>
-            <span class="category_ment2">약속 생성하기</span>
+            <i class="fa-solid fa-pencil"></i>
+            <span class="category_ment2">약속 등록하기</span>
         </section>
 
         <!--생성 양식 영역-->
-        <section class="wrap_insert_form">
-            <form action="/appointment/insertform" method="post">
+        <section class="wrap_insert_form" >
+            <form th:action="@{/appointment/insertVehicle}" method="post" th:object="${vehicleSaveForm}">
+<!--                <input type="hidden" name="appo_seq" th:value="*{appo_seq}">-->
                 <div class="form_row1">
                     <!--카테고리 설정-->
                     <div class="inputform_subcategory">
-                        <select name="subcategory" id="select_subcategory" required>
+                        <select name="appo_category" id="select_subcategory" th:value="*{appo_category}" required>
                             <option value="">세부 카테고리&nbsp;</option>
-                            <option value="카풀">카풀</option>
-                            <option value="택시">택시</option>
+                            <option th:selected="*{appo_category}=='카풀'">카풀</option>
+                            <option th:selected="*{appo_category}=='택시'">택시</option>
                         </select>
                     </div>
 
@@ -66,18 +141,19 @@
                     <div class="inputform_title">
                         <i class="fa-solid fa-quote-left"></i>
                         <spen class="form_ment"> 약속명 :&nbsp;
-                            <input type="text" name="write_title" placeholder="제목" required>
+                            <input type="text" th:field="*{appo_title}" th:errorclass="field-error" placeholder="제목">
                         </spen>
                         <i class="fa-solid fa-quote-right"></i>
                     </div>
-
+                    <div class="field-error" th:errors="*{appo_title}">
+                        약속 제목 오류
+                    </div>
                 </div>
-
 
                 <!--약속시간 설정-->
                 <!-- 기본 시간설정을 js로 현재 시간 받아서 표시하기
-                    write_date : 날짜 값 / write_time : 시간 값 -> 컨트롤러에서 합쳐서 insert
-                    showTimeOption() : 선택 시 div.selected_choosetime 표시
+                    appo_date1 : 날짜 값 / appo_date2 : 시간 값 -> js에서 합쳐서 update
+                    div.selected_choosetime : js에서 input:radio'option_time'에 따라 선택
                 -->
                 <fieldset class="inputform_time">
                     <legend>&nbsp;<i class="fa-solid fa-plus"></i> 시간을 정해주세요!&nbsp;</legend>
@@ -85,29 +161,32 @@
                     <div class="select_date">
                         <label>
                                 <span class="form_ment">날짜 :
-                                    <input type="date" name="write_date" min="2023-01-01" max="2024-01-01" required>
+                                    <input type="date" name="appo_date1" class="add_time_value" min="2023-01-01" max="2024-01-01"
+                                           th:value="*{#dates.format(appo_time,'yyyy-MM-dd')}">
                                 </span>
                         </label>
+                        <div class="field-error" th:errors="*{appo_time}">
+                            약속 시간 오류
+                        </div>
                     </div>
 
                     <div class="select_time_type">
                         <span class="form_ment">시간 : </span>
                         <label title="참여자들이 상의하여 자유롭게 시간을 결정하기 위한 옵션입니다.">
-                            <input type="radio" name="option_time" value="allday" required> All Day
-                            <input type="hidden" name="write_time" value="00:00">
+                            <input type="radio" name="option_time" value="allday" th:checked="${option_time eq 'allday' ? 'checked' : ''}"> All Day
                         </label>
                         <div class="form_row2">
                             <label title="정확한 약속시간을 설정하기 위한 옵션입니다.">
                                 <input type="radio" name="option_time" value="choosetime"
-                                       onclick="showTimeOption()" required> 날짜
-                                선택
+                                       th:checked="${option_time eq 'choosetime' ? 'checked' : ''}"> 날짜 선택
                             </label>
                             <!--날짜선택 눌렀을 시 표시-->
                             <div class="selected_choosetime">
                                 <i class="fa-solid fa-caret-down"></i>
-                                <input type="time" name="write_time" id="select_time">
+                                <input type="time" name="appo_date2" class="add_time_value" th:value="*{#dates.format(appo_time,'HH:mm')}">
                             </div>
                         </div>
+                        <input type="hidden" name="appo_time">
                     </div>
 
                 </fieldset>
@@ -116,11 +195,15 @@
                 <fieldset class="inputform_personnel">
                     <legend>&nbsp;<i class="fa-solid fa-plus"></i> 모집할 인원 수를 정해주세요!&nbsp;</legend>
                     <!--최소인원 설정-->
-                    <span class="form_ment">최소 인원 :<input type="number" name="select_min_num" value="1" min="1"
-                                                          max="20" required></span>
+                    <span class="form_ment">최소 인원 :<input type="number" th:field="*{appo_min_mem}" th:errorclass="field-error" value="1" min="1" max="20"></span>
+                    <div class="field-error" th:errors="*{appo_min_mem}">
+                        최소인원 오류
+                    </div>
                     <!--최대인원 설정-->
-                    <span class="form_ment">최대 인원 : <input type="number" name="select_max_num" value="1" min="1"
-                                                           max="20" required></span>
+                    <span class="form_ment">최대 인원 : <input type="number" th:field="*{appo_max_mem}" th:errorclass="field-error" value="1" min="1" max="20"></span>
+                    <div class="field-error" th:errors="*{appo_max_mem}">
+                        최대인원 오류
+                    </div>
                 </fieldset>
 
                 <!--약속장소 설정-->
@@ -129,18 +212,18 @@
                     <!--장소 검색기능 필요!!-->
                     <div class="form_row3">
                         <span class="form_ment">출발지 : </span>
-                        <input type="search" placeholder="위치 검색..." id="start_place">
+                        <input type="search" placeholder="위치 검색..." id="start_place" name="appo_start_place" th:value="*{appo_start_place}" required>
                         <!--지도표시 영역-->
-                        <div class="map_container">
-                            <div></div>
+                        <div class="google_map">
+                            <div id="map" style="width: 100%; height: 370px;"></div>
                         </div>
                     </div>
                     <div class="form_row3">
                         <span class="form_ment">도착지 : </span>
-                        <input type="search" placeholder="위치 검색..." id="place">
+                        <input type="search" placeholder="위치 검색..." id="place" name="appo_place" th:value="*{appo_place}" required>
                         <!--지도표시 영역-->
-                        <div class="map_container">
-                            <div></div>
+                        <div class="google_map">
+                            <div id="map2" style="width: 100%; height: 370px;"></div>
                         </div>
                     </div>
                 </fieldset>
@@ -148,7 +231,10 @@
                 <!--약속 내용 작성-->
                 <fieldset class="inputform_content">
                     <legend>&nbsp;<i class="fa-solid fa-plus"></i> 약속에 대해 설명해주세요!&nbsp;</legend>
-                    <textarea name="write_content" cols="50" rows="10" placeholder="내용..."></textarea>
+                    <textarea th:field="*{appo_content}" th:errorclass="field-error" cols="50" rows="10" placeholder="내용..."></textarea>
+                    <div class="field-error" th:errors="*{appo_content}">
+                        내용 오류
+                    </div>
                 </fieldset>
 
                 <!--버튼 영역-->
@@ -156,7 +242,6 @@
                     <button type="submit">등록</button>
                     <button>취소</button>
                 </div>
-
             </form>
         </section>
 
@@ -164,7 +249,12 @@
     </div>
 
 </div>
-
+<style>
+    .field-error{
+        order-color: #dc3545;
+        color: #dc3545;
+    }
+</style>
 
 <footer>
     <div> Team 2 in FinalProject 2023</div>

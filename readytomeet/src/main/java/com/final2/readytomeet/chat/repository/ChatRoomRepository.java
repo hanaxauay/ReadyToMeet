@@ -37,10 +37,8 @@ public class ChatRoomRepository {
         return chatRoom;
     }
 
+    public int deleteChatRoom(int appo_seq) {
+        return chatRoomMapper.deleteChatRoomByAppoSeq(appo_seq);
+    }
 
-//    public ChatRoom createChatRoomsss(String name, int appoSeq) {
-//        ChatRoom chatRoom = ChatRoom.create(name, appoSeq);
-//        chatRoomMapper.createChatRoom(chatRoom);
-//        return chatRoom;
-//    }
 }

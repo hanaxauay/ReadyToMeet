@@ -19,4 +19,7 @@ public interface ChatRoomMapper {
 
     @Insert("INSERT INTO CHAT_ROOM (APPO_SEQ, room_name) VALUES (#{appo_seq}, #{room_name})")
     void createChatRoom(ChatRoom chatRoom);
+
+    @Delete(("DELETE FROM CHAT_ROOM WHERE APPO_SEQ=#{appo_seq} "))
+    int deleteChatRoomByAppoSeq(int appo_seq);
 }

@@ -264,7 +264,7 @@ body{
   display: block;
 }
 .appointment_place_text {
-    max-width: 100%
+    max-width: 100%;
     color: #FF7777;
 
     text-align: center;
@@ -319,7 +319,7 @@ body{
   height: 90%;
   margin: 0 0.2%;
   padding: 1%;
-  background: rgb(159, 159, 159);
+  background: #ffffff;
 }
 /*임시지도 : 지도 삽입 후 수정 필수*/
 .map_container {

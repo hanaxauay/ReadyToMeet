@@ -129,10 +129,28 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.detailBtn2 {
+    padding: 10px;
+    background-color: #ff7777;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 25%;
+    justify-content: flex-end;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 16px;
+
+}
 
 .more {
     float: right;
-    margin-right: 5%;
+    margin-right: 8%;
     color: red;
     background-color: #ff7777;
 }
@@ -146,7 +164,7 @@
 .weather-container {
     position: absolute;
     bottom: 2%;
-    left: 2%;
+    left: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -158,8 +176,8 @@
     justify-content: center;
     text-align: center;
     position: absolute;
-    bottom: 7%;
-    left: 2%;
+    bottom: 3%;
+    left: 5%;
     margin: 1%;
     padding: 1%;
     background-color: #fff;
