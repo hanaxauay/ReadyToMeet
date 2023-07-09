@@ -26,12 +26,14 @@ b {
 .inputImg {
     width: 15%;
     margin-left: 10%;
+
 }
 
 .addImage {
     background-color: lightgray;
     overflow: hidden;
     margin: 0 1% 5% 0;
+    object-fit: cover;
 }
 
 #submit {

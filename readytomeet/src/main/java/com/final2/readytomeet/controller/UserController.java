@@ -1,50 +1,98 @@
 package com.final2.readytomeet.controller;
 
 
-import com.final2.readytomeet.Mapper.UserMapper;
 import com.final2.readytomeet.dto.UserDto;
 import com.final2.readytomeet.service.UserService;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-import javax.annotation.Resource;
 import javax.inject.Inject;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 
 @Controller
 public class UserController {
 
-    private Logger logger = LoggerFactory.getLogger(UserController.class);
-
-    @Autowired
+    @Inject
     private UserService userService;
-//
-    @Autowired
-    private UserMapper userMapper;
 
-    @RequestMapping("/login")
-    public String login() {
-        logger.info("LOGIN PAGE");
-
-        return "login";
+    //note 회원목록
+    @RequestMapping("user/list")
+    public String userList(Model model){
+        List<UserDto> list = userService.userList();
+        model.addAttribute("list", list);
+        return "userlist";
     }
+
+
+    //note 회원 상세정보 조회
+    @RequestMapping("user/view")
+    public String userView(String user_id, Model model){
+        model.addAttribute("dto", userService.viewUser(user_id));
+        return "user/userview";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+//    @RequestMapping("user/view")
+//    public String getUserProfile(String user_id, Model model, HttpSession session) {
+//        UserDto userDto = userService.viewUser(user_id);
+//        session.setAttribute("userDto", userDto);
+//        model.addAttribute("userDto", userDto);
+//        return "userview";
+//    }
+
+
+
+
+    //note 프로필 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//    @GetMapping("/view")
+//    public String getUser(Model model, HttpSession session, String user_id){
+//        UserDto loggedInUser = (UserDto) session.getAttribute("loggedInUser");
+//
+//
+//        UserDto userDto = userService.getUser(String.valueOf(loggedInUser));
+//        model.addAttribute("userDto", userDto);
+//        return "userview";
+//    }
+//
+
+
+
+    //note 프로필정보출력중
+//    @GetMapping("/view")
+//    public String getUserProfile(String user_id, Model model) {
+//
+//            UserDto userDto = userService.getUserProfile(user_id);
+//            model.addAttribute("user", userDto);
+//            return "userview";
+//
+//    }
+
+
+
+//    @RequestMapping("/login")
+//    public String login() {
+//        logger.info("LOGIN PAGE");
+//
+//        return "login";
+//    }
 
 
 //    @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
@@ -81,23 +129,9 @@ public class UserController {
 //    }
 
 
+    //note 회원 목록 조회
 
 
-
-
-//
-//    //note 유저 상세정보 조회
-//    @RequestMapping(value = "/user", method = RequestMethod.GET)
-//    public String user(HttpSession session, Model model){
-//        UserDto dto = (UserDto)session.getAttribute("userDto");
-//        String user_id = dto.getUser_id();
-//
-//
-//        UserDto userDto = userMapper.readUser(user_id);
-//        model.addAttribute("dto", dto);
-//
-//        return "userview";
-//    }
 
 
 

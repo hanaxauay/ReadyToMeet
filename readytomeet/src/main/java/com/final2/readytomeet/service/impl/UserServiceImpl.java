@@ -7,114 +7,69 @@ import com.final2.readytomeet.dto.UserDto;
 import com.final2.readytomeet.repository.UserRepository;
 import com.final2.readytomeet.service.UserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-import com.final2.readytomeet.Mapper.UserMapper;
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.inject.Inject;
-import java.io.File;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 
 @Service
 public class UserServiceImpl implements UserService {
-//
-//    @Autowired
-//    private UserDao dao;
-@Autowired
-    private UserMapper userMapper;
-//
+
     @Inject
     private UserRepository userRepository;
-
-    //note 로그인
-//    @Override
-//    public UserDto login(UserDto dto){
-//        return dao.login(dto);
-//    }
-//
-//
-
 //    @Autowired
-//    UserServiceImpl(UserMapper userMapper){
-//        this.userMapper = userMapper;
-//    }
-//    public List<Map<String, Object>> getUser(){
-//        return userMapper.getUser();
-//    }
-//
-//    @Override
-//    public void upload(UserDto dto, MultipartFile file) throws Exception {
-//
-//    }
-//
-//    @Override
-//    public UserDto readUser(String user_id) {
-//        return null;
-//    }
+//    private UserMapper userMapper;
 
-
-    //note 로그인
-
-
-    //note 회원정보 조회
+    //note 전체회원 조회
     @Override
-    public UserDto readUser(String user_id){
-        UserDto dto = null;
+    public List<UserDto> userList() {
+        return userRepository.userList();
+    }
 
-        try {
-            dto = userMapper.readUser(user_id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return dto;
+    //note 회원 정보 상세 조회
+    @Override
+    public UserDto viewUser(String user_id){
+        return userRepository.viewUser(user_id);
     }
 
 //    @Override
-//    public List<UserDto> selectList() {
-//        return UserMapper.selectList();
-//    }
+//    public void deleteUser(String user_id){
 //
+//    }
 
 
-//    //note 회원정보 수정
+
+
+
 //    @Override
-//    public void modifyUser(UserDto userDto) throws Exception{
-//        userRepository.updateUser(userDto);
-//    }
+//    public UserDto getUserProfile(String user_id){
+//        Optional<UserDto> user = userRepository.findById(user_id);
 //
-//    //note 회원 프로필 사진 수정
+//        if (user != null ){
+//            return userMapper.getUserProfile(user_id);
+//        } else {
+//            return null;
+//        }
+//    }
+
+
+
+
+
+
+
+    //note 프로필 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 //    @Override
-//    public void modifyUimage(String user_id, String user_img) throws Exception {
-//        userRepository.updateUimage(user_id, user_img);
+//    public UserDto getUserProfile(String user_id){
+//        UserDto userDto = userRepository.getUserProfile(user_id)
+//                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + user_id));
+//        return userMapper.toUserDto(user_id);
 //    }
-//
-//
-//
-
-
-
-
-
-//
-//    @Override
-//    public UserDto readUser(String user_id) throws Exception{
-//        return repository.readUser(user_id);
-//    }
-////    @Override
-////    public void updateUser(UserDto dto) {
-////        try {
-////            repository.updateUser(dto);
-////        } catch (Exception e) {
-////            e.printStackTrace();
-////        }
-////
-////    }
 
 //    public void upload(UserDto dto, MultipartFile file) throws Exception {
 //        String projectPath = "E:/files/";

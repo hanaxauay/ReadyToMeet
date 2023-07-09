@@ -149,6 +149,8 @@
     <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
     <li><a href="/appointment/workList/all">WORK</a> </li>
     <li><a href="/community/list">Community</a> </li>
+    <li><a href="/user/list">회원리스트</a></li>
+
     <li>
       <form action="/search" method="GET" class="search-container">
         <input type="text" name="keyword" placeholder="약속을 찾아봐요!">
@@ -156,7 +158,7 @@
       </form>
 
     </li>
-    <li class="liMypage"><a th:href="@{|/user/#{user_id}|}"><img src="../image/mypage.png" class="imgMypage"></a></li>
+    <li class="liMypage"><a href="/user/view"><img src="../image/mypage.png" class="imgMypage"></a></li>
   </ul>
 </nav>
 

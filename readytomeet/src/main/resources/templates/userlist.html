@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="user : ${list}">
+      <div>
+          <strong>아이디: </strong>
+          <span th:text="${user.user_id}"></span>
+      </div>
+    <div>
+        <strong>전화번호: </strong>
+        <span th:text="${user.user_phone}"></span>
+    </div>
+    <div>
+        <strong>이메일: </strong>
+        <span th:text="${user.user_email}"></span>
+    </div>
+    <div>
+        <strong>이름: </strong>
+        <span th:text="${user.user_name}"></span>
+    </div>
+    <div>
+        <strong>닉네임: </strong>
+        <span th:text="${user.user_nickname}"></span>
+    </div>
+    <div>
+        <strong>나이: </strong>
+        <span th:text="${user.user_age}"></span>
+    </div>
+    <div>
+        <strong>성별: </strong>
+        <span th:text="${user.user_gender}"></span>
+    </div>
+    <div>
+        <strong>지역: </strong>
+        <span th:text="${user.user_location}"></span>
+    </div>
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
