@@ -1,4 +1,4 @@
-@font-face {
+    @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
     font-weight: 400;
@@ -96,6 +96,15 @@
             border: 0.7px solid rgb(185, 184, 184);
             border-radius: 0.5rem;
         }
+        
+        .joinContent > input#password {
+        	width: 34%;
+        	height: 40px;
+            box-sizing: border-box;
+            display: inline-block;
+            border: 0.7px solid rgb(185, 184, 184);
+            border-radius: 0.5rem;
+    	}
 
         .joinContent > input#password_confirm {
         	width: 34%;
@@ -105,6 +114,14 @@
             border: 0.7px solid rgb(185, 184, 184);
             border-radius: 0.5rem;
     	}
+    	
+    	#password_info {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 87.5%;
+        color: black;
+    	}
 
         #password_error {
         position: absolute;
@@ -113,13 +130,6 @@
         font-size: 87.5%;
         color: red;
     	}
-
-        #id{
-            width: 43%;
-        }
-        #nickname{
-        	width: 43%;
-        }
         #phone{
             width: 43%;
         }
@@ -148,4 +158,4 @@
         }
         .select-gender>input[type="radio"] {
             margin-right: 5px;
-        }
+        } 

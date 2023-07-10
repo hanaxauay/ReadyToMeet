@@ -11,6 +11,7 @@ import com.final2.readytomeet.service.JoinService;
 import com.final2.readytomeet.service.UserService;
 import com.final2.readytomeet.service.testService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,6 @@ public class LoginController {
     private final UserChatRoomRepository userChatRoomRepository;
     private final ChatMessageRepository chatMessageRepository;
     private final ChatRoomMapper chatRoomMapper;
-    private final JoinService JoinService;
     @GetMapping("/login")
     public String showLoginForm() {
         return "login"; // login.html (로그인 폼 템플릿)을 반환
@@ -66,12 +66,12 @@ public class LoginController {
         return "login"; // 로그인 폼 페이지로 리다이렉트
     }
 
-    @GetMapping("/find")
+    @GetMapping("/login/find")
     public String showPwFindForm() {
         return "pwfind"; // pwfind.html (비밀번호 찾기 폼 템플릿)을 반환
     }
 
-    @GetMapping("/join")
+    @GetMapping("/login/join")
     public String showJoinForm() {
         return "joinForm"; // joinForm.html (회원 가입 폼 템플릿)을 반환
     }
@@ -104,11 +104,5 @@ public class LoginController {
 
         return Integer.toString(randomNumber);
     }
-
-        @PostMapping("/join")
-        public String join(@ModelAttribute JoinDto joinDto){
-            JoinService.join(joinDto);
-            return "login";
-        }
 
 }
