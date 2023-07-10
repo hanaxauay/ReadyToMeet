@@ -77,16 +77,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    var maleRadio = document.getElementById('male');
-    var femaleRadio = document.getElementById('female');
-    var genderInput = document.getElementById('gender');
-
-    maleRadio.addEventListener('change', function() {
-        genderInput.value = '1';
-    });
-
-    femaleRadio.addEventListener('change', function() {
-        genderInput.value = '0';
-    });
-});
