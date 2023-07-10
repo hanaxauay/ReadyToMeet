@@ -17,6 +17,14 @@ public interface UserService {
     //note 회원 정보 상세 조회
     UserDto viewUser(String user_id);
 
+    //note 유저정보보기
+    UserDto readUser(String user_id);
+
+    boolean checkPw(String userId, String userPw);
+
+    //note 회원정보 삭제
+    void deleteUser(String user_id);
+
 
     //note 프로필출력중!!!!!!!!!!!!!!!!!!!
 //    public UserDto getUserProfile(String user_id);

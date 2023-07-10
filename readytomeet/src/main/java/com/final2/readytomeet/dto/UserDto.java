@@ -141,8 +141,6 @@ public class UserDto {
                 ", user_age=" + user_age +
                 ", user_gender=" + user_gender +
                 ", user_location='" + user_location + '\'' +
-                ", user_img='" + user_img + '\'' +
-                ", user_path='" + user_path + '\'' +
                 ", user_content='" + user_content + '\'' +
                 '}';
     }

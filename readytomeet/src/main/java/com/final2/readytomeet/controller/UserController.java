@@ -5,14 +5,13 @@ import com.final2.readytomeet.dto.UserDto;
 import com.final2.readytomeet.service.UserService;
 
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -23,11 +22,11 @@ public class UserController {
     private UserService userService;
 
     //note 회원목록
-    @RequestMapping("user/list")
+    @RequestMapping("member/list")
     public String userList(Model model){
         List<UserDto> list = userService.userList();
         model.addAttribute("list", list);
-        return "userlist";
+        return "memberlist";
     }
 
 
@@ -39,9 +38,27 @@ public class UserController {
     }
 
 
+    //note 유저 정보 불러오기 실패
+    @RequestMapping("user/readuser")
+    public String readUser(String user_id, Model model){
+        model.addAttribute("dto", userService.readUser(user_id));
+        return "userview";
+    }
 
 
-
+    //note 회원정보 삭제
+    @RequestMapping("user/delete")
+    public String deleteUser(@RequestParam String user_id, @RequestParam String user_pw, Model model){
+        boolean result = userService.checkPw(user_id, user_pw);
+        if(result) {
+            userService.deleteUser(user_id);
+            return "redirect:/member/list";
+        } else {
+            model.addAttribute("message", "비밀번호 불일치");
+            model.addAttribute("dto", userService.viewUser(user_id));
+        return "user/userview";
+        }
+    }
 
 
 

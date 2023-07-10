@@ -10,6 +10,7 @@ import com.final2.readytomeet.service.UserService;
 
 import org.springframework.stereotype.Service;
 
+
 import javax.inject.Inject;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
     //note 전체회원 조회
     @Override
     public List<UserDto> userList() {
+
         return userRepository.userList();
     }
 
@@ -34,6 +36,29 @@ public class UserServiceImpl implements UserService {
     public UserDto viewUser(String user_id){
         return userRepository.viewUser(user_id);
     }
+
+    //note 유저정보보기
+    @Override
+    public UserDto readUser(String user_id){
+        return userRepository.readUser(user_id);
+    }
+
+
+    //note 회원정보 삭제
+    @Override
+    public void deleteUser(String user_id){
+        userRepository.deleteUser(user_id);
+    }
+
+    //note  비밀번호 체크
+    @Override
+    public boolean checkPw(String user_id, String user_pw){
+        return userRepository.checkPw(user_id, user_pw);
+    }
+
+
+
+
 
 //    @Override
 //    public void deleteUser(String user_id){
