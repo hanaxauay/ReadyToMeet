@@ -386,3 +386,102 @@ h1 {
     color: rgb(100, 100, 100);
     font-weight: 700;
 }
+
+
+
+
+/*정렬체크 검색 전체 영역 정렬*/
+.wrap_appointment_sort_search{
+  width: 60%;
+  padding-top: 1%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+/*약속 카테고리 내 검색창 컨테이너*/
+.appointment_search_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/*----카테고리 표시 문구 설정-----*/
+.show_sub_category_container{
+  width: 50%;
+
+  display: flex;
+  align-items: center;
+  float: left;
+
+  color: #FF7777;
+  text-align: center;
+}
+/*카테고리 텍스트 설정*/
+.show_sub_category{
+  margin-right: 5%;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.show_sub_img{
+  width: 20%;
+  margin-right: 2%;
+  font-size: 2rem;
+  font-weight: bold;
+}
+/*세부 카테고리 설정*/
+.sub_category_ment{
+  margin-left: 1.5%;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+
+
+/*검색창 요소 정렬 설정*/
+.appointment_search_container form{
+  width: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+}
+/*검색창 셀렉트 박스 설정*/
+.appointment_search_container select{
+  margin-left: 1%;
+  padding: 0.8%;
+  border: 2px solid rgb(121, 121, 121);
+  border-radius: 9px;
+}
+/*검색창 길이*/
+#search{
+  width: 100%;
+  padding: 0.8%;
+}
+/*검색창 설정*/
+.appointment_search_container input[type="search"]{
+  float: left;
+  margin: 0 0.5%;
+  border: 2px solid rgb(121, 121, 121);
+  border-radius: 9px;
+}
+.appointment_search_container input:focus{
+  outline: none;
+}
+/*검색창 검색버튼 설정*/
+.appointment_search_container input[type="submit"]{
+  float: left;
+  padding: 1% 1.4%;
+
+  background-color: rgb(103,103,103);
+  border: none;
+  border-radius: 9px;
+
+  text-align: center;
+  color:white;
+}

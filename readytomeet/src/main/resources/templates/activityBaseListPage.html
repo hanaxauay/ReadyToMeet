@@ -1,87 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
 
-    <link href="../../css/common.css" rel="stylesheet" />
-    <link href="../../css/activityBaseListPage.css" rel="stylesheet" />
-    <title>Document</title>
-    <script src="../../js/activityBaseListPage.js"></script>
-    <!-- 아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함 key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.-->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD51bMavEVnc-HZy3RwWG_brHEQ4qfXAog&callback=initMap">
-    </script>
-    <script>
-        window.onload = getLocation;
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(locationSuccess, locationError, geo_options);
-            } else {
-                console.log("지오 로케이션 없음")
-            }
-        };
+        <link href="../../css/common.css" rel="stylesheet" />
+        <link href="../../css/activityBaseListPage.css" rel="stylesheet" />
+        <title>Document</title>
+        <script src="../../js/activityBaseListPage.js"></script>
 
-        // getLocation
-        var latitude, longitude;
-        function locationSuccess(p) {
-            latitude = p.coords.latitude;
-            longitude = p.coords.longitude;
-            // 위치를 얻은 후에 날씨 데이터를 가져오기 위해 fetchWeatherData 함수 호출
-            // fetchWeatherData(latitude, longitude);
-            initMap();
-        }
 
-        // locationSuccess
-        function locationError(error){
-            var errorTypes = {
-                0 : "무슨 에런지 모르겠음",
-                1 : "위치 허용 안했음.",
-                2 : "위치가 안잡힘",
-                3 : "응답시간이 지남"
-            };
-            var errorMsg = errorTypes[error.code];
-        }
-        // locationError
-        var geo_options = {
-            enableHighAccuracy: true,
-            maximumAge        : 30000,
-            timeout           : 27000
-        };
-        // geo_options
-        var map;
-        function initMap() {
-
-            var button = document.getElementById('mapBtn');
-            // button.addEventListener('click', changeCenter);
-
-            var nowPosition = new google.maps.LatLng(latitude, longitude);
-            map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
-                center: nowPosition
-            });
-
-            var mainMarker = new google.maps.Marker({
-                position: nowPosition,
-                map: map,
-                label: {
-                    text: "현위치",
-                    color: "#ff7777"
-                },
-                icon: {
-                    url: "logo.png",
-                    labelOrigin: new google.maps.Point(100, 55)
-                }
-            });
-        }
-    </script>
-
-</head>
-
-<body>
-<!--헤더 영역-->
-<nav>
+    </head>
+    <body>
+        <!--헤더 영역-->
+<nav> 
     <ul>
         <li class="liLogo"><a href="/main"><img src="../../image/logo.png" class="imgLogo"></a></li>
         <li><a href="/all">All</a> </li>
@@ -98,107 +32,106 @@
         <li class="liMypage"><a href="#"><img src="../../image/mypage.png" class="imgMypage"></a></li>
     </ul>
 </nav>
-<div class=”main_content”>
+        <div class=”main_content”>
 
-    <!--바디 영역-->
-    <div class="appointment_base_wrap">
+        <!--바디 영역-->
+        <div class="appointment_base_wrap">
 
-        <!--세부 카테고리 영역-->
-        <article class="sub_category">
-            <div class="sub_menu">
-                <a href="/appointment/activityList/cafe"><span class="sub_menu_text">카페</span></a>
-            </div>
-            <div class="sub_menu">
-                <a href="/appointment/activityList/restaurant"><span class="sub_menu_text">맛집</span></a>
-            </div>
-            <div class="sub_menu">
-                <a href="/appointment/activityList/sport"><span class="sub_menu_text">스포츠</span></a>
-            </div>
-            <div class="sub_menu">
-                <a href="/appointment/activityList/outdoor"><span class="sub_menu_text">야외활동</span></a>
-            </div>
-            <div class="sub_menu">
-                <a href="/appointment/activityList/buy"><span class="sub_menu_text">구매</span></a>
-            </div>
-            <div class="sub_menu">
-                <a href="/appointment/activityList/game"><span class="sub_menu_text">게임</span></a>
-            </div>
-            <div class="sub_menu">
-                <a href="/appointment/activityList/others"><span class="sub_menu_text">기타</span></a>
-            </div>
-        </article>
-
-
-
-        <!-- 리스트 정렬 & 검색 영역 -->
-        <article class="wrap_appointment_sort_search">
-
-            <!--검색 영역-->
-            <div class="appointment_search_container">
-
-                <!-- 현재 카테고리 표시 문구 -->
-                <div class="show_sub_category_container">
-                    <!--                        <a th:href="@{/appointment/activityAllList}">-->
-                    <span class="show_sub_category">ACTIVITY </span>
-                    <!--                        </a>-->
-                    <span class="show_sub_category"> > </span>
-                    <!-- 세부 카테고리 변경 시 따라서 문구 변경 -->
-                    <span class="sub_category_ment" th:text="${subCategoryText}"> subCategoryText</span>
+            <!--세부 카테고리 영역-->
+            <article class="sub_category">
+                <div class="sub_menu">
+                    <a href="/appointment/activityList/cafe"><span class="sub_menu_text">카페</span></a>
                 </div>
+                <div class="sub_menu">
+                    <a href="/appointment/activityList/restaurant"><span class="sub_menu_text">맛집</span></a>
+                </div>
+                <div class="sub_menu">
+                    <a href="/appointment/activityList/sport"><span class="sub_menu_text">스포츠</span></a>
+                </div>
+                <div class="sub_menu">
+                    <a href="/appointment/activityList/outdoor"><span class="sub_menu_text">야외활동</span></a>
+                </div>
+                <div class="sub_menu">
+                    <a href="/appointment/activityList/buy"><span class="sub_menu_text">구매</span></a>
+                </div>
+                <div class="sub_menu">
+                    <a href="/appointment/activityList/game"><span class="sub_menu_text">게임</span></a>
+                </div>
+                <div class="sub_menu">
+                    <a href="/appointment/activityList/others"><span class="sub_menu_text">기타</span></a>
+                </div>
+            </article>
+            
 
-                <form action="#">
+
+            <!-- 리스트 정렬 & 검색 영역 -->
+            <article class="wrap_appointment_sort_search">
+
+                <!--검색 영역-->
+                <div class="appointment_search_container">
+
+                    <!-- 현재 카테고리 표시 문구 -->
+                    <div class="show_sub_category_container">
+<!--                        <a th:href="@{/appointment/activityAllList}">-->
+                            <span class="show_sub_category">ACTIVITY </span>
+<!--                        </a>-->
+                        <span class="show_sub_category"> > </span>
+                        <!-- 세부 카테고리 변경 시 따라서 문구 변경 -->
+                        <span class="sub_category_ment" th:text="${subCategoryText}"> subCategoryText</span>
+                    </div>
+
+                  <form action="/appointment/activityList/all" method="GET" onsubmit="return validateSearch()">
                     <!--셀렉트 박스-->
-                    <select name="appointment_base_search_filter" >
-                        <option value="subCategory" th:text="${subCategoryText}" th:if="${subCategoryText == '전체'}"></option>
-                        <option value="subCategory" th:text="${subCategoryText}+' 전체'" th:unless="${subCategoryText == '전체'}"></option>
-                        <option value="appointmentTitle">약속명</option>
-                        <option value="appointmentPlace">약속장소</option>
-                        <option value="writerNickname">작성자</option>
+                    <select name="type" id="type">
+                      <option value="all">전체</option>
+                      <option value="appo_title">약속명</option>
+                      <option value="appo_place">약속장소</option>
+                      <option value="appo_host">작성자</option>
                     </select>
 
-                    <input type="search" id="search_length" name="appointment_search" placeholder="약속 세부 검색..." >
+                    <input type="search" id="search_length" name="keyword" placeholder="검색어는 최소 2글자 이상 입력해야 합니다..." >
+
                     <input type="submit" value="search">
-
-                </form>
-            </div>
-
-            <!--정렬체크 영역-->
-            <div class="sort_checkbox_container">
-                <div class="appointment_list_sort">
-                    <label>
-                        <span class="sort_ment">가까운 시간 순 <input type="checkbox" name="sort_what_close" value="sort_time_close" onclick="NoMultiChk(this)"></span>
-                    </label>
+                  </form>
                 </div>
-                <div class="appointment_list_sort">
-                    <label>
-                        <span class="sort_ment">가까운 위치 순 <input type="checkbox" name="sort_what_close" value="sort_place_close" onclick="NoMultiChk(this)"></span>
-                    </label>
+
+                <!--정렬체크 영역-->
+                <div class="sort_checkbox_container">
+                    <div class="appointment_list_sort">
+                        <label>
+                            <span class="sort_ment">가까운 시간 순 <input type="checkbox" name="sort_what_close" value="sort_time_close" onclick="NoMultiChk(this)"></span>
+                        </label>
+                    </div>
+                    <div class="appointment_list_sort">
+                        <label>
+                            <span class="sort_ment">가까운 위치 순 <input type="checkbox" name="sort_what_close" value="sort_place_close" onclick="NoMultiChk(this)"></span>
+                        </label>
+                    </div>
                 </div>
-            </div>
 
-        </article>
+            </article>
 
 
-        <!-- 메인 컨텐츠 영역-->
-        <article class="wrap_appointment_main">
+            <!-- 메인 컨텐츠 영역-->
+            <article class="wrap_appointment_main">
 
-            <!-- 카테고리 약속 리스트 컨테이너 (메인 왼쪽)-->
-            <div class="appointment_list_container">
-                <!--약속 리스트 / 기본 세부 카테고리:전체 / 페이지 당 13개-->
-                <!-- 반복출력 되도록 타임리프 활용
-                    양식 : 폰트 크기 = 약 14px,
-                          시간 표시 = MM / DD HH:mm (10 이하일 때 십의 자리에 0 추가, 24시간으로 표시)
-                          영역 크기 = 시간 20%, 장소 30%, 제목 30% (마진, 패딩 미포함)
-                    커서 올렸을 때 지도 띄우기 추가 필요-->
-                <div class="appointment_list_area">
+                <!-- 카테고리 약속 리스트 컨테이너 (메인 왼쪽)-->
+                <div class="appointment_list_container">
+                    <!--약속 리스트 / 기본 세부 카테고리:전체 / 페이지 당 13개-->
+                    <!-- 반복출력 되도록 타임리프 활용
+                        양식 : 폰트 크기 = 약 14px,
+                              시간 표시 = MM / DD HH:mm (10 이하일 때 십의 자리에 0 추가, 24시간으로 표시)
+                              영역 크기 = 시간 20%, 장소 30%, 제목 30% (마진, 패딩 미포함)
+                        커서 올렸을 때 지도 띄우기 추가 필요-->
+                    <div class="appointment_list_area">
 
-                    <th:block th:each="list: ${activityList}">
+                        <th:block th:each="list: ${activityList}">
                         <div class="appointment_list_element">
 
-                            <!--                            <a href="#" onclick="openNewWindow()">-->
+<!--                            <a href="#" onclick="openNewWindow()">-->
                             <!-- 클릭 시 새 창으로 열기 ->  th:target="_blank" -->
-                            <!--                            <a th:href="@{/appointment/detailActivity(appo_seq=${list.appo_seq})}">-->
                             <a th:href="@{/appointment/detailActivity(appo_seq=${list.appo_seq})}">
+
                                 <div class="appointment_date">
                                     <span class="appointment_date_text" th:text="${list.appo_date1}"></span>
                                     <span class="appointment_date_text" th:text="${list.appo_date2}"></span>
@@ -211,84 +144,115 @@
                                 </div>
                             </a>
                         </div>
-                    </th:block>
+                        </th:block>
 
-                </div>
-
-
-                <!--                            <div class="appointment_list_element">-->
-                <!--&lt;!&ndash;                                <a th:href="@{/appointment/detailActivityPage(appo_seq=${list.appo_seq})}">&ndash;&gt;-->
-                <!--                                    <div class="appointment_date">-->
-                <!--                                        <span class="appointment_date_text" th:text="${test}"></span>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="appointment_place">-->
-                <!--                                        <span class="appointment_place_text" th:text="${test}"></span>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="appointment_title">-->
-                <!--                                        <span class="appointment_title_text" th:text="${test}"></span>-->
-                <!--                                    </div>-->
-                <!--&lt;!&ndash;                                </a>&ndash;&gt;-->
-                <!--                            </div>-->
-
-
-                <!-- 페이징 영역 -->
-                <div class="paging_container">
-                    <!--페이징 넘버 표시할 곳-->
-                    <span class="paging_num"> 1  2  3  4  5  6</span>
-                </div>
-
-            </div>
-
-            <!-- 지도 & 약속생성 버튼 영역 (메인 오른쪽) -->
-            <div class="wrap_map_button_sort">
-                <!-- 지도 컨테이너 -->
-                <div class="appointment_map_container">
-                    <div class="google_map">
-                        <div id="map" style="width: 100%; height: 370px;"></div>
                     </div>
-                    <span class="map_container_ment">즐기고 싶은 장소를 찾아보세요!</span>
+
+
+<!--                            <div class="appointment_list_element">-->
+<!--&lt;!&ndash;                                <a th:href="@{/appointment/detailActivityPage(appo_seq=${list.appo_seq})}">&ndash;&gt;-->
+<!--                                    <div class="appointment_date">-->
+<!--                                        <span class="appointment_date_text" th:text="${test}"></span>-->
+<!--                                    </div>-->
+<!--                                    <div class="appointment_place">-->
+<!--                                        <span class="appointment_place_text" th:text="${test}"></span>-->
+<!--                                    </div>-->
+<!--                                    <div class="appointment_title">-->
+<!--                                        <span class="appointment_title_text" th:text="${test}"></span>-->
+<!--                                    </div>-->
+<!--&lt;!&ndash;                                </a>&ndash;&gt;-->
+<!--                            </div>-->
+
+
+                  <!-- 페이징 영역 -->
+                  <!-- 페이징 영역 -->
+                  <div class="pagination-container">
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination">
+                        <li class="page-item">
+                          <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=1, type=${param.type}, keyword=${param.keyword})}" aria-label="Previous" th:text="'<<'"></a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=${pagination.prevBlock}, type=${param.type}, keyword=${param.keyword})}" aria-label="Previous" th:text="'<'"></a>
+                        </li>
+                        <th:block th:with="start=${pagination.startPage}, end=${pagination.endPage}">
+                          <li th:each="pageButton : ${#numbers.sequence(start, end)}" th:if="${pageButton <= pagination.totalPageCnt}">
+                            <a class="page-link"
+                               th:href="@{${#httpServletRequest.servletPath}(page=${pageButton}, type=${param.type}, keyword=${param.keyword})}"
+                               th:text="${pageButton}"
+                               th:style="${pagination.page == pageButton} ? 'background-color: #FF7777; color: white;' : ''"></a>
+                          </li>
+                        </th:block>
+                        <li class="page-item">
+                          <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=${pagination.nextBlock}, type=${param.type}, keyword=${param.keyword})}" aria-label="Next" th:text="'>'"></a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=${pagination.totalPageCnt}, type=${param.type}, keyword=${param.keyword})}" aria-label="Next" th:text="'>>'"></a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+
                 </div>
 
-                <!-- 약속 생성 버튼 컨테이너-->
-                <div class="appointment_create_button_container">
-                    <!--약속 생성 버튼 원형-->
-                    <a href="/appointment/insertActivity">
-                        <div class="create_button_circle">
-                            <span class="create_button_text">+</span>
+                <!-- 지도 & 약속생성 버튼 영역 (메인 오른쪽) -->
+                <div class="wrap_map_button_sort">
+                    <!-- 지도 컨테이너 -->
+                    <div class="appointment_map_container">
+                        <div class="map_container">
+                        <!-- 지도 들어갈 공간 -->
                         </div>
-                    </a>
+                        <span class="map_container_ment">즐기고 싶은 장소를 찾아보세요!</span>
+                    </div>
+
+                    <!-- 약속 생성 버튼 컨테이너-->
+                    <div class="appointment_create_button_container">
+                        <!--약속 생성 버튼 원형-->
+                        <a href="/appointment/insertActivityForm">
+                           <div class="create_button_circle">
+                            <span class="create_button_text">+</span>
+                            </div> 
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-        </article>
-    </div>
+            </article>
+        </div>
 
 
-    <script>
-        function checkLogin(evt) {
-            evt.preventDefault(); // 기본 동작 중지
+            <script>
+                function checkLogin(evt) {
+                    evt.preventDefault(); // 기본 동작 중지
 
-            // 로그인 여부 체크 로직
-            if (isLoggedIn()) {
-                // 로그인된 상태라면 링크 이동
-                window.location.href = evt.target.href;
-            } else {
-                // 로그인되지 않은 상태라면 로그인 필요 메시지 표시
-                alert("로그인이 필요합니다.");
+                // 로그인 여부 체크 로직
+                if (isLoggedIn()) {
+                    // 로그인된 상태라면 링크 이동
+                    window.location.href = evt.target.href;
+                } else {
+                    // 로그인되지 않은 상태라면 로그인 필요 메시지 표시
+                    alert("로그인이 필요합니다.");
+                }
             }
-        }
 
-        // 로그인 여부 확인 함수
-        function isLoggedIn() {
-            // 세션 또는 쿠키 등을 사용하여 로그인 여부를 체크하는 로직을 작성하십시오.
-            // 예시: 세션에 로그인 정보가 있는지 확인
-            return (sessionStorage.getItem("loggedInUser") !== null);
-        }
+            // 로그인 여부 확인 함수
 
-    </script>
-    <footer>
-        <div> Team 2 in FinalProject 2023</div>
-    </footer>
-</div>
-</body>
+            // 검색
+            function isLoggedIn() {
+                // 세션 또는 쿠키 등을 사용하여 로그인 여부를 체크하는 로직을 작성하십시오.
+                // 예시: 세션에 로그인 정보가 있는지 확인
+                return (sessionStorage.getItem("loggedInUser") !== null);
+            }
+            function validateSearch() {
+            var keyword = document.getElementById('search_length').value;
+            if (keyword.length < 2) {
+              alert('검색어는 최소 2글자 이상 입력해야 합니다.');
+              return false; // 검색을 중단합니다.
+            }
+            return true; // 검색을 계속합니다.
+          }
+            </script>
+        <footer>
+            <div> Team 2 in FinalProject 2023</div>
+        </footer>
+    </body>
 </html>

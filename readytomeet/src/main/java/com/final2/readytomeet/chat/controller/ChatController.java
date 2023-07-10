@@ -25,6 +25,6 @@ public class ChatController {
             chatMessageRepository.saveChatMessage(message);
         }
 
-        messagingTemplate.convertAndSend("/sub/chat/room/" + message.getAppo_seq(), message);
+        messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoom_id(), message);
     }
 }

@@ -11,15 +11,12 @@ public interface ChatRoomMapper {
     @Select("SELECT * FROM CHAT_ROOM")
     List<ChatRoom> findAllRoom();
 
-    @Select("SELECT * FROM CHAT_ROOM WHERE APPO_SEQ = #{appo_seq}")
-    ChatRoom getChatRoomById(int appo_seq);
+    @Select("SELECT * FROM CHAT_ROOM WHERE ROOM_ID = #{room_id}")
+    ChatRoom getChatRoomById(String room_id);
 
     @Select("SELECT * FROM CHAT_ROOM WHERE USER_NICKNAME = #{user_nickname}")
     List<ChatRoom> findRoomByNickname(String nickname);
 
-    @Insert("INSERT INTO CHAT_ROOM (APPO_SEQ, room_name) VALUES (#{appo_seq}, #{room_name})")
+    @Insert("INSERT INTO CHAT_ROOM (room_id, room_name) VALUES (#{room_id}, #{room_name})")
     void createChatRoom(ChatRoom chatRoom);
-
-    @Delete(("DELETE FROM CHAT_ROOM WHERE APPO_SEQ=#{appo_seq} "))
-    int deleteChatRoomByAppoSeq(int appo_seq);
 }

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- CSS -->
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css">
-    <link href="../../../css/common.css" rel="stylesheet" />
     <style>
 
         [v-cloak] {
@@ -15,7 +14,6 @@
 
         .container {
             margin-top: 50px;
-            margin-bottom: 50px;
         }
 
         h3 {
@@ -32,7 +30,6 @@
             cursor: pointer;
             background-color: #FFFFFF; /* 변경: 배경색상 */
             color: #FF7777; /* 변경: 글자색상 */
-            margin-bottom: 0.5%;
         }
 
         /* 변경: 입력 필드 스타일 */
@@ -49,24 +46,6 @@
     </style>
 </head>
 <body>
-<!--헤더 영역-->
-<nav>
-    <ul>
-        <li class="liLogo"><a href="/main"><img src="../../image/logo.png" class="imgLogo"></a></li>
-        <li><a href="/all">All</a> </li>
-        <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
-        <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
-        <li><a href="/appointment/workList/all">WORK</a> </li>
-        <li><a href="/community/list">Community</a> </li>
-        <li>
-            <form action="/search" method="GET" class="search-container">
-                <input type="text" name="keyword" placeholder="약속을 찾아봐요!">
-                <input type="submit" value="Search">
-            </form>
-        </li>
-        <li class="liMypage"><a href="#"><img src="../../image/mypage.png" class="imgMypage"></a></li>
-    </ul>
-</nav>
 <div class="container" id="app" v-cloak>
     <div class="row">
         <div class="col-md-12">
@@ -74,17 +53,11 @@
         </div>
     </div>
     <ul class="list-group">
-        <li class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.appo_seq"
-            v-on:click="enterRoom(item.appo_seq, item.room_name)">
+        <li class="list-group-item list-group-item-action" v-for="item in chatrooms" v-bind:key="item.room_id"
+            v-on:click="enterRoom(item.room_id, item.room_name)">
             {{ item.room_name }}
         </li>
-        <!--        <input type="text" class="form-control" v-model="room_name" v-on:keyup.enter="createRoom">-->
-        <!--        <div class="input-group-append">-->
-        <!--            <button class="btn btn-primary" type="button" @click="createRoom">채팅방 개설</button>-->
-        <!--        </div>-->
     </ul>
-    <h5 style="float:right"> <a th:href="@{/appointment/activityList/all}">약속 만들고 채팅방 생성하러 가기</a></h5>
-
 </div>
 <!-- JavaScript -->
 <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
@@ -112,35 +85,31 @@
                 } else {
                     var params = new URLSearchParams();
                     params.append("name", this.room_name);
-                    params.append("appo_seq", parseInt(this.appo_seq)); // Added: Pass the appo_seq value
-
                     axios.post('/chat/room', params)
                         .then(response => {
                             alert("Room " + response.data.room_name + " 채팅방이 생성되었습니다.");
                             this.room_name = '';
                             this.findAllRoom();
-                            this.enterRoom(response.data.appo_seq, response.data.room_name); // 생성된 채팅방으로 입장
                         })
                         .catch(response => {
                             alert("채팅방 생성에 실패했습니다.");
                         });
                 }
             },
-
-            enterRoom: function(appo_seq, roomName) {
+            enterRoom: function(roomId, roomName) {
                 var sender = localStorage.getItem('wschat.sender');
                 if (!sender) {
                     sender = prompt('닉네임을 입력하세요');
                     localStorage.setItem('wschat.sender', sender);
                 }
-                localStorage.setItem('wschat.appo_seq', appo_seq);
-                window.location.href = "/chat/room/" + appo_seq;
+                localStorage.setItem('wschat.roomId', roomId);
+                window.location.href = "/chat/room/" + roomId;
             }
+
+
+
         }
     });
 </script>
-<!--<footer>-->
-<!--    <div> Team 2 in FinalProject 2023</div>-->
-<!--</footer>-->
 </body>
 </html>

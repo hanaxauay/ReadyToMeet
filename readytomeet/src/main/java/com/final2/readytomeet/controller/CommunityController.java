@@ -29,12 +29,39 @@ public class CommunityController {
   private CommunityService service;
 
   @GetMapping("/list")
-  public String selectList(Model model, @RequestParam(defaultValue = "1") int page) {
-    int totalListCnt = map.findAllCnt();
-    Pagination pagination = new Pagination(totalListCnt, page);
-    int startIndex = pagination.getStartIndex();
-    int pageSize = pagination.getPageSize();
-    List<CommunityDto> communityList = map.findListPaging(startIndex, pageSize);
+  public String selectList(Model model, @RequestParam(defaultValue = "1") int page,
+                           @RequestParam(required = false) String type,
+                           @RequestParam(required = false) String keyword) {
+    int totalListCnt;
+    List<CommunityDto> communityList;
+    Pagination pagination;
+
+    if (type != null && keyword != null && !type.isEmpty() && !keyword.isEmpty()) {
+      if (type.equals("all")) {
+        // 전체 검색 처리
+        totalListCnt = map.findSearchCnt("share_title", keyword)
+            + map.findSearchCnt("share_content", keyword)
+            + map.findSearchCnt("user_nickname", keyword);
+        pagination = new Pagination(totalListCnt, page);
+        int startIndex = pagination.getStartIndex();
+        int pageSize = pagination.getPageSize();
+        communityList = map.findSearchListPaging("share_title", keyword, startIndex, pageSize);
+      } else {
+        // 특정 필드 검색 처리
+        totalListCnt = map.findSearchCnt(type, keyword);
+        pagination = new Pagination(totalListCnt, page);
+        int startIndex = pagination.getStartIndex();
+        int pageSize = pagination.getPageSize();
+        communityList = map.findSearchListPaging(type, keyword, startIndex, pageSize);
+      }
+    } else {
+      // 검색 조건이 없는 경우 전체 레코드를 검색
+      totalListCnt = map.findAllCnt();
+      pagination = new Pagination(totalListCnt, page);
+      int startIndex = pagination.getStartIndex();
+      int pageSize = pagination.getPageSize();
+      communityList = map.findListPaging(startIndex, pageSize);
+    }
 
     model.addAttribute("communityList", communityList);
     model.addAttribute("pagination", pagination);
@@ -42,6 +69,7 @@ public class CommunityController {
 
     return "communitylist";
   }
+
   @GetMapping("/write")
   public String gotocommunitywrite(HttpSession session) {
     UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
@@ -54,7 +82,11 @@ public class CommunityController {
   }
 
   @PostMapping("/writepro")
-  public String write(CommunityDto dto, Model model, @RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) {
+  public String write(CommunityDto dto, Model model,
+                      @RequestParam(name = "file", required = false) MultipartFile file,
+                      HttpSession session,
+                      @RequestParam(required = false) String type,
+                      @RequestParam(required = false) String keyword) {
     try {
       UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
       if (loginUser != null) {
@@ -70,7 +102,12 @@ public class CommunityController {
         model.addAttribute("user_id", dto.getUser_id());
         model.addAttribute("user_nickname", dto.getUser_nickname());
         model.addAttribute("message", "글 작성이 완료되었습니다.");
-        model.addAttribute("searchUrl", "/community/list");
+        if (type != null && keyword != null && !keyword.isEmpty()) {
+          model.addAttribute("searchUrl", "/community/list?type=" + type + "&keyword=" + keyword);
+        } else {
+          model.addAttribute("searchUrl", "/community/list");
+        }
+
         return "message";
       } else {
         // 로그인되지 않은 상태 처리
@@ -94,7 +131,7 @@ public class CommunityController {
   }
 
   @GetMapping("/updateform")
-  public String updateform(Model model, int share_seq, HttpSession session) {
+  public String updateForm(Model model, int share_seq, HttpSession session) {
     UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
     CommunityDto communityDto = service.selectOne(share_seq);
 
@@ -114,15 +151,22 @@ public class CommunityController {
       return "message";
     }
   }
+
   @PostMapping("/update")
-  public String update(CommunityDto dto, Model model, HttpSession session) {
+  public String update(CommunityDto dto, Model model, HttpSession session,
+                       @RequestParam(required = false) String type,
+                       @RequestParam(required = false) String keyword) {
     UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
     CommunityDto originalDto = service.selectOne(dto.getShare_seq());
 
     // 작성자와 로그인한 사용자가 같은 경우에만 수정 가능
     if (loginUser != null && loginUser.getUser_id().equals(originalDto.getUser_id())) {
       model.addAttribute("message", "글 수정이 완료되었습니다.");
-      model.addAttribute("searchUrl", "/community/list");
+      if (type != null && keyword != null && !keyword.isEmpty()) {
+        model.addAttribute("searchUrl", "/community/list?type=" + type + "&keyword=" + keyword);
+      } else {
+        model.addAttribute("searchUrl", "/community/list");
+      }
       if (service.update(dto) > 0) {
         return "message";
       } else {
@@ -140,15 +184,22 @@ public class CommunityController {
       return "message";
     }
   }
+
   @GetMapping("/delete")
-  public String delete(int share_seq, Model model, HttpSession session) {
+  public String delete(int share_seq, Model model, HttpSession session,
+                       @RequestParam(required = false) String type,
+                       @RequestParam(required = false) String keyword) {
     UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
     CommunityDto communityDto = service.selectOne(share_seq);
 
     // 작성자와 로그인한 사용자가 같은 경우에만 삭제 가능
     if (loginUser != null && loginUser.getUser_id().equals(communityDto.getUser_id())) {
       model.addAttribute("message", "삭제가 완료되었습니다.");
-      model.addAttribute("searchUrl", "/community/list");
+      if (type != null && keyword != null && !keyword.isEmpty()) {
+        model.addAttribute("searchUrl", "/community/list?type=" + type + "&keyword=" + keyword);
+      } else {
+        model.addAttribute("searchUrl", "/community/list");
+      }
       if (service.delete(share_seq) > 0) {
         return "message";
       } else {

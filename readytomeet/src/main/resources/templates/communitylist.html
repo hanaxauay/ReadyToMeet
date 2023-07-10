@@ -7,14 +7,54 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/jinha.css">
     <link rel="stylesheet" href="../css/common.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function getSearchList(){
+          $.ajax({
+            type: 'GET',
+            url : "/getSearchList",
+            data : $("form[name=search-form]").serialize(),
+            success : function(result){
+              //테이블 초기화
+              $('#boardtable > tbody').empty();
+              if(result.length>=1){
+                result.forEach(function(item){
+                  str='<tr>'
+                  str += "<td>"+item.idx+"</td>";
+                  str+="<td>"+item.writer+"</td>";
+                  str+="<td><a href = '/board/detail?idx=" + item.idx + "'>" + item.title + "</a></td>";
+                  str+="<td>"+item.date+"</td>";
+                  str+="<td>"+item.hit+"</td>";
+                  str+="</tr>"
+                  $('#boardtable').append(str);
+                    })
+              }
+            }
+          })
+        }
 
+        // 검색
+        function isLoggedIn() {
+            // 세션 또는 쿠키 등을 사용하여 로그인 여부를 체크하는 로직을 작성하십시오.
+            // 예시: 세션에 로그인 정보가 있는지 확인
+            return (sessionStorage.getItem("loggedInUser") !== null);
+        }
+        function validateSearch() {
+        var keyword = document.getElementById('search_length').value;
+        if (keyword.length < 2) {
+          alert('검색어는 최소 2글자 이상 입력해야 합니다.');
+          return false; // 검색을 중단합니다.
+        }
+        return true; // 검색을 계속합니다.
+      }
+    </script>
 </head>
 <body>
 <!--해더 영역-->
 <nav>
     <ul>
         <li class="liLogo"><a href="#"><img src="../image/logo.png" class="imgLogo"></a></li>
-        <li><a href="/all/list">All</a> </li>
+        <li><a href="/all">All</a> </li>
         <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
         <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
         <li><a href="/appointment/workList/all">WORK</a> </li>
@@ -30,11 +70,29 @@
 </nav>
 
 <div class="wrap">
+    <article class="wrap_appointment_sort_search">
 
-    <section class="category_com">
-        <span class="category_ment1">COMUNITY</span>
-    </section>
+        <div class="appointment_search_container">
 
+            <div class="show_sub_category_container">
+                <span class="show_sub_category">COMMUNITY </span>
+                <span class="show_sub_category"> > </span>
+                <span class="show_sub_img">*ㅁ*</span>
+            </div>
+
+            <form action="/community/list" method="GET" onsubmit="return validateSearch()">
+                <!--셀렉트 박스-->
+                <select id="type" name="type">
+                    <option value="all">전체</option>
+                    <option value="share_title">제목</option>
+                    <option value="share_content">내용</option>
+                    <option value="user_nickname">작성자</option>
+                </select>
+                <input type="search" id="search" name="keyword" placeholder="검색어는 최소 2글자 이상 입력해야 합니다...">
+                <input type="submit" value="검색">
+            </form>
+        </div>
+    </article>
     <!-- 반복해서 만들도록 설정(타임리프로 할듯) -->
     <div th:each="share : ${communityList}" class="wrap_com">
         <div class="box">

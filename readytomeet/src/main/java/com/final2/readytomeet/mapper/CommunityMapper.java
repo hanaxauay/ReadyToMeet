@@ -24,4 +24,10 @@ public interface CommunityMapper {
     int findAllCnt();
     @Select("SELECT * FROM SHARE ORDER BY SHARE_SEQ DESC LIMIT #{startIndex}, #{pageSize}")
     List<CommunityDto> findListPaging(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
+    @Select("SELECT COUNT(*) AS TOTAL_COUNT FROM SHARE WHERE ${type} LIKE CONCAT('%', #{keyword}, '%')")
+    int findSearchCnt(@Param("type") String type, @Param("keyword") String keyword);
+
+    @Select("SELECT * FROM SHARE WHERE ${type} LIKE CONCAT('%', #{keyword}, '%') ORDER BY SHARE_SEQ DESC LIMIT #{startIndex}, #{pageSize}")
+    List<CommunityDto> findSearchListPaging(@Param("type") String type, @Param("keyword") String keyword,
+                                            @Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
 }

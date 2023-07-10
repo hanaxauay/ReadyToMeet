@@ -1,6 +1,7 @@
 package com.final2.readytomeet.service;
 
 import com.final2.readytomeet.dto.AppoDto;
+import com.final2.readytomeet.dto.CommunityDto;
 
 import java.util.List;
 
@@ -48,5 +49,7 @@ public interface AppoService {
     public int updateVehicle(AppoDto appodto);
     public int updateWork(AppoDto appodto);
 
-    int deleteAppointment(int appo_seq);
+    //검색 & 페이징
+    public int findSearchCnt(String type, String keyword);
+    public List<AppoDto> findSearchListPaging(String type, String keyword, int startIndex, int pageSize);
 }

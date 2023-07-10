@@ -51,7 +51,15 @@ public class CommunityServiceImpl implements CommunityService {
   public int updateViewCount(int share_seq) {
     return communityMapper.updateViewCount(share_seq);
   }
+  @Override
+  public int findSearchCnt(String type, String keyword) {
+    return communityMapper.findSearchCnt(type, keyword);
+  }
 
+  @Override
+  public List<CommunityDto> findSearchListPaging(String type, String keyword, int startIndex, int pageSize) {
+    return communityMapper.findSearchListPaging(type, keyword, startIndex, pageSize);
+  }
 
 
 }

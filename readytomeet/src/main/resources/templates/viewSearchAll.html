@@ -29,19 +29,21 @@
 
 <div class="wrap">
     <div class="activity_title">
-        <h1>약속 검색</h1>
+        <h1>All Appointment</h1>
     </div>
     <!-- 반복해서 만들도록 설정(타임리프로 할듯) -->
     <div th:each="appointment : ${searchList}">
         <div class="box">
             <div class="list">
-                <a th:href="@{/appointment/searchDetail(appo_seq=${appointment.appo_seq})}">
                 <div th:text="${appointment.appo_title}" class="title"></div>
-                </a>
             </div>
         </div>
     </div>
-
+    <div class="create">
+        <a href="/community/write">
+            <img src="../image/create.png">
+        </a>
+    </div>
     <!-- 페이징 처리하면됨 어떻게할지는 차차... -->
     <div class="paging">
         <a href="#" class="bt first"><<</a>

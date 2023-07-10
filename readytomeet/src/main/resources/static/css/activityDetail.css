@@ -441,27 +441,6 @@ body{
   font-weight: 500;
 }
 
-.btn-primary {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  padding: 0.725% 0;
-  border: 0.128rem solid #FF7777;
-  border-radius: 0.25rem;
-  background-color: white;
-  color: #d3455b;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.btn-primary:hover {
-  background-color: #FF7777;
-  color: white;
-}
-
-
 
 #chat_button{
   /*체크배경

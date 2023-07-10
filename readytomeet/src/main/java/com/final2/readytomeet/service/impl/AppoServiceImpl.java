@@ -1,5 +1,6 @@
 package com.final2.readytomeet.service.impl;
 
+import com.final2.readytomeet.Mapper.AppoMapper;
 import com.final2.readytomeet.dto.AppoDto;
 import com.final2.readytomeet.repository.AppoRepository;
 import com.final2.readytomeet.service.AppoService;
@@ -13,6 +14,9 @@ public class AppoServiceImpl implements AppoService {
 
     @Autowired
     private AppoRepository apporepository;
+
+    @Autowired
+    private AppoMapper AppoMapper;
 
     //전체 약속 검색
 //    @Override
@@ -125,8 +129,16 @@ public class AppoServiceImpl implements AppoService {
         return apporepository.updateWork(appodto);
     }
 
+
+
+    //검색 & 페이징
     @Override
-    public int deleteAppointment(int appo_seq) {
-        return apporepository.deleteAppointment(appo_seq);
+    public int findSearchCnt(String type, String keyword) {
+        return AppoMapper.findSearchCnt(type, keyword);
+    }
+
+    @Override
+    public List<AppoDto> findSearchListPaging(String type, String keyword, int startIndex, int pageSize) {
+        return AppoMapper.findSearchListPaging(type, keyword, startIndex, pageSize);
     }
 }

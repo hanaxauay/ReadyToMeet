@@ -17,7 +17,7 @@ public class ChatMessage {
     }
     private MessageType type; // 메시지 타입
     private Long messageId;
-    private int appo_seq; // 방번호
+    private String room_id; // 방번호
     private String user_nickname;
     private String message; // 메시지
     private Timestamp timestamp;
@@ -37,12 +37,12 @@ public class ChatMessage {
     public void setMessageId(Long messageId) {
         this.messageId = messageId;
     }
-    public int getAppo_seq() {
-        return appo_seq;
+    public String getRoom_id() {
+        return room_id;
     }
 
-    public void setAppo_seq(int appo_seq) {
-        this.appo_seq = appo_seq;
+    public void setRoom_id(String room_id) {
+        this.room_id = room_id;
     }
 
     public String getUser_nickname() {

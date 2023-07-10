@@ -10,73 +10,6 @@
         <link href="../../css/workBaseListPage.css" rel="stylesheet" />
         <title>Document</title>
         <script src="../../js/workBaseListPage.js"></script>
-
-        <!-- 아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함 key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.-->
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD51bMavEVnc-HZy3RwWG_brHEQ4qfXAog&callback=initMap">
-        </script>
-        <script>
-            window.onload = getLocation;
-            function getLocation() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(locationSuccess, locationError, geo_options);
-                } else {
-                    console.log("지오 로케이션 없음")
-                }
-            };
-
-            // getLocation
-            var latitude, longitude;
-            function locationSuccess(p) {
-                latitude = p.coords.latitude;
-                longitude = p.coords.longitude;
-                // 위치를 얻은 후에 날씨 데이터를 가져오기 위해 fetchWeatherData 함수 호출
-                // fetchWeatherData(latitude, longitude);
-                initMap();
-            }
-
-            // locationSuccess
-            function locationError(error){
-                var errorTypes = {
-                    0 : "무슨 에런지 모르겠음",
-                    1 : "위치 허용 안했음.",
-                    2 : "위치가 안잡힘",
-                    3 : "응답시간이 지남"
-                };
-                var errorMsg = errorTypes[error.code];
-            }
-            // locationError
-            var geo_options = {
-                enableHighAccuracy: true,
-                maximumAge        : 30000,
-                timeout           : 27000
-            };
-            // geo_options
-            var map;
-            function initMap() {
-
-                var button = document.getElementById('mapBtn');
-                // button.addEventListener('click', changeCenter);
-
-                var nowPosition = new google.maps.LatLng(latitude, longitude);
-                map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 15,
-                    center: nowPosition
-                });
-
-                var mainMarker = new google.maps.Marker({
-                    position: nowPosition,
-                    map: map,
-                    label: {
-                        text: "현위치",
-                        color: "#ff7777"
-                    },
-                    icon: {
-                        url: "logo.png",
-                        labelOrigin: new google.maps.Point(100, 55)
-                    }
-                });
-            }
-        </script>
     </head>
     <body>
 
@@ -130,17 +63,16 @@
                         <span class="sub_category_ment" th:text="${subCategoryText}"> subCategoryText</span>
                     </div>
 
-                    <form action="#">
+                    <form action="/appointment/workList/all" method="GET" onsubmit="return validateSearch()">
                         <!--셀렉트 박스-->
-                        <select name="appointment_base_search_filter" >
-                            <option value="subCategory" th:text="${subCategoryText}" th:if="${subCategoryText == '전체'}"></option>
-                            <option value="subCategory" th:text="${subCategoryText}+' 전체'" th:unless="${subCategoryText == '전체'}"></option>
-                            <option value="appointmentTitle">약속명</option>
-                            <option value="appointmentPlace">약속장소</option>
-                            <option value="writerNickname">작성자</option>
-                        </select>   
-                        
-                        <input type="search" id="search_length" name="appointment_search" placeholder="약속 세부 검색..." >
+                        <select name="type" id="type">
+                            <option value="all">전체</option>
+                            <option value="appo_title">약속명</option>
+                            <option value="appo_place">약속장소</option>
+                            <option value="appo_host">작성자</option>
+                        </select>
+
+                        <input type="search" id="search_length" name="keyword" placeholder="검색어는 최소 2글자 이상 입력해야 합니다..." >
 
                         <input type="submit" value="search">
                     </form>
@@ -195,9 +127,31 @@
                     </div>
 
                     <!-- 페이징 영역 -->
-                    <div class="paging_container">
-                        <!--페이징 넘버 표시할 곳-->
-                        <span class="paging_num"> 1  2  3  4  5  6</span>
+                    <div class="pagination-container">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=1)}" aria-label="Previous" th:text="'<<'"></a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=${pagination.prevBlock})}" aria-label="Previous" th:text="'<'"></a>
+                                </li>
+                                <th:block th:with="start=${pagination.startPage}, end=${pagination.endPage}">
+                                    <li th:each="pageButton : ${#numbers.sequence(start, end)}">
+                                        <a class="page-link"
+                                           th:href="@{${#httpServletRequest.servletPath}(page=${pageButton})}"
+                                           th:text="${pageButton}"
+                                           th:style="${pagination.page == pageButton} ? 'background-color: #FF7777; color: white;' : ''"></a>
+                                    </li>
+                                </th:block>
+                                <li class="page-item">
+                                    <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=${pagination.nextBlock})}" aria-label="Next" th:text="'>'"></a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=${pagination.totalPageCnt})}" aria-label="Next" th:text="'>>'"></a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
 
                 </div>
@@ -206,8 +160,8 @@
                 <div class="wrap_map_button_sort">
                     <!-- 지도 컨테이너 -->
                     <div class="appointment_map_container">
-                        <div class="google_map">
-                            <div id="map" style="width: 100%; height: 370px;"></div>
+                        <div class="map_container">
+                        <!-- 지도 들어갈 공간 -->
                         </div>
                         <span class="map_container_ment">즐기고 싶은 장소를 찾아보세요!</span>
                     </div>
@@ -215,7 +169,7 @@
                     <!-- 약속 생성 버튼 컨테이너-->
                     <div class="appointment_create_button_container">
                         <!--약속 생성 버튼 원형-->
-                        <a href="/appointment/insertWork">
+                        <a href="/appointment/insertWorkForm">
                            <div class="create_button_circle">
                             <span class="create_button_text">+</span>
                             </div> 
@@ -228,6 +182,22 @@
         </div>
 
         </div>
+        <script>
+            // 검색
+            function isLoggedIn() {
+                // 세션 또는 쿠키 등을 사용하여 로그인 여부를 체크하는 로직을 작성하십시오.
+                // 예시: 세션에 로그인 정보가 있는지 확인
+                return (sessionStorage.getItem("loggedInUser") !== null);
+            }
+            function validateSearch() {
+            var keyword = document.getElementById('search_length').value;
+            if (keyword.length < 2) {
+              alert('검색어는 최소 2글자 이상 입력해야 합니다.');
+              return false; // 검색을 중단합니다.
+            }
+            return true; // 검색을 계속합니다.
+          }
+            </script>
         <footer>
             <div> Team 2 in FinalProject 2023</div>
         </footer>
