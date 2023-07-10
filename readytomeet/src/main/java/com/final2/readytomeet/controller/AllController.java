@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/all")
 public class AllController {
   @Autowired
   private AppoService apposervice;
@@ -20,7 +19,7 @@ public class AllController {
   @Autowired
   private CommunityMapper map;
 
-  @GetMapping("/list")
+  @GetMapping("/all")
   public String selectActivityAll(Model model) {
     List<CommunityDto> communityList = map.findListPaging(0, 5); // 첫 번째 5개의 활동만 가져옵니다.
 

@@ -1,4 +1,4 @@
-package com.final2.readytomeet.mapper;
+package com.final2.readytomeet.Mapper;
 
 import com.final2.readytomeet.dto.AppoDto;
 import org.apache.ibatis.annotations.*;
@@ -107,7 +107,22 @@ public interface AppoMapper {
     //약속 삭제
     @Delete(" DELETE FROM APPOINTMENT WHERE APPO_SEQ=#{appo_seq} ")
     int deleteAppointment(int appo_seq);
+
+
+    /*검색기능*/
+    @Select("SELECT COUNT(*) AS TOTAL_COUNT FROM APPOINTMENT")
+    int findAllCnt();
+    @Select("SELECT * FROM APPOINTMENT ORDER BY APPO_SEQ DESC LIMIT #{startIndex}, #{pageSize}")
+    List<AppoDto> findListPaging(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
+
+    @Select("SELECT COUNT(*) AS TOTAL_COUNT FROM APPOINTMENT WHERE ${type} LIKE CONCAT('%', #{keyword}, '%')")
+    int findSearchCnt(@Param("type") String type, @Param("keyword") String keyword);
+
+    @Select("SELECT * FROM APPOINTMENT WHERE ${type} LIKE CONCAT('%', #{keyword}, '%') ORDER BY APPO_SEQ DESC LIMIT #{startIndex}, #{pageSize}")
+    List<AppoDto> findSearchListPaging(@Param("type") String type, @Param("keyword") String keyword,
+                                       @Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
 }
+
 
 
 

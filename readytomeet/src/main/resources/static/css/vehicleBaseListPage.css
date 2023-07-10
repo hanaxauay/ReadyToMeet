@@ -369,7 +369,32 @@ margin-left: 1.5%;
 }
 
 
+/*페이징 설정*/
+.pagination-container {
+    width: 100%;
+}
 
+.pagination-container a{
+    padding: 8px 16px; // 버튼 크기
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    width: 25%;
+    border-radius: 0.25rem;
+    color: #d3455b;
+    font-weight: 600;
+}
+.pagination-container a:active,
+.pagination-container a:hover,
+.pagination-container a:focus{
+    background-color: #FF7777;
+    outline: 0;
+    color: white;
+    text-decoration: none;
+}
 
 
 

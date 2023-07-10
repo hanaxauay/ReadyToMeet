@@ -80,20 +80,19 @@
                         <span class="sub_category_ment" th:text="${subCategoryText}"> subCategoryText</span>
                     </div>
 
-                    <form action="#">
-                        <!--셀렉트 박스-->
-                        <select name="appointment_base_search_filter" >
-                            <option value="subCategory" th:text="${subCategoryText}" th:if="${subCategoryText == '전체'}"></option>
-                            <option value="subCategory" th:text="${subCategoryText}+' 전체'" th:unless="${subCategoryText == '전체'}"></option>
-                            <option value="appointmentTitle">약속명</option>
-                            <option value="appointmentPlace">약속장소</option>
-                            <option value="writerNickname">작성자</option>
-                        </select>   
-                        
-                        <input type="search" id="search_length" name="appointment_search" placeholder="약속 세부 검색..." >
-                        <input type="submit" value="search">
-                        
-                    </form>
+                  <form action="/appointment/workList/all" method="GET">
+                    <!--셀렉트 박스-->
+                    <select name="appointment_base_search_filter" id="type">
+                      <option value="all">전체</option>
+                      <option value="appo_title">약속명</option>
+                      <option value="appo_place">약속장소</option>
+                      <option value="appo_host">작성자</option>
+                    </select>
+
+                    <input type="search" id="search_length" name="appointment_search" placeholder="약속 세부 검색..." >
+
+                    <input type="submit" value="search">
+                  </form>
                 </div>
 
                 <!--정렬체크 영역-->
@@ -165,11 +164,33 @@
 <!--                            </div>-->
 
 
-                    <!-- 페이징 영역 -->
-                    <div class="paging_container">
-                        <!--페이징 넘버 표시할 곳-->
-                        <span class="paging_num"> 1  2  3  4  5  6</span>
-                    </div>
+                  <!-- 페이징 영역 -->
+                  <div class="pagination-container">
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination">
+                        <li class="page-item">
+                          <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=1)}" aria-label="Previous" th:text="'<<'"></a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=${pagination.prevBlock})}" aria-label="Previous" th:text="'<'"></a>
+                        </li>
+                        <th:block th:with="start=${pagination.startPage}, end=${pagination.endPage}">
+                          <li th:each="pageButton : ${#numbers.sequence(start, end)}">
+                            <a class="page-link"
+                               th:href="@{${#httpServletRequest.servletPath}(page=${pageButton})}"
+                               th:text="${pageButton}"
+                               th:style="${pagination.page == pageButton} ? 'background-color: #FF7777; color: white;' : ''"></a>
+                          </li>
+                        </th:block>
+                        <li class="page-item">
+                          <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=${pagination.nextBlock})}" aria-label="Next" th:text="'>'"></a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" th:href="@{${#httpServletRequest.servletPath}(page=${pagination.totalPageCnt})}" aria-label="Next" th:text="'>>'"></a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
 
                 </div>
 

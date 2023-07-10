@@ -14,4 +14,6 @@ public interface CommunityService {
   public int update(CommunityDto dto);
   public int delete(int share_seq);
   public int updateViewCount(int share_seq);
+  public int findSearchCnt(String type, String keyword);
+  public List<CommunityDto> findSearchListPaging(String type, String keyword, int startIndex, int pageSize);
 }
