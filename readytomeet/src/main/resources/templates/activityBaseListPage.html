@@ -1,87 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
 
-    <link href="../../css/common.css" rel="stylesheet" />
-    <link href="../../css/activityBaseListPage.css" rel="stylesheet" />
-    <title>Document</title>
-    <script src="../../js/activityBaseListPage.js"></script>
-    <!-- 아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함 key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.-->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD51bMavEVnc-HZy3RwWG_brHEQ4qfXAog&callback=initMap">
-    </script>
-    <script>
-        window.onload = getLocation;
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(locationSuccess, locationError, geo_options);
-            } else {
-                console.log("지오 로케이션 없음")
-            }
-        };
-
-        // getLocation
-        var latitude, longitude;
-        function locationSuccess(p) {
-            latitude = p.coords.latitude;
-            longitude = p.coords.longitude;
-            // 위치를 얻은 후에 날씨 데이터를 가져오기 위해 fetchWeatherData 함수 호출
-            // fetchWeatherData(latitude, longitude);
-            initMap();
-        }
-
-        // locationSuccess
-        function locationError(error){
-            var errorTypes = {
-                0 : "무슨 에런지 모르겠음",
-                1 : "위치 허용 안했음.",
-                2 : "위치가 안잡힘",
-                3 : "응답시간이 지남"
-            };
-            var errorMsg = errorTypes[error.code];
-        }
-        // locationError
-        var geo_options = {
-            enableHighAccuracy: true,
-            maximumAge        : 30000,
-            timeout           : 27000
-        };
-        // geo_options
-        var map;
-        function initMap() {
-
-            var button = document.getElementById('mapBtn');
-            // button.addEventListener('click', changeCenter);
-
-            var nowPosition = new google.maps.LatLng(latitude, longitude);
-            map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
-                center: nowPosition
-            });
-
-            var mainMarker = new google.maps.Marker({
-                position: nowPosition,
-                map: map,
-                label: {
-                    text: "현위치",
-                    color: "#ff7777"
-                },
-                icon: {
-                    url: "logo.png",
-                    labelOrigin: new google.maps.Point(100, 55)
-                }
-            });
-        }
-    </script>
-
-</head>
-
-<body>
-<!--헤더 영역-->
-<nav>
+        <link href="../../css/common.css" rel="stylesheet" />
+        <link href="../../css/activityBaseListPage.css" rel="stylesheet" />
+        <title>Document</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="../../js/activityBaseListPage.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq6yoA_LB1nbECk64mZ3bRImbi1ZMmhCc&libraries=places&callback=initMap">
+        </script>
+    </head>
+    <body>
+        <!--헤더 영역-->
+<nav> 
     <ul>
         <li class="liLogo"><a href="/main"><img src="../../image/logo.png" class="imgLogo"></a></li>
         <li><a href="/all">All</a> </li>
@@ -237,14 +172,13 @@
                     <span class="paging_num"> 1  2  3  4  5  6</span>
                 </div>
 
-            </div>
-
-            <!-- 지도 & 약속생성 버튼 영역 (메인 오른쪽) -->
-            <div class="wrap_map_button_sort">
-                <!-- 지도 컨테이너 -->
-                <div class="appointment_map_container">
-                    <div class="google_map">
-                        <div id="map" style="width: 100%; height: 370px;"></div>
+                <!-- 지도 & 약속생성 버튼 영역 (메인 오른쪽) -->
+                <div class="wrap_map_button_sort">
+                    <!-- 지도 컨테이너 -->
+                    <div class="appointment_map_container">
+                        <!-- 지도 들어갈 공간 -->
+                        <div id="google_map"></div>
+                        <span class="map_container_ment">즐기고 싶은 장소를 찾아보세요!</span>
                     </div>
                     <span class="map_container_ment">즐기고 싶은 장소를 찾아보세요!</span>
                 </div>
