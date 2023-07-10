@@ -169,9 +169,9 @@
         <input type="text" name="keyword" placeholder="약속을 찾아봐요!">
         <input type="submit" value="Search">
       </form>
-
     </li>
-    <a href="/user/readuser"><li class="liMypage"><img src="../image/mypage.png" class="imgMypage"></li></a>
+
+    <li class="liMypage"><a th:href="@{/user/select(user_id=${user?.user_id})}"><img src="../image/mypage.png" th:text="${user?.user_id}" class="imgMypage"></a></li>
   </ul>
 
 </nav>

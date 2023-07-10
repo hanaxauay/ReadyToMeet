@@ -38,12 +38,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    //note 회원 정보 상세 조회
-//    @Override
-//    public UserDto viewUser(String user_id){
-//        return userRepository.viewUser(user_id);
-//    }
-
     //note 유저정보보기
     @Override
     public UserDto readUser(int id){
@@ -51,14 +45,27 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    //note 유저 정보 수정
+    //note 마이페이지 바로
     @Override
-    public int update(UserDto dto){
-        return userMapper.update(dto);
+    public UserDto selectOne(String user_id){
+        return userRepository.selectOne(user_id);
     }
 
 
-    //note 게시글 보기
+
+
+
+
+    //note 유저 정보 수정
+    @Override
+    public int update(UserDto userDto){
+        return userRepository.update(userDto);
+    }
+
+
+
+
+
 
 
 

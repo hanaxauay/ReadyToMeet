@@ -8,7 +8,7 @@ import com.final2.readytomeet.service.AppoService;
 import com.final2.readytomeet.service.UserService;
 
 
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,10 @@ import java.util.List;
 
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
+
+    private final HttpSession session;
 
     @Inject
     private UserService userService;
@@ -31,8 +34,6 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private AppoService apposervice;
 
     //note 회원목록
     @RequestMapping("member/list")
@@ -45,14 +46,47 @@ public class UserController {
 
     //note 유저 정보 불러오기
     @RequestMapping("user/readuser")
-    public String readUser(int id, Model model){
+    public String readUser(Integer id, Model model){
         model.addAttribute("dto", userService.readUser(id));
         return "userview";
     }
 
-    //note 내가 작성한 게시글
-    @GetMapping("user/updateform")
-    public String updateform(Model model, int id, HttpSession session) {
+
+    @GetMapping("user/select")
+    public String selectOne(Model model, HttpSession session){
+        String loginUser = (String) session.getAttribute("loginUser");
+        UserDto userDto = userService.selectOne(loginUser);
+        model.addAttribute("userDto", userDto);
+        return "userview";
+    }
+
+
+    //note 회원 정보 수정
+//
+//    @GetMapping("user/updateform")
+//    public String updateform(Model model, int id){
+//        model.addAttribute("userDto", userService.readUser(id));
+//        return "userupdate";
+//    }
+//
+//
+//    @PostMapping("user/update")
+//    public String update(UserDto userDto){
+//        if (userService.update(userDto) > 0) {
+//            //성공
+//            return "redirect:/user/readuser?id="+userDto.id;
+//        }else {
+//            //실패
+//            return "redirect:/user/updateform?id="+userDto.id;
+//        }
+//    }
+//
+//
+
+    
+
+        @GetMapping("user/updateform")
+    public String updateform(Model model, Integer id, HttpSession session) {
         UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
         UserDto userDto = userService.readUser(id);
             model.addAttribute("dto", userDto);
@@ -66,7 +100,7 @@ public class UserController {
 
         // 작성자와 로그인한 사용자가 같은 경우에만 수정 가능
         if (loginUser != null && loginUser.getUser_id().equals(originalDto.getUser_id())) {
-            model.addAttribute("message", "글 수정이 완료되었습니다.");
+            model.addAttribute("message", "정보 수정이 완료되었습니다.");
             model.addAttribute("searchUrl", "/member/list");
             if (userService.update(dto) > 0 ) {
                 return "message";
@@ -81,12 +115,16 @@ public class UserController {
         } else {
             // 작성자가 아닌 경우
             model.addAttribute("message", "글 작성자만 수정할 수 있습니다.");
-            model.addAttribute("searchUrl", "/user/readuser?user_id=" + dto.getUser_id());
+            model.addAttribute("searchUrl", "/user/readuser?id=" + dto.getId());
             return "message";
         }
     }
+
+
+
+
     @GetMapping("/delete")
-    public String delete(int id, Model model, HttpSession session) {
+    public String delete(Integer id, Model model, HttpSession session) {
         UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
         UserDto userDto = userService.readUser(id);
         return "memberlist";

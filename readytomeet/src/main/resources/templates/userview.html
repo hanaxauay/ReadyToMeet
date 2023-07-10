@@ -42,7 +42,7 @@
 <!--                <input type="file" name="file" accept="image/png, image/gif, image/jpeg">-->
 <!--                <input type="submit" id="submit" value="전송">-->
 <!--            </form>-->
-
+            <h1>마이페이지</h1>
             <div class="content">
                 <b>아이디</b>
                 <div class="field">
@@ -73,30 +73,30 @@
                 <div class="area">
                     <div class=textarea th:text="${dto?.user_content}"></div>
                     <div class="button">
-                        <button class="button" th:onclick="location.href='/user/updateform?user_id=[[${dto?.user_id}]]'">수정</button>
+                        <button class="button" th:onclick="location.href='/user/updateform?id=[[${dto?.id}]]'">수정</button>
                     </div>
 
                 </div>
             </div>
 
 
-                <div class="place">
-                    <b>지금까지 내가 간 장소</b>
-                    <div th:each="list : ${activityList}" class="page-content">
-                    <<a th:href="@{/appointment/detailActivity(appo_seq=${list.appo_seq})}">
-                    <div class="appointment_date">
-                        <span class="appointment_date_text" th:text="${list.appo_date1}"></span>
-                        <span class="appointment_date_text" th:text="${list.appo_date2}"></span>
-                    </div>
-                    <div class="appointment_place">
-                        <span class="appointment_place_text" th:text="${list.appo_place}">appo_place</span>
-                    </div>
-                    <div class="appointment_title">
-                        <span class="appointment_title_text" th:text="${list.appo_title}">appo_title</span>
-                    </div>
-                </a>
-                </div>
-            </div>
+<!--                <div class="place">-->
+<!--                    <b>지금까지 내가 간 장소</b>-->
+<!--                    <div th:each="list : ${activityList}" class="page-content">-->
+<!--                    <<a th:href="@{/appointment/detailActivity(appo_seq=${list.appo_seq})}">-->
+<!--                    <div class="appointment_date">-->
+<!--                        <span class="appointment_date_text" th:text="${list.appo_date1}"></span>-->
+<!--                        <span class="appointment_date_text" th:text="${list.appo_date2}"></span>-->
+<!--                    </div>-->
+<!--                    <div class="appointment_place">-->
+<!--                        <span class="appointment_place_text" th:text="${list.appo_place}">appo_place</span>-->
+<!--                    </div>-->
+<!--                    <div class="appointment_title">-->
+<!--                        <span class="appointment_title_text" th:text="${list.appo_title}">appo_title</span>-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--                </div>-->
+<!--            </div>-->
 
         </div>
     </section>

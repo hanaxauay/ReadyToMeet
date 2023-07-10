@@ -12,26 +12,29 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-//    @Select(" SELECT user_id, user_phone, user_email, user_name, user_nickname, user_age, user_gender, user_location FROM USER ORDER BY user_id ")
-    @Select(" SELECT * FROM USER ORDER BY id")
+
+    //note 회원 리스트 출력
+    @Select(" SELECT * FROM USER ORDER BY ID ")
     List<UserDto> list();
 
-//    @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
-//    UserDto selectOne(String user_id);
-
-
-
+    
     //note 유저 정보 보기
-    @Select(" SELECT * FROM USER WHERE id=#{id} ")
+    @Select(" SELECT * FROM USER WHERE ID=#{id} ")
     UserDto readUser(int id);
 
+    //note 로그인 시 필요
     @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
     UserDto loginUser(String user_id);
+
+    @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
+    UserDto selectOne(String user_id);
+
+
 
     @Insert(" INSERT INTO USER VALUES (#{user_img}, #{user_path}) ")
     int write(UserDto dto);
 
-    @Update(" UPDATE USER SET USER_NICKNAME=#{user_nickname}, USER_PW=#{user_pw}, USER_PHONE=#{user_phone}, USER_EMAIL=#{user_email}, USER_LOCATION=#{user_location}, USER_CONTENT=#{user_content}, USER_IMG=#{user_img} WHERE id=#{id} ")
+    @Update(" UPDATE USER SET USER_NICKNAME=#{user_nickname}, USER_PW=#{user_pw}, USER_PHONE=#{user_phone}, USER_EMAIL=#{user_email}, USER_LOCATION=#{user_location}, USER_CONTENT=#{user_content} WHERE ID=#{id} ")
     int update(UserDto dto);
 
 

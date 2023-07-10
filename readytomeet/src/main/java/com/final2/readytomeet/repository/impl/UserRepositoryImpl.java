@@ -42,6 +42,18 @@ public class UserRepositoryImpl implements UserRepository {
 
 
 
+    @Override
+    public UserDto selectOne(String user_id) {
+        UserDto dto = userMapper.selectOne(user_id);
+        return dto;
+    }
+
+    @Override
+    public int update(UserDto userDto){
+        int res = 0;
+        res = userMapper.update(userDto);
+        return res;
+    }
 
 
 

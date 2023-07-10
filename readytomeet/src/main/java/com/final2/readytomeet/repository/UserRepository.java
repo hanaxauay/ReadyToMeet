@@ -19,4 +19,8 @@ public interface UserRepository {
     //note 유저정보보기
     public UserDto readUser(int id);
 
+
+    UserDto selectOne(String user_id);
+
+   public int update(UserDto userDto);
 }
