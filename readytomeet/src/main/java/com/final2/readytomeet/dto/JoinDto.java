@@ -1,14 +1,12 @@
 package com.final2.readytomeet.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class JoinDto {
     private String USER_ID;
     private String USER_PW;
@@ -19,4 +17,7 @@ public class JoinDto {
     private int USER_AGE;
     private int USER_GENDER;
     private String USER_LOCATION;
+
+
 }
+

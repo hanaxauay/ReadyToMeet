@@ -9,88 +9,87 @@
 	<script src="../js/joinForm.js"></script>
 </head>
 <body>
-    <div class="center-box">
-    	<h1>회원가입</h1>
-    	<div class="joinForm">
-	        <form action="/join" method="post">
-				<!-- name 속성이 서버로 전송될 때 변수 역활-->
-	            <div class="joinContent">
-	                <label for="id">아이디</label>
-	                <input type="text" id="id" name="id">
-					<span class="point successIdChk">2자 이상 입력하세요</span>
-	            </div>
-	            	
-	            <div class="joinContent">
-	                <label for="password">비밀번호</label>
-	                <input type="password" id="password" name="password"><br>
-					<p id="password_info">8자리 이상 입력하세요</p>
-	            </div>
-	
-	            <div class="joinContent">
-	                <label for="password_confirm">비밀번호 확인</label>
-	                <input type="password" id="password_confirm" name="password_confirm"><br>
-					<p id="password_error" style="color: red;"></p>
-				</div>
+<div class="center-box">
+	<h1>회원가입</h1>
+	<div class="joinForm">
+		<form action="/join" method="post">
+			<!-- name 속성이 서버로 전송될 때 변수 역활-->
+			<div class="joinContent">
+				<label for="id">아이디</label>
+				<input type="text" id="id" name="USER_ID" placeholder="2자리 이상 입력하세요">
+			</div>
 
-				<div class="joinContent">
-					<label for="phone">전화번호</label>
-					<input type="text" id="phone" name="phone">
-					<span id="phoneChk" class="doubleChk">인증번호 보내기</span><br/>
-				</div>
+			<div class="joinContent">
+				<label for="password">비밀번호</label>
+				<input type="password" id="password" name="USER_PW"><br>
+				<p id="password_info">8자리 이상 입력하세요</p>
+			</div>
 
-				<div class="joinContent">
-					<label for="phone">인증확인</label>
-					<input type="text" id="phone2" name="phone2" disabled>
-					<span id="phoneChk2" class="doubleChk">인증 확인</span><br/>
-					<span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
-					<input type="hidden" id="phoneDoubleChk"/>
-				</div>
+			<div class="joinContent">
+				<label for="password_confirm">비밀번호 확인</label>
+				<input type="password" id="password_confirm" name="password_confirm"><br>
+				<p id="password_error" style="color: red;"></p>
+			</div>
 
-				<div class="joinContent">
-					<label for="email">이메일</label>
-					<input type="text" id="email" name="email"> @
-					<input type="text" id="emailDomain" name="emailDomain">
-					<select name="emailDomainSelect" id="emailDomainSelect" onchange="updateEmailDomain()">
-						<option value="직접입력">직접입력</option>
-						<option value="gmail.com">gmail.com</option>
-						<option value="naver.com">naver.com</option>
-						<option value="daum.net">daum.net</option>
-					</select>
-				</div>
-	
-	            <div class="joinContent">
-	                <label for="name">이름</label>
-	                <input type="text" id="name" name="name"><br>
-	            </div>
-	            
-	            <div class="joinContent">
-	                <label for="nickname">닉네임</label>
-	                <input type="text" id="nickname" name="nickname">
-	            </div>
-	
-	            <div class="joinContent">
-	            	<label for="age">나 이</label>
-	            	<input type="text" id="age" name="age" placeholder="숫자만 입력해주세요"><br>
-	            </div>
-	            
-	            <div class="joinContent">
-	                <div class="select-gender">
-	                    <label for="gender">성별</label>
-	                    <input type="radio" id="male" name="gender" value="1" checked style="margin-left: 115px;">
-	                    <label for="male">남성</label>
-	                    <input type="radio" id="female" name="gender" value="0">
-	                    <label for="female">여성</label>
-                	</div>
-	            </div>
+			<div class="joinContent">
+				<label for="phone">전화번호</label>
+				<input type="text" id="phone" name="USER_PHONE" placeholder="'-' 제외 숫자만 입력하세요">
+				<span id="phoneChk" class="doubleChk">인증번호 보내기</span><br/>
+			</div>
 
-				<div class="joinContent">
-					<label for="location">주 소</label>
-					<input type="text" id="location" name="location" placeholder="지역을 입력해주세요"><br>
-				</div>
+			<div class="joinContent">
+				<label for="phone">인증확인</label>
+				<input type="text" id="phone2" name="phone2" disabled>
+				<span id="phoneChk2" class="doubleChk">인증 확인</span><br/>
+				<span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
+				<input type="hidden" id="phoneDoubleChk"/>
+			</div>
 
-	            <button type="submit" id="join">가입하기</button>
-	        </form>
-		</div>
- 	</div>   
+			<div class="joinContent">
+				<label for="email">이메일</label>
+				<input type="text" id="email" name="USER_EMAIL"> @
+				<input type="text" id="emailDomain" name="emailDomain">
+				<select name="emailDomainSelect" id="emailDomainSelect" onchange="updateEmailDomain()">
+					<option value="직접입력">직접입력</option>
+					<option value="gmail.com">gmail.com</option>
+					<option value="naver.com">naver.com</option>
+					<option value="daum.net">daum.net</option>
+				</select>
+			</div>
+
+			<div class="joinContent">
+				<label for="name">이름</label>
+				<input type="text" id="name" name="USER_NAME"><br>
+			</div>
+
+			<div class="joinContent">
+				<label for="nickname">닉네임</label>
+				<input type="text" id="nickname" name="USER_NICKNAME">
+			</div>
+
+			<div class="joinContent">
+				<label for="age">나 이</label>
+				<input type="text" id="age" name="USER_AGE" placeholder="숫자만 입력해주세요"><br>
+			</div>
+
+			<div class="joinContent">
+				<div class="select-gender">
+					<label for="gender">성별</label>
+					<input type="radio" id="male" name="USER_GENDER" value="1" checked style="margin-left: 115px;">
+					<label for="male">남성</label>
+					<input type="radio" id="female" name="USER_GENDER" value="0">
+					<label for="female">여성</label>
+				</div>
+			</div>
+
+			<div class="joinContent">
+				<label for="location">주 소</label>
+				<input type="text" id="location" name="USER_LOCATION" placeholder="지역을 입력해주세요"><br>
+			</div>
+
+			<button type="submit" id="join">가입하기</button>
+		</form>
+	</div>
+</div>
 </body>
 </html>
