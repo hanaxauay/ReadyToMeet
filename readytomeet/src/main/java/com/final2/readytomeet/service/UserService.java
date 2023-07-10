@@ -5,7 +5,9 @@ import com.final2.readytomeet.dto.UserDto;
 import com.final2.readytomeet.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,20 +16,23 @@ public interface UserService {
     //note 전체회원 조회
     List<UserDto> userList();
 
-    //note 회원 정보 상세 조회
-    UserDto viewUser(String user_id);
 
     //note 유저정보보기
     UserDto readUser(String user_id);
 
-    boolean checkPw(String userId, String userPw);
 
-    //note 회원정보 삭제
-    void deleteUser(String user_id);
+    //note 유저 정보 수정
+    public String update(UserDto dto);
 
 
-    //note 프로필출력중!!!!!!!!!!!!!!!!!!!
-//    public UserDto getUserProfile(String user_id);
+    //note 게시글 보기
+
+
+    //note 게시글 보기
+
+
+    public void write(UserDto dto, MultipartFile file) throws Exception;
+
 
 
 }

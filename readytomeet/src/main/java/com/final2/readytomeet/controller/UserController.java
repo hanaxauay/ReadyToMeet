@@ -1,17 +1,24 @@
 package com.final2.readytomeet.controller;
 
 
+import com.final2.readytomeet.Mapper.UserMapper;
+import com.final2.readytomeet.dto.CommunityDto;
 import com.final2.readytomeet.dto.UserDto;
+import com.final2.readytomeet.service.AppoService;
 import com.final2.readytomeet.service.UserService;
 
 
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -20,6 +27,12 @@ public class UserController {
 
     @Inject
     private UserService userService;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private AppoService apposervice;
 
     //note 회원목록
     @RequestMapping("member/list")
@@ -30,141 +43,74 @@ public class UserController {
     }
 
 
-    //note 회원 상세정보 조회
-    @RequestMapping("user/view")
-    public String userView(String user_id, Model model){
-        model.addAttribute("dto", userService.viewUser(user_id));
-        return "user/userview";
-    }
-
-
-    //note 유저 정보 불러오기 실패
+    //note 유저 정보 불러오기
     @RequestMapping("user/readuser")
     public String readUser(String user_id, Model model){
         model.addAttribute("dto", userService.readUser(user_id));
         return "userview";
     }
 
+    //note 내가 작성한 게시글
 
-    //note 회원정보 삭제
-    @RequestMapping("user/delete")
-    public String deleteUser(@RequestParam String user_id, @RequestParam String user_pw, Model model){
-        boolean result = userService.checkPw(user_id, user_pw);
-        if(result) {
-            userService.deleteUser(user_id);
-            return "redirect:/member/list";
+    @RequestMapping("board/list")
+    public String selectActivityAll(Model model) {
+        List<CommunityDto> communityList = userMapper.findListPaging(0, 5); // 첫 번째 5개의 활동만 가져옵니다.
+
+        model.addAttribute("communityList", communityList);
+        model.addAttribute("activityList", apposervice.selectActivityAllList().subList(0, 5)); // 첫 번째 5개의 활동만 전달합니다.
+        model.addAttribute("workList", apposervice.selectWorkAllList().subList(0, 5)); // 첫 번째 5개의 활동만 전달합니다.
+        model.addAttribute("vehicleList", apposervice.selectVehicleAllList().subList(0, 5)); // 첫 번째 5개의 활동만 전달합니다.
+        return "all";
+    }
+
+
+    @GetMapping("user/updateform")
+    public String updateform(Model model, String user_id, HttpSession session) {
+        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
+        UserDto userDto = userService.readUser(user_id);
+
+
+            model.addAttribute("dto", userDto);
+            return "userupdate";
+
+    }
+    @PostMapping("user/update")
+    public String update(UserDto dto, Model model, HttpSession session) {
+        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
+        UserDto originalDto = userService.readUser(dto.getUser_id());
+
+        // 작성자와 로그인한 사용자가 같은 경우에만 수정 가능
+        if (loginUser != null && loginUser.getUser_id().equals(originalDto.getUser_id())) {
+            model.addAttribute("message", "글 수정이 완료되었습니다.");
+            model.addAttribute("searchUrl", "/member/list");
+            if (userService.update(dto) == null ) {
+                return "message";
+            } else {
+                return "redirect:/user/updateform?user_id=" + dto.getUser_id();
+            }
+        } else if (loginUser == null) {
+            // 로그인하지 않은 경우
+            model.addAttribute("message", "로그인이 필요합니다.");
+            model.addAttribute("searchUrl", "/login");
+            return "message";
         } else {
-            model.addAttribute("message", "비밀번호 불일치");
-            model.addAttribute("dto", userService.viewUser(user_id));
-        return "user/userview";
+            // 작성자가 아닌 경우
+            model.addAttribute("message", "글 작성자만 수정할 수 있습니다.");
+            model.addAttribute("searchUrl", "/user/readuser?user_id=" + dto.getUser_id());
+            return "message";
         }
+    }
+    @GetMapping("/delete")
+    public String delete(String user_id, Model model, HttpSession session) {
+        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
+        UserDto userDto = userService.readUser(user_id);
+        return "memberlist";
     }
 
 
 
 
 
-
-
-//    @RequestMapping("user/view")
-//    public String getUserProfile(String user_id, Model model, HttpSession session) {
-//        UserDto userDto = userService.viewUser(user_id);
-//        session.setAttribute("userDto", userDto);
-//        model.addAttribute("userDto", userDto);
-//        return "userview";
-//    }
-
-
-
-
-    //note 프로필 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-//    @GetMapping("/view")
-//    public String getUser(Model model, HttpSession session, String user_id){
-//        UserDto loggedInUser = (UserDto) session.getAttribute("loggedInUser");
-//
-//
-//        UserDto userDto = userService.getUser(String.valueOf(loggedInUser));
-//        model.addAttribute("userDto", userDto);
-//        return "userview";
-//    }
-//
-
-
-
-    //note 프로필정보출력중
-//    @GetMapping("/view")
-//    public String getUserProfile(String user_id, Model model) {
-//
-//            UserDto userDto = userService.getUserProfile(user_id);
-//            model.addAttribute("user", userDto);
-//            return "userview";
-//
-//    }
-
-
-
-//    @RequestMapping("/login")
-//    public String login() {
-//        logger.info("LOGIN PAGE");
-//
-//        return "login";
-//    }
-
-
-//    @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
-//    public String userLogin(UserDto dto, HttpServletRequest request) {
-//
-//        HttpSession session = request.getSession();
-//        UserDto res = userService.login(dto);
-//
-//        if( res != null ) {
-//
-//            session.setAttribute("res", res);
-//            return "redirect:main";
-//        } else {
-//            return "redirect:login";
-//        }
-//    }
-//
-//
-//
-
-
-
-
-
-//    @Autowired
-//    UserController(UserService userService){
-//        this.userService = userService;
-//    }
-//
-//    @GetMapping("/user")
-//    @ResponseBody
-//    public List<Map<String, Object>> getUser(){
-//        return userService.getUser();
-//    }
-
-
-    //note 회원 목록 조회
-
-
-
-
-
-
-
-
-//    @RequestMapping(value = "/user", method = RequestMethod.GET)
-//    public void viewGet(HttpSession session, Model model) throws Exception{
-//        String user_id  = (String) session.getAttribute("user_id");
-//
-//        UserDto dto = userService.readUser(user_id);
-//
-//        model.addAttribute("dto", dto);
-//
-//
-//    }
 
 
 
@@ -218,34 +164,6 @@ public class UserController {
 //        }
 //    }
 //
-//
-//    @GetMapping("/updateform")
-//    public String updateform(Model model, String user_id) {
-//        model.addAttribute("dto");
-//        return "userupdate";
-//    }
-//
-//    /* 회원 정보 업데이트 */
-//    @GetMapping("/update")
-//    public String updateGet(HttpSession session, Model model) throws Exception {
-//        model.addAttribute("userDto", userService.readUser((String)session.getAttribute("user_id")));
-//
-//        return "userupdate";
-//
-//    }
-
-
-//    @PostMapping("/update")
-//    public String updatePOST(UserDto dto) throws Exception {
-//        service.updateUser(dto);
-//        return "userview";
-//    }
-
-
-//    @GetMapping("update")
-//    public String gotouserview() {
-//        return "userview";
-//    }
 
 
 }

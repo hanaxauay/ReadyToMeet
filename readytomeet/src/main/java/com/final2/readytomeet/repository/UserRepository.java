@@ -15,25 +15,10 @@ public interface UserRepository{
     //note 전체회원조회
     public List<UserDto> userList();
 
-    //note 회원정보 상세 조회
-    public UserDto viewUser(String user_id);
 
     //note 유저정보보기
     public UserDto readUser(String user_id);
 
-    public void deleteUser(String user_id);
-
-    boolean check(String user_id, String user_pw);
-
-    public void updateUser(UserDto dto);
-
-    boolean checkPw(String userId, String userPw);
-
-
-    //note 회원정보
-//    public UserDto readUser(String user_id) throws Exception;
-
-//    Optional<UserDto> getUserProfile(String user_id);
 
 
 }

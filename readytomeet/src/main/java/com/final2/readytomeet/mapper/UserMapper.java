@@ -2,7 +2,6 @@ package com.final2.readytomeet.Mapper;
 
 import com.final2.readytomeet.dto.CommunityDto;
 import com.final2.readytomeet.dto.UserDto;
-import org.apache.catalina.User;
 import org.apache.ibatis.annotations.*;
 
 
@@ -16,25 +15,18 @@ public interface UserMapper {
     @Select(" SELECT * FROM USER ORDER BY user_id")
     List<UserDto> list();
 
-    @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
-    UserDto selectOne(String user_id);
+//    @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
+//    UserDto selectOne(String user_id);
 
     //note 유저 정보 보기
     @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
     UserDto readUser(String user_id);
 
-    @Delete(" DELETE FROM USER WHERE USER_ID=#{user_id} ")
-    UserDto deleteUser(String user_id);
+    @Insert(" INSERT INTO USER VALUES (#{user_img}, #{user_path} ")
+    String write(UserDto dto);
 
-
-    //    @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
-//    UserDto getUserById(String user_id);
-
-    //
-//    @Update(" UPDATE USER SET USER_NICKNAME=#{user_nickname}, USER_PW=#{user_pw}, USER_PHONE=#{user_phone}, USER_EMAIL=#{user_email}, USER_LOCATION=#{user_location}, USER_CONTENT=#{user_content} WHERE USER_ID=#{user_id} ")
-//    void updateUser(UserDto dto);
-//
-//
+    @Update(" UPDATE USER SET USER_NICKNAME=#{user_nickname}, USER_PW=#{user_pw}, USER_PHONE=#{user_phone}, USER_EMAIL=#{user_email}, USER_LOCATION=#{user_location}, USER_CONTENT=#{user_content}, USER_IMG=#{user_img} WHERE USER_ID=#{user_id} ")
+    String update(UserDto dto);
 
     @Select("SELECT COUNT(*) AS TOTAL_COUNT FROM SHARE")
     int findAllCnt();

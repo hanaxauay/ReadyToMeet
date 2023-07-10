@@ -35,10 +35,9 @@
 <div id="main">
     <section class="main">
         <div class="main_wrap">
-            <form class="inputImg" method="post" th:action="@{upload}" enctype="multipart/form-data">
+            <form class="inputImg" method="post" th:action="@{user/update}" enctype="multipart/form-data">
                 <div class="addImage" id="image-show">
-<!--                    <img th:src="@{/gen/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" alt="이미지가 아파요"/>-->
-
+                    <img th:if="${not #strings.isEmpty(dto?.user_img)}" th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" />
                 </div>
                 <input type="file" name="file" accept="image/png, image/gif, image/jpeg">
                 <input type="submit" id="submit" value="전송">
@@ -74,56 +73,17 @@
                 <div class="area">
                     <div class=textarea th:text="${dto?.user_content}"></div>
                     <div class="button">
-                        <input type="button" value="신분증 인증" th:onclick="showPopup()"/>
-                        <input type="button" value="수정" onclick="location.href='update'">
-                        <input type="button" value="삭제">
+                        <button class="button" th:onclick="location.href='/user/updateform?user_id=[[${dto?.user_id}]]'">수정</button>
                     </div>
+
                 </div>
             </div>
 
 
-            <div class="page-content">
+            <div th:each="post : ${userPosts}" class="page-content">
                 <div class="place">
                     <b>지금까지 내가 간 장소</b>
-<!--                    <div th:each="share : ${communityList}">-->
-<!--                        <div class="box">-->
-<!--                            <div class="list">-->
-<!--                                <div th:text="${share.share_category}" class="title"></div>-->
-<!--                                <div class="content">-->
-<!--                                    <a th:text="${share.share_title}" th:href="@{/community/view(share_seq=${share.share_seq})}"></a>-->
-<!--                                </div>-->
-<!--                                <div th:text="${#dates.format(share.share_time, 'yy.MM.dd')}" class="date"></div>-->
-<!--&lt;!&ndash;                                <div th:text="${share.user_id}" class="writer"></div>&ndash;&gt;-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="pagination-container">-->
-<!--                        <nav aria-label="Page navigation example">-->
-<!--                            <ul class="pagination">-->
-<!--                                <li class="page-item">-->
-<!--                                    <a class="page-link" th:href="@{list?page=1}" aria-label="Previous" th:text="'<<'"></a>-->
-<!--                                </li>-->
-<!--                                <li class="page-item">-->
-<!--                                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.prevBlock})}" aria-label="Previous" th:text="'<'"></a>-->
-<!--                                </li>-->
-<!--                                <th:block th:with="start = ${pagination?.startPage}, end = ${pagination?.endPage}">-->
-<!--                                    <li th:each="pageButton : ${numbers?.sequence(start, end)}">-->
-<!--                                        <a class="page-link"-->
-<!--                                           th:href="@{list?page={page} (page = ${pageButton})}"-->
-<!--                                           th:text=${pageButton}-->
-<!--                                           th:style="${pagination?.page == pageButton} ? 'background-color: #FDBFBB; color: white;' : ''"></a>-->
-<!--                                    </li>-->
-<!--                                </th:block>-->
-<!--                                <li class="page-item">-->
-<!--                                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.nextBlock})}" aria-label="Next"  th:text="'>'"></a>-->
-<!--                                </li>-->
-<!--                                <li class="page-item">-->
-<!--                                    <a class="page-link" th:href="@{list?page={page} (page = ${pagination?.totalPageCnt})}" aria-label="Next"  th:text="'>>'"></a>-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </nav>-->
-<!--                    </div>-->
+                    <div th:text="${post}"></div>
                 </div>
             </div>
 

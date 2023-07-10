@@ -6,23 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>페이지 수정</title>
     <link rel="stylesheet" href="../css/userUpdate.css">
-    <script src="../static/js/joinForm.js"></script>
 
-    <script>
-        function updateEmailDomain() {
-            var selectBox = document.getElementById("emailDomainSelect");
-            var emailDomainInput = document.getElementById("emailDomain");
-            var selectedDomain = selectBox.value;
 
-            if (selectedDomain === "직접입력") {
-                emailDomainInput.value = "";
-                emailDomainInput.disabled = false;
-            } else {
-                emailDomainInput.value = selectedDomain;
-                emailDomainInput.disabled = true;
-            }
-        }
-    </script>
+
 
 </head>
 <body>
@@ -30,22 +16,15 @@
 <div class="center-box">
     <h1>정보 수정</h1>
     <div class="joinForm">
-        <form action="/user/Update" method="post">
+        <form action="/user/update" method="post" enctype="multipart/form-data">
             <div class="joinContent" style="display:none;">
                 <label for="id">아이디</label>
                 <input type="text" id="id" name="id" th:value="${dto?.user_id}" readonly>
-                <button type="button" id="get_verification_code">중복 체크</button><br>
             </div>
             <div class="joinContent">
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nickname" name="nickname" th:value="${dto?.user_nickname}">
-                <button type="button" id="get_verification_code">중복 체크</button>
                 <br>
-            </div>
-
-            <div class="joinContent">
-                <label for="birthdate">생년월일</label>
-                <input type="date" id="birthdate" name="birthdate"  th:value="${dto?.user_age}"><br>
             </div>
 
 <!--            <div class="joinContent" style="display:none;">-->
@@ -83,14 +62,9 @@
             <div class="joinContent">
                 <label for="phone">전화번호</label>
                 <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" th:value="${dto?.user_phone}">
-                <button type="button" id="get_verification_code">인증번호 받기</button>
                 <br>
             </div>
 
-            <div class="joinContent">
-                <label for="verification_code">인증번호</label>
-                <input type="text" id="verification_code" name="verification_code"><br>
-            </div>
 
             <div class="joinContent">
                 <label for="email">이메일</label>
@@ -100,22 +74,23 @@
             <div class="joinContent">
                 <label for="address">주소</label>
                 <input type="text" id="address" name="address" th:value="${dto?.user_address}">
-                <button type="button" id="get_verification_code">주소 찾기</button>
                 <br>
             </div>
 
 
             <div class="joinContent">
                 <p>자기소개</p>
-                <textarea row="10" cols="40" name="textarea" placeholder="내용 입력" th:value="${dto?.user_content}"></textarea>
+                <textarea row="10" cols="40" name="textarea" placeholder="내용 입력" th:text="${dto?.user_content}"></textarea>
+                <input type="file" name="file" multiple="multiple">
             </div>
 
 
 
-            <button type="submit" value="수정">수정하기</button>
+            <input type="submit" value="수정"></input>
+            <input type="button" class="btn" value="취소" onclick="location.href='/user/readuser'">
         </form>
-    </div>
+        </div>
 </div>
-
 </body>
+
 </html>

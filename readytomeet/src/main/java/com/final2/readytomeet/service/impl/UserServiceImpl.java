@@ -3,16 +3,22 @@ package com.final2.readytomeet.service.impl;
 
 
 
+import com.final2.readytomeet.Mapper.UserMapper;
 import com.final2.readytomeet.dto.UserDto;
 import com.final2.readytomeet.repository.UserRepository;
 import com.final2.readytomeet.service.UserService;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.inject.Inject;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -20,8 +26,10 @@ public class UserServiceImpl implements UserService {
 
     @Inject
     private UserRepository userRepository;
-//    @Autowired
-//    private UserMapper userMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+
 
     //note 전체회원 조회
     @Override
@@ -32,10 +40,10 @@ public class UserServiceImpl implements UserService {
 
 
     //note 회원 정보 상세 조회
-    @Override
-    public UserDto viewUser(String user_id){
-        return userRepository.viewUser(user_id);
-    }
+//    @Override
+//    public UserDto viewUser(String user_id){
+//        return userRepository.viewUser(user_id);
+//    }
 
     //note 유저정보보기
     @Override
@@ -44,72 +52,30 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    //note 회원정보 삭제
+    //note 유저 정보 수정
     @Override
-    public void deleteUser(String user_id){
-        userRepository.deleteUser(user_id);
-    }
-
-    //note  비밀번호 체크
-    @Override
-    public boolean checkPw(String user_id, String user_pw){
-        return userRepository.checkPw(user_id, user_pw);
+    public String update(UserDto dto){
+        return userMapper.update(dto);
     }
 
 
+    //note 게시글 보기
 
 
 
-//    @Override
-//    public void deleteUser(String user_id){
-//
-//    }
+    @Override
+    public void write(UserDto dto, MultipartFile file) throws Exception {
+        String projectPath = "E:/files/";
+        UUID uuid = UUID.randomUUID();
 
-
-
-
-
-//    @Override
-//    public UserDto getUserProfile(String user_id){
-//        Optional<UserDto> user = userRepository.findById(user_id);
-//
-//        if (user != null ){
-//            return userMapper.getUserProfile(user_id);
-//        } else {
-//            return null;
-//        }
-//    }
-
-
-
-
-
-
-
-    //note 프로필 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-//    @Override
-//    public UserDto getUserProfile(String user_id){
-//        UserDto userDto = userRepository.getUserProfile(user_id)
-//                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + user_id));
-//        return userMapper.toUserDto(user_id);
-//    }
-
-//    public void upload(UserDto dto, MultipartFile file) throws Exception {
-//        String projectPath = "E:/files/";
-//        UUID uuid = UUID.randomUUID();
-//
-//        if(file != null && !file.isEmpty()) {
-//            String user_img = uuid + "_" + file.getOriginalFilename();
-//            File saveFile = new File(projectPath, user_img);
-//            file.transferTo(saveFile);
-//            dto.setUser_img(user_img);
-//            dto.setUser_path("/download/" + user_img);
-//        }
-//        userMapper.upload(dto);
-//    }
-//
-
+        if(file != null && !file.isEmpty()) {
+            String filename = uuid + "_" + file.getOriginalFilename();
+            File saveFile = new File(projectPath, filename);
+            file.transferTo(saveFile);
+            dto.setUser_img(filename);
+            dto.setUser_path("/download/" + filename);
+        }
+        userMapper.write(dto);
+    }
 
 }
