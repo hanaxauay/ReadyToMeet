@@ -7,7 +7,6 @@
 
     <script src="https://kit.fontawesome.com/e66bbc4b5b.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
-
     <link href="../css/common.css" rel="stylesheet" />
     <link href="../css/vehicleDetail.css" rel="stylesheet" />
     <title>Document</title>
@@ -15,7 +14,6 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq6yoA_LB1nbECk64mZ3bRImbi1ZMmhCc&libraries=places&callback=initMap"></script>
     <script th:inline="javascript" src="../js/vehicleDetail.js"></script>
 
-    <title>Title</title>
 </head>
 <body>
 
@@ -111,19 +109,21 @@
                                 <span class="appointment_text" th:text="|${dto.appo_start_place} → ${dto.appo_place}|">dto.appo_place → dto.appo_place</span>
                                 <!-- 지도 컨테이너 -->
                                 <div class="appointment_map_container">
-
                                         <div id="google_map1" th:data-placevalue1="${dto.appo_start_place}">
                                             <!-- 지도 들어갈 공간 -->
                                         </div>
-
-
                                         <div id="google_map2" th:data-placevalue2="${dto.appo_place}">
                                             <!-- 지도 들어갈 공간 -->
                                         </div>
-
-
-
                                 </div>
+<!--                                <div class="form_row3">-->
+<!--                                    <span class="form_ment">도착지 : </span>-->
+<!--                                    <input type="search" placeholder="위치 검색..." id="place" name="appo_place" th:value="*{appo_place}" required>-->
+<!--                                    &lt;!&ndash;지도표시 영역&ndash;&gt;-->
+<!--                                    <div class="google_map">-->
+<!--                                        <div id="map2" style="width: 100%; height: 370px;"></div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </div>
                             <div class="appointment_content">
                                 <span class="appointment_ment"><i class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;내용</span>
@@ -167,7 +167,7 @@
                     <div class="detail_button_container">
                         <div class="wrap_button_container_row1">
                             <!--참여하기-->
-                            <button class="detail_button" id="party_button" th:onclick="@{}">약속에 참여하기</button>
+                            <button class="detail_button" id="party_button" th:onclick="@{/appointment/}">약속에 참여하기</button>
                             <!--목록-->
                             <button class="detail_button" id="list_button">목록</button>
                         </div>
@@ -180,11 +180,11 @@
                         </div>
                     </div>
 
-                    <!-- 채팅 참여 버튼 컨테이너-->
-                    <div class="chat_button_container">
-                        <!--채팅 참여 버튼-->
-                        <button class="detail_button" id="chat_button">채팅 참여하기</button>
-                    </div>
+                    <button style="display: inline-block; padding: 8px 16px; background-color: #ff7777; color: #ffffff; border: none; border-radius: 4px; font-size: 14px; font-weight: bold; text-decoration: none; cursor: pointer;">
+                        <a th:href="@{/chat/room/{appo_seq}(appo_seq=${dto.appo_seq})}" th:text="'채팅방 참여하기'" style="color: #ffffff; text-decoration: none;"></a>
+                    </button>
+                    <!--                      activityDetailPageMine.html여기에서 appo_seq로 구분해서 채팅방 생성 -> 여기는 appo_seq에 맞는 채팅방만이 나와야함. -->
+                    <!--                    </div>-->
                 </div>
 
             </div>
@@ -194,8 +194,61 @@
     </div>
 
 </div>
-<footer>
-    <div> Team 2 in FinalProject 2023</div>
-</footer>
+<!-- JavaScript -->
+<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
+<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            room_name: '',
+            chatrooms: []
+        },
+        created() {
+            this.findAllRoom();
+        },
+        methods: {
+            findAllRoom: function() {
+                axios.get('/chat/rooms').then(response => {
+                    this.chatrooms = response.data;
+                });
+            },
+            createRoom: function() {
+                if (this.room_name === "") {
+                    alert("채팅방 이름을 입력하세요");
+                    return;
+                } else {
+                    var params = new URLSearchParams();
+                    params.append("name", this.room_name);
+                    axios.post('/chat/room', params)
+                        .then(response => {
+                            alert("Room " + response.data.room_name + " 채팅방이 생성되었습니다.");
+                            this.room_name = '';
+                            this.findAllRoom();
+                            this.enterRoom(response.data.appo_seq, response.data.room_name); // 생성된 채팅방으로 입장
+                        })
+                        .catch(response => {
+                            alert("채팅방 생성에 실패했습니다.");
+                        });
+                }
+            },
+            joinChatRoom() {
+                var appo_seq = this.appo_seq; // Get the appo_seq value
+                var url = "/chat/room/" + appo_seq; // Create the URL with appo_seq parameter
+                window.location.href = url; // Redirect to the chat room page
+            },
+            enterRoom: function(appo_seq, roomName) {
+                var sender = localStorage.getItem('wschat.sender');
+                if (!sender) {
+                    sender = prompt('닉네임을 입력하세요');
+                    localStorage.setItem('wschat.sender', sender);
+                }
+                localStorage.setItem('wschat.appo_seq', appo_seq);
+                window.location.href = "/chat/room/" + appo_seq;
+            }
+        }
+    });
+
+</script>
 </body>
 </html>

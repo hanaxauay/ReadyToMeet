@@ -22,15 +22,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
-    implementation 'com.vikingsen.inject:worker-inject:0.2.2'
-    compileOnly 'org.projectlombok:lombok'
+	compileOnly 'org.projectlombok:lombok'
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
-	implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
-
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	//websocket
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
@@ -41,9 +39,13 @@ dependencies {
 	implementation 'org.webjars:stomp-websocket:2.3.3-1'
 	implementation 'com.google.code.gson:gson:2.8.0'
 	compileOnly('org.springframework.boot:spring-boot-starter-thymeleaf')
-
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// SMS 인증
+	implementation 'net.nurigo:javaSDK:2.2'
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
 }
 

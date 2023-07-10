@@ -1,18 +1,23 @@
 package com.final2.readytomeet.repository;
 
 import com.final2.readytomeet.dto.UserDto;
+import org.apache.catalina.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository {
+import java.util.List;
+import java.util.Optional;
 
-    // 회원 정보
-    public UserDto readUser(String user_id) throws Exception;
 
-    public UserDto readUserWithIDPW(String user_id, String user_pw) throws Exception;
 
-    // 회원정봅 수정
-    public void updateUser(UserDto dto) throws Exception;
+public interface UserRepository{
+    //note 전체회원조회
+    public List<UserDto> userList();
 
-    public void updateUimage(String uid, String uimage) throws Exception;
+
+    //note 유저정보보기
+    public UserDto readUser(String user_id);
 
 
 

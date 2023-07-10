@@ -18,28 +18,29 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq6yoA_LB1nbECk64mZ3bRImbi1ZMmhCc&libraries=places&callback=initMap"></script>
     <script th:inline="javascript" type="text/javascript" src="../js/workUpdate.js"></script>
 
+
 </head>
 
 <body>
 
-    <!--헤더 영역-->
-    <nav>
-        <ul>
-            <li class="liLogo"><a href="/main"><img src="../image/logo.png" class="imgLogo"></a></li>
-            <li><a href="/all">All</a> </li>
-            <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
-            <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
-            <li><a href="/appointment/workList/all">WORK</a> </li>
-            <li><a href="/community/list">Community</a> </li>
-            <li>
-                <form action="/search" method="GET" class="search-container">
-                    <input type="text" name="keyword" placeholder="약속을 찾아봐요!">
-                    <input type="submit" value="Search">
-                </form>
-            </li>
-            <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
-        </ul>
-    </nav>
+<!--헤더 영역-->
+<nav>
+    <ul>
+        <li class="liLogo"><a href="/main"><img src="../image/logo.png" class="imgLogo"></a></li>
+        <li><a href="/all">All</a> </li>
+        <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
+        <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
+        <li><a href="/appointment/workList/all">WORK</a> </li>
+        <li><a href="/community/list">Community</a> </li>
+        <li>
+            <form action="/search" method="GET" class="search-container">
+                <input type="text" name="keyword" placeholder="약속을 찾아봐요!">
+                <input type="submit" value="Search">
+            </form>
+        </li>
+        <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
+    </ul>
+</nav>
 
     <div class=”main_content”>
 
@@ -81,9 +82,6 @@
                             <i class="fa-solid fa-quote-right"></i>
                         </div>
 
-                    </div>
-
-
                     <!--약속시간 설정-->
                     <!-- 기본 시간설정을 js로 현재 시간 받아서 표시하기
                         appo_date1 : 날짜 값 / appo_date2 : 시간 값 -> js에서 합쳐서 update
@@ -91,15 +89,15 @@
                     -->
                     <fieldset class="inputform_time">
                         <legend>&nbsp;<i class="fa-solid fa-plus"></i> 시간을 정해주세요!&nbsp;</legend>
-
-                        <div class="select_date">
-                            <label>
+                    <div class="select_date">
+                        <label>
                                 <span class="form_ment">날짜 :
                                     <input type="date" name="appo_date1" class="add_time_value" min="2023-01-01" max="2024-01-01"
                                            th:value="*{#dates.format(appo_time,'yyyy-MM-dd')}" required>
                                 </span>
-                            </label>
-                        </div>
+                        </label>
+                    </div>
+
 
                         <div class="select_time_type">
                             <span class="form_ment">시간 : </span>
@@ -161,18 +159,33 @@
                         <button th:onclick="|location.href='@{/appointment/detailActivity(appo_seq=*{appo_seq})}'|">취소</button>
                     </div>
 
-                </form>
-            </section>
+                </fieldset>
 
+                <!--약속 내용 작성-->
+                <fieldset class="inputform_content">
+                    <legend>&nbsp;<i class="fa-solid fa-plus"></i> 약속에 대해 설명해주세요!&nbsp;</legend>
+                    <textarea name="appo_content" cols="50" rows="10" placeholder="내용..." th:value="*{appo_content}"
+                              th:text="*{appo_content}"></textarea>
+                </fieldset>
 
-        </div>
+                <!--버튼 영역-->
+                <div class="inputform_button">
+                    <button type="submit" >수정</button>
+                    <button th:onclick="|location.href='@{/appointment/detailActivity(appo_seq=*{appo_seq})}'|">취소</button>
+                </div>
+
+            </form>
+        </section>
+
 
     </div>
 
+</div>
 
-    <footer>
-        <div> Team 2 in FinalProject 2023</div>
-    </footer>
+
+<footer>
+    <div> Team 2 in FinalProject 2023</div>
+</footer>
 </body>
 
 </html>

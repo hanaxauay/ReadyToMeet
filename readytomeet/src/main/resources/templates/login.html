@@ -5,7 +5,30 @@
     <title>Login</title>
 	<link rel="stylesheet" href="../css/login.css">
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	var error = /*[[${error}]]*/ null;
+	if (error) {
+		$(document).ready(function() {
+			alert(error);
+		});
+	}
+	/*]]>*/
+	/*<![CDATA[*/
+	var success = /*[[${success}]]*/ null;
+	if (success) {
+		alert(success);
+		window.location.href = '/main';
+	}
+	/*]]>*/
+	/*]]>*/
+</script>
+
+
 <body>
+
 	<div class="outer1">
 		<div class="outer2">
 			<div class="header">

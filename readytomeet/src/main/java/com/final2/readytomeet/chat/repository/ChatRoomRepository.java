@@ -26,14 +26,19 @@ public class ChatRoomRepository {
         return chatRoomMapper.findAllRoom();
     }
 
-    public ChatRoom findRoomById(String id) {
-        return chatRoomMapper.findRoomById(id);
+    public ChatRoom getChatRoomById(int appo_seq) {
+        return chatRoomMapper.getChatRoomById(appo_seq);
     }
 
 
-    public ChatRoom createChatRoom(String name) {
-        ChatRoom chatRoom = ChatRoom.create(name);
+    public ChatRoom createChatRoom(int appo_seq, String name) {
+        ChatRoom chatRoom = ChatRoom.create(appo_seq, name);
         chatRoomMapper.createChatRoom(chatRoom);
         return chatRoom;
     }
+
+    public int deleteChatRoom(int appo_seq) {
+        return chatRoomMapper.deleteChatRoomByAppoSeq(appo_seq);
+    }
+
 }
