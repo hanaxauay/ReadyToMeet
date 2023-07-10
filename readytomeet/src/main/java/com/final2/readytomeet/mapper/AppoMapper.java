@@ -16,8 +16,8 @@ public interface AppoMapper {
 //    List<AppoDto> selectAppointmentAllList();
 
     //Activity 전체 약속 검색
-    @Select("SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2" +
-        " FROM APPOINTMENT WHERE NOT APPO_CATEGORY IN ('카풀', '택시', '유급', '무급') ORDER BY APPO_SEQ DESC")
+    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2" +
+            " FROM APPOINTMENT WHERE NOT APPO_CATEGORY IN ('카풀', '택시', '유급', '무급') ORDER BY APPO_SEQ DESC ")
     List<AppoDto> selectActivityAllList();
     //Activity 세부 카테고리 전체 검색
     @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY='카페' ORDER BY APPO_SEQ DESC ")
@@ -36,7 +36,7 @@ public interface AppoMapper {
     List<AppoDto> selectActivityOthersList();
 
     //Vehicle 전체 약속 검색
-    @Select("SELECT APPO_SEQ, APPO_TITLE, APPO_START_PLACE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY IN ('카풀', '택시') ORDER BY APPO_SEQ DESC")
+    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_START_PLACE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY='카풀' OR APPO_CATEGORY='택시' ORDER BY APPO_SEQ DESC ")
     List<AppoDto> selectVehicleAllList();
     //Vehicle 세부 카테고리 전체 검색
     @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_START_PLACE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY='카풀' ORDER BY APPO_SEQ DESC ")
@@ -46,7 +46,7 @@ public interface AppoMapper {
 
 
     //Work 전체 약속 검색
-    @Select("SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY IN ('유급', '무급') ORDER BY APPO_SEQ DESC")
+    @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY='유급' OR APPO_CATEGORY='무급' ORDER BY APPO_SEQ DESC ")
     List<AppoDto> selectWorkAllList();
     //Work 세부 카테고리 전체 검색
     @Select(" SELECT APPO_SEQ, APPO_TITLE, APPO_PLACE, DATE_FORMAT(APPO_TIME,'%m/%d') AS APPO_DATE1, DATE_FORMAT(APPO_TIME,'%H:%i') AS APPO_DATE2 FROM APPOINTMENT WHERE APPO_CATEGORY='유급' ORDER BY APPO_SEQ DESC ")
@@ -91,15 +91,15 @@ public interface AppoMapper {
 
     //--------------------------------update---------------------------------
     //Activity 약속 수정
-    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem} ")
+    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem} WHERE APPO_SEQ=#{appo_seq} ")
     int updateActivity(AppoDto appodto);
 
     //Vehicle 약속 수정
-    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTEMT=#{appo_content}, APPO_PALCE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_START_PALCE=#{appo_start_place} ")
+    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_START_PLACE=#{appo_start_place} WHERE APPO_SEQ=#{appo_seq} ")
     int updateVehicle(AppoDto appodto);
 
     //Work 약속 수정
-    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APO_PLACE=#{appo_place}, ppo_time=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_PAY=#{appo_pay} ")
+    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_PAY=#{appo_pay} WHERE APPO_SEQ=#{appo_seq} ")
     int updateWork(AppoDto appodto);
 
 
@@ -107,22 +107,7 @@ public interface AppoMapper {
     //약속 삭제
     @Delete(" DELETE FROM APPOINTMENT WHERE APPO_SEQ=#{appo_seq} ")
     int deleteAppointment(int appo_seq);
-
-
-    /*검색기능*/
-    @Select("SELECT COUNT(*) AS TOTAL_COUNT FROM APPOINTMENT")
-    int findAllCnt();
-    @Select("SELECT * FROM APPOINTMENT ORDER BY APPO_SEQ DESC LIMIT #{startIndex}, #{pageSize}")
-    List<AppoDto> findListPaging(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
-
-    @Select("SELECT COUNT(*) AS TOTAL_COUNT FROM APPOINTMENT WHERE ${type} LIKE CONCAT('%', #{keyword}, '%')")
-    int findSearchCnt(@Param("type") String type, @Param("keyword") String keyword);
-
-    @Select("SELECT * FROM APPOINTMENT WHERE ${type} LIKE CONCAT('%', #{keyword}, '%') ORDER BY APPO_SEQ DESC LIMIT #{startIndex}, #{pageSize}")
-    List<AppoDto> findSearchListPaging(@Param("type") String type, @Param("keyword") String keyword,
-                                       @Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
 }
-
 
 
 

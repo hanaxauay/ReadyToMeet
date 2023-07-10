@@ -3,10 +3,10 @@ package com.final2.readytomeet.dto;
 public class Pagination {
 
 	/** 1. 페이지 당 보여지는 게시글의 최대 개수 **/
-	private int pageSize = 13;
+	private int pageSize = 10;
 
 	/** 2. 페이징된 버튼의 블럭당 최대 개수 **/
-	private int blockSize = 5;
+	private int blockSize = 10;
 
 	/** 3. 현재 페이지 **/
 	private int page = 1;
@@ -169,10 +169,6 @@ public class Pagination {
 			setStartIndex(0);
 		}
 	}
-	
-	
-	
-	
 	
 	
 	

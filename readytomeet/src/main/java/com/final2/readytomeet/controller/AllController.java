@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
+@RequestMapping("/all")
 public class AllController {
   @Autowired
   private AppoService apposervice;
@@ -19,7 +20,7 @@ public class AllController {
   @Autowired
   private CommunityMapper map;
 
-  @GetMapping("/all")
+  @GetMapping("/list")
   public String selectActivityAll(Model model) {
     model.addAttribute("activityList", apposervice.selectActivityAllList().subList(0, 2)); // 첫 번째 5개의 활동만 전달합니다.
     model.addAttribute("workList", apposervice.selectWorkAllList().subList(0, 2)); // 첫 번째 5개의 활동만 전달합니다.
