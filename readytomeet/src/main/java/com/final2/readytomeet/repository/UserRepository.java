@@ -11,14 +11,12 @@ import java.util.Optional;
 
 
 
-public interface UserRepository{
+public interface UserRepository {
     //note 전체회원조회
     public List<UserDto> userList();
 
 
     //note 유저정보보기
-    public UserDto readUser(String user_id);
-
-
+    public UserDto readUser(int id);
 
 }

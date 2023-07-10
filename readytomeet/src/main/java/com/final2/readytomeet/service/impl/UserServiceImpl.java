@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,14 +46,14 @@ public class UserServiceImpl implements UserService {
 
     //note 유저정보보기
     @Override
-    public UserDto readUser(String user_id){
-        return userRepository.readUser(user_id);
+    public UserDto readUser(int id){
+        return userRepository.readUser(id);
     }
 
 
     //note 유저 정보 수정
     @Override
-    public String update(UserDto dto){
+    public int update(UserDto dto){
         return userMapper.update(dto);
     }
 
