@@ -54,7 +54,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 	// SMS 인증
-	implementation 'net.nurigo:sdk:4.2.7'
+	implementation 'net.nurigo:javaSDK:2.2'
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
 }
 
 tasks.named('test') {

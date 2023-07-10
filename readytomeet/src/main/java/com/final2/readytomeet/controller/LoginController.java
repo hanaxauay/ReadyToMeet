@@ -1,21 +1,18 @@
 package com.final2.readytomeet.controller;
 
 import com.final2.readytomeet.Mapper.UserMapper;
-import com.final2.readytomeet.chat.dto.ChatMessage;
-import com.final2.readytomeet.chat.dto.ChatRoom;
-import com.final2.readytomeet.chat.mapper.ChatMessageMapper;
 import com.final2.readytomeet.chat.mapper.ChatRoomMapper;
 import com.final2.readytomeet.chat.repository.ChatMessageRepository;
 import com.final2.readytomeet.chat.repository.UserChatRoomRepository;
 import com.final2.readytomeet.dto.UserDto;
 import com.final2.readytomeet.service.UserService;
+import com.final2.readytomeet.service.testService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -88,5 +85,14 @@ public class LoginController {
         }
     }
 
+    @RequestMapping(value = "/phoneCheck", method = RequestMethod.GET)
+    @ResponseBody
+    public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기
+        int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+
+        testService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
+
+        return Integer.toString(randomNumber);
+    }
 
 }
