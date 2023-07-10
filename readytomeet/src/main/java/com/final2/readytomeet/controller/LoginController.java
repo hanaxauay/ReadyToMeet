@@ -66,12 +66,12 @@ public class LoginController {
         return "login"; // 로그인 폼 페이지로 리다이렉트
     }
 
-    @GetMapping("/find")
+    @GetMapping("/login/find")
     public String showPwFindForm() {
         return "pwfind"; // pwfind.html (비밀번호 찾기 폼 템플릿)을 반환
     }
 
-    @GetMapping("/join")
+    @GetMapping("/login/join")
     public String showJoinForm() {
         return "joinForm"; // joinForm.html (회원 가입 폼 템플릿)을 반환
     }
