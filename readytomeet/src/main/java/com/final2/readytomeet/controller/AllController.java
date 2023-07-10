@@ -21,9 +21,12 @@ public class AllController {
 
   @GetMapping("/all")
   public String selectActivityAll(Model model) {
-    model.addAttribute("activityList", apposervice.selectActivityAllList().subList(0, 2)); // 첫 번째 5개의 활동만 전달합니다.
-    model.addAttribute("workList", apposervice.selectWorkAllList().subList(0, 2)); // 첫 번째 5개의 활동만 전달합니다.
-    model.addAttribute("vehicleList", apposervice.selectVehicleAllList().subList(0, 2)); // 첫 번째 5개의 활동만 전달합니다.
+    List<CommunityDto> communityList = map.findListPaging(0, 5); // 첫 번째 5개의 활동만 가져옵니다.
+
+    model.addAttribute("communityList", communityList);
+    model.addAttribute("activityList", apposervice.selectActivityAllList().subList(0, 5)); // 첫 번째 5개의 활동만 전달합니다.
+    model.addAttribute("workList", apposervice.selectWorkAllList().subList(0, 5)); // 첫 번째 5개의 활동만 전달합니다.
+    model.addAttribute("vehicleList", apposervice.selectVehicleAllList().subList(0, 5)); // 첫 번째 5개의 활동만 전달합니다.
     return "all";
   }
 }

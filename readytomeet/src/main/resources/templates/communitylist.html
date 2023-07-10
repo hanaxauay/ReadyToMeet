@@ -32,21 +32,6 @@
             }
           })
         }
-
-        // 검색
-        function isLoggedIn() {
-            // 세션 또는 쿠키 등을 사용하여 로그인 여부를 체크하는 로직을 작성하십시오.
-            // 예시: 세션에 로그인 정보가 있는지 확인
-            return (sessionStorage.getItem("loggedInUser") !== null);
-        }
-        function validateSearch() {
-        var keyword = document.getElementById('search_length').value;
-        if (keyword.length < 2) {
-          alert('검색어는 최소 2글자 이상 입력해야 합니다.');
-          return false; // 검색을 중단합니다.
-        }
-        return true; // 검색을 계속합니다.
-      }
     </script>
 </head>
 <body>
@@ -80,7 +65,7 @@
                 <span class="show_sub_img">*ㅁ*</span>
             </div>
 
-            <form action="/community/list" method="GET" onsubmit="return validateSearch()">
+            <form action="/community/list" method="GET">
                 <!--셀렉트 박스-->
                 <select id="type" name="type">
                     <option value="all">전체</option>
@@ -88,7 +73,7 @@
                     <option value="share_content">내용</option>
                     <option value="user_nickname">작성자</option>
                 </select>
-                <input type="search" id="search" name="keyword" placeholder="검색어는 최소 2글자 이상 입력해야 합니다...">
+                <input type="search" id="search" name="keyword" placeholder="약속 세부 검색...">
                 <input type="submit" value="검색">
             </form>
         </div>
