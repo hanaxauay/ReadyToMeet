@@ -43,6 +43,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// SMS 인증
+	implementation 'net.nurigo:javaSDK:2.2'
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
 }
 
 tasks.named('test') {
