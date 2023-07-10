@@ -91,15 +91,15 @@ public interface AppoMapper {
 
     //--------------------------------update---------------------------------
     //Activity 약속 수정
-    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem} ")
+    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem} WHERE APPO_SEQ=#{appo_seq} ")
     int updateActivity(AppoDto appodto);
 
     //Vehicle 약속 수정
-    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTEMT=#{appo_content}, APPO_PALCE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_START_PALCE=#{appo_start_place} ")
+    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_START_PLACE=#{appo_start_place} WHERE APPO_SEQ=#{appo_seq} ")
     int updateVehicle(AppoDto appodto);
 
     //Work 약속 수정
-    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APO_PLACE=#{appo_place}, ppo_time=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_PAY=#{appo_pay} ")
+    @Update(" UPDATE APPOINTMENT SET APPO_TITLE=#{appo_title}, APPO_CONTENT=#{appo_content}, APPO_PLACE=#{appo_place}, APPO_TIME=#{appo_time}, APPO_MIN_MEM=#{appo_min_mem}, APPO_MAX_MEM=#{appo_max_mem}, APPO_PAY=#{appo_pay} WHERE APPO_SEQ=#{appo_seq} ")
     int updateWork(AppoDto appodto);
 
 

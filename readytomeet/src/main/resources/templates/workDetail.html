@@ -8,10 +8,13 @@
     <script src="https://kit.fontawesome.com/e66bbc4b5b.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
 
-    <link href="../../css/common.css" rel="stylesheet" />
-    <link href="../../css/workDetail.css" rel="stylesheet" />
+    <link href="../css/common.css" rel="stylesheet" />
+    <link href="../css/workDetail.css" rel="stylesheet" />
     <title>Document</title>
-    <script src="../../js/workBaseListPage.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq6yoA_LB1nbECk64mZ3bRImbi1ZMmhCc&libraries=places&callback=initMap"></script>
+    <script th:inline="javascript" src="../js/workDetail.js"></script>
+
 
     <title>Title</title>
 </head>
@@ -20,7 +23,7 @@
 <!--헤더 영역-->
 <nav>
     <ul>
-        <li class="liLogo"><a href="/main"><img src="../../image/logo.png" class="imgLogo"></a></li>
+        <li class="liLogo"><a href="/main"><img src="../image/logo.png" class="imgLogo"></a></li>
         <li><a href="/all">All</a> </li>
         <li><a href="/appointment/activityList/all">ACTIVITY</a> </li>
         <li><a href="/appointment/vehicleList/all">VEHICLE</a> </li>
@@ -32,7 +35,7 @@
                 <input type="submit" value="Search">
             </form>
         </li>
-        <li class="liMypage"><a href="#"><img src="../../image/mypage.png" class="imgMypage"></a></li>
+        <li class="liMypage"><a href="#"><img src="../image/mypage.png" class="imgMypage"></a></li>
     </ul>
 </nav>
 
@@ -113,7 +116,7 @@
                                 <span class="appointment_text" th:text="${dto.appo_place}">appo_place</span>
                                 <!-- 지도 컨테이너 -->
                                 <div class="appointment_map_container">
-                                    <div class="map_container">
+                                    <div id="google_map" th:data-placevalue="${dto.appo_place}">
                                         <!-- 지도 들어갈 공간 -->
                                     </div>
                                 </div>
@@ -162,13 +165,13 @@
                             <!--참여하기-->
                             <button class="detail_button" id="party_button" th:onclick="@{/appointment/}">약속에 참여하기</button>
                             <!--목록-->
-                            <button class="detail_button" id="list_button" th:onclick="'history.back()'">목록</button>
+                            <button class="detail_button" id="list_button">목록</button>
                         </div>
                         <div class="wrap_button_container_row2">
                             <!--수정하기-->
-                            <button class="detail_button" id="update_button" th:onclick="@{/appointment/insertWorkForm(appo_seq=${dto.appo_seq})}">수정</button>
+                            <button class="detail_button" id="update_button" th:onclick="|location.href='@{/appointment/updateWorkForm(appo_seq=${dto.appo_seq})}'|">수정</button>
                             <!--삭제하기-->
-                            <button class="detail_button" id="delete_button" th:onclick="">삭제</button>
+                            <button class="detail_button" id="delete_button" th:value="${dto.appo_seq}">삭제</button>
                         </div>
                     </div>
 
@@ -186,6 +189,7 @@
     </div>
 
 </div>
+
 <footer>
     <div> Team 2 in FinalProject 2023</div>
 </footer>

@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,30 +101,30 @@ public class AppoController {
 
         if(apposervice.insertActivity(appodto) > 0){
             //성공 시 해당 약속 상세페이지 이동
-            return "redirect:/appointment/detailActivityPage";
+            return "redirect:/appointment/detailActivityPage?appo_seq="+appodto.appo_seq;
         }else {
             //실패 시 처리 작업 필요하면 추가
-            return "redirect:/appointment/insertActivityForm";
+            return "redirect:/appointment/insertActivityForm?appo_seq="+appodto.appo_seq;
         }
     }
 
 
-    //Activity 약속 수정 폼 이동 (예정)
+    //Activity 약속 수정 폼 이동
     @GetMapping("/updateActivityForm")
     public String updateActivityForm(Model model, int appo_seq){
         model.addAttribute("activityDto", apposervice.selectAppointmentOneList(appo_seq));
-        return "activityWrite";
+        return "activityUpdate";
     }
 
-    //Activity 약속 수정 (예정)
+    //Activity 약속 수정
     @PostMapping("/updateActivity")
     public String updateActivity(AppoDto appodto){
         if(apposervice.updateActivity(appodto) > 0){
             //성공 시 해당 약속 상세페이지 이동
-            return "redirect:/appointment/detailActivityPage";
+            return "redirect:/appointment/detailActivity?appo_seq="+appodto.appo_seq;
         }else {
             //실패 시 처리 작업 필요하면 추가
-            return "redirect:/appointment/updateActivityForm";
+            return "redirect:/appointment/updateActivityForm?appo_seq="+appodto.appo_seq;
         }
     }
 
@@ -129,7 +133,8 @@ public class AppoController {
     public String deleteActivity(int appo_seq){
         //삭제 시 필요한 메세지 추가
         apposervice.deleteAppointment(appo_seq);
-        return "activityList/all";
+
+        return "redirect:/appointment/activityList/all";
     }
 
 
@@ -160,7 +165,7 @@ public class AppoController {
     }
 
 
-    //Vehicle 상세페이지 이동 (예정)
+    //Vehicle 상세페이지 이동
     @GetMapping("/detailVehicle")
     public String detailVehiclePage(Model model, int appo_seq){
         model.addAttribute("vehicleDto", apposervice.selectAppointmentOneList(appo_seq));
@@ -169,7 +174,10 @@ public class AppoController {
 
     //Vehicle 약속 생성 폼 이동
     @GetMapping("/insertVehicleForm")
-    public String insertVehicleForm(){
+    public String insertVehicleForm(HttpSession session){
+//        if(session.getAttribute("loggedInUser") == null) {
+//            return "vehicleDetail";
+//        }
         return "vehicleWrite";
     }
 
@@ -178,29 +186,30 @@ public class AppoController {
     public String insertVehicle(AppoDto appodto){
         if(apposervice.insertVehicle(appodto) > 0){
             //성공 시 해당 약속 상세페이지
-            return "redirect:/appointment/detailVehiclePage";
+            return "redirect:/appointment/detailVehicle?appo_seq="+appodto.appo_seq;
         }else {
             //실패 시 처리 작업 필요하면 추가
-            return "redirect:/appointment/insertVehicleForm";
+            return "redirect:/appointment/insertVehicleForm?appo_seq="+appodto.appo_seq;
         }
     }
 
-    //Vehicle 약속 수정 폼 이동 (예정)
+    //Vehicle 약속 수정 폼 이동
     @GetMapping("/updateVehicleForm")
     public String updateVehicleForm(Model model, int appo_seq){
         model.addAttribute("vehicleDto", apposervice.selectAppointmentOneList(appo_seq));
-        return "vehicleWrite";
+        return "vehicleUpdate";
     }
 
-    //Vehicle 약속 수정 (예정)
+    //Vehicle 약속 수정
     @PostMapping("/updateVehicle")
-    public String updateVehicle(AppoDto appodto, int appo_seq){
+    public String updateVehicle(AppoDto appodto){
         if(apposervice.updateVehicle(appodto) > 0){
             //성공 시 해당 약속 상세페이지 이동
-            return "redirect:/appointment/detailVehiclePage(appo_seq)";
+            return "redirect:/appointment/detailVehicle?appo_seq="+appodto.appo_seq;
         }else {
             //실패 시 처리 작업 필요하면 추가
-            return "redirect:/appointment/ ";
+            //message = "<script>alert('수정에 실패했습니다. 다시 시도해주세요.');location.replace=('/appointment/updateVehicleForm');</script>";
+            return "redirect:/appointment/updateVehicleForm?appo_seq="+appodto.appo_seq;
         }
     }
 
@@ -209,7 +218,7 @@ public class AppoController {
     public String deleteVehicle(int appo_seq){
         //삭제 시 필요한 메세지 추가
         apposervice.deleteAppointment(appo_seq);
-        return "vehicleList/all";
+        return "redirect:/appointment/vehicleList/all";
     }
 
 
@@ -239,8 +248,8 @@ public class AppoController {
         return "workBaseListPage";
     }
 
-    //Work 상세페이지 이동 (예정)
-    @GetMapping("/detailWorkPage")
+    //Work 상세페이지 이동
+    @GetMapping("/detailWork")
     public String detailWorkPage(Model model, int appo_seq){
         model.addAttribute("workDto", apposervice.selectAppointmentOneList(appo_seq));
         return "workDetail";
@@ -257,29 +266,29 @@ public class AppoController {
     public String insertWork(AppoDto appodto){
         if(apposervice.insertWork(appodto) > 0){
             //성공 시 해당 약속 상세페이지
-            return "redirect:/appointment/detailWorkPage";
+            return "redirect:/appointment/detailWork?appo_seq="+appodto.appo_seq;
         }else {
             //실패 시 처리 작업 필요하면 추가
-            return "redirect:/appointment/insertWorkForm";
+            return "redirect:/appointment/insertWorkForm?appo_seq="+appodto.appo_seq;
         }
     }
 
-    //Work 약속 수정 폼 이동 (예정)
+    //Work 약속 수정 폼 이동
     @GetMapping("/updateWorkForm")
     public String updateWorkForm(Model model, int appo_seq){
         model.addAttribute("workDto", apposervice.selectAppointmentOneList(appo_seq));
-        return "workWrite";
+        return "workUpdate";
     }
 
-    //Work 약속 수정 (예정)
+    //Work 약속 수정
     @PostMapping("/updateWork")
     public String updateWork(AppoDto appodto){
         if(apposervice.updateWork(appodto) > 0){
             //성공 시 해당 약속 상세페이지 이동
-            return "redirect:/appointment/detailWorkPage";
+            return "redirect:/appointment/detailWork?appo_seq="+appodto.appo_seq;
         }else {
             //실패 시 처리 작업 필요하면 추가
-            return "redirect:/appointment/ ";
+            return "redirect:/appointment/updateWorkForm?appo_seq="+appodto.appo_seq;
         }
     }
 
@@ -288,7 +297,7 @@ public class AppoController {
     public String deleteWork(int appo_seq){
         //삭제 시 필요한 메세지 추가
         apposervice.deleteAppointment(appo_seq);
-        return "workList/all";
+        return "redirect:/appointment/workList/all";
     }
 
 

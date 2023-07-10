@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="../css/common.css">
 
     <title>work수정페이지</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq6yoA_LB1nbECk64mZ3bRImbi1ZMmhCc&libraries=places&callback=initMap"></script>
+    <script th:inline="javascript" type="text/javascript" src="../js/workUpdate.js"></script>
 
 </head>
 
@@ -42,7 +45,7 @@
         <!--바디 영역-->
         <div class="appointment_form_wrap">
 
-            <!--카테고리 & 생성멘트 표시-->
+            <!--카테고리 & 수정멘트 표시-->
             <section class="category_container">
                 <span class="category_ment1">WORK</span>
                 <i class="fa-solid fa-pencil"></i>
@@ -50,15 +53,16 @@
             </section>
 
             <!--생성 양식 영역-->
-            <section class="wrap_insert_form">
-                <form action="/appointment/insertform" method="post">
+            <section class="wrap_insert_form" >
+                <form th:action="@{/appointment/updateWork}" method="post" th:object="${workDto}" th:onsubmit="return timeSubmit()">
+                    <input type="hidden" name="appo_seq" th:value="*{appo_seq}">
                     <div class="form_row1">
                         <!--카테고리 설정-->
                         <div class="inputform_subcategory">
-                            <select name="subcategory" id="select_subcategory">
+                            <select name="appo_category" id="select_subcategory" th:value="*{appo_category}" required>
                                 <option value="">세부 카테고리&nbsp;</option>
-                                <option value="유급">유급</option>
-                                <option value="무급">무급</option>
+                                <option th:selected="*{appo_category}=='유급'">유급</option>
+                                <option th:selected="*{appo_category}=='무급'">무급</option>
                             </select>
                         </div>
 
@@ -66,7 +70,7 @@
                         <div class="inputform_title">
                             <i class="fa-solid fa-quote-left"></i>
                             <spen class="form_ment"> 약속명 :&nbsp;
-                                <input type="text" name="write_title" placeholder="제목">
+                                <input type="text" name="appo_title" placeholder="제목" th:value="*{appo_title}" required>
                             </spen>
                             <i class="fa-solid fa-quote-right"></i>
                         </div>
@@ -76,8 +80,8 @@
 
                     <!--약속시간 설정-->
                     <!-- 기본 시간설정을 js로 현재 시간 받아서 표시하기
-                        write_date : 날짜 값 / write_time : 시간 값 -> 컨트롤러에서 합쳐서 insert
-                        showTimeOption() : 선택 시 div.selected_choosetime 표시
+                        appo_date1 : 날짜 값 / appo_date2 : 시간 값 -> js에서 합쳐서 update
+                        div.selected_choosetime : js에서 input:radio'option_time'에 따라 선택
                     -->
                     <fieldset class="inputform_time">
                         <legend>&nbsp;<i class="fa-solid fa-plus"></i> 시간을 정해주세요!&nbsp;</legend>
@@ -85,7 +89,8 @@
                         <div class="select_date">
                             <label>
                                 <span class="form_ment">날짜 :
-                                    <input type="date" name="write_date" min="2023-01-01" max="2024-01-01">
+                                    <input type="date" name="appo_date1" class="add_time_value" min="2023-01-01" max="2024-01-01"
+                                           th:value="*{#dates.format(appo_time,'yyyy-MM-dd')}">
                                 </span>
                             </label>
                         </div>
@@ -93,20 +98,20 @@
                         <div class="select_time_type">
                             <span class="form_ment">시간 : </span>
                             <label title="참여자들이 상의하여 자유롭게 시간을 결정하기 위한 옵션입니다.">
-                                <input type="radio" name="option_time" value="allday"> All Day
-                                <input type="hidden" name="write_time" value="00:00">
+                                <input type="radio" name="option_time" value="allday" th:checked="${option_time eq 'allday' ? 'checked' : ''}"> All Day
                             </label>
                             <div class="form_row2">
                                 <label title="정확한 약속시간을 설정하기 위한 옵션입니다.">
-                                    <input type="radio" name="option_time" value="choosetime" onclick="showTimeOption()"> 날짜
-                                    선택
+                                    <input type="radio" name="option_time" value="choosetime"
+                                           th:checked="${option_time eq 'choosetime' ? 'checked' : ''}"> 날짜 선택
                                 </label>
                                 <!--날짜선택 눌렀을 시 표시-->
-                                <div class="selected_choosetime">
+                                <div id="selected_choosetime">
                                     <i class="fa-solid fa-caret-down"></i>
-                                    <input type="time" name="write_time" id="select_time">
+                                    <input type="time" name="appo_date2" class="add_time_value" th:value="*{#dates.format(appo_time,'HH:mm')}">
                                 </div>
                             </div>
+                            <input type="hidden" name="appo_time">
                         </div>
 
                     </fieldset>
@@ -115,16 +120,19 @@
                     <fieldset class="inputform_personnel">
                         <legend>&nbsp;<i class="fa-solid fa-plus"></i> 모집할 인원 수를 정해주세요!&nbsp;</legend>
                         <!--최소인원 설정-->
-                        <span class="form_ment">최소 인원 :<input type="number" name="select_min_num" value="1" min="1" max="20"></span>
+                        <span class="form_ment">최소 인원 :<input type="number" name="appo_min_mem" th:value="*{appo_min_mem}" min="1"
+                                                              max="20" required></span>
                         <!--최대인원 설정-->
-                        <span class="form_ment">최대 인원 : <input type="number" name="select_max_num" value="1" min="1" max="20"></span>
+                        <span class="form_ment">최대 인원 : <input type="number" name="appo_max_mem" th:value="*{appo_max_mem}" min="1"
+                                                               max="20" required></span>
                     </fieldset>
 
                     <!--임금 설정-->
                     <!--카테고리 유급 설정 시 나타나도록 하면 굿-->
                     <fieldset class="inputform_pay">
                         <legend>&nbsp;<i class="fa-solid fa-plus"></i> 지급할 금액을 정해주세요!&nbsp;</legend>
-                        <span class="form_ment">임금(시급) :<input type="number" name="select_pay" step="10" value="9160" title="현재 최저시급은 9160원입니다.">&nbsp;원</span>
+                        <span class="form_ment">임금(시급) :<input type="number" name="appo_pay" step="10" th:value="*{appo_pay}"
+                                                               title="현재 최저시급은 9160원입니다." required>&nbsp;원</span>
                     </fieldset>
 
                     <!--약속장소 설정-->
@@ -132,10 +140,15 @@
                         <legend>&nbsp;<i class="fa-solid fa-plus"></i> 만날 장소를 정해주세요!&nbsp;</legend>
                         <!--장소 검색기능 필요!!-->
                         <span class="form_ment">위치 : </span>
-                        <input type="search" placeholder="위치 검색...">
+
+                            <input type="search" placeholder="위치 검색..." id="search_place" name="appo_place" th:value="*{appo_place}"
+                                   title="검색 시 가장 정확한 하나의 장소를 찾습니다." required>
+                        <span class="search_icon"><i class="fa-solid fa-magnifying-glass-location"></i></span>
+
+
                         <!--지도표시 영역-->
                         <div class="map_container">
-                            <div></div>
+                            <div id="google_map" th:data-placevalue="*{appo_place}"></div>
                         </div>
                         
                     </fieldset>
@@ -143,13 +156,14 @@
                     <!--약속 내용 작성-->
                     <fieldset class="inputform_content">
                         <legend>&nbsp;<i class="fa-solid fa-plus"></i> 약속에 대해 설명해주세요!&nbsp;</legend>
-                        <textarea name="write_content" cols="50" rows="10" placeholder="내용..."></textarea>
+                        <textarea name="appo_content" cols="50" rows="10" placeholder="내용..." th:value="*{appo_content}"
+                                  th:text="*{appo_content}"></textarea>
                     </fieldset>
 
                     <!--버튼 영역-->
                     <div class="inputform_button">
-                        <button type="submit">수정</button>
-                        <button>취소</button>
+                        <button type="submit" >수정</button>
+                        <button th:onclick="|location.href='@{/appointment/detailWork(appo_seq=*{appo_seq})}}'|">취소</button>
                     </div>
 
                 </form>

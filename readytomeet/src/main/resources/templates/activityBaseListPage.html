@@ -9,11 +9,9 @@
         <link href="../../css/common.css" rel="stylesheet" />
         <link href="../../css/activityBaseListPage.css" rel="stylesheet" />
         <title>Document</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="../../js/activityBaseListPage.js"></script>
-        <script>
-            function openNewWindow() {
-                window.open("/activityDetail");
-            }
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq6yoA_LB1nbECk64mZ3bRImbi1ZMmhCc&libraries=places&callback=initMap">
         </script>
     </head>
     <body>
@@ -180,9 +178,8 @@
                 <div class="wrap_map_button_sort">
                     <!-- 지도 컨테이너 -->
                     <div class="appointment_map_container">
-                        <div class="map_container">
                         <!-- 지도 들어갈 공간 -->
-                        </div>
+                        <div id="google_map"></div>
                         <span class="map_container_ment">즐기고 싶은 장소를 찾아보세요!</span>
                     </div>
 

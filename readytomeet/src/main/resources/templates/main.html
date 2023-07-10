@@ -7,6 +7,9 @@
   <link href="../css/main.css" rel="stylesheet" />
   <link href="../css/common.css" rel="stylesheet" />
   <script>
+
+  //-----------------------------------------> 구글맵 api - 현재 위치 구하기 <--------------------------------------------//
+
     window.onload = getLocation;
     function getLocation(){
       if(navigator.geolocation){
@@ -16,13 +19,18 @@
       }
     };
     // getLocation
-    var latitude, longitude;
+
+
+    var latitude, longitude; // 위도 경도
+
     function locationSuccess(p){
       latitude = p.coords.latitude,
-              longitude = p.coords.longitude;
+      longitude = p.coords.longitude;
       initMap();
     }
     // locationSuccess
+
+
     function locationError(error){
       var errorTypes = {
         0 : "무슨 에런지 모르겠음",
@@ -33,24 +41,30 @@
       var errorMsg = errorTypes[error.code];
     }
     // locationError
+
+
     var geo_options = {
       enableHighAccuracy: true,
       maximumAge        : 30000,
       timeout           : 27000
     };
     // geo_options
+
+
+  //-----------------------------------------> 여기서부터 구글맵 api 호출 <-----------------------------------------------//
     var map;
     function initMap() {
 
-      var button = document.getElementById('mapBtn');
-      button.addEventListener('click', changeCenter);
+      var button = document.getElementById('mapBtn'); //내 위치 이동 버튼
+      button.addEventListener('click', changeCenter); //내 위치를 센터로 ㄱ
 
-      var nowPosition = new google.maps.LatLng(latitude, longitude);
-      map = new google.maps.Map( document.getElementById('map'), {
+      var nowPosition = new google.maps.LatLng(latitude, longitude); //맵 내 위치 (매개변수: 현재 내 위치)
+      map = new google.maps.Map( document.getElementById('map'), { //맵 크기 지정
         zoom: 15,
         center: nowPosition
       });
 
+      //내 위치 표시 마커 설정
       var mainMarker = new google.maps.Marker({
         position: nowPosition,
         map: map,
@@ -59,7 +73,7 @@
           color: "#ff7777"
         },
         icon: {
-          url: "logo.png",
+          url: "../image/mypage.png",
           labelOrigin: new google.maps.Point(100, 55)
         }
       });
