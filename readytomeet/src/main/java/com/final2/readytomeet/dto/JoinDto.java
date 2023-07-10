@@ -10,7 +10,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class JoinDto {
-    private Long id;
     private String USER_ID;
     private String USER_PW;
     private String USER_PHONE;

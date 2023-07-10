@@ -13,8 +13,6 @@ import javax.persistence.*;
 public class JoinEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(unique = true)
     private String USER_ID;
 
