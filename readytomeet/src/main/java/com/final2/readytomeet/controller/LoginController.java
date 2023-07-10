@@ -1,10 +1,13 @@
 package com.final2.readytomeet.controller;
 
 import com.final2.readytomeet.Mapper.UserMapper;
+import com.final2.readytomeet.chat.dto.ChatRoom;
 import com.final2.readytomeet.chat.mapper.ChatRoomMapper;
 import com.final2.readytomeet.chat.repository.ChatMessageRepository;
 import com.final2.readytomeet.chat.repository.UserChatRoomRepository;
+import com.final2.readytomeet.dto.JoinDto;
 import com.final2.readytomeet.dto.UserDto;
+import com.final2.readytomeet.service.JoinService;
 import com.final2.readytomeet.service.UserService;
 import com.final2.readytomeet.service.testService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,6 +28,7 @@ public class LoginController {
     private final UserChatRoomRepository userChatRoomRepository;
     private final ChatMessageRepository chatMessageRepository;
     private final ChatRoomMapper chatRoomMapper;
+    private final JoinService JoinService;
     @GetMapping("/login")
     public String showLoginForm() {
         return "login"; // login.html (로그인 폼 템플릿)을 반환
@@ -90,5 +95,20 @@ public class LoginController {
         }
     }
 
+    @RequestMapping(value = "/phoneCheck", method = RequestMethod.GET)
+    @ResponseBody
+    public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기
+        int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+
+        testService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
+
+        return Integer.toString(randomNumber);
+    }
+
+        @PostMapping("/join")
+        public String join(@ModelAttribute JoinDto joinDto){
+            JoinService.join(joinDto);
+            return "login";
+        }
 
 }

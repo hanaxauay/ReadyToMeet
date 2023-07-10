@@ -7,11 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (password.value !== passwordConfirm.value) {
             passwordError.textContent = '비밀번호가 일치하지 않습니다.';
             passwordError.style.color = 'red';
-            document.getElementById('pwDoubleChk').value = 'false';
         } else {
             passwordError.textContent = '비밀번호가 일치합니다.';
             passwordError.style.color = 'green';
-            document.getElementById('pwDoubleChk').value = 'true';
         }
     });
 });
@@ -76,5 +74,19 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('phoneDoubleChk').value = 'false';
             phone2.focus();
         }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var maleRadio = document.getElementById('male');
+    var femaleRadio = document.getElementById('female');
+    var genderInput = document.getElementById('gender');
+
+    maleRadio.addEventListener('change', function() {
+        genderInput.value = '1';
+    });
+
+    femaleRadio.addEventListener('change', function() {
+        genderInput.value = '0';
     });
 });
