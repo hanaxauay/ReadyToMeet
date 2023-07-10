@@ -1,34 +1,38 @@
 package com.final2.readytomeet.service;
 
-import com.final2.readytomeet.dto.CommunityDto;
+import com.final2.readytomeet.Mapper.UserMapper;
 import com.final2.readytomeet.dto.UserDto;
+import com.final2.readytomeet.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
+
 
 public interface UserService {
-
-//    //note 로그인
-//    public UserDto login(UserDto dto);
-
+    //note 전체회원 조회
+    List<UserDto> userList();
 
 
-    //
-//    List<Map<String, Object>> getUser();
-//
-//
-////    public List<UserDto> selectList();
-//
-//
-//
-//
-//
-//    public void upload(UserDto dto, MultipartFile file) throws Exception;
-//
-//
-//
-    //note 회원정보 보기
-    public UserDto readUser(String user_id);
+    //note 유저정보보기
+    UserDto readUser(String user_id);
+
+
+    //note 유저 정보 수정
+    public String update(UserDto dto);
+
+
+    //note 게시글 보기
+
+
+    //note 게시글 보기
+
+
+    public void write(UserDto dto, MultipartFile file) throws Exception;
+
 
 
 }
