@@ -35,8 +35,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     //note 유저정보보기
     @Override
-    public UserDto readUser(String user_id){
-        UserDto dto = userMapper.readUser(user_id);
+    public UserDto readUser(int id){
+        UserDto dto = userMapper.readUser(id);
         return dto;
     }
 

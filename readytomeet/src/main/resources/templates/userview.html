@@ -35,13 +35,13 @@
 <div id="main">
     <section class="main">
         <div class="main_wrap">
-            <form class="inputImg" method="post" th:action="@{user/update}" enctype="multipart/form-data">
-                <div class="addImage" id="image-show">
-                    <img th:if="${not #strings.isEmpty(dto?.user_img)}" th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" />
-                </div>
-                <input type="file" name="file" accept="image/png, image/gif, image/jpeg">
-                <input type="submit" id="submit" value="전송">
-            </form>
+<!--            <form class="inputImg" method="post" th:action="@{user/update}" enctype="multipart/form-data">-->
+<!--                <div class="addImage" id="image-show">-->
+<!--                    <img th:if="${not #strings.isEmpty(dto?.user_img)}" th:src="@{/download/{user_img}(user_img=${dto?.user_img})}" width="100%" height="100%" />-->
+<!--                </div>-->
+<!--                <input type="file" name="file" accept="image/png, image/gif, image/jpeg">-->
+<!--                <input type="submit" id="submit" value="전송">-->
+<!--            </form>-->
 
             <div class="content">
                 <b>아이디</b>
@@ -80,10 +80,21 @@
             </div>
 
 
-            <div th:each="post : ${userPosts}" class="page-content">
                 <div class="place">
                     <b>지금까지 내가 간 장소</b>
-                    <div th:text="${post}"></div>
+                    <div th:each="list : ${activityList}" class="page-content">
+                    <<a th:href="@{/appointment/detailActivity(appo_seq=${list.appo_seq})}">
+                    <div class="appointment_date">
+                        <span class="appointment_date_text" th:text="${list.appo_date1}"></span>
+                        <span class="appointment_date_text" th:text="${list.appo_date2}"></span>
+                    </div>
+                    <div class="appointment_place">
+                        <span class="appointment_place_text" th:text="${list.appo_place}">appo_place</span>
+                    </div>
+                    <div class="appointment_title">
+                        <span class="appointment_title_text" th:text="${list.appo_title}">appo_title</span>
+                    </div>
+                </a>
                 </div>
             </div>
 

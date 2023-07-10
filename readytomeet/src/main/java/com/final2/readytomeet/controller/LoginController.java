@@ -36,7 +36,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@RequestParam("user_id") String user_id, @RequestParam("user_pw") String user_pw, Model model) {
-        UserDto user = userMapper.readUser(user_id);
+        UserDto user = userMapper.loginUser(user_id);
 
         if (user != null && user.getUser_pw().equals(user_pw)) {
             model.addAttribute("loginUser", user);

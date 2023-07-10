@@ -3,6 +3,7 @@ package com.final2.readytomeet.dto;
 
 
 public class UserDto {
+    private int id;
     private String user_id;
     private String user_pw;
     private String user_phone;
@@ -16,19 +17,17 @@ public class UserDto {
     private String user_path;
     private String user_content;
 
-    public UserDto(String user_id, String user_pw, String user_phone, String user_email, String user_name, String user_nickname, Integer user_age, Integer user_gender, String user_location, String user_img, String user_path, String user_content) {
-        this.user_id = user_id;
-        this.user_pw = user_pw;
-        this.user_phone = user_phone;
-        this.user_email = user_email;
-        this.user_name = user_name;
-        this.user_nickname = user_nickname;
-        this.user_age = user_age;
-        this.user_gender = user_gender;
-        this.user_location = user_location;
-        this.user_img = user_img;
-        this.user_path = user_path;
-        this.user_content = user_content;
+
+    public UserDto() {
+        super();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUser_id() {

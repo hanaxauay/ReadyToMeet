@@ -18,17 +18,12 @@ public interface UserService {
 
 
     //note 유저정보보기
-    UserDto readUser(String user_id);
+    UserDto readUser(int id);
 
 
     //note 유저 정보 수정
-    public String update(UserDto dto);
+    public int update(UserDto dto);
 
-
-    //note 게시글 보기
-
-
-    //note 게시글 보기
 
 
     public void write(UserDto dto, MultipartFile file) throws Exception;
