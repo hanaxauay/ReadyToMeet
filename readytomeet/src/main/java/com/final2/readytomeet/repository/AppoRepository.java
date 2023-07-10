@@ -36,7 +36,7 @@ public interface AppoRepository {
     public AppoDto selectAppointmentOneList(int appo_seq);
 
 
-    public int insertActivity(AppoDto appodto);
+    public int insertActivity(AppoDto appoDto);
     public int insertVehicle(AppoDto appodto);
     public int insertWork(AppoDto appodto);
 
@@ -45,6 +45,6 @@ public interface AppoRepository {
     public int updateVehicle(AppoDto appodto);
     public int updateWork(AppoDto appodto);
 
-
+    public int deleteAppointment(int appo_seq);
 
 }

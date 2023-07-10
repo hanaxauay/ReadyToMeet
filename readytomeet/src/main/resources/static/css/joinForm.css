@@ -8,9 +8,10 @@
     body {
             font-family: 'Pretendard-Regular', sans-serif;
             background-color: #F77777;
-        }
-        /* 중앙에 위치한 박스 스타일 */
-        .center-box {
+    }
+
+    /* 중앙에 위치한 박스 스타일 */
+    .center-box {
             width: 500px;
             height: 800px;
             position: absolute;
@@ -20,9 +21,9 @@
             border-radius: 0.8rem;
             padding: 50px;
             background-color: white;
-        }
-
-        h1 {
+     }
+    
+    h1 {
         display: block;
         font-size: 200%;
         margin-block-start: 0.67em;
@@ -30,10 +31,10 @@
         margin-inline-start: 0px;
         margin-inline-end: 0px;
         font-weight: bold;
-        }
+    }
 
-        /* 가입하기 버튼 스타일 */
-        button[type="submit"] {
+    /* 가입하기 버튼 스타일 */
+    button[type="submit"] {
             width: 100%;
             margin-top: 10px;
             background-color: #FF7777;
@@ -45,38 +46,39 @@
             font-size: 100%;
             cursor: pointer;
             border-radius: 5px;
-        }
+    }
 
-        /* 인증번호 받기 버튼 스타일 */
-        #phoneChk {
-            margin-top: 10px;
-            background-color: #FF7777;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 50%;
-            cursor: pointer;
-            border-radius: 5px;
-            width:18%;
-            font-size: 75.0%;
-        }
-        #phoneChk2 {
-            margin-top: 10px;
-            background-color: #FF7777;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 50%;
-            cursor: pointer;
-            border-radius: 5px;
-            width:24%;
-            font-size: 75.0%;
-        }
-        .joinContent{
+    /* 인증번호 받기 버튼 스타일 */
+   #phoneChk {
+           margin-top: 10px;
+           background-color: #FF7777;
+           border: none;
+           color: white;
+           padding: 10px 20px;
+           text-align: center;
+           text-decoration: none;
+           font-size: 50%;
+           cursor: pointer;
+           border-radius: 5px;
+           width:18%;
+           font-size: 75.0%;
+    }
+    #phoneChk2 {
+           margin-top: 10px;
+           background-color: #FF7777;
+           border: none;
+           color: white;
+           padding: 10px 20px;
+           text-align: center;
+           text-decoration: none;
+           font-size: 50%;
+           cursor: pointer;
+           border-radius: 5px;
+           width:24%;
+           font-size: 75.0%;
+    }
+
+    .joinContent{
         	position: relative;
             width: 100%;
             margin-bottom: 15px;
@@ -93,23 +95,6 @@
             border: 0.7px solid rgb(185, 184, 184);
             border-radius: 0.5rem;
         }
-
-        .joinContent > input#password {
-        	width: 34%;
-        	height: 40px;
-            box-sizing: border-box;
-            display: inline-block;
-            border: 0.7px solid rgb(185, 184, 184);
-            border-radius: 0.5rem;
-    	}
-
-    	#password_info {
-        position: absolute;
-        top: -15%;
-        right: 0;
-        font-size: 100%;
-        color: black;
-    	}
 
         .joinContent > input#password_confirm {
         	width: 34%;
@@ -128,23 +113,12 @@
         color: red;
     	}
 
-    	.joinContent > input#id {
-        	width: 34%;
-        	height: 40px;
-            box-sizing: border-box;
-            display: inline-block;
-            border: 0.7px solid rgb(185, 184, 184);
-            border-radius: 0.5rem;
-    	}
-
-        .point.successIdChk {
-        position: absolute;
-        top: 25%;
-        right: 0;
-        font-size: 100%;
-        color: black;
-    	}
-
+        #id{
+            width: 43%;
+        }
+        #nickname{
+        	width: 43%;
+        }
         #phone{
             width: 43%;
         }

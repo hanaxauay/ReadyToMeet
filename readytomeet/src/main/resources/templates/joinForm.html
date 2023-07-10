@@ -12,17 +12,16 @@
     <div class="center-box">
     	<h1>회원가입</h1>
     	<div class="joinForm">
-	        <form action="/joincheck" method="post">
+	        <form>
 	            <div class="joinContent">
 	                <label for="id">아이디</label>
 	                <input type="text" id="id" name="id">
-					<span class="point successIdChk">2자 이상 입력하세요</span>
+	                <button type="button" id="get_verification_code">중복 체크</button><br>
 	            </div>
 	            	
 	            <div class="joinContent">
 	                <label for="password">비밀번호</label>
 	                <input type="password" id="password" name="password"><br>
-					<p id="password_info">8자리 이상 입력하세요</p>
 	            </div>
 	
 	            <div class="joinContent">
@@ -39,6 +38,7 @@
 	            <div class="joinContent">
 	                <label for="nickname">닉네임</label>
 	                <input type="text" id="nickname" name="nickname">
+	                <button type="button" id="get_verification_code">중복 체크</button><br>
 	            </div>
 	
 	            <div class="joinContent">
@@ -81,7 +81,7 @@
 	                    <label for="female">여성</label>
                 </div>
 	            </div>
-	            <button type="submit" id="join">가입하기</button>
+	            <button type="submit">가입하기</button>
 	        </form>
 		</div>
  	</div>   

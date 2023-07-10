@@ -8,33 +8,84 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css">
   <style>
-    [v-cloak] {
-      display: none;
-    }
-    .chat-container {
+    @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+    .container {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
     }
-    .chat-header {
-      padding: 10px;
-      text-align: center;
 
-      color: #FF7777; /* 변경: 글자색상 */
+    .chat-container {
+      width: 500px;
+      height: 600px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
+
+    .chat-header {
+      padding: 20px;
+      text-align: center;
+      background-color: #ff7777;
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
     .chat-messages {
-      flex: 1;
+      max-height: calc(100% - 160px); /* Adjusted height */
       overflow-y: auto;
-      padding: 60px;
+      padding: 20px;
+      background-color: #ffffff;
     }
+
     .chat-messages li {
       margin-bottom: 10px;
-      word-break: break-all;
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      font-family: 'Nanum Pen Script', cursive;
+      font-size: x-large;
     }
+
     .chat-input {
       padding: 20px;
-      background-color: #f8f9fa;
+      background-color: #ffffff;
+      width: 100%;
+      position: absolute;
+      bottom: 0; /* Adjusted position */
     }
+
+    .chat-input .input-group {
+      margin-bottom: 0;
+    }
+
+    .chat-input .form-control {
+      border-radius: 20px;
+      font-size: 14px;
+      color: #333333;
+    }
+
+    .chat-input .btn-primary {
+      border-radius: 20px;
+      background-color: #ff7777;
+      border-color: #ff7777;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 8px 20px;
+      text-transform: uppercase;
+    }
+
+    .chat-input .btn-primary:hover {
+      background-color: #ff7777;
+      border-color: #ff7777;
+    }
+
   </style>
 </head>
 <body>
@@ -43,32 +94,32 @@
     <div class="chat-header">
       <h3 th:text="${chatRoom1.room_name}"></h3>
     </div>
-<!--  <div class="input-group mt-5">-->
-<!--    <div class="input-group-prepend">-->
-<!--      <label class="input-group-text">Message</label>-->
-<!--    </div>-->
-<!--    <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">-->
-<!--    <div class="input-group-append">-->
-<!--      <button class="btn btn-primary" type="button" @click="sendMessage">Send</button>-->
-<!--    </div>-->
-<!--  </div>-->
-  <ul class="list-group chat-messages">
-    <li class="list-group-item" v-for="message in messages">
-      {{ message.user_nickname }} - {{ message.message }}
-      <span style="float: right">{{ formatDate(message.timestamp) }}</span>
-    </li>
-  </ul>
-  <div class="chat-input">
-  <div class="input-group" >
-    <div class="input-group-prepend">
-      <label class="input-group-text">Message</label>
+    <!--  <div class="input-group mt-5">-->
+    <!--    <div class="input-group-prepend">-->
+    <!--      <label class="input-group-text">Message</label>-->
+    <!--    </div>-->
+    <!--    <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">-->
+    <!--    <div class="input-group-append">-->
+    <!--      <button class="btn btn-primary" type="button" @click="sendMessage">Send</button>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <ul class="list-group chat-messages">
+      <li class="list-group-item" v-for="message in messages">
+        {{ message.user_nickname }} - {{ message.message }}
+        <span style="float: right">{{ formatDate(message.timestamp) }}</span>
+      </li>
+    </ul>
+    <div class="chat-input">
+      <div class="input-group" >
+        <div class="input-group-prepend">
+          <label class="input-group-text">Message</label>
+        </div>
+        <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" @click="sendMessage">Send</button>
+        </div>
+      </div>
     </div>
-    <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">
-    <div class="input-group-append">
-      <button class="btn btn-primary" type="button" @click="sendMessage">Send</button>
-    </div>
-  </div>
-  </div>
   </div>
 </div>
 <!-- JavaScript -->
@@ -84,15 +135,15 @@
   var vm = new Vue({
     el: '#app',
     data: {
-      roomId: '',
+      appo_seq: '',
       room: {},
-      sender: '', // 수정된 부분
+      sender: '',
       message: '',
       messages: [],
       timestamp: ''
     },
     created() {
-      this.roomId = localStorage.getItem('wschat.roomId');
+      this.appo_seq = localStorage.getItem('wschat.appo_seq');
       this.sender = [[${loginUser.user_nickname}]];
       this.findRoom();
       this.getChatMessages();
@@ -103,12 +154,11 @@
         chatContainer.scrollTop = chatContainer.scrollHeight;
       },
       findRoom: function() {
-        axios.get('/chat/room/' + this.roomId).then(response => {
+        axios.get('/chat/room/' + this.appo_seq).then(response => {
           this.room = response.data;
         });
-        axios.get('/chats/room/' + this.roomId).then(response => {
+        axios.get('/chats/room/' + this.appo_seq).then(response => {
           this.messages = response.data;
-          // 가장 최근 메시지를 가져와서 표시
           if (this.messages.length > 0) {
             var latestMessage = this.messages[this.messages.length - 1];
             this.latestMessage = latestMessage.message;
@@ -119,33 +169,33 @@
       formatDate: function(timestamp) {
         var date = new Date(timestamp);
         var options = {
-          year: 'numeric',
+          // year: 'numeric',
           month: 'numeric',
           day: 'numeric',
           hour: 'numeric',
           minute: 'numeric',
-          second: 'numeric'
+          // second: 'numeric'
         };
         return date.toLocaleString('ko-KR', options);
       },
-
-
       sendMessage: function() {
         ws.send("/pub/chat/message", {}, JSON.stringify({
           type: 'TALK',
-          room_id: this.roomId,
+          appo_seq: this.appo_seq,
           user_nickname: this.sender,
           message: this.message
         }));
         this.message = '';
-        this.$nextTick(this.scrollToBottom);
+        this.$nextTick(function() {
+          this.scrollToBottom();
+        });
       },
       recvMessage: function(recv) {
         if (recv.type == 'ENTER') {
           this.messages.push({
             "type": recv.type,
             "user_nickname": '★',
-            "message": this.sender + '님 입장~! ★', // 수정된 부분
+            "message": this.sender + '님 입장~! ★',
             "timestamp": new Date()
           });
         } else {
@@ -156,19 +206,22 @@
             "timestamp": new Date(recv.timestamp)
           });
         }
+        this.$nextTick(function() {
+          this.scrollToBottom();
+        });
       }
     }
   });
 
   function connect() {
     ws.connect({}, function(frame) {
-      ws.subscribe("/sub/chat/room/" + vm.$data.roomId, function(message) {
+      ws.subscribe("/sub/chat/room/" + vm.$data.appo_seq, function(message) {
         var recv = JSON.parse(message.body);
         vm.recvMessage(recv);
       });
       ws.send("/pub/chat/message", {}, JSON.stringify({
         type: 'ENTER',
-        room_id: vm.$data.roomId,
+        appo_seq: vm.$data.appo_seq,
         user_nickname: vm.$data.sender
       }));
     }, function(error) {
@@ -184,5 +237,6 @@
   }
   connect();
 </script>
+
 </body>
 </html>

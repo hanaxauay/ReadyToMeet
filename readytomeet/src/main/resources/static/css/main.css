@@ -129,10 +129,28 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.detailBtn2 {
+    padding: 10px;
+    background-color: #ff7777;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 25%;
+    justify-content: flex-end;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 16px;
+
+}
 
 .more {
     float: right;
-    margin-right: 5%;
+    margin-right: 8%;
     color: red;
     background-color: #ff7777;
 }
@@ -146,7 +164,7 @@
 .weather-container {
     position: absolute;
     bottom: 2%;
-    left: 2%;
+    left: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -157,51 +175,51 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    position: fixed;
-    bottom: 7%;
-    left: 2%;
+    position: absolute;
+    bottom: 3%;
+    left: 5%;
     margin: 1%;
     padding: 1%;
-    background-color: #f2f2f2;
-    border-radius: 5px;
+    background-color: #fff;
+    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.weather h1 {
-    font-size: 1.8vw;
+.weather h2 {
+    font-size: 1.4rem;
     font-weight: bold;
-    margin-bottom: 1%;
-    color: #333;
+    margin-bottom: 0.5rem;
+    color: #ff7777;
 }
 
 .weather .weather-icon {
-    width: 6.4vw;
-    height: 6.4vw;
-    margin-bottom: 1%;
+    width: 8rem;
+    height: 8rem;
+    margin-bottom: 1rem;
 }
 
 .weather p {
-    font-size: 1.4vw;
-    margin-bottom: 0.5%;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
     color: #555;
 }
 
 .weather .temperature {
-    font-size: 2vw;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #333;
 }
 
 .weather .description {
-    font-size: 1.4vw;
+    font-size: 1rem;
     color: #777;
 }
 
 .weather .details {
     display: flex;
     justify-content: center;
-    gap: 1%;
-    margin-top: 1%;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 
 .weather .detail {
@@ -209,14 +227,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1%;
+    padding: 0.5rem 1rem;
     background-color: #f8f8f8;
     border-radius: 5px;
 }
 
 .weather .detail p {
-    font-size: 1.2vw;
-    margin-bottom: 0.5%;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
     color: #777;
 }
 
@@ -227,9 +245,9 @@
 
 .weather hr {
     border: none;
-    height: 0.1vw;
+    height: 2px;
     background-color: #ddd;
-    margin: 2% 0;
+    margin: 1.5rem 0;
 }
 
 
