@@ -71,13 +71,14 @@ public class CommunityController {
   }
 
   @GetMapping("/write")
-  public String gotocommunitywrite(HttpSession session) {
+  public String gotocommunitywrite(HttpSession session, Model model) {
     UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
     if (loginUser != null) {
       return "communitywrite";
     } else {
-      // 로그인되지 않은 상태 처리
-      return "redirect:/login";
+      model.addAttribute("message", "로그인이 필요합니다.");
+      model.addAttribute("searchUrl", "/login");
+      return "message";
     }
   }
 
