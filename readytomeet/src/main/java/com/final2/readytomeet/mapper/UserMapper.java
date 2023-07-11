@@ -1,6 +1,5 @@
 package com.final2.readytomeet.Mapper;
 
-import com.final2.readytomeet.dto.AppoDto;
 import com.final2.readytomeet.dto.CommunityDto;
 import com.final2.readytomeet.dto.UserDto;
 import org.apache.ibatis.annotations.*;
@@ -26,24 +25,19 @@ public interface UserMapper {
     @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
     UserDto loginUser(String user_id);
 
-    @Select(" SELECT * FROM USER WHERE USER_ID=#{user_id} ")
-    UserDto selectOne(String user_id);
+    @Select(" SELECT * FROM USER WHERE ID=#{id} ")
+    UserDto selectOne(Integer id);
 
 
 
     @Insert(" INSERT INTO USER VALUES (#{user_img}, #{user_path}) ")
     int write(UserDto dto);
 
-    @Update(" UPDATE USER SET USER_NICKNAME=#{user_nickname}, USER_PW=#{user_pw}, USER_PHONE=#{user_phone}, USER_EMAIL=#{user_email}, USER_LOCATION=#{user_location}, USER_CONTENT=#{user_content} WHERE ID=#{id} ")
-    int update(UserDto dto);
+//    @Update(" UPDATE USER SET USER_NICKNAME=#{user_nickname}, USER_PW=#{user_pw}, USER_PHONE=#{user_phone}, USER_EMAIL=#{user_email}, USER_LOCATION=#{user_location}, USER_CONTENT=#{user_content} WHERE ID=#{id} ")
+//    void update(UserDto userDto);
 
-
-
-
-    @Select("SELECT COUNT(*) AS TOTAL_COUNT FROM SHARE")
-    int findAllCnt();
-    @Select("SELECT * FROM SHARE ORDER BY SHARE_SEQ DESC LIMIT #{startIndex}, #{pageSize}")
-    List<CommunityDto> findListPaging(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
-
+    @Update(" UPDATE USER SET USER_ID=#{user_id}, USER_PW=#{user_pw}, USER_PHONE=#{user_phone}, USER_EMAIL=#{user_email}, USER_NAME=#{user_name}, USER_NICKNAME=#{user_nickname}, USER_AGE=#{user_age}, USER_GENDER=#{user_gender}, USER_LOCATION=#{user_location} WHERE ID=#{id} ")
+    Integer update(Integer id);
+    
 
 }

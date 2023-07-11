@@ -47,8 +47,8 @@ public class UserServiceImpl implements UserService {
 
     //note 마이페이지 바로
     @Override
-    public UserDto selectOne(String user_id){
-        return userRepository.selectOne(user_id);
+    public UserDto selectOne(Integer id){
+        return userRepository.selectOne(id);
     }
 
 
@@ -57,14 +57,16 @@ public class UserServiceImpl implements UserService {
 
 
     //note 유저 정보 수정
+//    @Override
+//    public int update(Integer id){
+//        return userRepository.update(id);
+//    }
+
+
     @Override
-    public int update(UserDto userDto){
-        return userRepository.update(userDto);
+    public Integer update(Integer id) {
+        return userMapper.update(id);
     }
-
-
-
-
 
 
 

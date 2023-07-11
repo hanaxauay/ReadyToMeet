@@ -20,7 +20,9 @@ public interface UserRepository {
     public UserDto readUser(int id);
 
 
-    UserDto selectOne(String user_id);
 
-   public int update(UserDto userDto);
+    UserDto selectOne(Integer id);
+
+
+
 }

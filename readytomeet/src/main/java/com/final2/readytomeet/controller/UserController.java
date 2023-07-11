@@ -4,11 +4,9 @@ package com.final2.readytomeet.controller;
 import com.final2.readytomeet.Mapper.UserMapper;
 
 import com.final2.readytomeet.dto.UserDto;
-import com.final2.readytomeet.service.AppoService;
 import com.final2.readytomeet.service.UserService;
 
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -22,11 +20,10 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
+
 @Controller
-@RequiredArgsConstructor
 public class UserController {
 
-    private final HttpSession session;
 
     @Inject
     private UserService userService;
@@ -52,74 +49,73 @@ public class UserController {
     }
 
 
-    @GetMapping("user/select")
-    public String selectOne(Model model, HttpSession session){
-        String loginUser = (String) session.getAttribute("loginUser");
-        UserDto userDto = userService.selectOne(loginUser);
-        model.addAttribute("userDto", userDto);
-        return "userview";
+    @RequestMapping("user/select")
+    public String selectOne(Model model, Integer id){
+        try {
+            userService.selectOne(id);
+            model.addAttribute("dto", userService.selectOne(id));
+
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        return "redirect:/user/readuser?id="+"1";
     }
 
 
-    //note 회원 정보 수정
-//
-//    @GetMapping("user/updateform")
-//    public String updateform(Model model, int id){
-//        model.addAttribute("userDto", userService.readUser(id));
-//        return "userupdate";
-//    }
-//
+        //note 회원 정보 수정
+
+    @RequestMapping("user/updateform")
+    public String update(@ModelAttribute UserDto userDto){
+        userService.update(userDto.getId());
+        return "redirect:/member/list";
+    }
+
+
+
+
+
+
+
+//        @GetMapping("user/updateform")
+//        public String updateform(Model model, Integer id, HttpSession session) {
+//            UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
+//            UserDto userDto = userService.selectOne(id);
+//            model.addAttribute("dto", userDto);
+//            return "userupdate";
+//        }
 //
 //    @PostMapping("user/update")
-//    public String update(UserDto userDto){
-//        if (userService.update(userDto) > 0) {
-//            //성공
-//            return "redirect:/user/readuser?id="+userDto.id;
-//        }else {
-//            //실패
-//            return "redirect:/user/updateform?id="+userDto.id;
+//    public String update(UserDto dto, Model model, HttpSession session) {
+//        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
+//        UserDto originalDto = userService.selectOne(dto.getId());
+//
+//        try {
+//            if (loginUser != null && loginUser.getUser_id().equals(originalDto.getUser_id())) {
+//                model.addAttribute("message", "정보 수정이 완료되었습니다.");
+//                model.addAttribute("searchUrl", "/member/list");
+//                if (userService.update(dto) > 0) {
+//                    return "message";
+//                } else {
+//                    return "redirect:/user/updateform?user_id=" + dto.getUser_id();
+//                }
+//            } else if (loginUser == null) {
+//                // 로그인하지 않은 경우
+//                model.addAttribute("message", "로그인이 필요합니다.");
+//                model.addAttribute("searchUrl", "/login");
+//                return "message";
+//            } else {
+//                // 작성자가 아닌 경우
+//                model.addAttribute("message", "글 작성자만 수정할 수 있습니다.");
+//                model.addAttribute("searchUrl", "/user/readuser?id=" + dto.getId());
+//                return "message";
+//            } // 작성자와 로그인한 사용자가 같은 경우에만 수정 가능
+//        } catch (NullPointerException e) {
+//            e.printStackTrace();
 //        }
+//
+//        return "redirect:/user/readuser?id="+"1";
 //    }
 //
-//
-
-    
-
-        @GetMapping("user/updateform")
-    public String updateform(Model model, Integer id, HttpSession session) {
-        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
-        UserDto userDto = userService.readUser(id);
-            model.addAttribute("dto", userDto);
-            return "userupdate";
-
-    }
-    @PostMapping("user/update")
-    public String update(UserDto dto, Model model, HttpSession session) {
-        UserDto loginUser = (UserDto) session.getAttribute("loggedInUser");
-        UserDto originalDto = userService.readUser(dto.getId());
-
-        // 작성자와 로그인한 사용자가 같은 경우에만 수정 가능
-        if (loginUser != null && loginUser.getUser_id().equals(originalDto.getUser_id())) {
-            model.addAttribute("message", "정보 수정이 완료되었습니다.");
-            model.addAttribute("searchUrl", "/member/list");
-            if (userService.update(dto) > 0 ) {
-                return "message";
-            } else {
-                return "redirect:/user/updateform?user_id=" + dto.getUser_id();
-            }
-        } else if (loginUser == null) {
-            // 로그인하지 않은 경우
-            model.addAttribute("message", "로그인이 필요합니다.");
-            model.addAttribute("searchUrl", "/login");
-            return "message";
-        } else {
-            // 작성자가 아닌 경우
-            model.addAttribute("message", "글 작성자만 수정할 수 있습니다.");
-            model.addAttribute("searchUrl", "/user/readuser?id=" + dto.getId());
-            return "message";
-        }
-    }
-
 
 
 

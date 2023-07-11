@@ -17,13 +17,18 @@ public interface UserService {
 
 
 
+
     //note 마이페이지 바로
-    UserDto selectOne(String user_id);
+    UserDto selectOne(Integer id);
+
+
+
 
     //note 유저 정보 수정
-    public int update(UserDto userDto);
 
 
+
+    public Integer update(Integer id);
 
     public void write(UserDto dto, MultipartFile file) throws Exception;
 

@@ -5,6 +5,7 @@ import com.final2.readytomeet.Mapper.UserMapper;
 import com.final2.readytomeet.dto.UserDto;
 import com.final2.readytomeet.repository.UserRepository;
 
+import org.apache.catalina.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,18 +44,17 @@ public class UserRepositoryImpl implements UserRepository {
 
 
     @Override
-    public UserDto selectOne(String user_id) {
-        UserDto dto = userMapper.selectOne(user_id);
+    public UserDto selectOne(Integer id) {
+        UserDto dto = userMapper.selectOne(id);
         return dto;
     }
 
-    @Override
-    public int update(UserDto userDto){
-        int res = 0;
-        res = userMapper.update(userDto);
-        return res;
-    }
-
+//    @Override
+//    public int update(UserDto userDto){
+//        int res = 0;
+//        res = userMapper.update(userDto);
+//        return res;
+//    }
 
 
 
