@@ -59,7 +59,7 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/logout")
+    @PostMapping    ("/logout")
     public String logout() {
         session.removeAttribute("loggedInUser");
         session.invalidate();
